@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>classsurvey</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Basic Graphs and Tables</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11775,228 +11775,27 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="A-Dataset-in-R">A Dataset in R<a class="anchor-link" href="#A-Dataset-in-R">&#182;</a></h1><p>R has a Variety of built-in small datsets for you to experiment with, for example, opening up R, you can just type in: mtcars, and that will show you some variables and observations. The command below show sthe first 5 rows of dataset <strong>mtcars</strong></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">head</span><span class="p">(</span>mtcars<span class="p">,</span> <span class="m">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<table>
-<thead><tr><th></th><th scope=col>mpg</th><th scope=col>cyl</th><th scope=col>disp</th><th scope=col>hp</th><th scope=col>drat</th><th scope=col>wt</th><th scope=col>qsec</th><th scope=col>vs</th><th scope=col>am</th><th scope=col>gear</th><th scope=col>carb</th></tr></thead>
-<tbody>
-	<tr><th scope=row>Mazda RX4</th><td>21.0 </td><td>6    </td><td>160  </td><td>110  </td><td>3.90 </td><td>2.620</td><td>16.46</td><td>0    </td><td>1    </td><td>4    </td><td>4    </td></tr>
-	<tr><th scope=row>Mazda RX4 Wag</th><td>21.0 </td><td>6    </td><td>160  </td><td>110  </td><td>3.90 </td><td>2.875</td><td>17.02</td><td>0    </td><td>1    </td><td>4    </td><td>4    </td></tr>
-	<tr><th scope=row>Datsun 710</th><td>22.8 </td><td>4    </td><td>108  </td><td> 93  </td><td>3.85 </td><td>2.320</td><td>18.61</td><td>1    </td><td>1    </td><td>4    </td><td>1    </td></tr>
-	<tr><th scope=row>Hornet 4 Drive</th><td>21.4 </td><td>6    </td><td>258  </td><td>110  </td><td>3.08 </td><td>3.215</td><td>19.44</td><td>1    </td><td>0    </td><td>3    </td><td>1    </td></tr>
-	<tr><th scope=row>Hornet Sportabout</th><td>18.7 </td><td>8    </td><td>360  </td><td>175  </td><td>3.15 </td><td>3.440</td><td>17.02</td><td>0    </td><td>0    </td><td>3    </td><td>2    </td></tr>
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Population-and-Sample">Population and Sample<a class="anchor-link" href="#Population-and-Sample">&#182;</a></h1><h2 id="A-Poluation-of-52-and-a-Sample-of-10">A Poluation of 52 and a Sample of 10<a class="anchor-link" href="#A-Poluation-of-52-and-a-Sample-of-10">&#182;</a></h2><p>There are 52 students in a class, I am interested in how many of your go to games at the University, and how many years each of you has lived in the city of Houston. But I do not have time to ask each of you questions.</p>
-<ul>
-<li>My population is all 52 students in the class. </li>
-<li>Given my limited time and resources, I will gather a sample of just 10 students. </li>
+<h1 id="Single-Variable">Single Variable<a class="anchor-link" href="#Single-Variable">&#182;</a></h1><p>From a dataset, such as the in-class survey, there are various columns, each representing a different variable. We can zoom-in on each of the variables, and focus on that only.</p>
+<h2 id="Categorical/Discrete">Categorical/Discrete<a class="anchor-link" href="#Categorical/Discrete">&#182;</a></h2><p>Categorical variables, such as Major, Gender, Recent arrival or not, etc, we can generate frequency tables.</p>
+<p>The frequency table simply shows in separate columns (or rows) the name for all the categories for that categorical variable, and show next to these categories that number of times that category appears in the dataset. This is called a frequency table. So if we show a one-way frequency for majors, there would be four rows for the four unique majors from our survey of 10 students, and we would write down the number of students in each of the majors out of the 10 students.</p>
+<p>Rather than showing frequencies, we can also show ratios or percentages by dividing the number of observations in each category by the total number of observations in the survey.</p>
+<p>Graphically, we can show the results from these one-way frequency tables using bar charts and pie charts. The bar charts would have separate bars for each category, and the heights of the bars would show the number of observations in that category, or the fraction of individuals in the categorical. The relative heights of bars are the same whether we show the frequencies or the fractions/ratios. A pie chart might give a more direct visual sense of the fraction of observations in each category.</p>
+<h2 id="Continuous/Quantitative">Continuous/Quantitative<a class="anchor-link" href="#Continuous/Quantitative">&#182;</a></h2><p>Graphically, we can show a continuous variable using a histogram. This could be test scores, temperatures, years in houston, etc. This involves first creating a categorical/discrete variable based on the continuous variable. Since the underlying continuous variable is ordered (low to high temperature unless major which is not ordered), the categorica/discrete variable we generate is an ordered categorical variable (majors could be called unordered categorical variable).</p>
+<p>To genereate the histogram, we:</p>
+<ol>
+<li>Make sure that all observations belongs to one category<ul>
+<li>no observations belonging to no categories</li>
+<li>each observation only belongs to one category</li>
 </ul>
-<p>Gathering information regarding game attendance for the 10 students, I can perhaps gain some insights about the population.</p>
-<h2 id="Random-Sample">Random Sample<a class="anchor-link" href="#Random-Sample">&#182;</a></h2><p>I can just point and pick 10 <em>random</em> people, but how do I know I am choosing picking randomly? In general, we want to pick a random sample from the population. You don't want your sample of 10 to just be students in the first row, or students who happen to be giving eye contacts. We want a random sample that hopefully gives us some representative information about the population of 52 students.</p>
-<p>How do you pick random numbers?</p>
-<p>Siri, Alexa, Google, ..., you can get random numbers very easily now. You can download various apps also that allows you to draw a random integer from say between 1 to 4, with equal chance of drawing any of the four numbers.</p>
-<p>In our class:</p>
-<ul>
-<li>we have 4 rows of seats</li>
-<li>we have 13 columns of seats</li>
-<li>there are 52 students in the class together. I will now randomly pick between 1 and 4, 10 times, and randomly pick between 1 and 13 also 10 times. </li>
-</ul>
-<p>This gives me ten pairs of row and columns numbers, and these indicate which 10 students will be a part of randomly drawn sample of students.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># in R, draw integers between 1 and 4, 10 times</span>
-<span class="kp">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> replace <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
-<span class="c1"># in R, draw integers between 1 and 13, 10 times</span>
-<span class="kp">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">13</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> replace <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<ol class=list-inline>
-	<li>4</li>
-	<li>1</li>
-	<li>1</li>
-	<li>2</li>
-	<li>2</li>
-	<li>4</li>
-	<li>1</li>
-	<li>1</li>
-	<li>3</li>
-	<li>3</li>
+</li>
+<li>Each category is equi-distance along the continuous variable's original scale. </li>
+<li>Then we create a bar graph where each bar is a category, and the height of the bar represents the number of observations within that category. </li>
 </ol>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<ol class=list-inline>
-	<li>1</li>
-	<li>8</li>
-	<li>8</li>
-	<li>5</li>
-	<li>5</li>
-	<li>11</li>
-	<li>4</li>
-	<li>12</li>
-	<li>9</li>
-	<li>5</li>
-</ol>
-
-</div>
-
-</div>
+<h1 id="Two-Variables-Together">Two Variables Together<a class="anchor-link" href="#Two-Variables-Together">&#182;</a></h1><h2 id="Two-Continuous-Variables">Two Continuous Variables<a class="anchor-link" href="#Two-Continuous-Variables">&#182;</a></h2><p>With two continuous/quantitative variables, we can generate a scatter plot. Crucially, each point of the scatter plot represents one individual, the location of that point indicates the x and y values of that individual. The x and y values could be the individual's test score and hours studied for example.</p>
+<h2 id="Two-Categorical-Variables">Two Categorical Variables<a class="anchor-link" href="#Two-Categorical-Variables">&#182;</a></h2><p>With two discrete/categorical variables, we can generate two-way frequency tables. This is very similar to what we did for one discrete variable, except now we have columns and rows, representing the categories of the two variables. The two variables could be gender and majors, we would write in each table cell the number of students who are male and econ majors, male and bio majors in for example the first column, and repeat this for girls in the second column.</p>
 
 </div>
 </div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="In-Class-Survey-with-N-=-10">In Class Survey with N = 10<a class="anchor-link" href="#In-Class-Survey-with-N-=-10">&#182;</a></h1><p>R has <em>base</em> packages. Many of R's best packages do not come with the base packages. You have to install separately. One of the best packages for data science is <a href="https://www.tidyverse.org/">tidyverse</a>. <strong>Tidyvers</strong> has a great package called <a href="https://tibble.tidyverse.org/">tibble</a> which is a great way to deal with what are called dataframes, where we store our data.</p>
-<p>Sequentially, in class, we ask each of the 10 randomly drawn students a number of questions, and record the answers in the dataframe.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Install Tibble inside RStudio for Example by installing Tidyverse: install.packages(&quot;tidyverse&quot;)</span>
-<span class="kn">library</span><span class="p">(</span>tibble<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Create an empty Tibble, which is a type of dataframe</span>
-in_class_survey <span class="o">&lt;-</span> tibble<span class="p">(</span>ID <span class="o">=</span> <span class="kt">integer</span><span class="p">(),</span> ROW <span class="o">=</span> <span class="kt">integer</span><span class="p">(),</span> COL <span class="o">=</span> <span class="kt">integer</span><span class="p">(),</span> 
-                          gender <span class="o">=</span> <span class="kp">factor</span><span class="p">(),</span>
-                          years.in.houston <span class="o">=</span> <span class="kt">double</span><span class="p">(),</span>
-                          major <span class="o">=</span> <span class="kp">factor</span><span class="p">(),</span>
-                          commute <span class="o">=</span> <span class="kp">factor</span><span class="p">(),</span>
-                          games.attended <span class="o">=</span> <span class="kt">integer</span><span class="p">())</span>
-
-<span class="c1"># Let&#39;s define the Categories for the Categorical/Discrete Variables that We have</span>
-in_class_survey<span class="o">$</span>gender <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>in_class_survey<span class="o">$</span>gender<span class="p">,</span> levels <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span> <span class="s">&#39;FEMALE&#39;</span><span class="p">,</span> <span class="s">&#39;NA&#39;</span><span class="p">))</span>
-in_class_survey<span class="o">$</span>major <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>in_class_survey<span class="o">$</span>major<span class="p">,</span> levels <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span> <span class="s">&#39;HEALTH&#39;</span><span class="p">,</span> <span class="s">&#39;PSYCHOLOGY&#39;</span> <span class="p">,</span><span class="s">&#39;CONSUMER SCIENCE&#39;</span><span class="p">,</span> <span class="s">&#39;NA&#39;</span><span class="p">))</span>
-in_class_survey<span class="o">$</span>commute <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>in_class_survey<span class="o">$</span>commute<span class="p">,</span> levels <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> <span class="s">&#39;NO&#39;</span><span class="p">,</span> <span class="s">&#39;NA&#39;</span><span class="p">))</span>
-
-<span class="c1"># Ask Students Questions and Record Answers</span>
-in_class_survey<span class="p">[</span><span class="m">1</span><span class="p">,]</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="s">&#39;MALE&#39;</span><span class="p">,</span> <span class="m">21.0</span><span class="p">,</span> <span class="s">&#39;ECON&#39;</span><span class="p">,</span> <span class="s">&#39;YES&#39;</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
-in_class_survey<span class="p">[</span><span class="m">2</span><span class="p">,]</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">12</span><span class="p">,</span> <span class="s">&#39;FEMALE&#39;</span><span class="p">,</span> <span class="m">21.0</span><span class="p">,</span> <span class="s">&#39;HEALTH&#39;</span><span class="p">,</span> <span class="s">&#39;YES&#39;</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
-
-<span class="c1"># Look at the Survey Results</span>
-in_class_survey
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<table>
-<thead><tr><th scope=col>ID</th><th scope=col>ROW</th><th scope=col>COL</th><th scope=col>gender</th><th scope=col>years.in.houston</th><th scope=col>major</th><th scope=col>commute</th><th scope=col>games.attended</th></tr></thead>
-<tbody>
-	<tr><td>1     </td><td>3     </td><td>10    </td><td>MALE  </td><td>21    </td><td>ECON  </td><td>YES   </td><td>0     </td></tr>
-	<tr><td>2     </td><td>1     </td><td>12    </td><td>FEMALE</td><td>21    </td><td>HEALTH</td><td>YES   </td><td>2     </td></tr>
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     </div>
   </div>

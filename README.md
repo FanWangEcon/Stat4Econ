@@ -11,8 +11,6 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
 
 1. [Population and Sample](survey/classsurvey.html)
 
-# 2. Variables in a Dataset
+# 2. Graphs and Tables
 
-1. [Types of Variables](descriptive/realnumber.html)
-2. [Graphing One Variable](descriptive/whatisfunction.html)
-3. [Graphing Multiple Variables](descriptive/funcnotations.html)
+1. [Basic Graphs and Tables](descriptive/BasicGraphsandTables.html)

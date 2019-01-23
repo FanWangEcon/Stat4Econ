@@ -21,6 +21,14 @@
 *.Rhistory
 
 ###################
+# Jupyter Ignore
+###################
+
+*checkpoints.md
+*checkpoints.ipynb
+*ipynb_checkpoints
+
+###################
 # Matlab.gitignore
 ###################
 

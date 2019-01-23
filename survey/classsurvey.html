@@ -11783,7 +11783,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kp">head</span><span class="p">(</span>mtcars<span class="p">,</span> <span class="m">5</span><span class="p">)</span>
@@ -11849,14 +11849,17 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># in R, draw integers between 1 and 4, 10 times</span>
-<span class="kp">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> replace <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Setting seed means we will get the same set of random numbers each time</span>
+<span class="kp">set.seed</span><span class="p">(</span><span class="m">12345</span><span class="p">)</span>
+<span class="c1"># in R, draw integers between 1 and 4, 10 times</span>
+ROW.RAND.DRAWS <span class="o">=</span> <span class="kp">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> replace <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 <span class="c1"># in R, draw integers between 1 and 13, 10 times</span>
-<span class="kp">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">13</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> replace <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+COL.RAND.DRAWS <span class="o">=</span> <span class="kp">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">13</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> replace <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 <span class="c1"># Note that the way we are drawing randomly, we could draw the same individual twice.</span>
+<span class="kp">rbind</span><span class="p">(</span>ROW.RAND.DRAWS<span class="p">,</span> COL.RAND.DRAWS<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11874,42 +11877,12 @@ div#notebook {
 
 
 <div class="output_html rendered_html output_subarea ">
-<ol class=list-inline>
-	<li>1</li>
-	<li>1</li>
-	<li>4</li>
-	<li>1</li>
-	<li>1</li>
-	<li>3</li>
-	<li>1</li>
-	<li>4</li>
-	<li>2</li>
-	<li>3</li>
-</ol>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<ol class=list-inline>
-	<li>3</li>
-	<li>5</li>
-	<li>1</li>
-	<li>1</li>
-	<li>3</li>
-	<li>10</li>
-	<li>6</li>
-	<li>13</li>
-	<li>8</li>
-	<li>2</li>
-</ol>
+<table>
+<tbody>
+	<tr><th scope=row>ROW.RAND.DRAWS</th><td>3 </td><td>4 </td><td> 4</td><td>4 </td><td>2 </td><td>1 </td><td>2 </td><td>3 </td><td>3 </td><td> 4</td></tr>
+	<tr><th scope=row>COL.RAND.DRAWS</th><td>1 </td><td>2 </td><td>10</td><td>1 </td><td>6 </td><td>7 </td><td>6 </td><td>6 </td><td>3 </td><td>13</td></tr>
+</tbody>
+</table>
 
 </div>
 
@@ -11923,7 +11896,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="In-Class-Survey-with-N-=-10">In Class Survey with N = 10<a class="anchor-link" href="#In-Class-Survey-with-N-=-10">&#182;</a></h1><p>R has <em>base</em> packages. Many of R's best packages do not come with the base packages. You have to install separately. One of the best packages for data science is <a href="https://www.tidyverse.org/">tidyverse</a>. <strong>Tidyvers</strong> has a great package called <a href="https://tibble.tidyverse.org/">tibble</a> which is a great way to deal with what are called dataframes, where we store our data.</p>
+<h1 id="In-Class-Survey-with-N-=-10">In Class Survey with N = 10<a class="anchor-link" href="#In-Class-Survey-with-N-=-10">&#182;</a></h1><p>R has <em>base</em> packages. Many of R's best packages do not come with the base packages. You have to install separately. One of the best packages for data science is <a href="https://www.tidyverse.org/">tidyverse</a>. <strong>tidyverse</strong> has a great package called <a href="https://tibble.tidyverse.org/">tibble</a>, which is a great way to deal with what are called dataframes, where we store our data. <strong>tidyverse</strong> also has <a href="https://dplyr.tidyverse.org/">dplyr</a>, which is a powerful set of tools for transforming data.</p>
 <p>Sequentially, in class, we ask each of the 10 randomly drawn students a number of questions, and record the answers in the dataframe.</p>
 
 </div>
@@ -11931,7 +11904,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Install Tibble and dplyr inside RStudio for Example by installing Tidyverse: install.packages(&quot;tidyverse&quot;)</span>
@@ -11948,7 +11921,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>df <span class="o">&lt;-</span> tibble<span class="p">(</span>ID <span class="o">=</span> <span class="kt">integer</span><span class="p">(),</span> ROW <span class="o">=</span> <span class="kt">integer</span><span class="p">(),</span> COL <span class="o">=</span> <span class="kt">integer</span><span class="p">(),</span> 
@@ -11960,16 +11933,16 @@ div#notebook {
 
 
 <span class="c1"># Ask Students Questions and Record Answers</span>
-df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">1</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">3</span><span class="p">,</span> COL<span class="o">=</span><span class="m">10</span><span class="p">,</span> gender<span class="o">=</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span>   years.in.houston<span class="o">=</span><span class="m">21.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span>   commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">0</span><span class="p">)</span>
-df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">2</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">1</span><span class="p">,</span> COL<span class="o">=</span><span class="m">12</span><span class="p">,</span> gender<span class="o">=</span><span class="s">&#39;FEMALE&#39;</span><span class="p">,</span> years.in.houston<span class="o">=</span><span class="m">21.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;HEALTH&#39;</span><span class="p">,</span> commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">3</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">4</span><span class="p">,</span> COL<span class="o">=</span><span class="m">9</span> <span class="p">,</span> gender<span class="o">=</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span>   years.in.houston<span class="o">=</span><span class="m">22.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span>   commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">0</span><span class="p">)</span>
-df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">4</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">2</span><span class="p">,</span> COL<span class="o">=</span><span class="m">7</span> <span class="p">,</span> gender<span class="o">=</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span>   years.in.houston<span class="o">=</span><span class="m">22.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span>   commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">14</span><span class="p">)</span>
-df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">5</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">3</span><span class="p">,</span> COL<span class="o">=</span><span class="m">3</span> <span class="p">,</span> gender<span class="o">=</span><span class="s">&#39;FEMALE&#39;</span><span class="p">,</span> years.in.houston<span class="o">=</span><span class="m">20.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span>   commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">0</span><span class="p">)</span>
-df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">6</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">1</span><span class="p">,</span> COL<span class="o">=</span><span class="m">8</span> <span class="p">,</span> gender<span class="o">=</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span>   years.in.houston<span class="o">=</span><span class="m">3.0</span><span class="p">,</span>  major<span class="o">=</span><span class="s">&#39;PSYCH&#39;</span><span class="p">,</span>  commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">0</span><span class="p">)</span>
-df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">7</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">4</span><span class="p">,</span> COL<span class="o">=</span><span class="m">4</span> <span class="p">,</span> gender<span class="o">=</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span>   years.in.houston<span class="o">=</span><span class="m">25.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span>   commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">25</span><span class="p">)</span>
-df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">8</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">2</span><span class="p">,</span> COL<span class="o">=</span><span class="m">6</span> <span class="p">,</span> gender<span class="o">=</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span>   years.in.houston<span class="o">=</span><span class="m">20.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;CONSUMERSCIENCE&#39;</span><span class="p">,</span> commute<span class="o">=</span> <span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">9</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">4</span><span class="p">,</span> COL<span class="o">=</span><span class="m">5</span> <span class="p">,</span> gender<span class="o">=</span><span class="s">&#39;FEMALE&#39;</span><span class="p">,</span> years.in.houston<span class="o">=</span><span class="m">5.0</span><span class="p">,</span>  major<span class="o">=</span><span class="s">&#39;HUMANRESOURCE&#39;</span><span class="p">,</span> commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">0</span><span class="p">)</span>
-df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">10</span><span class="p">,</span> ROW<span class="o">=</span><span class="m">3</span><span class="p">,</span> COL<span class="o">=</span><span class="m">1</span> <span class="p">,</span> gender<span class="o">=</span><span class="s">&#39;FEMALE&#39;</span><span class="p">,</span> years.in.houston<span class="o">=</span><span class="m">20.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span> commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">1</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">3</span><span class="p">,</span> COL<span class="o">=</span><span class="m">1</span><span class="p">,</span>  gender<span class="o">=</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span>   years.in.houston<span class="o">=</span><span class="m">21.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span>   commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">2</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">4</span><span class="p">,</span> COL<span class="o">=</span><span class="m">2</span><span class="p">,</span>  gender<span class="o">=</span><span class="s">&#39;FEMALE&#39;</span><span class="p">,</span> years.in.houston<span class="o">=</span><span class="m">21.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;HEALTH&#39;</span><span class="p">,</span> commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">3</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">4</span><span class="p">,</span> COL<span class="o">=</span><span class="m">10</span><span class="p">,</span> gender<span class="o">=</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span>   years.in.houston<span class="o">=</span><span class="m">22.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span>   commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">4</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">4</span><span class="p">,</span> COL<span class="o">=</span><span class="m">1</span><span class="p">,</span>  gender<span class="o">=</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span>   years.in.houston<span class="o">=</span><span class="m">22.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span>   commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">14</span><span class="p">)</span>
+df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">5</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">2</span><span class="p">,</span> COL<span class="o">=</span><span class="m">6</span><span class="p">,</span>  gender<span class="o">=</span><span class="s">&#39;FEMALE&#39;</span><span class="p">,</span> years.in.houston<span class="o">=</span><span class="m">20.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span>   commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">6</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">1</span><span class="p">,</span> COL<span class="o">=</span><span class="m">7</span><span class="p">,</span>  gender<span class="o">=</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span>   years.in.houston<span class="o">=</span><span class="m">3.0</span><span class="p">,</span>  major<span class="o">=</span><span class="s">&#39;PSYCH&#39;</span><span class="p">,</span>  commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">7</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">2</span><span class="p">,</span> COL<span class="o">=</span><span class="m">6</span><span class="p">,</span>  gender<span class="o">=</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span>   years.in.houston<span class="o">=</span><span class="m">25.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span>   commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">25</span><span class="p">)</span>
+df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">8</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">3</span><span class="p">,</span> COL<span class="o">=</span><span class="m">6</span><span class="p">,</span>  gender<span class="o">=</span><span class="s">&#39;MALE&#39;</span><span class="p">,</span>   years.in.houston<span class="o">=</span><span class="m">20.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;CONSUMERSCIENCE&#39;</span><span class="p">,</span> commute<span class="o">=</span> <span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">9</span> <span class="p">,</span> ROW<span class="o">=</span><span class="m">3</span><span class="p">,</span> COL<span class="o">=</span><span class="m">3</span><span class="p">,</span>  gender<span class="o">=</span><span class="s">&#39;FEMALE&#39;</span><span class="p">,</span> years.in.houston<span class="o">=</span><span class="m">5.0</span><span class="p">,</span>  major<span class="o">=</span><span class="s">&#39;HUMANRESOURCE&#39;</span><span class="p">,</span> commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+df <span class="o">&lt;-</span> add_row<span class="p">(</span>df<span class="p">,</span> ID<span class="o">=</span><span class="m">10</span><span class="p">,</span> ROW<span class="o">=</span><span class="m">4</span><span class="p">,</span> COL<span class="o">=</span><span class="m">13</span><span class="p">,</span> gender<span class="o">=</span><span class="s">&#39;FEMALE&#39;</span><span class="p">,</span> years.in.houston<span class="o">=</span><span class="m">20.0</span><span class="p">,</span> major<span class="o">=</span><span class="s">&#39;ECON&#39;</span><span class="p">,</span> commute<span class="o">=</span><span class="s">&#39;YES&#39;</span><span class="p">,</span> games.attended<span class="o">=</span><span class="m">0</span><span class="p">)</span>
 
 <span class="c1"># List All Variables in df</span>
 str<span class="p">(</span>df<span class="p">)</span>
@@ -11993,8 +11966,8 @@ df
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:	10 obs. of  8 variables:
  $ ID              : num  1 2 3 4 5 6 7 8 9 10
- $ ROW             : num  3 1 4 2 3 1 4 2 4 3
- $ COL             : num  10 12 9 7 3 8 4 6 5 1
+ $ ROW             : num  3 4 4 4 2 1 2 3 3 4
+ $ COL             : num  1 2 10 1 6 7 6 6 3 13
  $ gender          : Factor w/ 2 levels &#34;MALE&#34;,&#34;FEMALE&#34;: 1 2 1 1 2 1 1 1 2 2
  $ years.in.houston: num  21 21 22 22 20 3 25 20 5 20
  $ major           : Factor w/ 5 levels &#34;ECON&#34;,&#34;HEALTH&#34;,..: 1 2 1 1 1 3 1 4 5 1
@@ -12014,16 +11987,16 @@ df
 <table>
 <thead><tr><th scope=col>ID</th><th scope=col>ROW</th><th scope=col>COL</th><th scope=col>gender</th><th scope=col>years.in.houston</th><th scope=col>major</th><th scope=col>commute</th><th scope=col>games.attended</th></tr></thead>
 <tbody>
-	<tr><td> 1             </td><td>3              </td><td>10             </td><td>MALE           </td><td>21             </td><td>ECON           </td><td>YES            </td><td> 0             </td></tr>
-	<tr><td> 2             </td><td>1              </td><td>12             </td><td>FEMALE         </td><td>21             </td><td>HEALTH         </td><td>YES            </td><td> 2             </td></tr>
-	<tr><td> 3             </td><td>4              </td><td> 9             </td><td>MALE           </td><td>22             </td><td>ECON           </td><td>YES            </td><td> 0             </td></tr>
-	<tr><td> 4             </td><td>2              </td><td> 7             </td><td>MALE           </td><td>22             </td><td>ECON           </td><td>YES            </td><td>14             </td></tr>
-	<tr><td> 5             </td><td>3              </td><td> 3             </td><td>FEMALE         </td><td>20             </td><td>ECON           </td><td>YES            </td><td> 0             </td></tr>
-	<tr><td> 6             </td><td>1              </td><td> 8             </td><td>MALE           </td><td> 3             </td><td>PSYCH          </td><td>YES            </td><td> 0             </td></tr>
-	<tr><td> 7             </td><td>4              </td><td> 4             </td><td>MALE           </td><td>25             </td><td>ECON           </td><td>YES            </td><td>25             </td></tr>
-	<tr><td> 8             </td><td>2              </td><td> 6             </td><td>MALE           </td><td>20             </td><td>CONSUMERSCIENCE</td><td>YES            </td><td> 2             </td></tr>
-	<tr><td> 9             </td><td>4              </td><td> 5             </td><td>FEMALE         </td><td> 5             </td><td>HUMANRESOURCE  </td><td>YES            </td><td> 0             </td></tr>
-	<tr><td>10             </td><td>3              </td><td> 1             </td><td>FEMALE         </td><td>20             </td><td>ECON           </td><td>YES            </td><td> 0             </td></tr>
+	<tr><td> 1             </td><td>3              </td><td> 1             </td><td>MALE           </td><td>21             </td><td>ECON           </td><td>YES            </td><td> 0             </td></tr>
+	<tr><td> 2             </td><td>4              </td><td> 2             </td><td>FEMALE         </td><td>21             </td><td>HEALTH         </td><td>YES            </td><td> 2             </td></tr>
+	<tr><td> 3             </td><td>4              </td><td>10             </td><td>MALE           </td><td>22             </td><td>ECON           </td><td>YES            </td><td> 0             </td></tr>
+	<tr><td> 4             </td><td>4              </td><td> 1             </td><td>MALE           </td><td>22             </td><td>ECON           </td><td>YES            </td><td>14             </td></tr>
+	<tr><td> 5             </td><td>2              </td><td> 6             </td><td>FEMALE         </td><td>20             </td><td>ECON           </td><td>YES            </td><td> 0             </td></tr>
+	<tr><td> 6             </td><td>1              </td><td> 7             </td><td>MALE           </td><td> 3             </td><td>PSYCH          </td><td>YES            </td><td> 0             </td></tr>
+	<tr><td> 7             </td><td>2              </td><td> 6             </td><td>MALE           </td><td>25             </td><td>ECON           </td><td>YES            </td><td>25             </td></tr>
+	<tr><td> 8             </td><td>3              </td><td> 6             </td><td>MALE           </td><td>20             </td><td>CONSUMERSCIENCE</td><td>YES            </td><td> 2             </td></tr>
+	<tr><td> 9             </td><td>3              </td><td> 3             </td><td>FEMALE         </td><td> 5             </td><td>HUMANRESOURCE  </td><td>YES            </td><td> 0             </td></tr>
+	<tr><td>10             </td><td>4              </td><td>13             </td><td>FEMALE         </td><td>20             </td><td>ECON           </td><td>YES            </td><td> 0             </td></tr>
 </tbody>
 </table>
 
@@ -12047,7 +12020,7 @@ df
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Generate Binary Variable of Having attended any games or not</span>
@@ -12080,16 +12053,16 @@ df
 <table>
 <thead><tr><th scope=col>ID</th><th scope=col>ROW</th><th scope=col>COL</th><th scope=col>gender</th><th scope=col>years.in.houston</th><th scope=col>major</th><th scope=col>commute</th><th scope=col>games.attended</th><th scope=col>games.any</th><th scope=col>econ</th></tr></thead>
 <tbody>
-	<tr><td> 1             </td><td>3              </td><td>10             </td><td>MALE           </td><td>21             </td><td>ECON           </td><td>YES            </td><td> 0             </td><td>Never.Attended </td><td>ECON           </td></tr>
-	<tr><td> 2             </td><td>1              </td><td>12             </td><td>FEMALE         </td><td>21             </td><td>HEALTH         </td><td>YES            </td><td> 2             </td><td>Has.Attended   </td><td>Not.Econ       </td></tr>
-	<tr><td> 3             </td><td>4              </td><td> 9             </td><td>MALE           </td><td>22             </td><td>ECON           </td><td>YES            </td><td> 0             </td><td>Never.Attended </td><td>ECON           </td></tr>
-	<tr><td> 4             </td><td>2              </td><td> 7             </td><td>MALE           </td><td>22             </td><td>ECON           </td><td>YES            </td><td>14             </td><td>Has.Attended   </td><td>ECON           </td></tr>
-	<tr><td> 5             </td><td>3              </td><td> 3             </td><td>FEMALE         </td><td>20             </td><td>ECON           </td><td>YES            </td><td> 0             </td><td>Never.Attended </td><td>ECON           </td></tr>
-	<tr><td> 6             </td><td>1              </td><td> 8             </td><td>MALE           </td><td> 3             </td><td>PSYCH          </td><td>YES            </td><td> 0             </td><td>Never.Attended </td><td>Not.Econ       </td></tr>
-	<tr><td> 7             </td><td>4              </td><td> 4             </td><td>MALE           </td><td>25             </td><td>ECON           </td><td>YES            </td><td>25             </td><td>Has.Attended   </td><td>ECON           </td></tr>
-	<tr><td> 8             </td><td>2              </td><td> 6             </td><td>MALE           </td><td>20             </td><td>CONSUMERSCIENCE</td><td>YES            </td><td> 2             </td><td>Has.Attended   </td><td>Not.Econ       </td></tr>
-	<tr><td> 9             </td><td>4              </td><td> 5             </td><td>FEMALE         </td><td> 5             </td><td>HUMANRESOURCE  </td><td>YES            </td><td> 0             </td><td>Never.Attended </td><td>Not.Econ       </td></tr>
-	<tr><td>10             </td><td>3              </td><td> 1             </td><td>FEMALE         </td><td>20             </td><td>ECON           </td><td>YES            </td><td> 0             </td><td>Never.Attended </td><td>ECON           </td></tr>
+	<tr><td> 1             </td><td>3              </td><td> 1             </td><td>MALE           </td><td>21             </td><td>ECON           </td><td>YES            </td><td> 0             </td><td>Never.Attended </td><td>ECON           </td></tr>
+	<tr><td> 2             </td><td>4              </td><td> 2             </td><td>FEMALE         </td><td>21             </td><td>HEALTH         </td><td>YES            </td><td> 2             </td><td>Has.Attended   </td><td>Not.Econ       </td></tr>
+	<tr><td> 3             </td><td>4              </td><td>10             </td><td>MALE           </td><td>22             </td><td>ECON           </td><td>YES            </td><td> 0             </td><td>Never.Attended </td><td>ECON           </td></tr>
+	<tr><td> 4             </td><td>4              </td><td> 1             </td><td>MALE           </td><td>22             </td><td>ECON           </td><td>YES            </td><td>14             </td><td>Has.Attended   </td><td>ECON           </td></tr>
+	<tr><td> 5             </td><td>2              </td><td> 6             </td><td>FEMALE         </td><td>20             </td><td>ECON           </td><td>YES            </td><td> 0             </td><td>Never.Attended </td><td>ECON           </td></tr>
+	<tr><td> 6             </td><td>1              </td><td> 7             </td><td>MALE           </td><td> 3             </td><td>PSYCH          </td><td>YES            </td><td> 0             </td><td>Never.Attended </td><td>Not.Econ       </td></tr>
+	<tr><td> 7             </td><td>2              </td><td> 6             </td><td>MALE           </td><td>25             </td><td>ECON           </td><td>YES            </td><td>25             </td><td>Has.Attended   </td><td>ECON           </td></tr>
+	<tr><td> 8             </td><td>3              </td><td> 6             </td><td>MALE           </td><td>20             </td><td>CONSUMERSCIENCE</td><td>YES            </td><td> 2             </td><td>Has.Attended   </td><td>Not.Econ       </td></tr>
+	<tr><td> 9             </td><td>3              </td><td> 3             </td><td>FEMALE         </td><td> 5             </td><td>HUMANRESOURCE  </td><td>YES            </td><td> 0             </td><td>Never.Attended </td><td>Not.Econ       </td></tr>
+	<tr><td>10             </td><td>4              </td><td>13             </td><td>FEMALE         </td><td>20             </td><td>ECON           </td><td>YES            </td><td> 0             </td><td>Never.Attended </td><td>ECON           </td></tr>
 </tbody>
 </table>
 
@@ -12112,7 +12085,7 @@ df
 </ul>
 </li>
 <li>What is the average number of games students attended?<ul>
-<li>But only average students attended $4.3$ games</li>
+<li>But on average students attended $4.3$ games (because one student attended 25 games, and another student in the sample attended 10 games)</li>
 </ul>
 </li>
 </ul>
@@ -12125,7 +12098,7 @@ df
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Using the dplyr package, we can find the fraction of individuals in factor variables</span>
@@ -12134,20 +12107,6 @@ df <span class="o">%&gt;%</span>
   group_by<span class="p">(</span>games.any<span class="p">)</span> <span class="o">%&gt;%</span>
   summarise <span class="p">(</span>freq <span class="o">=</span> n<span class="p">())</span> <span class="o">%&gt;%</span>
   mutate<span class="p">(</span>fraction <span class="o">=</span> freq <span class="o">/</span> <span class="kp">sum</span><span class="p">(</span>freq<span class="p">))</span>
-
-<span class="c1"># Average Game Attendance Overall, and for each sub-group, conditional on attending any or no attendance</span>
-<span class="c1"># This creates a column that has overall average for games.attended, showing in every row:</span>
-df <span class="o">%&gt;%</span> summarise<span class="p">(</span>games.attended.avg <span class="o">=</span><span class="kp">mean</span><span class="p">(</span>games.attended<span class="p">))</span>
-<span class="c1"># This creates a column that has overall average for games.attended, showing in every row:</span>
-df <span class="o">%&gt;%</span> group_by<span class="p">(</span>games.any<span class="p">)</span> <span class="o">%&gt;%</span> summarise<span class="p">(</span>games.attended.avg <span class="o">=</span> <span class="kp">mean</span><span class="p">(</span>games.attended<span class="p">))</span>
-<span class="c1"># To show both overall average and the group specific average together</span>
-<span class="c1">#   the first mutate adds to df a column that has the overall average, same value every row</span>
-<span class="c1">#   then when we group by, we can calculate within group average for games.attended</span>
-<span class="c1">#   we can also take the average of the avg var, which is the same for all rows, so grouped averages are the same</span>
-df <span class="o">%&gt;%</span> 
-   mutate<span class="p">(</span>avg<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>games.attended<span class="p">))</span> <span class="o">%&gt;%</span> 
-   group_by<span class="p">(</span>games.any<span class="p">)</span> <span class="o">%&gt;%</span> 
-   summarise<span class="p">(</span>Avg_group<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>games.attended<span class="p">),</span>Total_Mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>avg<span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12176,6 +12135,30 @@ df <span class="o">%&gt;%</span>
 </div>
 
 </div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Average Game Attendance Overall, and for each sub-group, conditional on attending any or no attendance</span>
+<span class="c1"># This creates a column that has overall average for games.attended, showing in every row:</span>
+df <span class="o">%&gt;%</span> summarise<span class="p">(</span>games.attended.avg <span class="o">=</span><span class="kp">mean</span><span class="p">(</span>games.attended<span class="p">))</span>
+<span class="c1"># This creates a column that has overall average for games.attended, showing in every row:</span>
+df <span class="o">%&gt;%</span> group_by<span class="p">(</span>games.any<span class="p">)</span> <span class="o">%&gt;%</span> summarise<span class="p">(</span>games.attended.avg <span class="o">=</span> <span class="kp">mean</span><span class="p">(</span>games.attended<span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
 
 <div class="output_area">
 
@@ -12213,6 +12196,33 @@ df <span class="o">%&gt;%</span>
 </div>
 
 </div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># To show both overall average and the group specific average together</span>
+<span class="c1">#   the first mutate adds to df a column that has the overall average, same value every row</span>
+<span class="c1">#   then when we group by, we can calculate within group average for games.attended</span>
+<span class="c1">#   we can also take the average of the avg var, which is the same for all rows, so grouped averages are the same</span>
+df <span class="o">%&gt;%</span> 
+   mutate<span class="p">(</span>avg<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>games.attended<span class="p">))</span> <span class="o">%&gt;%</span> 
+   group_by<span class="p">(</span>games.any<span class="p">)</span> <span class="o">%&gt;%</span> 
+   summarise<span class="p">(</span>Avg_group<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>games.attended<span class="p">),</span>Total_Mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>avg<span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
 
 <div class="output_area">
 

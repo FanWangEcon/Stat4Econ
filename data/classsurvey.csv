@@ -1,0 +1,11 @@
+ID,ROW,COL,gender,years.in.houston,major,commute,games.attended,games.any,econ
+1,3,1,MALE,21,ECON,YES,0,Never.Attended,ECON
+2,4,2,FEMALE,21,HEALTH,YES,2,Has.Attended,Not.Econ
+3,4,10,MALE,22,ECON,YES,0,Never.Attended,ECON
+4,4,1,MALE,22,ECON,YES,14,Has.Attended,ECON
+5,2,6,FEMALE,20,ECON,YES,0,Never.Attended,ECON
+6,1,7,MALE,3,PSYCH,YES,0,Never.Attended,Not.Econ
+7,2,6,MALE,25,ECON,YES,25,Has.Attended,ECON
+8,3,6,MALE,20,CONSUMERSCIENCE,YES,2,Has.Attended,Not.Econ
+9,3,3,FEMALE,5,HUMANRESOURCE,YES,0,Never.Attended,Not.Econ
+10,4,13,FEMALE,20,ECON,YES,0,Never.Attended,ECON

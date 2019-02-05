@@ -9,7 +9,7 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
 
 1. [An In-class Survey](survey/classsurvey.html)
 2. [One Variable Graphs and Tables](descriptive/OneVariable.html)
-3. [Multiple Variables Graphs and Tables](descriptive/BasicGraphsTables.html)
+3. [Multiple Variables Graphs and Tables](descriptive/MultipleVariables.html)
 
 # Summarizing Data
 

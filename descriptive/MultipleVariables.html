@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>BasicGraphsTables</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>MultipleVariables</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11776,14 +11776,15 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong><a href="https://fanwangecon.github.io/Stat4Econ/">Back to Fan's Intro Stat Table of Content</a></strong></p>
-<h1 id="Basic-Graphs-and-Tables">Basic Graphs and Tables<a class="anchor-link" href="#Basic-Graphs-and-Tables">&#182;</a></h1><h2 id="Load-Packages-and-Data">Load Packages and Data<a class="anchor-link" href="#Load-Packages-and-Data">&#182;</a></h2><h3 id="Packages">Packages<a class="anchor-link" href="#Packages">&#182;</a></h3><p>We will continue to rely on various <a href="https://www.tidyverse.org/">tidyverse</a>. Now including: <a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a>, <a href="https://readr.tidyverse.org/">readr</a>, along with <a href="https://dplyr.tidyverse.org/">dplyr</a> and <a href="https://tibble.tidyverse.org/">tibble</a>, which we used for the <a href="https://fanwangecon.github.io/Stat4Econ/survey/classsurvey.html">in-class survey</a> already.</p>
+<h1 id="Multiple-Variables-Basic-Graphs-and-Tables">Multiple Variables Basic Graphs and Tables<a class="anchor-link" href="#Multiple-Variables-Basic-Graphs-and-Tables">&#182;</a></h1><h2 id="Load-Packages-and-Data">Load Packages and Data<a class="anchor-link" href="#Load-Packages-and-Data">&#182;</a></h2><h3 id="Packages">Packages<a class="anchor-link" href="#Packages">&#182;</a></h3><p>We will continue to rely on various <a href="https://www.tidyverse.org/">tidyverse</a>. Now including: <a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a>, <a href="https://readr.tidyverse.org/">readr</a>, along with <a href="https://dplyr.tidyverse.org/">dplyr</a> and <a href="https://tibble.tidyverse.org/">tibble</a>, which we used for the <a href="https://fanwangecon.github.io/Stat4Econ/survey/classsurvey.html">in-class survey</a> already.</p>
+<p>We will also use the <a href="https://yihui.name/knitr/">knitr</a> Package, which allows for prettified outputs.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># For Data Structures</span>
@@ -11794,6 +11795,9 @@ div#notebook {
 <span class="kn">library</span><span class="p">(</span>readr<span class="p">)</span>
 <span class="c1"># For plotting</span>
 <span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
+<span class="c1"># For Additional table output </span>
+<span class="c1"># install.packages(&quot;knitr&quot;)</span>
+<span class="kn">library</span><span class="p">(</span>knitr<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11812,7 +11816,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Load the dataset using readr&#39;s read_csv</span>
@@ -11856,7 +11860,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We have several factor variables, we can set them as factor one by one</span>
@@ -11918,39 +11922,7 @@ str<span class="p">(</span>df_survey<span class="p">)</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Single-Variable">Single Variable<a class="anchor-link" href="#Single-Variable">&#182;</a></h1><p>From a dataset, such as the in-class survey, there are various columns, each representing a different variable. We can zoom-in on each of the variables, and focus on that only.</p>
-<h2 id="Categorical/Discrete">Categorical/Discrete<a class="anchor-link" href="#Categorical/Discrete">&#182;</a></h2><p>Categorical variables, such as Major, Gender, Recent arrival or not, etc, we can generate frequency tables.</p>
-<p>The frequency table simply shows in separate columns (or rows) the name for all the categories for that categorical variable, and show next to these categories that number of times that category appears in the dataset. This is called a frequency table. So if we show a one-way frequency for majors, there would be four rows for the four unique majors from our survey of 10 students, and we would write down the number of students in each of the majors out of the 10 students.</p>
-<p>Rather than showing frequencies, we can also show ratios or percentages by dividing the number of observations in each category by the total number of observations in the survey.</p>
-<p>Graphically, we can show the results from these one-way frequency tables using bar charts and pie charts. The bar charts would have separate bars for each category, and the heights of the bars would show the number of observations in that category, or the fraction of individuals in the categorical. The relative heights of bars are the same whether we show the frequencies or the fractions/ratios. A pie chart might give a more direct visual sense of the fraction of observations in each category.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Continuous/Quantitative">Continuous/Quantitative<a class="anchor-link" href="#Continuous/Quantitative">&#182;</a></h2><p>Graphically, we can show a continuous variable using a histogram. This could be test scores, temperatures, years in houston, etc. This involves first creating a categorical/discrete variable based on the continuous variable. Since the underlying continuous variable is ordered (low to high temperature unless major which is not ordered), the categorica/discrete variable we generate is an ordered categorical variable (majors could be called unordered categorical variable).</p>
-<p>To genereate the histogram, we:</p>
-<ol>
-<li>Make sure that all observations belongs to one category<ul>
-<li>no observations belonging to no categories</li>
-<li>each observation only belongs to one category</li>
-</ul>
-</li>
-<li>Each category is equi-distance along the continuous variable's original scale. </li>
-<li>Then we create a bar graph where each bar is a category, and the height of the bar represents the number of observations within that category. </li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Two-Variables-Together">Two Variables Together<a class="anchor-link" href="#Two-Variables-Together">&#182;</a></h1><h2 id="Two-Continuous-Variables">Two Continuous Variables<a class="anchor-link" href="#Two-Continuous-Variables">&#182;</a></h2><p>With two continuous/quantitative variables, we can generate a scatter plot. Crucially, each point of the scatter plot represents one individual, the location of that point indicates the x and y values of that individual. The x and y values could be the individual's test score and hours studied for example.</p>
+<h2 id="Two-Continuous-Variables">Two Continuous Variables<a class="anchor-link" href="#Two-Continuous-Variables">&#182;</a></h2><p>With two continuous/quantitative variables, we can generate a scatter plot. Crucially, each point of the scatter plot represents one individual, the location of that point indicates the x and y values of that individual. The x and y values could be the individual's test score and hours studied for example.</p>
 
 </div>
 </div>
@@ -11975,7 +11947,7 @@ str<span class="p">(</span>df_survey<span class="p">)</span>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We can first find the group averages</span>
@@ -12018,7 +11990,7 @@ df_gender_avg_games
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We can graph based on df_gender_avg_games</span>
@@ -12099,7 +12071,7 @@ SkgYHRJGh4TRKU74P91NP1RvlKh9AAAAAElFTkSuQmCC"
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># But it is a little cumbersome to do this in two steps, we can do it in one step</span>
@@ -12188,7 +12160,7 @@ AAAAAElFTkSuQmCC"
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We can calculate the statistics as a table, and also show obs in each group</span>
@@ -12232,7 +12204,7 @@ df_survey <span class="o">%&gt;%</span>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Let&#39;s Show these Visually</span>

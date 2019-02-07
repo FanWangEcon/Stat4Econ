@@ -11775,22 +11775,20 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Toolbox-One">Toolbox One<a class="anchor-link" href="#Toolbox-One">&#182;</a></h1><p>We have various tools at our disposal to summarize variables and the relationship between variables. Imagine that we have multiple toolboxes. This is the first one. There are two levels to this toolbox.</p>
-<h2 id="Three-Basic-Tools">Three Basic Tools<a class="anchor-link" href="#Three-Basic-Tools">&#182;</a></h2><p>On the first level, our three tools are:</p>
+<h1 id="Rescaling-Standard-Deviation-and-Covariance">Rescaling Standard Deviation and Covariance<a class="anchor-link" href="#Rescaling-Standard-Deviation-and-Covariance">&#182;</a></h1><p>We have various tools at our disposal to summarize variables and the relationship between variables. Imagine that we have multiple toolboxes. This is the first one. There are two levels to this toolbox.</p>
+<h2 id="Three-Basic-Tools">Three Basic Tools<a class="anchor-link" href="#Three-Basic-Tools">&#182;</a></h2><p>Our three basic tools are:</p>
 <ol>
 <li>(sample) Mean of X (or Y)</li>
 <li>(sample) Standard Deviation of X (or Y)</li>
 <li>(sample) Covariance of X and Y</li>
 </ol>
-<h2 id="Two-Rescaling-Tools">Two Rescaling Tools<a class="anchor-link" href="#Two-Rescaling-Tools">&#182;</a></h2><p>On the second level, we have two tools that combine the tools from the first level:</p>
+<h2 id="Two-Rescaling-Tools">Two Rescaling Tools<a class="anchor-link" href="#Two-Rescaling-Tools">&#182;</a></h2><p>Additionally, we have two tools that combine the tools from the first level:</p>
 <ol>
 <li>Coefficient of Variation = (Standard Deviation)/(Mean)</li>
 <li>Correlation = (Covariance of X and Y)/((Standard Deviation of X)*(Standard Deviation of Y))</li>
 </ol>
 <p>The tools on the second level rescales the standard deviation and covariance statistics.</p>
-<h2 id="Formulas-for-the-First-Three-Tools">Formulas for the First Three Tools<a class="anchor-link" href="#Formulas-for-the-First-Three-Tools">&#182;</a></h2><p>Formulas are short-hands so that we can be precise and succient.</p>
-<h2 id="Sample-Mean">Sample Mean<a class="anchor-link" href="#Sample-Mean">&#182;</a></h2><h2 id="Sample-Standard-Deviation">Sample Standard Deviation<a class="anchor-link" href="#Sample-Standard-Deviation">&#182;</a></h2><h2 id="Sample-Covariance">Sample Covariance<a class="anchor-link" href="#Sample-Covariance">&#182;</a></h2><h2 id="Formulas-for-the-Two-Rescaling-Tools">Formulas for the Two Rescaling Tools<a class="anchor-link" href="#Formulas-for-the-Two-Rescaling-Tools">&#182;</a></h2><p>Formulas are short-hands so that we can be precise and succient.</p>
-<h2 id="Coefficient-of-Variation">Coefficient of Variation<a class="anchor-link" href="#Coefficient-of-Variation">&#182;</a></h2><h2 id="Correlation">Correlation<a class="anchor-link" href="#Correlation">&#182;</a></h2>
+
 </div>
 </div>
 </div>
@@ -11815,7 +11813,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Load in Data Tools</span>
@@ -11868,7 +11866,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Control Graph Size</span>
@@ -11877,8 +11875,7 @@ cols(
 <span class="c1"># 1. specify x and y</span>
 <span class="c1"># 2. label each state</span>
 <span class="c1"># 3. add in trend line</span>
-<span class="kp">suppressMessages</span><span class="p">(</span><span class="kp">print</span><span class="p">(</span>
-    ggplot<span class="p">(</span>df_wgedu<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Share.College.Edu<span class="p">,</span> y<span class="o">=</span>Hourly.Salary<span class="p">))</span> <span class="o">+</span>
+scatter <span class="o">&lt;-</span> ggplot<span class="p">(</span>df_wgedu<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Share.College.Edu<span class="p">,</span> y<span class="o">=</span>Hourly.Salary<span class="p">))</span> <span class="o">+</span>
       geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span>
       geom_text<span class="p">(</span>aes<span class="p">(</span>label<span class="o">=</span>State<span class="p">),</span> size<span class="o">=</span><span class="m">3</span><span class="p">,</span> hjust<span class="o">=</span><span class="m">-.2</span><span class="p">,</span> vjust<span class="o">=</span><span class="m">-.2</span><span class="p">)</span> <span class="o">+</span>
       geom_smooth<span class="p">(</span>method<span class="o">=</span>lm<span class="p">)</span> <span class="o">+</span>
@@ -11887,7 +11884,7 @@ cols(
            y <span class="o">=</span> <span class="s">&#39;Hourly Wage&#39;</span><span class="p">,</span>
            caption <span class="o">=</span> <span class="s">&#39;Economic Policy Institute\n www.epi.org/data/&#39;</span><span class="p">)</span> <span class="o">+</span>
       theme_bw<span class="p">()</span>
-<span class="p">))</span>
+<span class="kp">print</span><span class="p">(</span>scatter<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12142,7 +12139,7 @@ pDQwlAAAAABJRU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We can compute the three basic statistics</span>
@@ -12231,7 +12228,7 @@ as_tibble<span class="p">(</span>stats.coefvari<span class="p">)</span>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We can compute the three basic statistics</span>
@@ -12240,7 +12237,7 @@ states.covcor <span class="o">&lt;-</span> <span class="kt">list</span><span cla
               Shr.Wage.Cov <span class="o">=</span> cov<span class="p">(</span>df_wgedu<span class="o">$</span>Hourly.Salary<span class="p">,</span>
                                  df_wgedu<span class="o">$</span>Share.College.Edu<span class="p">),</span>        
               <span class="c1"># Correlation </span>
-              Shr.Wage.Cor <span class="o">=</span> cor<span class="p">(</span>df_survey<span class="o">$</span>Hourly.Salary<span class="p">,</span> df_survey<span class="o">$</span>Share.College.Edu<span class="p">),</span>
+              Shr.Wage.Cor <span class="o">=</span> cor<span class="p">(</span>df_wgedu<span class="o">$</span>Hourly.Salary<span class="p">,</span> df_wgedu<span class="o">$</span>Share.College.Edu<span class="p">),</span>
               Shr.Wage.Cor.Formula <span class="o">=</span> <span class="p">(</span>cov<span class="p">(</span>df_wgedu<span class="o">$</span>Hourly.Salary<span class="p">,</span> df_wgedu<span class="o">$</span>Share.College.Edu<span class="p">)</span>
                                       <span class="o">/</span><span class="p">(</span>stats.msdv<span class="o">$</span>Shr.Coll.Std<span class="o">*</span>stats.msdv<span class="o">$</span>Hr.Wage.Std<span class="p">))</span>
               <span class="p">)</span>

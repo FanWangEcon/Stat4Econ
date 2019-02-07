@@ -11784,7 +11784,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[217]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># For Data Structures</span>
@@ -11816,7 +11816,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[218]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Load the dataset using readr&#39;s read_csv</span>
@@ -11860,7 +11860,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[219]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We have several factor variables, we can set them as factor one by one</span>
@@ -11934,9 +11934,17 @@ str<span class="p">(</span>df_survey<span class="p">)</span>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="A-Frequency-Table-and-a-Bar-Graph">A Frequency Table and a Bar Graph<a class="anchor-link" href="#A-Frequency-Table-and-a-Bar-Graph">&#182;</a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[220]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># This Generates A Frequency table for the number of students of each gender</span>
@@ -11979,15 +11987,85 @@ df_survey <span class="o">%&gt;%</span>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[221]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># We can make a bar graph for the Frequency Table</span>
+<span class="c1"># graph size</span>
+<span class="kp">options</span><span class="p">(</span>repr.plot.width <span class="o">=</span> <span class="m">2</span><span class="p">,</span> repr.plot.height <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="c1"># Graph</span>
+bar.plot <span class="o">&lt;-</span> ggplot<span class="p">(</span>df_survey<span class="p">)</span> <span class="o">+</span> 
+    geom_bar<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>gender<span class="p">))</span> <span class="o">+</span> 
+    theme_bw<span class="p">()</span>
+<span class="kp">print</span><span class="p">(</span>bar.plot<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAADwCAMAAAAJixmgAAAAOVBMVEUAAAAzMzNNTU1ZWVlo
+aGh8fHyMjIyampqnp6eysrK9vb3Hx8fQ0NDZ2dnh4eHp6enr6+vw8PD///8Yrk7HAAAACXBI
+WXMAABJ0AAASdAHeZh94AAAEdElEQVR4nO3dgZaaMBAF0DQFRLeVkv//2BpABCSE4AzCzHvn
+dNcVGXMLhrjIxjhlMd9uwN4BWHoAlh6ApQfgSH6dNNvBiY937l/yGgwlAd6w5tqcDmwfmVtz
+bc4Gtv2XyZprA/Dn4QfPrbk25wM/X8PtAe0fb37TZVg2BWzdnrs0IXhY9rivYYABBpgYvPNI
+6wDgcQCOBuDFAAwwwAADDHBCAI4G4MUADDDAAAMMcEL0gcWfeZiCEx9//i2c+HiAIwEYYIAB
+BhjghAAcDcCLARhggAEGGOCEABwNwIsB+CtgbR891PZZS6tsC1ttu3QPfrvIg7BxBzrVMr7G
+Y7SFCRt3nC08+UC8AnAbPeBWPbcmwCSN46i5BDbdz3Z0yaFUsDWDuPmIAt8G3psGsHvt0sFI
+A0cjDlxaRa9h71XVaTnfUYd6K6FgdZ1WYWpd4MrmlSqwrpGWRnA0ABM3jqPmEljdLq0O3KbK
+rwGvULCrTUgsFBweYgoF/xg7e788cN9nlSGwsFMtHdeGvOK2cDQAEzeOo+YiuC4zY7Iy+K5Y
+GrjqfodnQ++KpYEvxv8CoMrNRQn4OeBQM/BQB1a3S6vrtNQdlqIBmLhxHDUXwUVzh8m0vIbL
+9nhk1PTS1vz13+5qjsPqBh6FudT+2GRyJeB+4HFXAn4OPILnTMWBY1EADv99aY7GcdRMAy/8
+BXGOxnHUBDgenWAlF3mMN7CSLawNPDyTqAE8OnOqADw+UywfrPK6pdk1ASZpHEdNgAEGGGCA
+qRrHURNggAEGGGCqxnHUBBhggAEGmKpxHDU/A6s41TL7X6VlCwNM2ziOmgADDDDAAFM1jqMm
+wAADDDDAVI3jqAkwwAADDDBV4zhqArwcXNUCMGXjOGoCvBL8dlXLiUKzhdclbXIappIAhwNw
+agD+PKzghZHWupwOHFpzbc4OPmk2g9OTvk+wlgSYPOrABwvA0gOw9AC8Kf38l/Z167no7evw
+UauKk1XyIQK/3XjOnGi7d1ujN10J7SOt5APwpsyBu4l8CcBklXx2AQ//jR+1rjhVJR/KTqu/
+0XZaC81M7LSoKvkwbuG2jX2H/dZzJxQnquSzC3j+UJVQnKiSD7bwpsyDh73r5FZqcZpKPtTg
+0U731sxuYfpIi6aSD8bS0gOw9AAsPQBLD8BHSHRi709q85XeHoApa/OVDqTKTfanIdUX08yy
+8ABWRTfX4mNp4aZL7zY0C0N6dgfXtp/ut7mV+UYY282m2SwtpkvD812lZ3fw1eSuzj3p6oWl
+uTWk2t38fKnl7NLgPJsbsjs4M36OMk/K2nlwimaXdu0rN7yUKruDn9P9uH5i2PF9oaVkz09Z
+bNUTagNPd9qmET0zvJQqu4ObiX6abqn0ndGP//EFvvrua3YpVb54WOpu3Yfg12FpupQq3xl4
+/DSI6jG0yP0MXi+we4xAuoHHZClVvjS0DM5Rzv/Muz+hn5WtJBw6pT7/3k9Yti9hyrFEUvbf
+pW/Z403B17zHfHvIGYClB2DpAVh61IH/A//bzM6mYMnOAAAAAElFTkSuQmCC"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Using-R-Functions-to-Generate-Multiple-Frequency-Tables">Using R Functions to Generate Multiple Frequency Tables<a class="anchor-link" href="#Using-R-Functions-to-Generate-Multiple-Frequency-Tables">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[222]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># There are Multiple Categorical Variables in the dataset</span>
 <span class="c1"># Would be nice if we can generate frequency tables for all of them easily</span>
 <span class="c1"># Let&#39;s create a list of  that are categorical</span>
 categorical.nomial.list <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;gender&#39;</span><span class="p">,</span> <span class="s">&#39;major&#39;</span><span class="p">,</span> <span class="s">&#39;games.any&#39;</span><span class="p">,</span> <span class="s">&#39;commute&#39;</span><span class="p">,</span> <span class="s">&#39;econ&#39;</span><span class="p">)</span>
-<span class="c1"># we can also show frequencies for the unique values in: years.in.houston and games.attended </span>
-categorical.list <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;years.in.houston&#39;</span><span class="p">,</span> <span class="s">&#39;games.attended&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11997,7 +12075,7 @@ categorical.list <span class="o">&lt;-</span> <span class="kt">c</span><span cla
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[223]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Let&#39;s Write a Function, not that we need to, but let&#39;s do it</span>
@@ -12061,13 +12139,13 @@ dplyr.freq.table<span class="p">(</span>df <span class="o">=</span> df_survey<sp
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[224]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Let&#39;s Now Use our function to generate Multiple Frequency Tables</span>
 <span class="c1"># We will first use a explicit loop</span>
-<span class="kr">for</span> <span class="p">(</span>ctr <span class="kr">in</span> <span class="kp">seq_along</span><span class="p">(</span>categorical.list<span class="p">))</span> <span class="p">{</span>
-    freq.table <span class="o">&lt;-</span> dplyr.freq.table<span class="p">(</span>df <span class="o">=</span> df_survey<span class="p">,</span> cate.var.str <span class="o">=</span> categorical.list<span class="p">[</span>ctr<span class="p">])</span>
+<span class="kr">for</span> <span class="p">(</span>ctr <span class="kr">in</span> <span class="kp">seq_along</span><span class="p">(</span>categorical.nomial.list<span class="p">))</span> <span class="p">{</span>
+    freq.table <span class="o">&lt;-</span> dplyr.freq.table<span class="p">(</span>df <span class="o">=</span> df_survey<span class="p">,</span> cate.var.str <span class="o">=</span> categorical.nomial.list<span class="p">[</span>ctr<span class="p">])</span>
     <span class="kp">print</span><span class="p">(</span>freq.table<span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
@@ -12086,24 +12164,38 @@ dplyr.freq.table<span class="p">(</span>df <span class="o">=</span> df_survey<sp
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[1] &#34;From Dataset: df_survey, Freq. Table for Variable: years.in.houston&#34;
-# A tibble: 6 x 3
-  years.in.houston frequency.count proportions
-             &lt;dbl&gt;           &lt;int&gt;       &lt;dbl&gt;
-1                3               1         0.1
-2                5               1         0.1
-3               20               3         0.3
-4               21               2         0.2
-5               22               2         0.2
-6               25               1         0.1
-[1] &#34;From Dataset: df_survey, Freq. Table for Variable: games.attended&#34;
-# A tibble: 4 x 3
-  games.attended frequency.count proportions
-           &lt;dbl&gt;           &lt;int&gt;       &lt;dbl&gt;
-1              0               6         0.6
-2              2               2         0.2
-3             14               1         0.1
-4             25               1         0.1
+<pre>[1] &#34;From Dataset: df_survey, Freq. Table for Variable: gender&#34;
+# A tibble: 2 x 3
+  gender frequency.count proportions
+  &lt;fct&gt;            &lt;int&gt;       &lt;dbl&gt;
+1 FEMALE               4         0.4
+2 MALE                 6         0.6
+[1] &#34;From Dataset: df_survey, Freq. Table for Variable: major&#34;
+# A tibble: 5 x 3
+  major           frequency.count proportions
+  &lt;fct&gt;                     &lt;int&gt;       &lt;dbl&gt;
+1 CONSUMERSCIENCE               1         0.1
+2 ECON                          6         0.6
+3 HEALTH                        1         0.1
+4 HUMANRESOURCE                 1         0.1
+5 PSYCH                         1         0.1
+[1] &#34;From Dataset: df_survey, Freq. Table for Variable: games.any&#34;
+# A tibble: 2 x 3
+  games.any      frequency.count proportions
+  &lt;fct&gt;                    &lt;int&gt;       &lt;dbl&gt;
+1 Has.Attended                 4         0.4
+2 Never.Attended               6         0.6
+[1] &#34;From Dataset: df_survey, Freq. Table for Variable: commute&#34;
+# A tibble: 1 x 3
+  commute frequency.count proportions
+  &lt;fct&gt;             &lt;int&gt;       &lt;dbl&gt;
+1 YES                  10           1
+[1] &#34;From Dataset: df_survey, Freq. Table for Variable: econ&#34;
+# A tibble: 2 x 3
+  econ     frequency.count proportions
+  &lt;fct&gt;              &lt;int&gt;       &lt;dbl&gt;
+1 ECON                   6         0.6
+2 Not.Econ               4         0.4
 </pre>
 </div>
 </div>
@@ -12112,9 +12204,17 @@ dplyr.freq.table<span class="p">(</span>df <span class="o">=</span> df_survey<sp
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Using-Lapply-to-Generate-Multiple-Frequency-Tables-with-a-Single-Line">Using Lapply to Generate Multiple Frequency Tables with a Single Line<a class="anchor-link" href="#Using-Lapply-to-Generate-Multiple-Frequency-Tables-with-a-Single-Line">&#182;</a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[225]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We will now use lapply, the single line loop tool in R</span>
@@ -12214,7 +12314,7 @@ dplyr.freq.table<span class="p">(</span>df <span class="o">=</span> df_survey<sp
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Continuous/Quantitative">Continuous/Quantitative<a class="anchor-link" href="#Continuous/Quantitative">&#182;</a></h2><p>Graphically, we can show a continuous variable using a histogram. This could be test scores, temperatures, years in houston, etc. This involves first creating a categorical/discrete variable based on the continuous variable. Since the underlying continuous variable is ordered (low to high temperature unless major which is not ordered), the categorica/discrete variable we generate is an ordered categorical variable (majors could be called unordered categorical variable).</p>
-<p>To genereate the histogram, we:</p>
+<h3 id="Histogram-with-Lapply">Histogram with Lapply<a class="anchor-link" href="#Histogram-with-Lapply">&#182;</a></h3><p>To genereate the histogram, we:</p>
 <ol>
 <li>Make sure that all observations belongs to one category<ul>
 <li>no observations belonging to no categories</li>
@@ -12227,6 +12327,299 @@ dplyr.freq.table<span class="p">(</span>df <span class="o">=</span> df_survey<sp
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[226]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># We will write a histogram function</span>
+ggplot.histogram <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>df<span class="p">,</span> cts.var.str<span class="p">){</span>    
+    
+    <span class="c1"># Figure Size</span>
+    <span class="kp">options</span><span class="p">(</span>repr.plot.width <span class="o">=</span> <span class="m">4</span><span class="p">,</span> repr.plot.height <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+    
+    <span class="c1"># Figure Title</span>
+    title <span class="o">&lt;-</span> <span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;Histogram for %s in %s&quot;</span><span class="p">,</span> cts.var.str<span class="p">,</span> <span class="kp">deparse</span><span class="p">(</span><span class="kp">substitute</span><span class="p">(</span>df<span class="p">)))</span>
+    
+    <span class="c1"># We have in our 10 student survey only 10 observations</span>
+    <span class="c1"># We can still generate a histogram for our continuous variables</span>
+    <span class="c1"># Will only use three bins</span>
+    histogram.3bins <span class="o">&lt;-</span> ggplot<span class="p">(</span>df_survey<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=!!</span>sym<span class="p">(</span>cts.var.str<span class="p">)))</span> <span class="o">+</span>
+      geom_histogram<span class="p">(</span>bins<span class="o">=</span><span class="m">3</span><span class="p">)</span> <span class="o">+</span>
+      labs<span class="p">(</span>title <span class="o">=</span> <span class="kp">paste0</span><span class="p">(</span>title<span class="p">),</span>
+           caption <span class="o">=</span> <span class="s">&#39;In Class Survey of 10 Students\n3 bins&#39;</span><span class="p">)</span> <span class="o">+</span>
+      theme_bw<span class="p">()</span>
+    
+    <span class="c1"># obtain the data in the plot</span>
+    plot_data <span class="o">&lt;-</span> ggplot_build<span class="p">(</span>histogram.3bins<span class="p">)</span>
+    <span class="c1"># the dataframe below contains all the information for the histogram</span>
+    <span class="c1"># bins and number of observations in each bins</span>
+    plot_dataframe <span class="o">&lt;-</span> plot_data<span class="o">$</span>data<span class="p">[[</span><span class="m">1</span><span class="p">]]</span>
+    
+    <span class="c1"># return outputs</span>
+    <span class="kr">return</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>gghist<span class="o">=</span>histogram.3bins<span class="p">,</span> hist.df<span class="o">=</span>plot_dataframe<span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[227]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Now the list of continuous Variables and calling the function with lapply</span>
+cts.list <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;years.in.houston&#39;</span><span class="p">,</span> <span class="s">&#39;games.attended&#39;</span><span class="p">)</span>
+
+<span class="c1"># lapply</span>
+results <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>cts.list<span class="p">,</span>
+       ggplot.histogram<span class="p">,</span>
+       df <span class="o">=</span> df_survey<span class="p">)</span>
+
+<span class="c1"># Show results</span>
+<span class="kr">for</span> <span class="p">(</span>ctr <span class="kr">in</span> <span class="kp">seq_along</span><span class="p">(</span>cts.list<span class="p">)){</span>
+    <span class="kp">print</span><span class="p">(</span>results<span class="p">[</span>ctr<span class="p">])</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[1]]
+[[1]]$gghist
+
+[[1]]$hist.df
+  y count  x xmin xmax    density ncount ndensity PANEL group ymin ymax colour
+1 2     2  0 -5.5  5.5 0.01818182   0.25     0.25     1    -1    0    2     NA
+2 0     0 11  5.5 16.5 0.00000000   0.00     0.00     1    -1    0    0     NA
+3 8     8 22 16.5 27.5 0.07272727   1.00     1.00     1    -1    0    8     NA
+    fill size linetype alpha
+1 grey35  0.5        1    NA
+2 grey35  0.5        1    NA
+3 grey35  0.5        1    NA
+
+
+[[1]]
+[[1]]$gghist
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+rkJggg=="
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+[[1]]$hist.df
+  y count    x  xmin  xmax density ncount ndensity PANEL group ymin ymax colour
+1 8     8  0.0 -6.25  6.25   0.064  1.000    1.000     1    -1    0    8     NA
+2 1     1 12.5  6.25 18.75   0.008  0.125    0.125     1    -1    0    1     NA
+3 1     1 25.0 18.75 31.25   0.008  0.125    0.125     1    -1    0    1     NA
+    fill size linetype alpha
+1 grey35  0.5        1    NA
+2 grey35  0.5        1    NA
+3 grey35  0.5        1    NA
+
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAFoCAMAAAC46dgSAAAAOVBMVEUAAAAzMzNNTU1ZWVlo
+aGh8fHyMjIyampqnp6eysrK9vb3Hx8fQ0NDZ2dnh4eHp6enr6+vw8PD///8Yrk7HAAAACXBI
+WXMAABJ0AAASdAHeZh94AAAPJ0lEQVR4nO2d66KCKhCFOR4ru3r0/R/2eIWBwaQSHNlr/bBS
+ZtbIl6jUbqsWylpq7wKguALgzAXAmQuAMxcAZy4AzlwAnLkAOHMBcOYC4Mz1OWClrGfKydBc
+fi2JpFKq3CxboKVZrsjdcb5+qQXZGn8XNwf8fq8+0lkpddosW5DG6oP2YRPA8XfxZ8DLm3+W
+Uq/NcgVbmmVQ0/D13nbxd1E24M1SfWaZEnBY4++10RD96s4lxeXZv1TzmqJbM70/HydV3Iam
+SjWlOnerqrIbnJ5Tmmuhykfb3rqHm8nuSaXD3bxrCZ+nbuujtWrV0qGjpTY2Qd3rakw5uV5b
+t4m9nvaPiXTamV0kMuVNm0y36dN1qRpj3cyrG9/pfBvAz7FU9dCd89BrOl2Hp9VYaXfaqdq2
+MJuVGrc/L8PDTWf3pJrDR5G8Kwnv49bKqnWWCbUBk6CuK3VQNTy7uE2s9bR/To6daecDTMqz
+APf7fVHPqc2FWldT8ru6enAFQbUiPIBLdR8MSn1Ed53ctE23L/Xwotv8KMZKT82A5josT0OG
+4tFXWYwPpeNkpZrCR9G87xO+hgP0dep7gtQ6yg6lxiaoS/lsm3PfhrrSJnS91T86klftGaJZ
+V7am217T4HXuQBPretqXU99DDNcKTk8EUUspk73qunU8zC7jO2w4Ku9jpc9xNxrSBf0bsJne
+5O9TTeGjaN73Catxa9N3EOtTO5Qa06AppXZtCicvXU/qJ5FW1WM7Dpjtf8u6bRiKqfV58vDd
+cG0D+NydNe41qaqc3kzDm6uca1G0/tfjepoymA727KCVyuoQmvd9wpJUTGrVIqHU2ARZucYx
+5OzkpetJ/Wy3rHYcMOvKlvg/hjf7tT/IqfV4ZHtH6I2G6Ho4jQ3XM851KIVKn98K+y2yDNib
+ymo6PL5NSN+SpNZ2oZZ56QU8u56Ut8mw3u0f1mtzOw6YdaVlWhTzwjrKzv3dlneE3myi4zFc
+0FxDAd+6k0p1r7cD/D6h3Y+61nahFsfYn8vNa73dWP9wwHSrJacrLaOqO3gf02UfCekPYf8I
+veVMVnd9X4QO0aV6uhl+G6LfJyzc+YSx1jmNGzouaRDv68bNS9fz/mGAm0XArd2VFuCe4nik
+2rvUrfOP0NtOVZpSKjVO59KLrJsz1g03QO0qYCuV1SE871LCy5jjRaYF3R6noeOSBpFc57Fn
+b25eup73j1lrtVsAPHdlMxem2527+6uzW91wcvaP0JveJlXj9Wbv0w141Xhv85pvDO70TFX2
+bOxbhSXAVipnYDJ53yd8DfeLr8LcJlVmusQOrfWSBpFcN1VoV9qErnf7hxZuteOASXkndW70
+3eW0+TnfUlPrPqxY+NBiG8DT3XlRj1d3rXeigwK+zWueq4CdiQ5aCsm7knDKQSY6inreRkPL
+6d3iBtFc48TF1W1irXf6xyqctuOASXnj08oC3NU2gaTWwyvvCL3VEP0c5teG9305nt3cqUp1
+ftJKb/3W54PcmC4CtqcqrVpM3rWEdWVmLXWt0zYSOlY/74MJsnLdyZQkyWutd/rHKpy08wzR
+pLxnOTc07e56qo9a96d07wid8gP/hkwiHyHvoXRb+lg5BeDhVNnPjd9Wm4rIe0B15+Knf0sK
+wPOpcutPtmPlTS1F9HWCamnb93WF6zF8ceF+mLyJ9TPg0pqYc5J/XRZ0CAFw5gLgzAXAmQuA
+MxcAZy4AzlyfAv4HOoS+B7yy/b8P830XksjmuJUBcKwQIZUBcKwQIZUBcKwQIZUBcKwQIZV9
+ArgoisK8AmARNhsCLvTCifzOeZsQId24nw0A7xUipDIAjhUipLKvAI9TJP8x/buzeEXQphdZ
+ewNe3YNROIL9Wh+iATi9DQB/3ifbhAAwAKcIAeBYIccDjIus6DHS56IBOL0NAHMBcJAAWIQN
+AHMBcJAAWIQNAHMBcJAAWIQNAHMBcJAAWIQNAHMBcJAAWIQNAHMBcJAAWIQNAHMBcJAAWIQN
+AHMBcJAAWIQNAHMBcJAAWIRNRMD8W/R7A07/dwPyhSM4Vsjxj2C+CoDT2wAwFwAHCYBF2AAw
+FwAHCYBF2AAwFwAHCYBF2AAwFwAHCYBF2AAwFwAHCYBF2AAwFwAHCYBF2AAwFwAHCYBF2AAw
+FwAHCYBF2AAwFwAHCYBF2AAwFwAvCL90FztmX8D4rcroMQAMwJ+GfArYF6kFwOltNgU8n4Px
+PxuOo08AFy2G6Lgxex/BLQDHjQFgAP40BIBjhQAwAKcIwUxWrJADAl6K1ALg9DYAzAXAQQJg
+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"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     </div>
   </div>

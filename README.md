@@ -8,9 +8,21 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
 # Dataset, Tables and Graphs
 
 1. [An In-class Survey](survey/classsurvey.html)
+  + create a tibble dataset
+  + draw 10 random students from 50 and build a survey
 2. [One Variable Graphs and Tables](descriptive/OneVariable.html)
+  + frequency table
+  + bar chart and histogram
+  + R function and lapply to generate graphs/tables for different variables
 3. [Multiple Variables Graphs and Tables](descriptive/MultipleVariables.html)
+  + two-way frequency table
+  + stacked bar chart
+  + scatter-plot
 
 # Summarizing Data
 
 1. [Mean, Standard Deviation, Covariance, Correlation](summarystats/toolboxone.html)
+  + a dataset with state-level wage and education data
+  + scatter-plot
+  + coefficient of variation rescales standard deviation
+  + correlation rescales covariance

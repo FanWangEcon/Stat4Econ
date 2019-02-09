@@ -1,7 +1,7 @@
 
-This is a work-in-progress [course website](https://fanwangecon.github.io/Stat4Econ/) for Introductory Statistics for Undergraduate Students, produced by [Fan](https://fanwangecon.github.io/). Course covers a limited subset of topics from *Statistics for Business and Economics* (Anderson Sweeney Williams Camm Cochran 12e), and uses various definitions from the book. R (tidyverse) is used throughout.
+This is a work-in-progress [course website](https://fanwangecon.github.io/Stat4Econ/) for Introductory Statistics for Undergraduate Students, produced by [Fan](https://fanwangecon.github.io/). Course covers a limited subset of topics from *Statistics for Business and Economics* (Anderson Sweeney Williams Camm Cochran 12e).
 
-Materials are written R in Jupyter notebook and shown as HTML files. To obtain codes and raw files, see [here](docs/gitsetup.md) for github set up. For HTML files, click on the links below.
+R is used. Packages from [Tidyverse](https://www.tidyverse.org/) are used, including [tibble](https://tibble.tidyverse.org/) for framing data, [tidyr](https://dplyr.tidyverse.org/) and [dplyr](https://dplyr.tidyverse.org/) for reshaping data and aggregating statistics, [ggplot2](https://ggplot2.tidyverse.org/) for graphing, and [readr](https://readr.tidyverse.org/) for file IO. Materials are written in R using Jupyter notebook and shown as HTML files. To obtain codes and raw files, see [here](docs/gitsetup.md) for github set up. For HTML files, click on the links below.
 
 Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or problems.
 
@@ -21,7 +21,11 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
 
 # Summarizing Data
 
-1. [Mean, Standard Deviation, Covariance, Correlation](summarystats/toolboxone.html)
+1. [Mean, Standard Deviation](summarystats/toolboxone.html)
+  + a dataset with city-month temperatures
+  + mean and standard deviation
+  + melting
+1. [Rescaling--Coefficient of Variation and Correlation](summarystats/toolboxone.html)
   + a dataset with state-level wage and education data
   + scatter-plot
   + coefficient of variation rescales standard deviation

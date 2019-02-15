@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>toolboxone</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>DataBasketball</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11776,19 +11776,8 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong><a href="https://fanwangecon.github.io/Stat4Econ/">Back to Fan's Intro Stat Table of Content</a></strong></p>
-<h1 id="Rescaling-Standard-Deviation-and-Covariance">Rescaling Standard Deviation and Covariance<a class="anchor-link" href="#Rescaling-Standard-Deviation-and-Covariance">&#182;</a></h1><p>We have various tools at our disposal to summarize variables and the relationship between variables. Imagine that we have multiple toolboxes. This is the first one. There are two levels to this toolbox.</p>
-<h2 id="Three-Basic-Tools">Three Basic Tools<a class="anchor-link" href="#Three-Basic-Tools">&#182;</a></h2><p>Our three basic tools are:</p>
-<ol>
-<li>(sample) Mean of X (or Y)</li>
-<li>(sample) Standard Deviation of X (or Y)</li>
-<li>(sample) Covariance of X and Y</li>
-</ol>
-<h2 id="Two-Rescaling-Tools">Two Rescaling Tools<a class="anchor-link" href="#Two-Rescaling-Tools">&#182;</a></h2><p>Additionally, we have two tools that combine the tools from the first level:</p>
-<ol>
-<li>Coefficient of Variation = (Standard Deviation)/(Mean)</li>
-<li>Correlation = (Covariance of X and Y)/((Standard Deviation of X)*(Standard Deviation of Y))</li>
-</ol>
-<p>The tools on the second level rescales the standard deviation and covariance statistics.</p>
+<h1 id="A-Dataset-on-Basketball">A Dataset on Basketball<a class="anchor-link" href="#A-Dataset-on-Basketball">&#182;</a></h1><p>We have a <a href="&#39;../data/Basketball.csv&#39;">dataset on basketball teams</a>. This is a panel dataset.</p>
+<p>We will load in the dataset and do some analysis with it.</p>
 
 </div>
 </div>
@@ -11797,96 +11786,92 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Data-Examples">Data Examples<a class="anchor-link" href="#Data-Examples">&#182;</a></h1><p><strong>The dataset, <em>EPIStateEduWage2017.csv</em>, can be downloaded <a href="../data/EPIStateEduWage2017.csv">here</a>.</strong></p>
-<h2 id="College-Education-Share-and-Hourly-Wage">College Education Share and Hourly Wage<a class="anchor-link" href="#College-Education-Share-and-Hourly-Wage">&#182;</a></h2><p>Two variables:</p>
-<ol>
-<li>Fraction of individual with college degree in a state<ul>
-<li>this is in Fraction units, the minimum is 0.00, the maximum is 100 percent, which is 1.00</li>
+<h2 id="What-is-in-the-Dataset">What is in the Dataset<a class="anchor-link" href="#What-is-in-the-Dataset">&#182;</a></h2><h3 id="Paths-to-Data">Paths to Data<a class="anchor-link" href="#Paths-to-Data">&#182;</a></h3><h4 id="Relative-Path">Relative Path<a class="anchor-link" href="#Relative-Path">&#182;</a></h4><p>The dataset is stored in a csv file. The folder structure for this file we are working inside and the data file is:</p>
+<ul>
+<li>main folder: Stat4Econ<ul>
+<li>subfolder: data<ul>
+<li>file: Basketball.csv</li>
 </ul>
 </li>
-<li>Average hourly salary in the state<ul>
-<li>this is in Dollar units</li>
+<li>subfolder: descriptive<ul>
+<li>file: DataBasketball.ipynb (the jupyter notebook file)</li>
+<li>file: DataBasetball.html (the html version of the jupyter notebook file</li>
 </ul>
 </li>
-</ol>
+</ul>
+</li>
+</ul>
+<p>overall this means:</p>
+<ul>
+<li>the csv file's location is: <strong>'/Stat4Econ/data/Basketball.csv'</strong></li>
+<li>the working R code file's location is: <strong>'/Stat4Econ/descriptive/DataBasketball.ipynb'</strong></li>
+</ul>
+<p>Given this structure, to access the <em>Basketball.csv</em> dataset, we need to go one folder up from our current subfolder to the mainfolder, and then choose the data subfolder, and the Basketball.csv file in the subfolder.</p>
+<h4 id="Absolute-Path">Absolute Path<a class="anchor-link" href="#Absolute-Path">&#182;</a></h4><p>If these files are not in the same main folder, but are in different locations on your computer, you can find the <em>full path</em> to the csv path and copy paste the path below in between the single quotes.</p>
+<p>search on google to find out how to get the full path to file:</p>
+<ul>
+<li>google search for <a href="https://www.google.com/search?q=find+full+path+for+file+on+mac">find full path for file on mac</a><ul>
+<li>this might end up looking like: <strong>'/Users/fan/Downloads/Basketball.csv'</strong>    </li>
+</ul>
+</li>
+<li>google search for <a href="https://www.google.com/search?q=find+full+path+for+file+on+mac">find full path for file on PC</a><ul>
+<li>this might end up looking like: <strong>'C:/Users/fan/Documents/Dropbox/Basketball.csv'</strong></li>
+</ul>
+</li>
+</ul>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Load in Data Tools</span>
-<span class="c1"># For Reading/Loading Data</span>
-<span class="kn">library</span><span class="p">(</span>readr<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>tibble<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
-<span class="c1"># Load in Data</span>
-df_wgedu <span class="o">&lt;-</span> read_csv<span class="p">(</span><span class="s">&#39;../data/EPIStateEduWage2017.csv&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Parsed with column specification:
-cols(
-  State = col_character(),
-  Share.College.Edu = col_double(),
-  Hourly.Salary = col_double()
-)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="A-Scatter-Plot">A Scatter Plot<a class="anchor-link" href="#A-Scatter-Plot">&#182;</a></h2><p>We can Visualize the Data with a Scatter Plot. There seems to be a positive relationship between the share of individuals in a state with college education, and the average hourly salary in that state.</p>
-<p>While most states are along the trend line, we have some states, likw WY, that are outliers. WY has high hourly salary but low share with college education.</p>
+<h3 id="Using-Relative-path-to-load-in-data">Using Relative path to load in data<a class="anchor-link" href="#Using-Relative-path-to-load-in-data">&#182;</a></h3><p>We will load in the data using base R read.csv function.</p>
+<ul>
+<li>For what the variables mean, see <a href="https://en.wikipedia.org/wiki/Basketball_statistics">here</a></li>
+<li>For what NBA team names correspond to, see <a href="https://en.wikipedia.org/w/index.php?title=Wikipedia:WikiProject_National_Basketball_Association/National_Basketball_Association_team_abbreviations">here</a>.</li>
+</ul>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Control Graph Size</span>
-<span class="kp">options</span><span class="p">(</span>repr.plot.width <span class="o">=</span> <span class="m">5</span><span class="p">,</span> repr.plot.height <span class="o">=</span> <span class="m">5</span><span class="p">)</span>
-<span class="c1"># Draw Scatter Plot</span>
-<span class="c1"># 1. specify x and y</span>
-<span class="c1"># 2. label each state</span>
-<span class="c1"># 3. add in trend line</span>
-scatter <span class="o">&lt;-</span> ggplot<span class="p">(</span>df_wgedu<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Share.College.Edu<span class="p">,</span> y<span class="o">=</span>Hourly.Salary<span class="p">))</span> <span class="o">+</span>
-      geom_point<span class="p">(</span>size<span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span>
-      geom_text<span class="p">(</span>aes<span class="p">(</span>label<span class="o">=</span>State<span class="p">),</span> size<span class="o">=</span><span class="m">3</span><span class="p">,</span> hjust<span class="o">=</span><span class="m">-.2</span><span class="p">,</span> vjust<span class="o">=</span><span class="m">-.2</span><span class="p">)</span> <span class="o">+</span>
-      geom_smooth<span class="p">(</span>method<span class="o">=</span>lm<span class="p">)</span> <span class="o">+</span>
-      labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&#39;Hourly Wage and College Share by States&#39;</span><span class="p">,</span>
-           x <span class="o">=</span> <span class="s">&#39;Fraction with College Education&#39;</span><span class="p">,</span>
-           y <span class="o">=</span> <span class="s">&#39;Hourly Wage&#39;</span><span class="p">,</span>
-           caption <span class="o">=</span> <span class="s">&#39;Economic Policy Institute\n www.epi.org/data/&#39;</span><span class="p">)</span> <span class="o">+</span>
-      theme_bw<span class="p">()</span>
-<span class="kp">print</span><span class="p">(</span>scatter<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># We can load the dataset in first by setting our directory, then loading in the dataset</span>
+<span class="kp">setwd</span><span class="p">(</span><span class="s">&#39;../data/&#39;</span><span class="p">)</span>
+basetball_data <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&#39;Basketball.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Alternatively, we can just use one line</span>
+basetball_data <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&#39;../data/Basketball.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Summarize all variables in data frame</span>
+<span class="kp">summary</span><span class="p">(</span>basetball_data<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11904,372 +11889,55 @@ scatter <span class="o">&lt;-</span> ggplot<span class="p">(</span>df_wgedu<span
 
 
 
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-pDQwlAAAAABJRU5ErkJggg=="
->
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Standard-Deviations-and-Coefficient-of-Variation">Standard Deviations and Coefficient of Variation<a class="anchor-link" href="#Standard-Deviations-and-Coefficient-of-Variation">&#182;</a></h2><p>The two variables above are in different units. We first calculate mean, standard deviation, and covariance. With just these, it is hard to compare the standard deviation of the two variables, which are in different scales.</p>
-<p>The sample standard deviations for the two variables are: $0.051$ and $1.51$, in fraction and dollar units. Can we say the hourly salary has a larger standard deviation? But it is just a different scale. $1.51$ is a large number, but that does not mean that variable has greater variation than the fraction with college education variable.</p>
-<p>Converting the Statistics to Coefficient of Variations, now we have: $0.16$ and $0.09$. Because of the division, these are both in fraction units--standard deviations as a fraction of the mean. Now these are more comparable.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># We can compute the three basic statistics</span>
-stats.msdv <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span>
-              <span class="c1"># Mean, SD and Var for the College Share variable</span>
-              Shr.Coll.Mean <span class="o">=</span> <span class="kp">mean</span><span class="p">(</span>df_wgedu<span class="o">$</span>Share.College.Edu<span class="p">),</span> 
-              Shr.Coll.Std <span class="o">=</span> sd<span class="p">(</span>df_wgedu<span class="o">$</span>Share.College.Edu<span class="p">),</span>
-              Shr.Coll.Var <span class="o">=</span> var<span class="p">(</span>df_wgedu<span class="o">$</span>Share.College.Edu<span class="p">),</span>
-    
-              <span class="c1"># Mean, SD and Var for the Hourly Wage Variable</span>
-              Hr.Wage.Mean <span class="o">=</span> <span class="kp">mean</span><span class="p">(</span>df_wgedu<span class="o">$</span>Hourly.Salary<span class="p">),</span>                            
-              Hr.Wage.Std <span class="o">=</span> sd<span class="p">(</span>df_wgedu<span class="o">$</span>Hourly.Salary<span class="p">),</span>
-              Hr.Wage.Var <span class="o">=</span> var<span class="p">(</span>df_wgedu<span class="o">$</span>Hourly.Salary<span class="p">)</span>
-              <span class="p">)</span>
-
-<span class="c1"># We can compute the three basic statistics</span>
-stats.coefvari <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span>              
-              <span class="c1"># Coefficient of Variation</span>
-              Shr.Coll.Coef.Variation <span class="o">=</span> <span class="p">(</span>stats.msdv<span class="o">$</span>Shr.Coll.Std<span class="p">)</span><span class="o">/</span><span class="p">(</span>stats.msdv<span class="o">$</span>Shr.Coll.Mean<span class="p">),</span>
-              Hr.Wage.Coef.Variation <span class="o">=</span> <span class="p">(</span>stats.msdv<span class="o">$</span>Hr.Wage.Std<span class="p">)</span><span class="o">/</span><span class="p">(</span>stats.msdv<span class="o">$</span>Hr.Wage.Mean<span class="p">)</span>
-              <span class="p">)</span>
-
-<span class="c1"># Let&#39;s Print the Statistics we Computed</span>
-as_tibble<span class="p">(</span>stats.msdv<span class="p">)</span>
-as_tibble<span class="p">(</span>stats.coefvari<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<table>
-<thead><tr><th scope=col>Shr.Coll.Mean</th><th scope=col>Shr.Coll.Std</th><th scope=col>Shr.Coll.Var</th><th scope=col>Hr.Wage.Mean</th><th scope=col>Hr.Wage.Std</th><th scope=col>Hr.Wage.Var</th></tr></thead>
-<tbody>
-	<tr><td>0.3164706  </td><td>0.05135109 </td><td>0.002636934</td><td>16.29961   </td><td>1.509687   </td><td>2.279156   </td></tr>
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<table>
-<thead><tr><th scope=col>Shr.Coll.Coef.Variation</th><th scope=col>Hr.Wage.Coef.Variation</th></tr></thead>
-<tbody>
-	<tr><td>0.1622618 </td><td>0.09262108</td></tr>
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Covariance-and-Correlation">Covariance and Correlation<a class="anchor-link" href="#Covariance-and-Correlation">&#182;</a></h2><p>For covariance, hard to tell whether it is large or small. To make comparisons possible, we calculate coefficient of variations and correlation statistics.</p>
-<p>The covariance we get is positive: $0.06$, but is this actually large positive relationship? $0.06$ seems like a small number.</p>
-<p>Rescaling covariance to correlation, the correlation between the two variables is: $0.78$. Since the correlation of two variable is beloww $-1$ and $+1$, we can now say actually the two variables are very positively related. Higher share of individuals with college education is strongly positively correlated with higher hourly salary.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># We can compute the three basic statistics</span>
-states.covcor <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span>              
-              <span class="c1"># Covariance between the two variables</span>
-              Shr.Wage.Cov <span class="o">=</span> cov<span class="p">(</span>df_wgedu<span class="o">$</span>Hourly.Salary<span class="p">,</span>
-                                 df_wgedu<span class="o">$</span>Share.College.Edu<span class="p">),</span>        
-              <span class="c1"># Correlation </span>
-              Shr.Wage.Cor <span class="o">=</span> cor<span class="p">(</span>df_wgedu<span class="o">$</span>Hourly.Salary<span class="p">,</span> df_wgedu<span class="o">$</span>Share.College.Edu<span class="p">),</span>
-              Shr.Wage.Cor.Formula <span class="o">=</span> <span class="p">(</span>cov<span class="p">(</span>df_wgedu<span class="o">$</span>Hourly.Salary<span class="p">,</span> df_wgedu<span class="o">$</span>Share.College.Edu<span class="p">)</span>
-                                      <span class="o">/</span><span class="p">(</span>stats.msdv<span class="o">$</span>Shr.Coll.Std<span class="o">*</span>stats.msdv<span class="o">$</span>Hr.Wage.Std<span class="p">))</span>
-              <span class="p">)</span>
-
-<span class="c1"># Let&#39;s Print the Statistics we Computed</span>
-as_tibble<span class="p">(</span>states.covcor<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<table>
-<thead><tr><th scope=col>Shr.Wage.Cov</th><th scope=col>Shr.Wage.Cor</th><th scope=col>Shr.Wage.Cor.Formula</th></tr></thead>
-<tbody>
-	<tr><td>0.06039719</td><td>0.7790764 </td><td>0.7790764 </td></tr>
-</tbody>
-</table>
-
+<div class="output_text output_subarea ">
+<pre>        ilkid            year        firstname         lastname    
+ WILLIKE01 :   27   Min.   :1946   John   :  502   Williams:  441  
+ EDWARJA01 :   25   1st Qu.:1974   Bob    :  404   Johnson :  400  
+ CORBITY01 :   24   Median :1988   Mike   :  395   Smith   :  317  
+ JACKSJI01 :   24   Mean   :1986   Jim    :  344   Jones   :  298  
+ CASSESA01 :   23   3rd Qu.:1999   Chris  :  267   Davis   :  254  
+ MALONMO01 :   23   Max.   :2009   Tom    :  260   Brown   :  209  
+ (Other)   :21813                  (Other):19787   (Other) :20040  
+      team       leag            gp           minutes            pts        
+ TOT    : 1611   A: 1247   Min.   : 1.00   Min.   :   0.0   Min.   :   0.0  
+ NYK    :  947   N:20712   1st Qu.:29.00   1st Qu.: 275.5   1st Qu.: 113.0  
+ BOS    :  919             Median :60.00   Median :1038.0   Median : 386.0  
+ DET    :  799             Mean   :51.91   Mean   :1204.1   Mean   : 531.1  
+ PHI    :  736             3rd Qu.:76.00   3rd Qu.:2009.0   3rd Qu.: 811.0  
+ LAL    :  712             Max.   :90.00   Max.   :3882.0   Max.   :4029.0  
+ (Other):16235                                                              
+      oreb             dreb             reb              asts       
+ Min.   :  0.00   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0  
+ 1st Qu.:  0.00   1st Qu.:   1.0   1st Qu.:  44.0   1st Qu.:  20.0  
+ Median : 22.00   Median :  60.0   Median : 160.0   Median :  71.0  
+ Mean   : 49.79   Mean   : 117.8   Mean   : 229.7   Mean   : 118.1  
+ 3rd Qu.: 75.00   3rd Qu.: 180.0   3rd Qu.: 333.0   3rd Qu.: 167.0  
+ Max.   :587.00   Max.   :1538.0   Max.   :2149.0   Max.   :1164.0  
+                                                                    
+      stl             blk           turnover           pf       
+ 0      : 5939   0      : 6855   0      : 5696   Min.   :  0.0  
+ 1      :  607   1      : 1126   1      :  349   1st Qu.: 43.0  
+ 2      :  479   2      :  860   2      :  347   Median :118.0  
+ 3      :  445   3      :  754   NULL   :  294   Mean   :123.6  
+ 5      :  345   4      :  647   3      :  287   3rd Qu.:193.0  
+ 4      :  343   5      :  608   5      :  246   Max.   :386.0  
+ (Other):13801   (Other):11109   (Other):14740                  
+      fga              fgm              fta              ftm       
+ Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Min.   :  0.0  
+ 1st Qu.: 106.0   1st Qu.:  43.0   1st Qu.:  30.0   1st Qu.: 20.0  
+ Median : 345.0   Median : 148.0   Median :  99.0   Median : 70.0  
+ Mean   : 452.5   Mean   : 204.2   Mean   : 146.9   Mean   :109.6  
+ 3rd Qu.: 696.0   3rd Qu.: 313.0   3rd Qu.: 218.0   3rd Qu.:161.0  
+ Max.   :3159.0   Max.   :1597.0   Max.   :1363.0   Max.   :840.0  
+                                                                   
+      tpa              tpm       
+ Min.   :  0.00   Min.   :  0.0  
+ 1st Qu.:  0.00   1st Qu.:  0.0  
+ Median :  2.00   Median :  0.0  
+ Mean   : 38.07   Mean   : 13.1  
+ 3rd Qu.: 27.00   3rd Qu.:  7.0  
+ Max.   :678.00   Max.   :269.0  
+                                 </pre>
 </div>
 
 </div>

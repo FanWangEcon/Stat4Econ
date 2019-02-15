@@ -11,7 +11,7 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
   + create a tibble dataset
   + draw 10 random students from 50 and build a survey
   + **first use**: *tibble*, *add_row*, *factor*, *ifelse*, *group_by*, *mutate*, *summarise*, *write_csv*
-2. [Opening up a Dataset](survey/DataBasketball.html)
+2. [Opening up a Dataset](descriptive/DataBasketball.html)
   + relative and absolute path  
   + **first use**: *read.csv*
 3. [One Variable Graphs and Tables](descriptive/OneVariable.html)

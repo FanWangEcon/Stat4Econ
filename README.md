@@ -30,7 +30,7 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
 1. [Mean, Standard Deviation](summarystats/meansdhist.html)
   + a dataset with city-month temperatures
   + mean and standard deviation
-  + **use**: *dplyr + ggplot*, *gather*, *facet_wrap*, *show.unique.values*, *geom_line*, *geom_point*
+  + **use**: *dplyr + ggplot*, *gather*, *filter*, *facet_wrap*, *show.unique.values*, *geom_line*, *geom_point*
 2. [Rescaling--Coefficient of Variation and Correlation](summarystats/toolboxone.html)
   + a dataset with state-level wage and education data
   + scatter-plot

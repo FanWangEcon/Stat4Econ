@@ -44,16 +44,10 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
   + union, intersection and complements
   + conditional probability  
 2. [Examples of Sample Space and Probabilities](probability/samplespaceexa.html)
-  + throwing a Quarter
-  + four candidates for election
-  + six-sided unfair dice
-  + two basketball games
+  + throwing a Quarter, four candidates for election, six-sided unfair dice, two basketball games
   + **use**: *tibble*, *sample*
 3. [Throw an Unfair Four Sided Dice](probability/samplespacedice.html)
-  + throwing a Quarter
-  + four candidates for election
-  + six-sided unfair dice
-  + two basketball games
+  + Throw an unfair dice many times, law of large number
   + **use**: *reduce*, *full_join*, *mutate_all*, *dplyr::mutate*; *tibble+group_by+summarise+mutate+arrange+select*; *!!str.var.name!=*, *sprintf*, *str_extract*; *bind_cols*, *logspace*; *geom_line*, *scale_x_continuous(trans='log10')*, *labs()*
 4. [Multiple-Step Experiment: Playing the Lottery Three times](probability/lottery.html)
   + Path after 1, 2 and 3 plays

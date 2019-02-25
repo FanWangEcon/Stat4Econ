@@ -39,43 +39,34 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
 
 # 3. Basics of Probability
 
-1. [Sample Space, Experimental Outcomes, Events, Probabilities](Probability/samplespace.html)
+1. [Sample Space, Experimental Outcomes, Events, Probabilities](probability/samplespace.html)
   + definitions of Sample Space, Experimental Outcomes, Events and Probability
   + union, intersection and complements
   + conditional probability  
-2. [Examples of Sample Space and Probabilities](Probability/samplespaceexa.html)
+2. [Examples of Sample Space and Probabilities](probability/samplespaceexa.html)
   + throwing a Quarter
   + four candidates for election
   + six-sided unfair dice
   + two basketball games
   + **use**: *tibble*, *sample*
-3. [Throw an Unfair Four Sided Dice](Probability/samplespacedice.html)
+3. [Throw an Unfair Four Sided Dice](probability/samplespacedice.html)
   + throwing a Quarter
   + four candidates for election
   + six-sided unfair dice
   + two basketball games
-  + **use**:
-    - *reduce*, *full_join*, *mutate_all*, *dplyr::mutate*,
-    - *tibble+group_by+summarise+mutate+arrange+select*,
-    - *!!str.var.name!=*, *sprintf*, *str_extract*,
-    - *bind_cols*, *logspace*,
-    - *geom_line*, *scale_x_continuous(trans='log10')*, *labs()*
-4. [Multiple-Step Experiment: Playing the Lottery Three times](Probability/lottery.html)
+  + **use**: *reduce*, *full_join*, *mutate_all*, *dplyr::mutate*; *tibble+group_by+summarise+mutate+arrange+select*; *!!str.var.name!=*, *sprintf*, *str_extract*; *bind_cols*, *logspace*; *geom_line*, *scale_x_continuous(trans='log10')*, *labs()*
+4. [Multiple-Step Experiment: Playing the Lottery Three times](probability/lottery.html)
   + Path after 1, 2 and 3 plays
 
 # 4. Discrete Probability Distribution
 
-1. [Discrete Random Variable and Binomial Experiment](Probability/binomial.html)
+1. [Discrete Random Variable and Binomial Experiment](probability/binomial.html)
   + Discrete Random Variable
   + Expected Value and Variance
   + Binomial Properties
   + Examples: Larceny clearance rate, WWII German soldier survival rate
-  + **use**:
-    - *dbinom*, *pbinom*
-    - *geom_bar*, *geom_line*, *geom_point*, *geom_text*
-    - *lapply*, *sprintf*, *scale_y_continuous(sec.axis)*, *axis.text.y*, *round*
-2. [Poisson Probability Distribution](Probability/poisson.html)
+  + **use**: *dbinom*, *pbinom*; *geom_bar*, *geom_line*, *geom_point*, *geom_text*; *lapply*, *sprintf*, *scale_y_continuous(sec.axis)*, *axis.text.y*, *round*
+2. [Poisson Probability Distribution](probability/poisson.html)
   + Poisson Properties
   + Examples: Prussian army horse-kick death
-  + **use**:
-    - *dpois*, *ppois*
+  + **use**: *dpois*, *ppois*

@@ -5,7 +5,7 @@ R is used. Packages from [Tidyverse](https://www.tidyverse.org/) are used, inclu
 
 Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or problems.
 
-# Dataset, Tables and Graphs
+# 1. Dataset, Tables and Graphs
 
 1. [An In-class Survey](survey/classsurvey.html)
   + create a tibble dataset
@@ -25,14 +25,57 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
   + scatter-plot
   + **first use**: *spread*, *geom_point*, *geom_text*, *geom_smooth*, *geom_bar*
 
-# Summarizing Data
+# 2. Summarizing Data
 
 1. [Mean, Standard Deviation](summarystats/meansdhist.html)
   + a dataset with city-month temperatures
   + mean and standard deviation
-  + **use**: *dplyr + ggplot*, *gather*, *filter*, *facet_wrap*, *show.unique.values*, *geom_line*, *geom_point*
+  + **use**: *dplyr + ggplot*, *gather*, *filter*, *facet_wrap*, *show.unique.values*, *geom_line*, *geom_point*, *scale_x_continuous*
 2. [Rescaling--Coefficient of Variation and Correlation](summarystats/toolboxone.html)
   + a dataset with state-level wage and education data
   + scatter-plot
   + coefficient of variation rescales standard deviation
   + correlation rescales covariance
+
+# 3. Basics of Probability
+
+1. [Sample Space, Experimental Outcomes, Events, Probabilities](Probability/samplespace.html)
+  + definitions of Sample Space, Experimental Outcomes, Events and Probability
+  + union, intersection and complements
+  + conditional probability  
+2. [Examples of Sample Space and Probabilities](Probability/samplespaceexa.html)
+  + throwing a Quarter
+  + four candidates for election
+  + six-sided unfair dice
+  + two basketball games
+  + **use**: *tibble*, *sample*
+3. [Throw an Unfair Four Sided Dice](Probability/samplespacedice.html)
+  + throwing a Quarter
+  + four candidates for election
+  + six-sided unfair dice
+  + two basketball games
+  + **use**:
+    - *reduce*, *full_join*, *mutate_all*, *dplyr::mutate*,
+    - *tibble+group_by+summarise+mutate+arrange+select*,
+    - *!!str.var.name!=*, *sprintf*, *str_extract*,
+    - *bind_cols*, *logspace*,
+    - *geom_line*, *scale_x_continuous(trans='log10')*, *labs()*
+4. [Multiple-Step Experiment: Playing the Lottery Three times](Probability/lottery.html)
+  + Path after 1, 2 and 3 plays
+
+# 4. Discrete Probability Distribution
+
+1. [Discrete Random Variable and Binomial Experiment](Probability/binomial.html)
+  + Discrete Random Variable
+  + Expected Value and Variance
+  + Binomial Properties
+  + Examples: Larceny clearance rate, WWII German soldier survival rate
+  + **use**:
+    - *dbinom*, *pbinom*
+    - *geom_bar*, *geom_line*, *geom_point*, *geom_text*
+    - *lapply*, *sprintf*, *scale_y_continuous(sec.axis)*, *axis.text.y*, *round*
+2. [Poisson Probability Distribution](Probability/poisson.html)
+  + Poisson Properties
+  + Examples: Prussian army horse-kick death
+  + **use**:
+    - *dpois*, *ppois*

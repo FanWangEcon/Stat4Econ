@@ -11871,18 +11871,19 @@ We can find the expected value and variance by summing over all terms following:
 <ul>
 <li>$n=10$: 10 crimes, 10 trials</li>
 <li>$p=0.183$: what is $p$ here? For the police success is clearing a crime.</li>
-<li>$x$: if $x=10$, that means all larceny-thefts were cleared, if $x=0$, this means the policy failed to clear all 10 thefts. If a person commits 10 larcey-thefts, if $x \ge 1$, then that means they are arrested </li>
+<li>$x$: if $x=10$, that means all larceny-thefts were cleared, if $x=0$, this means the police failed to clear all 10 thefts.</li>
 </ul>
 <p>For example, the chance that $2$ out of $10$ is arrested is:
 $$f\left(x=2;n=10,p=0.183\right) = \frac{10!}{\left(10-2\right)! \cdot 2!} \cdot 0.183^2 \cdot \left(1-0.183\right)^{10-2} = 0.299$$</p>
-<p>We can use the r function, <em>dbinom</em>, to calculate these probabilites. We do this in the code below. From the graph below, we can see that there is a 13.3% chance that none of the 10 thieves would be arrested, and alomst 0 percent chance that all 10 of then would be arrested. The chance that 6 out of the 10 thiefs would be arrested is less than 1 percent.</p>
+<p>We can use the r function, <em>dbinom</em>, to calculate these probabilites: <em>dbinom(2,10,0.183)</em>. Additionally, <em>pbinom(2,10,0.183)</em> tells us the cumulative probability that at most 2 out of 10 are arrested.</p>
+<p>We do this in the code below. From the graph below, we can see that there is a 13.3% chance that none of the 10 thieves would be arrested, and alomst 0 percent chance that all 10 of then would be arrested. The chance that 6 out of the 10 thiefs would be arrested is less than 1 percent.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># library</span>
@@ -12113,7 +12114,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Cumulative Probability for different arrest counts, before dbinom, now pbinom</span>
@@ -12455,8 +12456,8 @@ lc3icqsTZFhIaFYMwUKzYggWmhVDsNCsGIKFZsUQLDQrhmChWTEEC82KIVhoVuz/A9hKz49V
 <h2 id="Binomial-Example:-WWII-German-Soldier">Binomial Example: WWII German Soldier<a class="anchor-link" href="#Binomial-Example:-WWII-German-Soldier">&#182;</a></h2><p>During WWII, 13.6 million Germans served in the German army, and 4.2 million were killed or missing. This is a death rate of <a href="https://en.wikipedia.org/wiki/World_War_II_casualties#Military_casualties_by_branch_of_service">30.9 percent</a>.</p>
 <p>Suppose there are many German towns that each sent 100 soldiers to the front, suppose the binomial properties apply, what is the fraction of solidiers who will return to their towns after the war?</p>
 <ul>
-<li>$n=100$: 100 solidiers from each village who could survive</li>
-<li>$p=1-0.309=0.691$: $p$ is the chance of survival</li>
+<li>$n=100$: suppose 100 solidiers from each German town went to join the German Army during WWII.</li>
+<li>$p=1-0.309=0.691$: $p$ is the chance of survival.</li>
 <li>$x$: if $x=1$, that means 1 out of 100 survived. </li>
 </ul>
 
@@ -12465,7 +12466,7 @@ lc3icqsTZFhIaFYMwUKzYggWmhVDsNCsGIKFZsUQLDQrhmChWTEEC82KIVhoVuz/A9hKz49V
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Parameters</span>
@@ -12504,7 +12505,7 @@ survive.prob <span class="o">&lt;-</span> tibble<span class="p">(</span>survives
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Control Graph Size</span>
@@ -12785,7 +12786,7 @@ SiIEC5VECBYqiRAsVBIhWKgkQrBQSfT/1cD2Rxql+wYAAAAASUVORK5CYII="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>f_table <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>start_idx<span class="p">)</span> <span class="p">{</span>

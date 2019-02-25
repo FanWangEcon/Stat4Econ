@@ -11817,7 +11817,7 @@ $$\Sigma f(x) = 1$$    </li>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Well-Known-Discrete-Probability-Distributions">Well Known Discrete Probability Distributions<a class="anchor-link" href="#Well-Known-Discrete-Probability-Distributions">&#182;</a></h2><p>There is a <a href="https://en.wikipedia.org/wiki/List_of_probability_distributions#Discrete_distributions">variety of</a> different Discrete Random Variable Probability Mass Functions that are appropriate for analyzing different situations. Think of these as tools, you don't need to memorize the formulas, but you can learn about under what conditions these distributions are useful. Learn about the parameters of these distributions, and use the appropriate Excel or R function.</p>
-<p>The simplest distribution is the <a href="https://en.wikipedia.org/wiki/Discrete_uniform_distribution">Discrete Uniform Distribution</a>, which just says each experimental outcome in the sample space has equal chance of happening.</p>
+<p>The simplest distribution is the <a href="https://en.wikipedia.org/wiki/Discrete_uniform_distribution">Discrete Uniform Distribution</a>. The uniform probability mass function is: $f(x) = \frac{1}{n}$, where $n$ is the <em>the number of values the random variable may assume</em>, corresponding to experimental outcomes. (ASWCC P222)</p>
 <p>We focus on the Binomial Distribution here, a variety of other distributions are related to the binomial distribution:</p>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Binomial_distribution">Binomial Distribution</a></li>
@@ -11857,7 +11857,7 @@ $$</p>
 <h3 id="Binomial-Expected-Value-and-Variance">Binomial Expected Value and Variance<a class="anchor-link" href="#Binomial-Expected-Value-and-Variance">&#182;</a></h3><p>For the binomial discrete random variable, it turns out the expected value and variance are:
 $$E(x) = n \cdot p$$
 $$Var(x) = n \cdot p \cdot (1-p)$$
-We can find the expected value and variance by summing over all terms, and we will always end up with these two results. It is intuitive. The average number of wins given that you play $n$ trials and given that the chance of winning each game is $p$ is $n \cdot p$.</p>
+We can find the expected value and variance by summing over all terms following: $E(x) = \mu_x = \Sigma x \cdot f(x)$ and $Var(x) = \sigma_x^2 = \Sigma \left( (x - \mu_x)^2 \cdot f(x) \right)$, and we will always end up with these two results. It is intuitive. The average number of wins given that you play $n$ trials and given that the chance of winning each game is $p$ is $n \cdot p$.</p>
 
 </div>
 </div>
@@ -11867,7 +11867,7 @@ We can find the expected value and variance by summing over all terms, and we wi
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Binomial-Example:-Larceny">Binomial Example: Larceny<a class="anchor-link" href="#Binomial-Example:-Larceny">&#182;</a></h2><p>In 2004, in the United State, <a href="https://en.wikipedia.org/wiki/Clearance_rate">18.3 percent of Larceny-Theft were cleared</a>. "Clearance rates are used by various groups as a measure of crimes solved by the police."</p>
-<h3 id="Chance-of-x-out-n-Arrested">Chance of x out n Arrested<a class="anchor-link" href="#Chance-of-x-out-n-Arrested">&#182;</a></h3><p>10 people commit 10 larceny-theft crimes, suppose the situation follows the conditions of the binomial experiment, what is the chance that no body is arrested?  The chance that 1, 2, 3, or all 10 are arrested?</p>
+<h3 id="Chance-of-x-out-n-Arrested">Chance of x out n Arrested<a class="anchor-link" href="#Chance-of-x-out-n-Arrested">&#182;</a></h3><p>10 people commit 10 larceny-theft crimes, suppose the situation follows the conditions of the binomial experiment, what is the chance that nobody is arrested?  The chance that 1, 2, 3, or all 10 are arrested?</p>
 <ul>
 <li>$n=10$: 10 crimes, 10 trials</li>
 <li>$p=0.183$: what is $p$ here? For the police success is clearing a crime.</li>
@@ -11875,14 +11875,14 @@ We can find the expected value and variance by summing over all terms, and we wi
 </ul>
 <p>For example, the chance that $2$ out of $10$ is arrested is:
 $$f\left(x=2;n=10,p=0.183\right) = \frac{10!}{\left(10-2\right)! \cdot 2!} \cdot 0.183^2 \cdot \left(1-0.183\right)^{10-2} = 0.299$$</p>
-<p>We can use the r function, <em>dbinom</em>, to calculate these probabilites. We do this in the code below. From the graph below, we can see that there is a 13.3% chance that none of the 10 thieves would be arrested, and alomst 0 percent chance that all 10 of then would be arrested.</p>
+<p>We can use the r function, <em>dbinom</em>, to calculate these probabilites. We do this in the code below. From the graph below, we can see that there is a 13.3% chance that none of the 10 thieves would be arrested, and alomst 0 percent chance that all 10 of then would be arrested. The chance that 6 out of the 10 thiefs would be arrested is less than 1 percent.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># library</span>
@@ -11904,18 +11904,21 @@ prob_of_arrests <span class="o">&lt;-</span> dbinom<span class="p">(</span>zero2
 <span class="c1"># Number of Arrests Probabilities</span>
 arrest.prob.mass <span class="o">&lt;-</span> tibble<span class="p">(</span>arrests<span class="o">=</span>zero2max<span class="p">,</span> prob<span class="o">=</span>prob_of_arrests<span class="p">)</span>
 
+<span class="c1"># Titles Strings etc</span>
+graph.title <span class="o">&lt;-</span> <span class="kp">sprintf</span><span class="p">(</span><span class="s">&#39;Prob for Number of Theft-Criminals Arrested out of %s&#39;</span> <span class="p">,</span>n<span class="p">)</span>
+graph.caption <span class="o">&lt;-</span> <span class="kp">sprintf</span><span class="p">(</span>
+    <span class="kp">paste0</span><span class="p">(</span><span class="s">&#39;Assuming the binomial properties apply\n&#39;</span><span class="p">,</span>
+           <span class="s">&#39;2004 Larceny/Left USA Clearance Rate = %s&#39;</span><span class="p">),</span> p<span class="p">)</span>
+
 <span class="c1"># Create a Table and Graph it</span>
 arrest.graph <span class="o">&lt;-</span> arrest.prob.mass <span class="o">%&gt;%</span>
     ggplot<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>arrests<span class="p">,</span> y<span class="o">=</span>prob<span class="p">,</span> label <span class="o">=</span> <span class="kp">sprintf</span><span class="p">(</span><span class="s">&#39;%0.3f&#39;</span><span class="p">,</span> prob<span class="p">)))</span> <span class="o">+</span> 
     geom_bar<span class="p">(</span>stat <span class="o">=</span> <span class="s">&#39;identity&#39;</span><span class="p">)</span> <span class="o">+</span> 
     geom_text<span class="p">(</span>vjust <span class="o">=</span> <span class="m">-0.5</span><span class="p">,</span> size <span class="o">=</span> <span class="m">3</span><span class="p">)</span> <span class="o">+</span> 
-    labs<span class="p">(</span>title <span class="o">=</span> <span class="kp">sprintf</span><span class="p">(</span><span class="s">&#39;Prob for Number of Theft-Criminals Arrested out of %s&#39;</span> 
-                         <span class="p">,</span>n<span class="p">),</span>
+    labs<span class="p">(</span>title <span class="o">=</span> graph.title<span class="p">,</span>
          x <span class="o">=</span> <span class="s">&#39;Number of Criminals Arrests&#39;</span><span class="p">,</span>
          y <span class="o">=</span> <span class="s">&#39;Prob of x Arrested&#39;</span><span class="p">,</span>
-         caption <span class="o">=</span> <span class="kp">sprintf</span><span class="p">(</span><span class="kp">paste0</span><span class="p">(</span><span class="s">&#39;Assuming the binomial properties apply\n&#39;</span><span class="p">,</span>
-                                 <span class="s">&#39;2004 Larceny/Left USA Clearance Rate = %s&#39;</span><span class="p">),</span>
-                           p<span class="p">))</span> <span class="o">+</span>
+         caption <span class="o">=</span> graph.caption<span class="p">)</span> <span class="o">+</span>
     scale_x_continuous<span class="p">(</span>labels <span class="o">=</span> zero2max<span class="p">,</span> breaks <span class="o">=</span> zero2max<span class="p">)</span> <span class="o">+</span>
     theme_bw<span class="p">()</span>
 
@@ -12110,7 +12113,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Cumulative Probability for different arrest counts, before dbinom, now pbinom</span>
@@ -12148,18 +12151,24 @@ arrest.graph <span class="o">&lt;-</span> arrest.graph <span class="o">+</span>
                   label <span class="o">=</span> <span class="kp">paste0</span><span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&#39;%2.0f&#39;</span><span class="p">,</span> cum.prob<span class="o">*</span><span class="m">100</span><span class="p">),</span> <span class="s">&#39;%&#39;</span><span class="p">)),</span>
               vjust <span class="o">=</span> <span class="m">-0.5</span><span class="p">,</span> size <span class="o">=</span> <span class="m">3</span><span class="p">,</span> color<span class="o">=</span>right.axis.color<span class="p">,</span> fontface<span class="o">=</span><span class="s">&#39;bold&#39;</span><span class="p">)</span>
 
-<span class="c1"># Titles etc</span>
+<span class="c1"># Titles Strings etc</span>
+graph.title <span class="o">&lt;-</span> <span class="kp">sprintf</span><span class="p">(</span>
+    <span class="kp">paste0</span><span class="p">(</span><span class="s">&#39;Number of Theft-Criminals Arrested out of %s\n&#39;</span><span class="p">,</span>
+           <span class="s">&#39;Prob Mass (Left) and Cumulative Prob (Right)&#39;</span><span class="p">),</span> n<span class="p">)</span>
+graph.caption <span class="o">&lt;-</span> <span class="kp">sprintf</span><span class="p">(</span>
+    <span class="kp">paste0</span><span class="p">(</span><span class="s">&#39;Assuming the binomial properties apply\n&#39;</span><span class="p">,</span>
+           <span class="s">&#39;2004 Larceny/Left USA Clearance Rate = %s&#39;</span><span class="p">),</span> p<span class="p">)</span>
+graph.title.x <span class="o">&lt;-</span> <span class="s">&#39;Number of Criminals Arrests&#39;</span>
+graph.title.y.axisleft <span class="o">&lt;-</span> <span class="s">&#39;Prob of x Arrested&#39;</span>
+graph.title.y.axisright <span class="o">&lt;-</span> <span class="s">&#39;Prob of at most x Arrested&#39;</span>
+
+<span class="c1"># Title</span>
 arrest.graph <span class="o">&lt;-</span> arrest.graph <span class="o">+</span> 
-    labs<span class="p">(</span>title <span class="o">=</span> <span class="kp">sprintf</span><span class="p">(</span><span class="kp">paste0</span><span class="p">(</span><span class="s">&#39;Number of Theft-Criminals Arrested out of %s&#39;</span><span class="p">,</span>
-                               <span class="s">&#39;\nProb Mass (Left) and Cumulative Prob (Right)&#39;</span><span class="p">)</span> 
-                         <span class="p">,</span>n<span class="p">),</span>
-         x <span class="o">=</span> <span class="s">&#39;Number of Criminals Arrests&#39;</span><span class="p">,</span>
-         y <span class="o">=</span> <span class="s">&#39;Prob of x Arrested&#39;</span><span class="p">,</span>
-         caption <span class="o">=</span> <span class="kp">sprintf</span><span class="p">(</span><span class="kp">paste0</span><span class="p">(</span><span class="s">&#39;Assuming the binomial properties apply\n&#39;</span><span class="p">,</span>
-                                 <span class="s">&#39;2004 Larceny/Left USA Clearance Rate = %s&#39;</span><span class="p">),</span>
-                           p<span class="p">))</span> <span class="o">+</span>
+    labs<span class="p">(</span>title <span class="o">=</span> graph.title<span class="p">,</span>
+         x <span class="o">=</span> graph.title.x<span class="p">,</span> y <span class="o">=</span> graph.title.y.axisleft<span class="p">,</span>
+         caption <span class="o">=</span> graph.caption<span class="p">)</span> <span class="o">+</span>
     scale_y_continuous<span class="p">(</span>sec.axis <span class="o">=</span> 
-                       sec_axis<span class="p">(</span><span class="o">~</span><span class="m">.</span><span class="o">*</span>axis.sec.ratio<span class="p">,</span> name <span class="o">=</span> <span class="s">&quot;Prob of at most x Arrested&quot;</span><span class="p">))</span> <span class="o">+</span>
+                       sec_axis<span class="p">(</span><span class="o">~</span><span class="m">.</span><span class="o">*</span>axis.sec.ratio<span class="p">,</span> name <span class="o">=</span> graph.title.y.axisright<span class="p">))</span> <span class="o">+</span>
     scale_x_continuous<span class="p">(</span>labels <span class="o">=</span> zero2max<span class="p">,</span> breaks <span class="o">=</span> zero2max<span class="p">)</span> <span class="o">+</span>
     theme<span class="p">(</span>axis.text.y <span class="o">=</span> element_text<span class="p">(</span>face<span class="o">=</span><span class="s">&#39;bold&#39;</span><span class="p">),</span>
           axis.text.y.right <span class="o">=</span> element_text<span class="p">(</span>color <span class="o">=</span> right.axis.color<span class="p">),</span>
@@ -12456,7 +12465,7 @@ lc3icqsTZFhIaFYMwUKzYggWmhVDsNCsGIKFZsUQLDQrhmChWTEEC82KIVhoVuz/A9hKz49V
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Parameters</span>
@@ -12495,7 +12504,7 @@ survive.prob <span class="o">&lt;-</span> tibble<span class="p">(</span>survives
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Control Graph Size</span>
@@ -12516,19 +12525,25 @@ survive.graph <span class="o">&lt;-</span> survive.graph <span class="o">+</span
     geom_line<span class="p">(</span>aes<span class="p">(</span>y<span class="o">=</span>cum.prob<span class="o">/</span>axis.sec.ratio<span class="p">),</span>
               alpha<span class="o">=</span><span class="m">0.75</span><span class="p">,</span> size<span class="o">=</span><span class="m">1</span><span class="p">,</span> color<span class="o">=</span>right.axis.color<span class="p">)</span> 
     
+<span class="c1"># Titles Strings etc</span>
+graph.title <span class="o">&lt;-</span> <span class="kp">sprintf</span><span class="p">(</span>
+    <span class="kp">paste0</span><span class="p">(</span><span class="s">&#39;Number of Surviving Soldiers out of %s from Town\n&#39;</span><span class="p">,</span>
+           <span class="s">&#39;Prob Mass (Left) and Cumulative Prob (Right)&#39;</span><span class="p">)</span> <span class="p">,</span>n<span class="p">)</span>
+graph.caption <span class="o">&lt;-</span> <span class="kp">sprintf</span><span class="p">(</span>
+    <span class="kp">paste0</span><span class="p">(</span><span class="s">&#39;Assuming the binomial properties apply\n&#39;</span><span class="p">,</span>
+           <span class="s">&#39;German Army Soldier WWII survival rate = %s&#39;</span><span class="p">),</span> p<span class="p">)</span>
+graph.title.x <span class="o">&lt;-</span> <span class="s">&#39;Number of Soldiers Survived&#39;</span>
+graph.title.y.axisleft <span class="o">&lt;-</span> <span class="s">&#39;Prob of x survived&#39;</span>
+graph.title.y.axisright <span class="o">&lt;-</span> <span class="s">&#39;Prob of at most x surviveed&#39;</span>
 
 <span class="c1"># Titles etc</span>
 survive.graph <span class="o">&lt;-</span> survive.graph <span class="o">+</span> 
-    labs<span class="p">(</span>title <span class="o">=</span> <span class="kp">sprintf</span><span class="p">(</span><span class="kp">paste0</span><span class="p">(</span><span class="s">&#39;Number of Surviving Soldiers out of %s from Town&#39;</span><span class="p">,</span>
-                               <span class="s">&#39;\nProb Mass (Left) and Cumulative Prob (Right)&#39;</span><span class="p">)</span> 
-                         <span class="p">,</span>n<span class="p">),</span>
-         x <span class="o">=</span> <span class="s">&#39;Number of Soldiers Survived&#39;</span><span class="p">,</span>
-         y <span class="o">=</span> <span class="s">&#39;Prob of x survived&#39;</span><span class="p">,</span>
-         caption <span class="o">=</span> <span class="kp">sprintf</span><span class="p">(</span><span class="kp">paste0</span><span class="p">(</span><span class="s">&#39;Assuming the binomial properties apply\n&#39;</span><span class="p">,</span>
-                                 <span class="s">&#39;German Army Soldier WWII survival rate = %s&#39;</span><span class="p">),</span>
-                           p<span class="p">))</span> <span class="o">+</span>
+    labs<span class="p">(</span>title <span class="o">=</span> graph.title<span class="p">,</span>
+         x <span class="o">=</span> graph.title.x<span class="p">,</span>
+         y <span class="o">=</span> graph.title.y.axisleft<span class="p">,</span>
+         caption <span class="o">=</span> graph.caption<span class="p">)</span> <span class="o">+</span>
     scale_y_continuous<span class="p">(</span>sec.axis <span class="o">=</span> 
-                       sec_axis<span class="p">(</span><span class="o">~</span><span class="m">.</span><span class="o">*</span>axis.sec.ratio<span class="p">,</span> name <span class="o">=</span> <span class="s">&quot;Prob of at most x surviveed&quot;</span><span class="p">))</span> <span class="o">+</span>
+                       sec_axis<span class="p">(</span><span class="o">~</span><span class="m">.</span><span class="o">*</span>axis.sec.ratio<span class="p">,</span> name <span class="o">=</span> graph.title.y.axisright<span class="p">))</span> <span class="o">+</span>
     scale_x_continuous<span class="p">(</span>labels <span class="o">=</span> zero2max<span class="p">[</span><span class="kp">floor</span><span class="p">(</span><span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span>n<span class="p">,</span>length.out<span class="o">=</span><span class="m">10</span><span class="p">))],</span>
                        breaks <span class="o">=</span> zero2max<span class="p">[</span><span class="kp">floor</span><span class="p">(</span><span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span>n<span class="p">,</span>length.out<span class="o">=</span><span class="m">10</span><span class="p">))])</span> <span class="o">+</span>
     theme<span class="p">(</span>axis.text.y <span class="o">=</span> element_text<span class="p">(</span>face<span class="o">=</span><span class="s">&#39;bold&#39;</span><span class="p">),</span>
@@ -12770,7 +12785,7 @@ SiIEC5VECBYqiRAsVBIhWKgkQrBQSfT/1cD2Rxql+wYAAAAASUVORK5CYII="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>f_table <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>start_idx<span class="p">)</span> <span class="p">{</span>

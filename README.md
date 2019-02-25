@@ -58,9 +58,9 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
   + Discrete Random Variable
   + Expected Value and Variance
   + Binomial Properties
-  + Examples: Larceny clearance rate, WWII German soldier survival rate
+  + Examples: USA larceny clearance rate, WWII German soldier survival rate
   + **use**: *dbinom*, *pbinom*; *geom_bar*, *geom_line*, *geom_point*, *geom_text*; *lapply*, *sprintf*, *scale_y_continuous(sec.axis)*, *axis.text.y*, *round*
 2. [Poisson Probability Distribution](probability/poisson.html)
   + Poisson Properties
-  + Examples: Prussian army horse-kick death
+  + Examples: Ladislaus Bortkiewicz's analysis of Prussian army horse-kick deaths
   + **use**: *dpois*, *ppois*

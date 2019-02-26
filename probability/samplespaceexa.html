@@ -11805,7 +11805,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Presidential-Election">Presidential Election<a class="anchor-link" href="#Presidential-Election">&#182;</a></h2><p>After various primaries there are four major candidates who could become president. Voting takes places in half a year. Over this year, many events could happen that would increase or decrease the support for candidates. After voting, the outcome is certain. But from today's perspective, when voting is one year from now, outcomes are uncertain.</p>
+<h2 id="Presidential-Election">Presidential Election<a class="anchor-link" href="#Presidential-Election">&#182;</a></h2><p>After various primaries there are four major candidates who could become president. Voting takes place in half a year. Over this year, many events could happen that would increase or decrease the support for candidates. After voting, the outcome is certain. But from today's perspective, when voting is one year from now, outcomes are uncertain.</p>
 <ul>
 <li>Experiment: Presidential Election in One Year</li>
 <li>Experimental outcomes: candidates <a href="https://en.wikipedia.org/wiki/Donald_Trump">DT</a>, <a href="https://en.wikipedia.org/wiki/Hillary_Clinton">HC</a>, <a href="https://en.wikipedia.org/wiki/Jill_Stein">JS</a>, <a href="https://en.wikipedia.org/wiki/Gary_Johnson">GJ</a> winning. </li>
@@ -11855,7 +11855,7 @@ $$P(\text{W} \cup \text{S}) = P(\text{W}) + P(\text{S}) - P(\text{W} \cap \text{
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Load Library</span>
@@ -11919,14 +11919,14 @@ dice.true.prob
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Throw-the-Dice-10-Times">Throw the Dice 10 Times<a class="anchor-link" href="#Throw-the-Dice-10-Times">&#182;</a></h3><p>We throw the dice 10 times, each time, get one of the three possible experimental outcomes, the chance of getting these outcomes are determined by the true probabilities of the unfair dice. If we throw 10 times, that does not mean we will get exact side 1 five times. Side 1 having proability of 50 percent means for each throw there is a 50 percent chance of getting side 1. But each throw is independent of other throws, so we could just by chance end up with no side 1 after ten throws, although the chance of that happening is low. How many times did we get each side in the ten random tosses below?</p>
+<h3 id="Throw-the-Dice-10-Times">Throw the Dice 10 Times<a class="anchor-link" href="#Throw-the-Dice-10-Times">&#182;</a></h3><p>We throw the dice 10 times, each time, get one of the six possible experimental outcomes, the chance of getting these outcomes are determined by the true probabilities of the unfair dice. If we throw 10 times, that does not mean we will get exact side 1 five times. Side 1 having proability of 50 percent means for each throw there is a 50 percent chance of getting side 1. But each throw is independent of other throws, so we could just by chance end up with no side 1 after ten throws, although the chance of that happening is low. How many times did we get each side in the ten random tosses below?</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># What could happen tomorrow?</span>
@@ -11963,14 +11963,14 @@ tibble<span class="p">(</span>which.future.dice <span class="o">=</span> <span c
 <thead><tr><th scope=col>which.future.dice</th><th scope=col>dice.draws</th></tr></thead>
 <tbody>
 	<tr><td>dice draws:1 </td><td>3            </td></tr>
-	<tr><td>dice draws:2 </td><td>1            </td></tr>
+	<tr><td>dice draws:2 </td><td>6            </td></tr>
 	<tr><td>dice draws:3 </td><td>1            </td></tr>
-	<tr><td>dice draws:4 </td><td>2            </td></tr>
-	<tr><td>dice draws:5 </td><td>1            </td></tr>
+	<tr><td>dice draws:4 </td><td>1            </td></tr>
+	<tr><td>dice draws:5 </td><td>2            </td></tr>
 	<tr><td>dice draws:6 </td><td>1            </td></tr>
-	<tr><td>dice draws:7 </td><td>1            </td></tr>
-	<tr><td>dice draws:8 </td><td>2            </td></tr>
-	<tr><td>dice draws:9 </td><td>2            </td></tr>
+	<tr><td>dice draws:7 </td><td>2            </td></tr>
+	<tr><td>dice draws:8 </td><td>1            </td></tr>
+	<tr><td>dice draws:9 </td><td>1            </td></tr>
 	<tr><td>dice draws:10</td><td>2            </td></tr>
 </tbody>
 </table>
@@ -12038,7 +12038,7 @@ $$P(\text{WS} \cup \text{WF}) = P(\text{WS}) +  P(\text{WF}) - P(\text{WS} \cap 
 <ul>
 <li>Experiment: One team plays two games</li>
 <li>Experimental outcomes: Win 0, 1, or 2 times</li>
-<li>Sample Space: $S=\left\{\text{'Win = 0'}, \text{'Win = 2'}, \text{'Win = 3'}\right\}$</li>
+<li>Sample Space: $S=\left\{\text{'0 Win'}, \text{'1 Win'}, \text{'2 Wins'}\right\}$</li>
 </ul>
 <p>This is also a sample space with three sample points (or experimental outcomes). Following our definitions earlier, these three experimental outcomes are mutually exclusive and jointly exhaustive. We could also call these three experimental outcomes here three different events of the sample space with the four paths of game play experimental outcomes (sample points).</p>
 

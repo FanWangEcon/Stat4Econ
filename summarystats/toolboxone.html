@@ -11788,7 +11788,7 @@ div#notebook {
 <li>Coefficient of Variation = (Standard Deviation)/(Mean)</li>
 <li>Correlation = (Covariance of X and Y)/((Standard Deviation of X)*(Standard Deviation of Y))</li>
 </ol>
-<p>The tools on the second level rescales the standard deviation and covariance statistics.</p>
+<p>The tools on the second level rescale the standard deviation and covariance statistics.</p>
 
 </div>
 </div>
@@ -11815,7 +11815,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Load in Data Tools</span>
@@ -11860,15 +11860,15 @@ cols(
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="A-Scatter-Plot">A Scatter Plot<a class="anchor-link" href="#A-Scatter-Plot">&#182;</a></h2><p>We can Visualize the Data with a Scatter Plot. There seems to be a positive relationship between the share of individuals in a state with college education, and the average hourly salary in that state.</p>
-<p>While most states are along the trend line, we have some states, likw WY, that are outliers. WY has high hourly salary but low share with college education.</p>
+<h2 id="A-Scatter-Plot">A Scatter Plot<a class="anchor-link" href="#A-Scatter-Plot">&#182;</a></h2><p>We can Visualize the Data with a Scatter Plot. There seems to be a positive relationship between the share of individuals in a state with a college education, and the average hourly salary in that state.</p>
+<p>While most states are along the trend line, we have some states, like WY, that are outliers. WY has a high hourly salary but low share with college education.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Control Graph Size</span>
@@ -12132,7 +12132,7 @@ pDQwlAAAAABJRU5ErkJggg=="
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Standard-Deviations-and-Coefficient-of-Variation">Standard Deviations and Coefficient of Variation<a class="anchor-link" href="#Standard-Deviations-and-Coefficient-of-Variation">&#182;</a></h2><p>The two variables above are in different units. We first calculate mean, standard deviation, and covariance. With just these, it is hard to compare the standard deviation of the two variables, which are in different scales.</p>
+<h2 id="Standard-Deviations-and-Coefficient-of-Variation">Standard Deviations and Coefficient of Variation<a class="anchor-link" href="#Standard-Deviations-and-Coefficient-of-Variation">&#182;</a></h2><p>The two variables above are in different units. We first calculate the mean, standard deviation, and covariance. With just these, it is hard to compare the standard deviation of the two variables, which are on different scales.</p>
 <p>The sample standard deviations for the two variables are: $0.051$ and $1.51$, in fraction and dollar units. Can we say the hourly salary has a larger standard deviation? But it is just a different scale. $1.51$ is a large number, but that does not mean that variable has greater variation than the fraction with college education variable.</p>
 <p>Converting the Statistics to Coefficient of Variations, now we have: $0.16$ and $0.09$. Because of the division, these are both in fraction units--standard deviations as a fraction of the mean. Now these are more comparable.</p>
 
@@ -12141,7 +12141,7 @@ pDQwlAAAAABJRU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We can compute the three basic statistics</span>
@@ -12221,16 +12221,16 @@ as_tibble<span class="p">(</span>stats.coefvari<span class="p">)</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Covariance-and-Correlation">Covariance and Correlation<a class="anchor-link" href="#Covariance-and-Correlation">&#182;</a></h2><p>For covariance, hard to tell whether it is large or small. To make comparisons possible, we calculate coefficient of variations and correlation statistics.</p>
+<h2 id="Covariance-and-Correlation">Covariance and Correlation<a class="anchor-link" href="#Covariance-and-Correlation">&#182;</a></h2><p>For covariance, hard to tell whether it is large or small. To make comparisons possible, we calculate the coefficient of variations and correlation statistics.</p>
 <p>The covariance we get is positive: $0.06$, but is this actually large positive relationship? $0.06$ seems like a small number.</p>
-<p>Rescaling covariance to correlation, the correlation between the two variables is: $0.78$. Since the correlation of two variable is beloww $-1$ and $+1$, we can now say actually the two variables are very positively related. Higher share of individuals with college education is strongly positively correlated with higher hourly salary.</p>
+<p>Rescaling covariance to correlation, the correlation between the two variables is: $0.78$. Since the correlation of two variable is below $-1$ and $+1$, we can now say actually the two variables are very positively related.  A higher share of individuals with a college education is strongly positively correlated with a higher hourly salary.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We can compute the three basic statistics</span>

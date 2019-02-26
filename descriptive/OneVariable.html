@@ -11784,7 +11784,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[217]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># For Data Structures</span>
@@ -11816,7 +11816,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[218]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Load the dataset using readr&#39;s read_csv</span>
@@ -11860,7 +11860,7 @@ cols(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[219]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We have several factor variables, we can set them as factor one by one</span>
@@ -11924,10 +11924,10 @@ str<span class="p">(</span>df_survey<span class="p">)</span>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Categorical/Discrete">Categorical/Discrete<a class="anchor-link" href="#Categorical/Discrete">&#182;</a></h2><p>Using categorical/discrete variables, such as Major, Gender, Recent arrival or not, etc, we can generate frequency tables.</p>
 <ul>
-<li>Nominal Varaibles: These are categorical variables like name, or address, or major. </li>
+<li>Nominal Variables: These are categorical variables like name, or address, or major. </li>
 <li>Ordinal Variables: These are categorical variables like age, grade in school, that could be ordered sequentially.</li>
 </ul>
-<p>The frequency table shows in separate columns (or rows) the name for all the categories for that categorical variable, and show next to these categories the number of times that category appears in the dataset. This is called a frequency table because frequncies are shown for each category. So if we show a one-way frequency for majors, there would be four rows for the four unique majors from our survey of 10 students, and we would write down the number of students in each of the majors out of the 10 students.</p>
+<p>The frequency table shows in separate columns (or rows) the name for all the categories for that categorical variable, and show next to these categories the number of times that category appears in the dataset. This is called a frequency table because frequencies are shown for each category. So if we show a one-way frequency for majors, there would be four rows for the four unique majors from our survey of 10 students, and we would write down the number of students in each of the majors out of the 10 students.</p>
 <p>Rather than showing frequencies, we can also show ratios or percentages by dividing the number of observations in each category by the total number of observations in the survey.</p>
 <p>Graphically, we can show the results from these one-way frequency tables using bar charts and pie charts. The bar charts would have separate bars for each category, and the heights of the bars would show the number of observations in that category, or the fraction of individuals in the categorical. The relative heights of bars are the same whether we show the frequencies or the fractions/ratios. A pie chart might give a more direct visual sense of the fraction of observations in each category.</p>
 
@@ -11944,7 +11944,7 @@ str<span class="p">(</span>df_survey<span class="p">)</span>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[220]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># This Generates A Frequency table for the number of students of each gender</span>
@@ -11987,7 +11987,7 @@ df_survey <span class="o">%&gt;%</span>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[221]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We can make a bar graph for the Frequency Table</span>
@@ -12059,7 +12059,7 @@ pW/Z403B17zHfHvIGYClB2DpAVh61IH/A//bzM6mYMnOAAAAAElFTkSuQmCC"
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[222]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># There are Multiple Categorical Variables in the dataset</span>
@@ -12075,22 +12075,26 @@ categorical.nomial.list <span class="o">&lt;-</span> <span class="kt">c</span><s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[223]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Let&#39;s Write a Function, not that we need to, but let&#39;s do it</span>
 <span class="c1"># We can give the function any name, here: dplyr.freq.table</span>
 dplyr.freq.table <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>df<span class="p">,</span> cate.var.str<span class="p">){</span>
+    
     <span class="c1"># A print Statement</span>
     <span class="kp">print</span><span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;From Dataset: %s, Freq. Table for Variable: %s&quot;</span><span class="p">,</span> <span class="kp">deparse</span><span class="p">(</span><span class="kp">substitute</span><span class="p">(</span>df<span class="p">)),</span> cate.var.str<span class="p">))</span>
+    
     <span class="c1"># Note below: !!sym(cate.var.str), because cate.var.str is string</span>
     freq.table <span class="o">&lt;-</span> df <span class="o">%&gt;%</span>
         group_by<span class="p">(</span><span class="o">!!</span>sym<span class="p">(</span>cate.var.str<span class="p">))</span> <span class="o">%&gt;%</span>
         summarise <span class="p">(</span>frequency.count <span class="o">=</span> n<span class="p">())</span> <span class="o">%&gt;%</span>
         mutate<span class="p">(</span>proportions <span class="o">=</span> frequency.count <span class="o">/</span> <span class="kp">sum</span><span class="p">(</span>frequency.count<span class="p">))</span>    
+    
     <span class="c1"># Function returns</span>
     <span class="kr">return</span><span class="p">(</span>freq.table<span class="p">)</span>
 <span class="p">}</span>
+
 <span class="c1"># Let&#39;s call test this function and generate our earlier table</span>
 dplyr.freq.table<span class="p">(</span>df <span class="o">=</span> df_survey<span class="p">,</span> cate.var.str <span class="o">=</span> <span class="s">&#39;gender&#39;</span><span class="p">)</span>
 </pre></div>
@@ -12139,7 +12143,7 @@ dplyr.freq.table<span class="p">(</span>df <span class="o">=</span> df_survey<sp
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[224]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Let&#39;s Now Use our function to generate Multiple Frequency Tables</span>
@@ -12214,7 +12218,7 @@ dplyr.freq.table<span class="p">(</span>df <span class="o">=</span> df_survey<sp
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[225]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We will now use lapply, the single line loop tool in R</span>
@@ -12313,15 +12317,15 @@ dplyr.freq.table<span class="p">(</span>df <span class="o">=</span> df_survey<sp
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Continuous/Quantitative">Continuous/Quantitative<a class="anchor-link" href="#Continuous/Quantitative">&#182;</a></h2><p>Graphically, we can show a continuous variable using a histogram. This could be test scores, temperatures, years in houston, etc. This involves first creating a categorical/discrete variable based on the continuous variable. Since the underlying continuous variable is ordered (low to high temperature unless major which is not ordered), the categorica/discrete variable we generate is an ordered categorical variable (majors could be called unordered categorical variable).</p>
-<h3 id="Histogram-with-Lapply">Histogram with Lapply<a class="anchor-link" href="#Histogram-with-Lapply">&#182;</a></h3><p>To genereate the histogram, we:</p>
+<h2 id="Continuous/Quantitative">Continuous/Quantitative<a class="anchor-link" href="#Continuous/Quantitative">&#182;</a></h2><p>Graphically, we can show a continuous variable using a histogram. This could be test scores, temperatures, years in Houston, etc. This involves first creating a categorical/discrete variable based on the continuous variable. Since the underlying continuous variable is ordered (low to high temperature unless major which is not ordered), the categorical/discrete variable we generate is an ordered categorical variable (majors could be called unordered categorical variable).</p>
+<h3 id="Histogram-with-Lapply">Histogram with Lapply<a class="anchor-link" href="#Histogram-with-Lapply">&#182;</a></h3><p>To generate the histogram, we:</p>
 <ol>
 <li>Make sure that all observations belongs to one category<ul>
 <li>no observations belonging to no categories</li>
 <li>each observation only belongs to one category</li>
 </ul>
 </li>
-<li>Each category is equi-distance along the continuous variable's original scale. </li>
+<li>Each category is equidistance along the continuous variable's original scale. </li>
 <li>Then we create a bar graph where each bar is a category, and the height of the bar represents the number of observations within that category. </li>
 </ol>
 
@@ -12330,7 +12334,7 @@ dplyr.freq.table<span class="p">(</span>df <span class="o">=</span> df_survey<sp
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[226]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># We will write a histogram function</span>
@@ -12369,7 +12373,7 @@ ggplot.histogram <span class="o">&lt;-</span> <span class="kr">function</span><s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[227]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Now the list of continuous Variables and calling the function with lapply</span>

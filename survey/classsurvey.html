@@ -11776,14 +11776,14 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong><a href="https://fanwangecon.github.io/Stat4Econ/">Back to Fan's Intro Stat Table of Content</a></strong></p>
-<h1 id="A-Dataset-in-R">A Dataset in R<a class="anchor-link" href="#A-Dataset-in-R">&#182;</a></h1><p>R has a Variety of built-in small datsets for you to experiment with, for example, opening up R, you can just type in: mtcars, and that will show you some variables and observations. The command below show sthe first 5 rows of dataset <strong>mtcars</strong></p>
+<h1 id="A-Dataset-in-R">A Dataset in R<a class="anchor-link" href="#A-Dataset-in-R">&#182;</a></h1><p>R has a Variety of built-in small datasets for you to experiment with, for example, opening up R, you can just type in: mtcars, and that will show you some variables and observations. The command below shows the first 5 rows of dataset <strong>mtcars</strong>:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kp">head</span><span class="p">(</span>mtcars<span class="p">,</span> <span class="m">5</span><span class="p">)</span>
@@ -11827,29 +11827,29 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Population-and-Sample">Population and Sample<a class="anchor-link" href="#Population-and-Sample">&#182;</a></h1><h2 id="A-Poluation-of-52-and-a-Sample-of-10">A Poluation of 52 and a Sample of 10<a class="anchor-link" href="#A-Poluation-of-52-and-a-Sample-of-10">&#182;</a></h2><p>There are 52 students in a class, I am interested in how many of your go to games at the University, and how many years each of you has lived in the city of Houston. But I do not have time to ask each of you questions.</p>
+<h1 id="Population-and-Sample">Population and Sample<a class="anchor-link" href="#Population-and-Sample">&#182;</a></h1><h2 id="A-Population-of-52-and-a-Sample-of-10">A Population of 52 and a Sample of 10<a class="anchor-link" href="#A-Population-of-52-and-a-Sample-of-10">&#182;</a></h2><p>There are 52 students in a class. I am interested in how many of you go to games at the University, and how many years each of you has lived in the city of Houston. But I do not have time to ask each of you questions.</p>
 <ul>
 <li>My population is all 52 students in the class. </li>
 <li>Given my limited time and resources, I will gather a sample of just 10 students. </li>
 </ul>
 <p>Gathering information regarding game attendance for the 10 students, I can perhaps gain some insights about the population.</p>
-<h2 id="Random-Sample">Random Sample<a class="anchor-link" href="#Random-Sample">&#182;</a></h2><p>I can just point and pick 10 <em>random</em> people, but how do I know I am choosing picking randomly? In general, we want to pick a random sample from the population. You don't want your sample of 10 to just be students in the first row, or students who happen to be giving eye contacts. We want a random sample that hopefully gives us some representative information about the population of 52 students.</p>
+<h2 id="Random-Sample">Random Sample<a class="anchor-link" href="#Random-Sample">&#182;</a></h2><p>I can point and pick ten random people, but how do I know I am choosing/selecting randomly? In general, we want to pick a random sample from the population. You don't want your sample of 10 to just be students in the first row or students who happen to be giving eye contacts. We want a random sample that hopefully gives us some representative information about the population of 52 students.</p>
 <p>How do you pick random numbers?</p>
-<p>Siri, Alexa, Google, ..., you can get random numbers very easily now. You can download various apps also that allows you to draw a random integer from say between 1 to 4, with equal chance of drawing any of the four numbers.</p>
+<p>Siri, Alexa, Google, ..., you can get random numbers very easily now. You can download various apps also that allows you to draw a random integer from say between 1 to 4, with an equal chance of drawing any of the four numbers.</p>
 <p>In our class:</p>
 <ul>
 <li>we have 4 rows of seats</li>
 <li>we have 13 columns of seats</li>
 <li>there are 52 students in the class together. I will now randomly pick between 1 and 4, 10 times, and randomly pick between 1 and 13 also 10 times. </li>
 </ul>
-<p>This gives me ten pairs of row and columns numbers, and these indicate which 10 students will be a part of randomly drawn sample of students.</p>
+<p>This gives me ten pairs of row and columns numbers, and these indicate which ten students will be a part of a randomly drawn sample of students.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Setting seed means we will get the same set of random numbers each time</span>
@@ -11904,7 +11904,7 @@ COL.RAND.DRAWS <span class="o">=</span> <span class="kp">sample</span><span clas
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Install Tibble and dplyr inside RStudio for Example by installing Tidyverse: install.packages(&quot;tidyverse&quot;)</span>
@@ -11921,7 +11921,7 @@ COL.RAND.DRAWS <span class="o">=</span> <span class="kp">sample</span><span clas
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>df <span class="o">&lt;-</span> tibble<span class="p">(</span>ID <span class="o">=</span> <span class="kt">integer</span><span class="p">(),</span> ROW <span class="o">=</span> <span class="kt">integer</span><span class="p">(),</span> COL <span class="o">=</span> <span class="kt">integer</span><span class="p">(),</span> 
@@ -12030,7 +12030,7 @@ df
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Generate Binary Variable of Having attended any games or not</span>
@@ -12108,7 +12108,7 @@ df
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Using the dplyr package, we can find the fraction of individuals in factor variables</span>
@@ -12152,7 +12152,7 @@ df <span class="o">%&gt;%</span>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Average Game Attendance Overall, and for each sub-group, conditional on attending any or no attendance</span>
@@ -12213,7 +12213,7 @@ df <span class="o">%&gt;%</span> group_by<span class="p">(</span>games.any<span 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># To show both overall average and the group specific average together</span>
@@ -12261,7 +12261,7 @@ df <span class="o">%&gt;%</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Different-Samples">Different Samples<a class="anchor-link" href="#Different-Samples">&#182;</a></h1><p>If we drew a different set of 10 people from the class, we would likely get different statistics than what we have in the current random sample. We want to make inference based on the sample about the population knowing that each set of random draws could give different sample statistics. Sample statistics is not the population statistics. If our samples are smaller than 10, our sample statistics are likely to be even further away from population statistics.</p>
+<h1 id="Different-Samples">Different Samples<a class="anchor-link" href="#Different-Samples">&#182;</a></h1><p>If we drew a different set of 10 people from the class, we would likely get different statistics than what we have in the current random sample. We want to make inference based on the sample about the population knowing that each set of random draws could give different sample statistics. Sample statistics is not population statistics. If our samples are smaller than 10, our sample statistics are likely to be even further away from population statistics.</p>
 
 </div>
 </div>
@@ -12270,14 +12270,14 @@ df <span class="o">%&gt;%</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Store-The-data">Store The data<a class="anchor-link" href="#Store-The-data">&#182;</a></h1><p>A common format for data storage is CSV (comma separated files). The file has texts and can be opened by any text editor. Each row of text corresponds to a row in the table above, which is an observation in the dataset. Values for each variable are separated by commas. The first row stores the list of column variable names, also separated by commas.</p>
+<h1 id="Store-The-data">Store The data<a class="anchor-link" href="#Store-The-data">&#182;</a></h1><p>A standard format for data storage is CSV (comma separated files). The file has texts and can be opened by any text editor. Each row of text corresponds to a row in the table above, which is an observation in the dataset. Commas separate values for each variable. The first row stores the list of column variable names, also separated by commas.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># This is tidyverse package for reading and writing files</span>

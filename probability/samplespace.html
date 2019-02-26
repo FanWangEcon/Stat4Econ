@@ -11835,7 +11835,7 @@ div#notebook {
 <ul>
 <li>Each element of the sample space can not have negative probability of happening, and also can not have more than $1$ probability of happening, with $P$ denotes probability, we have:
   $$0 \le P(E_i) \le 1$$</li>
-<li>The probabilities of all the mutually exclusive and jointly exhaustive experimental in the sample space sum up to $1$:
+<li>The probabilities of all the mutually exclusive and jointly exhaustive experimental outcomes in the sample space sum up to $1$. For an experimental with $n$ experimental outcomes:
   $$\Sigma_{i=1}^{n} P(E_i) = 1$$</li>
 </ul>
 
@@ -11844,7 +11844,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Load Library</span>
@@ -11874,6 +11874,24 @@ tibble<span class="p">(</span>tomorrow.experimental.outcomes <span class="o">=</
 <div class="prompt"></div>
 
 
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>-- Attaching packages --------------------------------------- tidyverse 1.2.1 --
+v ggplot2 3.1.0     v purrr   0.2.5
+v tibble  1.4.2     v dplyr   0.7.8
+v tidyr   0.8.2     v stringr 1.3.1
+v readr   1.2.1     v forcats 0.3.0
+-- Conflicts ------------------------------------------ tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 
 <div class="output_html rendered_html output_subarea ">
 <table>
@@ -11895,7 +11913,7 @@ tibble<span class="p">(</span>tomorrow.experimental.outcomes <span class="o">=</
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># What could happen tomorrow?</span>
@@ -11939,19 +11957,19 @@ tibble<span class="p">(</span>which.tomorrow <span class="o">=</span> <span clas
 	<tr><td>tomorrow:2 </td><td>No Rain    </td></tr>
 	<tr><td>tomorrow:3 </td><td>No Rain    </td></tr>
 	<tr><td>tomorrow:4 </td><td>No Rain    </td></tr>
-	<tr><td>tomorrow:5 </td><td>No Rain    </td></tr>
+	<tr><td>tomorrow:5 </td><td>Heavy Rain </td></tr>
 	<tr><td>tomorrow:6 </td><td>Heavy Rain </td></tr>
 	<tr><td>tomorrow:7 </td><td>No Rain    </td></tr>
-	<tr><td>tomorrow:8 </td><td>No Rain    </td></tr>
+	<tr><td>tomorrow:8 </td><td>Heavy Rain </td></tr>
 	<tr><td>tomorrow:9 </td><td>Light Rain </td></tr>
-	<tr><td>tomorrow:10</td><td>Heavy Rain </td></tr>
+	<tr><td>tomorrow:10</td><td>Light Rain </td></tr>
 	<tr><td>tomorrow:11</td><td>No Rain    </td></tr>
 	<tr><td>tomorrow:12</td><td>No Rain    </td></tr>
 	<tr><td>tomorrow:13</td><td>No Rain    </td></tr>
 	<tr><td>tomorrow:14</td><td>Light Rain </td></tr>
 	<tr><td>tomorrow:15</td><td>Heavy Rain </td></tr>
-	<tr><td>tomorrow:16</td><td>Heavy Rain </td></tr>
-	<tr><td>tomorrow:17</td><td>No Rain    </td></tr>
+	<tr><td>tomorrow:16</td><td>No Rain    </td></tr>
+	<tr><td>tomorrow:17</td><td>Heavy Rain </td></tr>
 	<tr><td>tomorrow:18</td><td>No Rain    </td></tr>
 	<tr><td>tomorrow:19</td><td>No Rain    </td></tr>
 	<tr><td>tomorrow:20</td><td>No Rain    </td></tr>

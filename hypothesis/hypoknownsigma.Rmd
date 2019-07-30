@@ -1,0 +1,52 @@
+---
+title: "R Notebook"
+output:
+  html_notebook: default
+  pdf_document:
+    number_sections: yes
+    toc: yes
+  html_document:
+    df_print: paged
+    toc: yes
+---
+
+Back to *[Fan](https://fanwangecon.github.io/)*'s **[Intro Stat Table of Content](https://fanwangecon.github.io/Stat4Econ/)**
+
+# Hypothesis Testing when the Population Variance is known
+
+Following the central limit theorem, we know that the distribution of a sample mean follows the normal distribution. The mean and the standard deviation of the sampling distribution are known. 
+
+## Left Tail Test
+
+A school administrator needs to determine which students should fail. 
+
+
+## Right Tail Test
+
+Does drinking energy drink really improve test score?
+
+
+## Two Tailed Test
+
+$$
+\mathrm{Cov}\left(x,y\right) = \sum_{a} \sum_{z} f(a,z) \cdot \left( x(a,z) - \mu_x \right) \cdot \left( y(a,z) - \mu_y \right)
+$$
+$$
+\rho_{x,y} = \frac{\mathrm{Cov}\left(x,y\right)}{\sigma_x \cdot \sigma_y}
+$$
+From *sample*, we have the sample mean and sample size:
+
+- $\bar{x} = 1$
+- $n = 10$
+
+From *Hypothesis*:
+
+- $\mu_0 = 10$
+
+Given that the *population* variance is:
+
+- $\sigma_x = 2$
+
+
+
+

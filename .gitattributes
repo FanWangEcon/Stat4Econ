@@ -1,0 +1,7 @@
+*.html linguist-vendored
+*.pdf linguist-vendored
+*.png linguist-vendored
+*.jpg linguist-vendored
+*.ipynb linguist-vendored
+*.csv linguist-vendored
+*.xlsx linguist-vendored

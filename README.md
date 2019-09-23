@@ -7,19 +7,19 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
 
 # 1. Dataset, Tables and Graphs
 
-1. [An In-class Survey](survey/classsurvey.html)
+1. [An In-class Survey](https://fanwangecon.github.io/Stat4Econ/survey/classsurvey.html)
   + create a tibble dataset
   + draw 10 random students from 50 and build a survey
   + **first use**: *tibble*, *add_row*, *factor*, *ifelse*, *group_by*, *mutate*, *summarise*, *write_csv*
-2. [Opening up a Dataset](descriptive/DataBasketball.html)
+2. [Opening up a Dataset](https://fanwangecon.github.io/Stat4Econ/descriptive/DataBasketball.html)
   + relative and absolute path  
   + **first use**: *read.csv*
-3. [One Variable Graphs and Tables](descriptive/OneVariable.html)
+3. [One Variable Graphs and Tables](https://fanwangecon.github.io/Stat4Econ/descriptive/OneVariable.html)
   + frequency table
   + bar chart and histogram
   + R function and lapply to generate graphs/tables for different variables
   + **first use**: *function*, *loop*, *lapply*, *!!sym*, *geom_histogram*, *geom_bar*
-4. [Multiple Variables Graphs and Tables](descriptive/MultipleVariables.html)
+4. [Multiple Variables Graphs and Tables](https://fanwangecon.github.io/Stat4Econ/descriptive/MultipleVariables.html)
   + two-way frequency table
   + stacked bar chart
   + scatter-plot
@@ -27,11 +27,11 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
 
 # 2. Summarizing Data
 
-1. [Mean, Standard Deviation](summarystats/meansdhist.html)
+1. [Mean, Standard Deviation](https://fanwangecon.github.io/Stat4Econ/summarystats/meansdhist.html)
   + a dataset with city-month temperatures
   + mean and standard deviation
   + **use**: *dplyr + ggplot*, *gather*, *filter*, *facet_wrap*, *show.unique.values*, *geom_line*, *geom_point*, *scale_x_continuous*
-2. [Rescaling--Coefficient of Variation and Correlation](summarystats/toolboxone.html)
+2. [Rescaling--Coefficient of Variation and Correlation](https://fanwangecon.github.io/Stat4Econ/summarystats/toolboxone.html)
   + a dataset with state-level wage and education data
   + scatter-plot
   + coefficient of variation rescales standard deviation
@@ -39,28 +39,28 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
 
 # 3. Basics of Probability
 
-1. [Sample Space, Experimental Outcomes, Events, Probabilities](probability/samplespace.html)
+1. [Sample Space, Experimental Outcomes, Events, Probabilities](https://fanwangecon.github.io/Stat4Econ/probability/poisson.html)
   + definitions of Sample Space, Experimental Outcomes, Events and Probability
   + union, intersection and complements
   + conditional probability  
-2. [Examples of Sample Space and Probabilities](probability/samplespaceexa.html)
+2. [Examples of Sample Space and Probabilities](https://fanwangecon.github.io/Stat4Econ/probability/samplespaceexa.html)
   + throwing a Quarter, four candidates for election, six-sided unfair dice, two basketball games
   + **use**: *tibble*, *sample*
-3. [Throw an Unfair Four Sided Dice](probability/samplespacedice.html)
+3. [Throw an Unfair Four Sided Dice](https://fanwangecon.github.io/Stat4Econ/probability/samplespacedice.html)
   + Throw an unfair dice many times, law of large number
   + **use**: *reduce*, *full_join*, *mutate_all*, *dplyr::mutate*; *tibble+group_by+summarise+mutate+arrange+select*; *!!str.var.name!=*, *sprintf*, *str_extract*; *bind_cols*, *logspace*; *geom_line*, *scale_x_continuous(trans='log10')*, *labs()*
-4. [Multiple-Step Experiment: Playing the Lottery Three times](probability/lottery.html)
+4. [Multiple-Step Experiment: Playing the Lottery Three times](https://fanwangecon.github.io/Stat4Econ/probability/lottery.html)
   + Path after 1, 2 and 3 plays
 
 # 4. Discrete Probability Distribution
 
-1. [Discrete Random Variable and Binomial Experiment](probability/binomial.html)
+1. [Discrete Random Variable and Binomial Experiment](https://fanwangecon.github.io/Stat4Econ/probability/binomial/binomial.html)
   + Discrete Random Variable
   + Expected Value and Variance
   + Binomial Properties
   + Examples: USA larceny clearance rate, WWII German soldier survival rate
   + **use**: *dbinom*, *pbinom*; *geom_bar*, *geom_line*, *geom_point*, *geom_text*; *lapply*, *sprintf*, *scale_y_continuous(sec.axis)*, *axis.text.y*, *round*
-2. [Poisson Probability Distribution](probability/poisson.html)
+2. [Poisson Probability Distribution](https://fanwangecon.github.io/Stat4Econ/probability/poisson.html)
   + Poisson Properties
   + Examples: Ladislaus Bortkiewicz's analysis of Prussian army horse-kick deaths
   + **use**: *dpois*, *ppois*

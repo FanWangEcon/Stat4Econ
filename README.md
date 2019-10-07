@@ -64,3 +64,8 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
   + Poisson Properties
   + Examples: Ladislaus Bortkiewicz's analysis of Prussian army horse-kick deaths
   + **use**: *dpois*, *ppois*
+
+----
+Files are from [Fan](https://fanwangecon.github.io)'s [Stat4Econ](https://github.com/FanWangEcon/Stat4Econ) repository. Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or problems.
+
+[![HitCount](http://hits.dwyl.io/FanWangEcon/Stat4Econ.svg)](http://hits.dwyl.io/FanWangEcon/Stat4Econ)

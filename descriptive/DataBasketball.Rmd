@@ -1,0 +1,69 @@
+---
+title: "Load a Dataset"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+**[Back to Fan's Intro Stat Table of Content](https://fanwangecon.github.io/Stat4Econ/)**
+
+# A Dataset on Basketball
+
+We have a dataset on basketball teams.
+
+**The dataset, *Basketball.csv*, can be downloaded [here](../data/Basketball.csv).**
+
+We will load in the dataset and do some analysis with it. 
+
+## What is in the Dataset
+
+### Paths to Data
+#### Relative Path
+The dataset is stored in a csv file. The folder structure for this file we are working inside and the data file is:
+
+- main folder: Stat4Econ
+    + subfolder: data
+        * file: Basketball.csv
+    + subfolder: descriptive
+        * file: DataBasketball.ipynb (the jupyter notebook file)
+        * file: DataBasetball.html (the html version of the jupyter notebook file
+ 
+overall this means:
+- the csv file's location is: **'/Stat4Econ/data/Basketball.csv'**
+- the working R code file's location is: **'/Stat4Econ/descriptive/DataBasketball.ipynb'**
+
+Given this structure, to access the *Basketball.csv* dataset, we need to go one folder up from our current subfolder to the mainfolder, and then choose the data subfolder, and the Basketball.csv file in the subfolder. 
+
+#### Absolute Path
+If these files are not in the same main folder but are in different locations on your computer, you can find the full path to the csv path and copy paste the path below in between the single quotes.
+
+search on google to find out how to get the full path to file:
+- google search for [find full path for file on mac](https://www.google.com/search?q=find+full+path+for+file+on+mac)
+    + this might end up looking like: **'/Users/fan/Downloads/Basketball.csv'**    
+- google search for [find full path for file on PC](https://www.google.com/search?q=find+full+path+for+file+on+mac)
+    + this might end up looking like: **'C:/Users/fan/Documents/Dropbox/Basketball.csv'**
+    
+
+### Using Relative path to load in data
+
+We will load in the data using base R read.csv function.
+
+- For what the variables mean, see [here](https://en.wikipedia.org/wiki/Basketball_statistics)
+- For what NBA team names correspond to, see [here](https://en.wikipedia.org/w/index.php?title=Wikipedia:WikiProject_National_Basketball_Association/National_Basketball_Association_team_abbreviations).
+
+```{r}
+# We can load the dataset in first by setting our directory, then loading in the dataset
+setwd('../data/')
+basetball_data <- read.csv('Basketball.csv')
+```
+
+```{r}
+# Alternatively, we can just use one line
+basetball_data <- read.csv('../data/Basketball.csv')
+```
+
+```{r}
+# Summarize all variables in data frame
+summary(basetball_data)
+```
+

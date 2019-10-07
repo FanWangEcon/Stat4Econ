@@ -1,9 +1,12 @@
+[![HitCount](http://hits.dwyl.io/fanwangecon/Stat4Econ.svg)](https://github.com/FanWangEcon/Stat4Econ)  [![Star](https://img.shields.io/github/stars/fanwangecon/Stat4Econ?style=social)](https://github.com/FanWangEcon/Stat4Econ/stargazers) [![Fork](https://img.shields.io/github/forks/fanwangecon/Stat4Econ?style=social)](https://github.com/FanWangEcon/Stat4Econ/network/members) [![Star](https://img.shields.io/github/watchers/fanwangecon/Stat4Econ?style=social)](https://github.com/FanWangEcon/Stat4Econ/watchers)
 
 This is a work-in-progress [course website](https://fanwangecon.github.io/Stat4Econ/) for Introductory Statistics for Undergraduate Students, produced by [Fan](https://fanwangecon.github.io/). Course covers a limited subset of topics from *Statistics for Business and Economics* (Anderson Sweeney Williams Camm Cochran 12e).
 
 R is used. Packages from [Tidyverse](https://www.tidyverse.org/) are used, including [tibble](https://tibble.tidyverse.org/) for framing data, [tidyr](https://dplyr.tidyverse.org/) and [dplyr](https://dplyr.tidyverse.org/) for reshaping data and aggregating statistics, [ggplot2](https://ggplot2.tidyverse.org/) for graphing, and [readr](https://readr.tidyverse.org/) for file IO. Materials are written in R using Jupyter notebook and shown as HTML files. To obtain codes and raw files, see [here](docs/gitsetup.md) for github set up. For HTML files, click on the links below.
 
 Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or problems.
+
+[![](https://img.shields.io/github/last-commit/fanwangecon/Stat4Econ)](https://github.com/FanWangEcon/Stat4Econ/commits/master) [![](https://img.shields.io/github/commit-activity/m/fanwangecon/Stat4Econ)](https://github.com/FanWangEcon/Stat4Econ/graphs/commit-activity) [![](https://img.shields.io/github/issues/fanwangecon/Stat4Econ)](https://github.com/FanWangEcon/Stat4Econ/issues) [![](https://img.shields.io/github/issues-pr/fanwangecon/Stat4Econ)](https://github.com/FanWangEcon/Stat4Econ/pulls)
 
 # 1. Dataset, Tables and Graphs
 
@@ -68,4 +71,8 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
 ----
 Files are from [Fan](https://fanwangecon.github.io)'s [Stat4Econ](https://github.com/FanWangEcon/Stat4Econ) repository. Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or problems.
 
-[![HitCount](http://hits.dwyl.io/FanWangEcon/Stat4Econ.svg)](http://hits.dwyl.io/FanWangEcon/Stat4Econ)
+![RepoSize](https://img.shields.io/github/repo-size/fanwangecon/Stat4Econ)
+![CodeSize](https://img.shields.io/github/languages/code-size/fanwangecon/Stat4Econ)
+![Language](https://img.shields.io/github/languages/top/fanwangecon/Stat4Econ)
+![Release](https://img.shields.io/github/downloads/fanwangecon/Stat4Econ/total)
+![License](https://img.shields.io/github/license/fanwangecon/Stat4Econ)

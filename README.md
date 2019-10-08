@@ -69,7 +69,7 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
   + **use**: *dpois*, *ppois*
 
 ----
-Files are from [Fan](https://fanwangecon.github.io)'s [Stat4Econ](https://github.com/FanWangEcon/Stat4Econ) repository. Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or problems.
+Please contact [![](https://img.shields.io/github/followers/fanwangecon?label=FanWangEcon&style=social)](https://github.com/FanWangEcon) [![](https://img.shields.io/twitter/follow/fanwangecon?label=%20&style=social)](https://twitter.com/fanwangecon) for issues or problems.
 
 ![RepoSize](https://img.shields.io/github/repo-size/fanwangecon/Stat4Econ)
 ![CodeSize](https://img.shields.io/github/languages/code-size/fanwangecon/Stat4Econ)

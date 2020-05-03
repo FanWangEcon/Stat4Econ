@@ -1,0 +1,169 @@
+---
+title: "Examples of Sample Space and Probabilities"
+titleshort: "Examples of Sample Space and Probabilities"
+description: |
+  Throwing a quarter, four candidates for election, six-sided unfair dice, two basketball games
+core:
+  - package: r
+    code: |
+      sample(size, replace, prob)
+date: 2020-05-02
+date_start: 2018-12-01
+output:
+  pdf_document:
+    pandoc_args: '../_output_kniti_pdf.yaml'
+    includes:
+      in_header: '../preamble.tex'
+  html_document:
+    pandoc_args: '../_output_kniti_html.yaml'
+    includes:
+      in_header: '../hdga.html'
+always_allow_html: true
+urlcolor: blue
+---
+
+## Sample Space and Probability Examples
+
+```{r global_options, include = FALSE}
+try(source("../.Rprofile"))
+```
+
+`r text_shared_preamble_one`
+`r text_shared_preamble_two`
+`r text_shared_preamble_thr`
+
+In *[Sample Space, Experimental Outcomes, Events, Probabilities](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html)*, we discussed various definitions. Here are some examples.
+
+- Experiment: Throwing a Quarter
+- Experimental outcomes: lands on Heads or lands on Tails
+- Sample Space: $S=\left\{H, T\right\}$
+- Event: There are only two experimental outcomes.
+- Probability:
+    + $1 \ge P(H) \ge 0$
+    + $1 \ge P(T) \ge 0$
+    + $P(H) + P(T) = 1$
+
+### Presidential Election
+
+After various primaries there are four major candidates who could become president. Voting takes place in half a year. Over this year, many events could happen that would increase or decrease the support for candidates. After voting, the outcome is certain. But from today's perspective, when voting is one year from now, outcomes are uncertain.
+
+- Experiment: Presidential Election in One Year
+- Experimental outcomes: candidates [DT](https://en.wikipedia.org/wiki/Donald_Trump), [HC](https://en.wikipedia.org/wiki/Hillary_Clinton), [JS](https://en.wikipedia.org/wiki/Jill_Stein), [GJ](https://en.wikipedia.org/wiki/Gary_Johnson) winning.
+- Sample Space: {DT, HC, JS, GJ}
+- Event:
+    + A woman wins is an event: $\text{W} = \left\{HC, JS\right\}$
+    + A man wins: $\text{M} = \left\{DT, GJ\right\}$
+    + Someone from a small party wins: $\text{S} = \left\{JS, GJ\right\}$
+- Probability:
+    + The probability that a woman does not win:
+    $$P(\text{W}^c) = 1 - P(\text{W}) = P(\text{M})$$
+    + There are no experimental outcomes, given the four that we have, where both woman and man wins, the two events are mutually exclusive:
+    $$P(\text{W} \cap \text{M}) = 0$$
+    + The probability that a woman wins conditional on a man winnning is zero:
+    $$P(\text{W} \mid \text{M}) = \frac{P(\text{W} \cap \text{M})}{P(\text{M})} = \frac{0}{P(DT) + P(GJ)} = 0$$
+    + The probability that a woman wins and someone from a small party wins:
+    $$P(\text{W} \cap \text{S}) = P(JS)$$
+    + The probability that a woman wins conditional on someone from a small party winning:
+    $$P(\text{W} \mid \text{S}) = \frac{P(\text{W} \cap \text{S})}{P(\text{S})} = \frac{P(JS)}{P(JS) + P(GJ)} $$
+    + Either a women wins or someone from a small party wins:
+    $$P(\text{W} \cup \text{S}) = P(\text{W}) + P(\text{S}) - P(\text{W} \cap \text{S}) = P(HC) + P(JS) + P(JS) + P(GJ) - P(JS) =  P(HC) + P(JS) + P(GJ)$$
+
+### Throwing a Dice
+
+- Experiment: Throwing a Dice
+- Experimental outcomes: lands on one of the six sides
+- Sample Space: $S=\left\{1,2,3,4,5,6\right\}$
+- Event: One could define many possible events. The experimental outcome is less than 3 is an event, greater than 2 is an event, been odd is an event, etc.
+
+In [Throw an Unfair Four Sided Dice](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html), we show what happens when we throw an unfair four sided dice many times. In the example below, we will throw an unfair dice, where the probability of landing on the side with 1 is 50 percent, and the chance of landing on each successive side is half of the chance of landing on the previous side. This is a dice weighted towards the smaller numbers.
+
+See the table below for the true probabilities of the unfiar dice.
+
+```{r}
+# Load Library
+library(tidyverse)
+
+# Define a List of Experimental Outcomes
+experimental.outcomes.list <- c(1,2,3,4,5,6)
+
+# Probabilities on experimental outcomes
+# Suppose dice is weighted towards 1
+fracbase <- 0.50
+experimental.outcome.prob <- c((1-fracbase)^0*fracbase,
+                               (1-fracbase)^1*fracbase,
+                               (1-fracbase)^2*fracbase,
+                               (1-fracbase)^3*fracbase,
+                               (1-fracbase)^4*fracbase,
+                               (1-fracbase)^5)
+
+# Show these in a Tibble
+dice.true.prob <- tibble(dice.outcomes.list = experimental.outcomes.list,
+                         dice.true.prob = experimental.outcome.prob)
+dice.true.prob
+```
+
+#### Throw the Dice 10 Times
+
+We throw the dice 10 times, each time, get one of the six possible experimental outcomes, the chance of getting these outcomes are determined by the true probabilities of the unfair dice. If we throw 10 times, that does not mean we will get exact side 1 five times. Side 1 having proability of 50 percent means for each throw there is a 50 percent chance of getting side 1. But each throw is independent of other throws, so we could just by chance end up with no side 1 after ten throws, although the chance of that happening is low. How many times did we get each side in the ten random tosses below?
+
+```{r}
+# What could happen tomorrow?
+# We live in a probabilistic world, drawing future from a hat
+# If we draw 20 times, what happens in the future?
+# It's pretty amazing, we get to see the future!
+number.of.futures.to.draw = 10
+future.dice.draws <- sample(experimental.outcomes.list,
+                            size = number.of.futures.to.draw,
+                            replace = TRUE,
+                            prob = experimental.outcome.prob)
+
+# A little tibble to show results
+tibble(which.future.dice = paste0('dice draws:', 1:number.of.futures.to.draw),
+       dice.draws = future.dice.draws)
+```
+
+#### Redefining Sample Space for Throwing a Dice
+
+Following our definition for sample space above, we can actually define an alternative sample spaces, for example:
+
+- Experiment: Throwing a Dice
+- Experimental outcomes: lands on greater or equal to 4, lands on less or equal to 3
+- Sample Space: $S=\left\{\text{'less equal to 3'}, \text{'greater equal to 4'}\right\}$
+
+This is also a sample space with two sample points (or experimental outcomes). Following our [definitions](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html) earlier, these two experimental outcomes are mutually exclusive and jointly exhaustive. We could also call these two experimental outcomes here two different events of the sample space with the six sample points.
+
+### Two Basketball Games
+
+- Experiment: One team plays two games
+- Experimental outcomes:
+    1. $E_1$: win first, win second
+    2. $E_2$: win first, lose second
+    3. $E_3$: lose first, win second
+    4. $E_4$: lose first, lose second
+- Sample Space: $S=\left\{E_1, E_2, E_3, E_4\right\}$
+- Events:
+    + no wins: $\text{W0} = \left\{E_4\right\}$
+    + win twice: $\text{W2} = \left\{E_1\right\}$
+    + win first game: $\text{WF} = \left\{E_1, E_2\right\}$
+    + win second game: $\text{WS} = \left\{E_1, E_3\right\}$
+    + etc.
+- Probability:
+    + What is the probability of winning the second game and the first game? Using the [conditional probability formula](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html), it is the probability of winning the first game times the probability of winning the second game conditional on winning the first game:
+    $$P(\text{WS} \cap \text{WF}) = P(\text{WS} \mid \text{WF}) \cdot P(\text{WF}) = P(E_1)$$
+        * If winning the first game does not change the probability of winning the second game, then we have:
+        $$P(E_1) = P(\text{WS} \mid \text{WF}) \cdot P(\text{WF}) = P(\text{WS}) \cdot P(\text{WF}) $$
+        * If the chance of winning the first and second game are the same, $P(\text{WS})=P(\text{WF})=p$, then we have:
+        $$P(E_1) = P(\text{WS}) \cdot P(\text{WF}) = p \cdot p = p^2 $$
+    + The probability of winning at least one game:
+    $$P(\text{WS} \cup \text{WF}) = P(\text{WS}) +  P(\text{WF}) - P(\text{WS} \cap \text{WF}) = P(E_1) + P(E_2) + P(E_3) $$
+
+
+#### Redefining Sample Space for two Basketball Game
+
+Following our definition for sample space above, we can actually define an alternative sample spaces using these events:
+
+- Experiment: One team plays two games
+- Experimental outcomes: Win 0, 1, or 2 times
+- Sample Space: $S=\left\{\text{'0 Win'}, \text{'1 Win'}, \text{'2 Wins'}\right\}$
+
+This is also a sample space with three sample points (or experimental outcomes). Following our definitions earlier, these three experimental outcomes are mutually exclusive and jointly exhaustive. We could also call these three experimental outcomes here three different events of the sample space with the four paths of game play experimental outcomes (sample points).

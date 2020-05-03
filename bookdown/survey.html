@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Survey | Introductory Statistics with R tidyverse</title>
+  <meta name="description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Survey | Introductory Statistics with R tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  <meta name="github-repo" content="fanwangecon/Stat4Econ" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Survey | Introductory Statistics with R tidyverse" />
+  
+  <meta name="twitter:description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  
+
+<meta name="author" content="Fan Wang" />
+
+
+<meta name="date" content="2020-05-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="dataset-tables-and-graphs.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92953468-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92953468-4');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introductory Statistics with R tidyverse</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="survey.html"><a href="survey.html"><i class="fa fa-check"></i><b>1</b> Survey</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="survey.html"><a href="survey.html#generate-a-dataset-in-r"><i class="fa fa-check"></i><b>1.1</b> Generate A Dataset in R</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="survey.html"><a href="survey.html#a-random-sample-of-students-in-class"><i class="fa fa-check"></i><b>1.1.1</b> A Random Sample of Students in Class</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html"><i class="fa fa-check"></i><b>2</b> Dataset, Tables and Graphs</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#opening-a-dataset"><i class="fa fa-check"></i><b>2.1</b> Opening a Dataset</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#paths-to-data"><i class="fa fa-check"></i><b>2.1.1</b> Paths to Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#one-variable-graphs-and-tables"><i class="fa fa-check"></i><b>2.2</b> One Variable Graphs and Tables</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#categoricaldiscrete"><i class="fa fa-check"></i><b>2.2.1</b> Categorical/Discrete</a></li>
+<li class="chapter" data-level="2.2.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#continuousquantitative"><i class="fa fa-check"></i><b>2.2.2</b> Continuous/Quantitative</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#multiple-variables-graphs-and-tables"><i class="fa fa-check"></i><b>2.3</b> Multiple Variables Graphs and Tables</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#two-continuous-variables"><i class="fa fa-check"></i><b>2.3.1</b> Two Continuous Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#two-categorical-variables"><i class="fa fa-check"></i><b>2.3.2</b> Two Categorical Variables</a></li>
+<li class="chapter" data-level="2.3.3" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#continuous-and-categorical-variable"><i class="fa fa-check"></i><b>2.3.3</b> Continuous and Categorical Variable</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="summarizing-data.html"><a href="summarizing-data.html"><i class="fa fa-check"></i><b>3</b> Summarizing Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="summarizing-data.html"><a href="summarizing-data.html#mean-and-standard-deviation"><i class="fa fa-check"></i><b>3.1</b> Mean and Standard Deviation</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="summarizing-data.html"><a href="summarizing-data.html#temperature-across-locations-over-time"><i class="fa fa-check"></i><b>3.1.1</b> Temperature Across Locations over Time</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="summarizing-data.html"><a href="summarizing-data.html#coefficient-of-variation-and-correlation"><i class="fa fa-check"></i><b>3.2</b> Coefficient of Variation and Correlation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="summarizing-data.html"><a href="summarizing-data.html#education-and-wage"><i class="fa fa-check"></i><b>3.2.1</b> Education and Wage</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="basics-of-probability.html"><a href="basics-of-probability.html"><i class="fa fa-check"></i><b>4</b> Basics of Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#experimental-outcomes"><i class="fa fa-check"></i><b>4.1</b> Experimental Outcomes</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-space-and-probabilities"><i class="fa fa-check"></i><b>4.1.1</b> Sample Space and Probabilities</a></li>
+<li class="chapter" data-level="4.1.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#union-and-intersection-and-complements"><i class="fa fa-check"></i><b>4.1.2</b> Union and Intersection and Complements</a></li>
+<li class="chapter" data-level="4.1.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#conditional-probability"><i class="fa fa-check"></i><b>4.1.3</b> Conditional Probability</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-space-and-probability-examples"><i class="fa fa-check"></i><b>4.2</b> Sample Space and Probability Examples</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#presidential-election"><i class="fa fa-check"></i><b>4.2.1</b> Presidential Election</a></li>
+<li class="chapter" data-level="4.2.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#throwing-a-dice"><i class="fa fa-check"></i><b>4.2.2</b> Throwing a Dice</a></li>
+<li class="chapter" data-level="4.2.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#two-basketball-games"><i class="fa fa-check"></i><b>4.2.3</b> Two Basketball Games</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-average"><i class="fa fa-check"></i><b>4.3</b> Sample Average</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#an-unfair-dice"><i class="fa fa-check"></i><b>4.3.1</b> An Unfair Dice</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="basics-of-probability.html"><a href="basics-of-probability.html#multiple-step-experiment"><i class="fa fa-check"></i><b>4.4</b> Multiple-Step Experiment</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#playing-the-lottery-three-times"><i class="fa fa-check"></i><b>4.4.1</b> Playing the Lottery Three times</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html"><i class="fa fa-check"></i><b>5</b> Discrete Probability Distribution</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#discrete-random-variable-and-binomial"><i class="fa fa-check"></i><b>5.1</b> Discrete Random Variable and Binomial</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#discrete-random-variable"><i class="fa fa-check"></i><b>5.1.1</b> Discrete Random Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-experiment"><i class="fa fa-check"></i><b>5.2</b> Binomial Experiment</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-example-larceny"><i class="fa fa-check"></i><b>5.2.1</b> Binomial Example: Larceny</a></li>
+<li class="chapter" data-level="5.2.2" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-example-wwii-german-soldier"><i class="fa fa-check"></i><b>5.2.2</b> Binomial Example: WWII German Soldier</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#poisson-distribution"><i class="fa fa-check"></i><b>5.3</b> Poisson Distribution</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#poisson-example-horse-kicking"><i class="fa fa-check"></i><b>5.3.1</b> Poisson Example: Horse-Kicking</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="index-and-code-links.html"><a href="index-and-code-links.html"><i class="fa fa-check"></i><b>A</b> Index and Code Links</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="index-and-code-links.html"><a href="index-and-code-links.html#survey-links"><i class="fa fa-check"></i><b>A.1</b> Survey links</a></li>
+<li class="chapter" data-level="A.2" data-path="index-and-code-links.html"><a href="index-and-code-links.html#dataset-tables-and-graphs-links"><i class="fa fa-check"></i><b>A.2</b> Dataset, Tables and Graphs links</a></li>
+<li class="chapter" data-level="A.3" data-path="index-and-code-links.html"><a href="index-and-code-links.html#summarizing-data-links"><i class="fa fa-check"></i><b>A.3</b> Summarizing Data links</a></li>
+<li class="chapter" data-level="A.4" data-path="index-and-code-links.html"><a href="index-and-code-links.html#basics-of-probability-links"><i class="fa fa-check"></i><b>A.4</b> Basics of Probability links</a></li>
+<li class="chapter" data-level="A.5" data-path="index-and-code-links.html"><a href="index-and-code-links.html#discrete-probability-distribution-links"><i class="fa fa-check"></i><b>A.5</b> Discrete Probability Distribution links</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://fanwangecon.github.io/Stat4Econ/bookdown/index.html" target="blank">Stat4Econ Bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introductory Statistics with R tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="survey" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Survey</h1>
+
+<div id="generate-a-dataset-in-r" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Generate A Dataset in R</h2>
+<blockquote>
+<p>Go back to <a href="http://fanwangecon.github.io/">fan</a>’s <a href="https://fanwangecon.github.io/REconTools/">REconTools</a> Package, <a href="https://fanwangecon.github.io/R4Econ/">R Code Examples</a> Repository (<a href="https://fanwangecon.github.io/R4Econ/bookdown">bookdown site</a>), or <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> Repository (<a href="https://fanwangecon.github.io/Stat4Econ/bookdown">bookdown site</a>).</p>
+</blockquote>
+<p>R has a Variety of built-in small datasets for you to experiment with, for example, opening up R, you can just type in: mtcars, and that will show you some variables and observations. The command below shows the first 5 rows of dataset <strong>mtcars</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="survey.html#cb1-1"></a><span class="kw">head</span>(mtcars, <span class="dv">5</span>)</span></code></pre></div>
+<p>There are 52 students in a class. I am interested in how many of you go to games at the University, and how many years each of you has lived in the city of Houston. But I do not have time to ask each of you questions.</p>
+<ul>
+<li>My population is all 52 students in the class.</li>
+<li>Given my limited time and resources, I will gather a sample of just 10 students.</li>
+</ul>
+<p>Gathering information regarding game attendance for the 10 students, I can perhaps gain some insights about the population.</p>
+<div id="a-random-sample-of-students-in-class" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> A Random Sample of Students in Class</h3>
+<p>I can point and pick ten random people, but how do I know I am choosing/selecting randomly? In general, we want to pick a random sample from the population. You don’t want your sample of 10 to just be students in the first row or students who happen to be giving eye contacts. We want a random sample that hopefully gives us some representative information about the population of 52 students.</p>
+<p>How do you pick random numbers?</p>
+<p>Siri, Alexa, Google, …, you can get random numbers very easily now. You can download various apps also that allows you to draw a random integer from say between 1 to 4, with an equal chance of drawing any of the four numbers.</p>
+<p>In our class:
+- we have 4 rows of seats
+- we have 13 columns of seats
+- there are 52 students in the class together. I will now randomly pick between 1 and 4, 10 times, and randomly pick between 1 and 13 also 10 times.</p>
+<p>This gives me ten pairs of row and columns numbers, and these indicate which ten students will be a part of a randomly drawn sample of students.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="survey.html#cb2-1"></a><span class="co"># Setting seed means we will get the same set of random numbers each time</span></span>
+<span id="cb2-2"><a href="survey.html#cb2-2"></a><span class="kw">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb2-3"><a href="survey.html#cb2-3"></a><span class="co"># in R, draw integers between 1 and 4, 10 times</span></span>
+<span id="cb2-4"><a href="survey.html#cb2-4"></a>ROW.RAND.DRAWS =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">10</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb2-5"><a href="survey.html#cb2-5"></a><span class="co"># in R, draw integers between 1 and 13, 10 times</span></span>
+<span id="cb2-6"><a href="survey.html#cb2-6"></a>COL.RAND.DRAWS =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">13</span>, <span class="dv">10</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb2-7"><a href="survey.html#cb2-7"></a><span class="co"># Note that the way we are drawing randomly, we could draw the same individual twice.</span></span>
+<span id="cb2-8"><a href="survey.html#cb2-8"></a><span class="kw">rbind</span>(ROW.RAND.DRAWS, COL.RAND.DRAWS)</span></code></pre></div>
+<pre><code>##                [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+## ROW.RAND.DRAWS    2    3    4    2    4    4    2    1    3     4
+## COL.RAND.DRAWS    8    2    6   11    6    7   10    1    8     7</code></pre>
+<div id="create-the-dataset-row-by-row" class="section level4" number="1.1.1.1">
+<h4><span class="header-section-number">1.1.1.1</span> Create the Dataset Row by Row</h4>
+<p>R has <em>base</em> packages. Many of R’s best packages do not come with the base packages. You have to install separately. One of the best packages for data science is <a href="https://www.tidyverse.org/">tidyverse</a>. <strong>tidyverse</strong> has a great package called <a href="https://tibble.tidyverse.org/">tibble</a>, which is a great way to deal with what are called dataframes, where we store our data. <strong>tidyverse</strong> also has <a href="https://dplyr.tidyverse.org/">dplyr</a>, which is a powerful set of tools for transforming data.</p>
+<p>Sequentially, in class, we ask each of the 10 randomly drawn students a number of questions, and record the answers in the dataframe.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="survey.html#cb4-1"></a>df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">ID =</span> <span class="kw">integer</span>(), <span class="dt">ROW =</span> <span class="kw">integer</span>(), <span class="dt">COL =</span> <span class="kw">integer</span>(),</span>
+<span id="cb4-2"><a href="survey.html#cb4-2"></a>             <span class="dt">gender =</span> <span class="kw">factor</span>(),</span>
+<span id="cb4-3"><a href="survey.html#cb4-3"></a>             <span class="dt">years.in.houston =</span> <span class="kw">double</span>(),</span>
+<span id="cb4-4"><a href="survey.html#cb4-4"></a>             <span class="dt">major =</span> <span class="kw">factor</span>(),</span>
+<span id="cb4-5"><a href="survey.html#cb4-5"></a>             <span class="dt">commute =</span> <span class="kw">factor</span>(),</span>
+<span id="cb4-6"><a href="survey.html#cb4-6"></a>             <span class="dt">games.attended =</span> <span class="kw">integer</span>())</span>
+<span id="cb4-7"><a href="survey.html#cb4-7"></a></span>
+<span id="cb4-8"><a href="survey.html#cb4-8"></a></span>
+<span id="cb4-9"><a href="survey.html#cb4-9"></a><span class="co"># Ask Students Questions and Record Answers</span></span>
+<span id="cb4-10"><a href="survey.html#cb4-10"></a>df &lt;-<span class="st"> </span><span class="kw">add_row</span>(df, <span class="dt">ID=</span><span class="dv">1</span> , <span class="dt">ROW=</span><span class="dv">3</span>, <span class="dt">COL=</span><span class="dv">1</span>,  <span class="dt">gender=</span><span class="st">&#39;MALE&#39;</span>,   <span class="dt">years.in.houston=</span><span class="fl">21.0</span>,</span>
+<span id="cb4-11"><a href="survey.html#cb4-11"></a>              <span class="dt">major=</span><span class="st">&#39;ECON&#39;</span>, <span class="dt">commute=</span><span class="st">&#39;YES&#39;</span>, <span class="dt">games.attended=</span><span class="dv">0</span>)</span>
+<span id="cb4-12"><a href="survey.html#cb4-12"></a>df &lt;-<span class="st"> </span><span class="kw">add_row</span>(df, <span class="dt">ID=</span><span class="dv">2</span> , <span class="dt">ROW=</span><span class="dv">4</span>, <span class="dt">COL=</span><span class="dv">2</span>,  <span class="dt">gender=</span><span class="st">&#39;FEMALE&#39;</span>, <span class="dt">years.in.houston=</span><span class="fl">21.0</span>,</span>
+<span id="cb4-13"><a href="survey.html#cb4-13"></a>              <span class="dt">major=</span><span class="st">&#39;HEALTH&#39;</span>, <span class="dt">commute=</span><span class="st">&#39;YES&#39;</span>, <span class="dt">games.attended=</span><span class="dv">2</span>)</span>
+<span id="cb4-14"><a href="survey.html#cb4-14"></a>df &lt;-<span class="st"> </span><span class="kw">add_row</span>(df, <span class="dt">ID=</span><span class="dv">3</span> , <span class="dt">ROW=</span><span class="dv">4</span>, <span class="dt">COL=</span><span class="dv">10</span>, <span class="dt">gender=</span><span class="st">&#39;MALE&#39;</span>,   <span class="dt">years.in.houston=</span><span class="fl">22.0</span>,</span>
+<span id="cb4-15"><a href="survey.html#cb4-15"></a>              <span class="dt">major=</span><span class="st">&#39;ECON&#39;</span>, <span class="dt">commute=</span><span class="st">&#39;YES&#39;</span>, <span class="dt">games.attended=</span><span class="dv">0</span>)</span>
+<span id="cb4-16"><a href="survey.html#cb4-16"></a>df &lt;-<span class="st"> </span><span class="kw">add_row</span>(df, <span class="dt">ID=</span><span class="dv">4</span> , <span class="dt">ROW=</span><span class="dv">4</span>, <span class="dt">COL=</span><span class="dv">1</span>,  <span class="dt">gender=</span><span class="st">&#39;MALE&#39;</span>,   <span class="dt">years.in.houston=</span><span class="fl">22.0</span>,</span>
+<span id="cb4-17"><a href="survey.html#cb4-17"></a>              <span class="dt">major=</span><span class="st">&#39;ECON&#39;</span>, <span class="dt">commute=</span><span class="st">&#39;YES&#39;</span>, <span class="dt">games.attended=</span><span class="dv">14</span>)</span>
+<span id="cb4-18"><a href="survey.html#cb4-18"></a>df &lt;-<span class="st"> </span><span class="kw">add_row</span>(df, <span class="dt">ID=</span><span class="dv">5</span> , <span class="dt">ROW=</span><span class="dv">2</span>, <span class="dt">COL=</span><span class="dv">6</span>,  <span class="dt">gender=</span><span class="st">&#39;FEMALE&#39;</span>, <span class="dt">years.in.houston=</span><span class="fl">20.0</span>,</span>
+<span id="cb4-19"><a href="survey.html#cb4-19"></a>              <span class="dt">major=</span><span class="st">&#39;ECON&#39;</span>, <span class="dt">commute=</span><span class="st">&#39;YES&#39;</span>, <span class="dt">games.attended=</span><span class="dv">0</span>)</span>
+<span id="cb4-20"><a href="survey.html#cb4-20"></a>df &lt;-<span class="st"> </span><span class="kw">add_row</span>(df, <span class="dt">ID=</span><span class="dv">6</span> , <span class="dt">ROW=</span><span class="dv">1</span>, <span class="dt">COL=</span><span class="dv">7</span>,  <span class="dt">gender=</span><span class="st">&#39;MALE&#39;</span>,   <span class="dt">years.in.houston=</span><span class="fl">3.0</span>,</span>
+<span id="cb4-21"><a href="survey.html#cb4-21"></a>              <span class="dt">major=</span><span class="st">&#39;PSYCH&#39;</span>, <span class="dt">commute=</span><span class="st">&#39;YES&#39;</span>, <span class="dt">games.attended=</span><span class="dv">0</span>)</span>
+<span id="cb4-22"><a href="survey.html#cb4-22"></a>df &lt;-<span class="st"> </span><span class="kw">add_row</span>(df, <span class="dt">ID=</span><span class="dv">7</span> , <span class="dt">ROW=</span><span class="dv">2</span>, <span class="dt">COL=</span><span class="dv">6</span>,  <span class="dt">gender=</span><span class="st">&#39;MALE&#39;</span>,   <span class="dt">years.in.houston=</span><span class="fl">25.0</span>,</span>
+<span id="cb4-23"><a href="survey.html#cb4-23"></a>              <span class="dt">major=</span><span class="st">&#39;ECON&#39;</span>, <span class="dt">commute=</span><span class="st">&#39;YES&#39;</span>, <span class="dt">games.attended=</span><span class="dv">25</span>)</span>
+<span id="cb4-24"><a href="survey.html#cb4-24"></a>df &lt;-<span class="st"> </span><span class="kw">add_row</span>(df, <span class="dt">ID=</span><span class="dv">8</span> , <span class="dt">ROW=</span><span class="dv">3</span>, <span class="dt">COL=</span><span class="dv">6</span>,  <span class="dt">gender=</span><span class="st">&#39;MALE&#39;</span>,   <span class="dt">years.in.houston=</span><span class="fl">20.0</span>,</span>
+<span id="cb4-25"><a href="survey.html#cb4-25"></a>              <span class="dt">major=</span><span class="st">&#39;CONSUMERSCIENCE&#39;</span>, <span class="dt">commute=</span> <span class="st">&#39;YES&#39;</span>, <span class="dt">games.attended=</span><span class="dv">2</span>)</span>
+<span id="cb4-26"><a href="survey.html#cb4-26"></a>df &lt;-<span class="st"> </span><span class="kw">add_row</span>(df, <span class="dt">ID=</span><span class="dv">9</span> , <span class="dt">ROW=</span><span class="dv">3</span>, <span class="dt">COL=</span><span class="dv">3</span>,  <span class="dt">gender=</span><span class="st">&#39;FEMALE&#39;</span>, <span class="dt">years.in.houston=</span><span class="fl">5.0</span>,</span>
+<span id="cb4-27"><a href="survey.html#cb4-27"></a>              <span class="dt">major=</span><span class="st">&#39;HUMANRESOURCE&#39;</span>, <span class="dt">commute=</span><span class="st">&#39;YES&#39;</span>, <span class="dt">games.attended=</span><span class="dv">0</span>)</span>
+<span id="cb4-28"><a href="survey.html#cb4-28"></a>df &lt;-<span class="st"> </span><span class="kw">add_row</span>(df, <span class="dt">ID=</span><span class="dv">10</span>, <span class="dt">ROW=</span><span class="dv">4</span>, <span class="dt">COL=</span><span class="dv">13</span>, <span class="dt">gender=</span><span class="st">&#39;FEMALE&#39;</span>, <span class="dt">years.in.houston=</span><span class="fl">20.0</span>,</span>
+<span id="cb4-29"><a href="survey.html#cb4-29"></a>              <span class="dt">major=</span><span class="st">&#39;ECON&#39;</span>, <span class="dt">commute=</span><span class="st">&#39;YES&#39;</span>, <span class="dt">games.attended=</span><span class="dv">0</span>)</span>
+<span id="cb4-30"><a href="survey.html#cb4-30"></a></span>
+<span id="cb4-31"><a href="survey.html#cb4-31"></a><span class="co"># List All Variables in df</span></span>
+<span id="cb4-32"><a href="survey.html#cb4-32"></a><span class="kw">str</span>(df)</span></code></pre></div>
+<pre><code>## tibble [10 x 8] (S3: tbl_df/tbl/data.frame)
+##  $ ID              : num [1:10] 1 2 3 4 5 6 7 8 9 10
+##  $ ROW             : num [1:10] 3 4 4 4 2 1 2 3 3 4
+##  $ COL             : num [1:10] 1 2 10 1 6 7 6 6 3 13
+##  $ gender          : chr [1:10] &quot;MALE&quot; &quot;FEMALE&quot; &quot;MALE&quot; &quot;MALE&quot; ...
+##  $ years.in.houston: num [1:10] 21 21 22 22 20 3 25 20 5 20
+##  $ major           : chr [1:10] &quot;ECON&quot; &quot;HEALTH&quot; &quot;ECON&quot; &quot;ECON&quot; ...
+##  $ commute         : chr [1:10] &quot;YES&quot; &quot;YES&quot; &quot;YES&quot; &quot;YES&quot; ...
+##  $ games.attended  : num [1:10] 0 2 0 14 0 0 25 2 0 0</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="survey.html#cb6-1"></a><span class="co"># Show full df Table</span></span>
+<span id="cb6-2"><a href="survey.html#cb6-2"></a>df</span></code></pre></div>
+</div>
+<div id="analyze-the-dataset-and-create-additional-variables" class="section level4" number="1.1.1.2">
+<h4><span class="header-section-number">1.1.1.2</span> Analyze the Dataset and Create Additional Variables</h4>
+<p>Based on the variables we gathered, we can generate some additional variables. Specifically, we will generate dummy variables for games.attended, and major. Let’s Generate Basic Sample Statistics. Summary will</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="survey.html#cb7-1"></a><span class="co"># Generate Binary Variable of Having attended any games or not</span></span>
+<span id="cb7-2"><a href="survey.html#cb7-2"></a>df<span class="op">$</span>games.any &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df<span class="op">$</span>games.attended<span class="op">&gt;</span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb7-3"><a href="survey.html#cb7-3"></a>df<span class="op">$</span>games.any &lt;-<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>games.any, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&#39;Has.Attended&#39;</span>, <span class="st">&#39;Never.Attended&#39;</span>))</span>
+<span id="cb7-4"><a href="survey.html#cb7-4"></a></span>
+<span id="cb7-5"><a href="survey.html#cb7-5"></a><span class="co"># Generate Binary Variable Econ or Not, 1 if major is ECON, 0 otherwise</span></span>
+<span id="cb7-6"><a href="survey.html#cb7-6"></a>df<span class="op">$</span>econ &lt;-<span class="st"> </span><span class="kw">ifelse</span>(df<span class="op">$</span>major<span class="op">==</span><span class="st">&#39;ECON&#39;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb7-7"><a href="survey.html#cb7-7"></a>df<span class="op">$</span>econ &lt;-<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>econ, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&#39;ECON&#39;</span>, <span class="st">&#39;Not.Econ&#39;</span>))</span>
+<span id="cb7-8"><a href="survey.html#cb7-8"></a></span>
+<span id="cb7-9"><a href="survey.html#cb7-9"></a><span class="co"># new data set with the two additional variables</span></span>
+<span id="cb7-10"><a href="survey.html#cb7-10"></a>df</span></code></pre></div>
+<p>We have a continuous/quantitative variable for games.attended, based on which we generated a binary/dummy variable of games.any to indicate if someone has attended any games or not.</p>
+<ul>
+<li>What fraction of students in the sample have attended games?
+<ul>
+<li><span class="math inline">\(60\)</span> percent of students never attended any games</li>
+</ul></li>
+<li>What is the average number of games students attended?
+<ul>
+<li>But on average students attended <span class="math inline">\(4.3\)</span> games (because one student attended 25 games, and another student in the sample attended 10 games)</li>
+</ul></li>
+</ul>
+<p>Suppose you are running the sports program, and each attendee of games pays the same ticket price, if you only care about total revenue, you only care about the average of <span class="math inline">\(4.3\)</span> games attended per student. It does not matter if 1 student attended 10 games, or 10 students attended 1 game each, you get the same total revenue, and the same game per student attended.</p>
+<p>But if you are trying to generate school spirit from the football program, you might care more about the <span class="math inline">\(60\)</span> percent number, which you might think is too high. Too many students never going to any games.</p>
+<p>If someone is writing an article about the popularity of football at the University, they can use the <span class="math inline">\(4.3\)</span> number to say that it is really popular, or the <span class="math inline">\(60\)</span> non-attendance ratio to say it is not that popular. So you see when we read news reports that have data, or when others provide us with statistics, we have to be careful and think if what they report are showing the full picture. The same simple attendance variable, calculated in two ways, shows two pictures of how popular football is.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="survey.html#cb8-1"></a><span class="co"># Using the dplyr package, we can find the fraction of individuals in factor variables</span></span>
+<span id="cb8-2"><a href="survey.html#cb8-2"></a><span class="co"># Fraction of individuals who attended any games</span></span>
+<span id="cb8-3"><a href="survey.html#cb8-3"></a>df <span class="op">%&gt;%</span></span>
+<span id="cb8-4"><a href="survey.html#cb8-4"></a><span class="st">  </span><span class="kw">group_by</span>(games.any) <span class="op">%&gt;%</span></span>
+<span id="cb8-5"><a href="survey.html#cb8-5"></a><span class="st">  </span><span class="kw">summarise</span> (<span class="dt">freq =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb8-6"><a href="survey.html#cb8-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">fraction =</span> freq <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(freq))</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="survey.html#cb9-1"></a><span class="co"># Average Game Attendance Overall, and for each sub-group, conditional on attending any or no attendance</span></span>
+<span id="cb9-2"><a href="survey.html#cb9-2"></a><span class="co"># This creates a column that has overall average for games.attended, showing in every row:</span></span>
+<span id="cb9-3"><a href="survey.html#cb9-3"></a>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">games.attended.avg =</span><span class="kw">mean</span>(games.attended))</span>
+<span id="cb9-4"><a href="survey.html#cb9-4"></a><span class="co"># This creates a column that has overall average for games.attended, showing in every row:</span></span>
+<span id="cb9-5"><a href="survey.html#cb9-5"></a>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(games.any) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">games.attended.avg =</span> <span class="kw">mean</span>(games.attended))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="survey.html#cb10-1"></a><span class="co"># To show both overall average and the group specific average together</span></span>
+<span id="cb10-2"><a href="survey.html#cb10-2"></a><span class="co">#   the first mutate adds to df a column that has the overall average, same value every row</span></span>
+<span id="cb10-3"><a href="survey.html#cb10-3"></a><span class="co">#   then when we group by, we can calculate within group average for games.attended</span></span>
+<span id="cb10-4"><a href="survey.html#cb10-4"></a><span class="co">#   we can also take the average of the avg var, which is the same for all rows, so grouped averages are the same</span></span>
+<span id="cb10-5"><a href="survey.html#cb10-5"></a>df <span class="op">%&gt;%</span></span>
+<span id="cb10-6"><a href="survey.html#cb10-6"></a><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">avg=</span><span class="kw">mean</span>(games.attended)) <span class="op">%&gt;%</span></span>
+<span id="cb10-7"><a href="survey.html#cb10-7"></a><span class="st">   </span><span class="kw">group_by</span>(games.any) <span class="op">%&gt;%</span></span>
+<span id="cb10-8"><a href="survey.html#cb10-8"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">avg.group=</span><span class="kw">mean</span>(games.attended),<span class="dt">avg.overall=</span><span class="kw">mean</span>(avg))</span></code></pre></div>
+<p>If we drew a different set of 10 people from the class, we would likely get different statistics than what we have in the current random sample. We want to make inference based on the sample about the population knowing that each set of random draws could give different sample statistics. Sample statistics is not population statistics. If our samples are smaller than 10, our sample statistics are likely to be even further away from population statistics.</p>
+</div>
+<div id="store-the-data" class="section level4" number="1.1.1.3">
+<h4><span class="header-section-number">1.1.1.3</span> Store the data</h4>
+<p>A standard format for data storage is CSV (comma separated files). The file has texts and can be opened by any text editor. Each row of text corresponds to a row in the table above, which is an observation in the dataset. Commas separate values for each variable. The first row stores the list of column variable names, also separated by commas.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="survey.html#cb11-1"></a><span class="co"># This File is written in a subfolder survey of folder Stat4Econ</span></span>
+<span id="cb11-2"><a href="survey.html#cb11-2"></a><span class="co"># In Stat4Econ, there is another folder called data</span></span>
+<span id="cb11-3"><a href="survey.html#cb11-3"></a><span class="co"># Typing in ../ means go back to the master folder</span></span>
+<span id="cb11-4"><a href="survey.html#cb11-4"></a><span class="co"># /data/ means go to the parallel subfolder data and store our csv file there</span></span>
+<span id="cb11-5"><a href="survey.html#cb11-5"></a><span class="kw">write_csv</span>(df , <span class="dt">path =</span> <span class="st">&#39;data/classsurvey.csv&#39;</span>)</span></code></pre></div>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dataset-tables-and-graphs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["Introductory-Statistics-with-R-tidyverse.pdf", "PDF"]],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

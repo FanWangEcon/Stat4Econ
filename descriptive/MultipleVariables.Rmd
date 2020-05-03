@@ -1,0 +1,189 @@
+---
+title: "Multiple Variables Graphs and Tables"
+titleshort: "Multiple Variables Graphs and Tables"
+description: |
+  Two-way frequency table, stacked bar chart annd scatter-plot
+core:
+  - package: r
+    code: |
+      interaction()
+  - package: dplyr
+    code: |
+      group_by(var)
+      summarize(freq = n())
+      spread(gender, freq)
+  - package: ggplot
+    code: |
+      aes(x,y,fill)
+      geom_bar(stat='identity', fun.y='mean', position='dodge')
+      geom_point(size)
+      geom_text(size,hjust,vjust)
+      geom_smooth(method=lm)
+      labs(title,x,y,caption)
+date: 2020-05-02
+date_start: 2018-12-01
+output:
+  pdf_document:
+    pandoc_args: '../_output_kniti_pdf.yaml'
+    includes:
+      in_header: '../preamble.tex'
+  html_document:
+    pandoc_args: '../_output_kniti_html.yaml'
+    includes:
+      in_header: '../hdga.html'
+always_allow_html: true
+urlcolor: blue
+---
+
+## Multiple Variables Graphs and Tables
+
+```{r global_options, include = FALSE}
+try(source("../.Rprofile"))
+```
+
+`r text_shared_preamble_one`
+`r text_shared_preamble_two`
+`r text_shared_preamble_thr`
+
+```{r}
+# For Data Manipulations
+library(tidyverse)
+# For Additional table output
+# install.packages("knitr")
+library(knitr)
+```
+
+Let's load in the dataset we created from the [in-class survey](https://fanwangecon.github.io/Stat4Econ/survey/htmlpdfr/classsurvey.html).
+
+```{r}
+# Load the dataset using readr's read_csv
+df_survey <- read_csv('data/classsurvey.csv')
+```
+
+```{r}
+# We have several factor variables, we can set them as factor one by one
+df_survey[['gender']] <- as.factor(df_survey[['gender']])
+# But that is a little cumbersome, we can using lapply, a core function in r to do this for all factors
+factor_col_names <- c('gender', 'major', 'commute', 'games.any', 'econ')
+df_survey[factor_col_names] <- lapply(df_survey[factor_col_names], as.factor)
+# Check Variable Types
+str(df_survey)
+```
+
+### Two Continuous Variables
+
+With two continuous/quantitative variables, we can generate a scatter plot. Crucially, each point of the scatter plot represents one individual, the location of that point indicates the x and y values of that individual. The x and y values could be the individual's test score and hours studied for example.
+
+```{r}
+# We can draw a scatter plot for two continuous variables
+# Control Graph Size
+options(repr.plot.width = 4, repr.plot.height = 4)
+# Draw Scatter Plot
+# 1. specify x and y
+# 2. label each individual by their ID, add letter I in front of value
+# 3. add in trend line
+scatter <- ggplot(df_survey, aes(x=games.attended, y=years.in.houston)) +
+      geom_point(size=1) +
+      geom_text(aes(label=paste0('I', ID)), size=3, hjust=-.2, vjust=-.2) +
+      geom_smooth(method=lm) + # Trend line
+      labs(title = paste0('Scatter Plot of Two Continuous/Quantitative Variables'
+                          ,'\nIn Class Survey of 10 Students'),
+           x = 'Games Attended at the University',
+           y = 'Years Spent in the City of Houston',
+           caption = 'In Class Survey') +
+      theme_bw()
+print(scatter)
+```
+
+### Two Categorical Variables
+
+With two discrete/categorical variables, we can generate two-way frequency tables. This is very similar to what we did for one discrete variable, except now we have columns and rows, representing the categories of the two variables. The two variables could be gender and majors, we would write in each table cell the number of students who are male and econ majors, male and bio majors in for example the first column, and repeat this for girls in the second column.
+
+```{r}
+# We can tabulate Frequencies based on two categorical variables
+df_survey %>%
+  group_by(gender, econ) %>%
+  summarize(freq = n()) %>%
+  spread(gender, freq)
+```
+
+```{r}
+# We can show the fraction of individuals in each of the four groups
+df_survey %>%
+  group_by(interaction(gender, econ)) %>%
+  summarise(freq = n()) %>%
+  mutate(fraction = freq / sum(freq))
+```
+
+```{r}
+# We can create stacked bar charts as well with the same data
+# graph size
+options(repr.plot.width = 3, repr.plot.height = 2)
+# Graph
+stacked.bar.plot <- ggplot(df_survey) +
+    geom_bar(aes(x=gender, fill=econ)) +
+    theme_bw()
+print(stacked.bar.plot)
+```
+
+### Continuous and Categorical Variable
+
+#### Average Across Groups
+
+We can look at the average game attendance by female and male students in our sample, using a bar plot, where the height of the bars now represent the average of the *games.attended* variable for each group.
+
+```{r}
+# We can first find the group averages
+df_gender_avg_games <- df_survey %>%
+                        group_by(gender) %>%
+                        summarise (avg.games.attended = mean(games.attended))
+df_gender_avg_games
+```
+
+```{r}
+# We can graph based on df_gender_avg_games
+# Sizing the Figure Here
+options(repr.plot.width = 2, repr.plot.height = 2)
+# Plot, stat = identity means to plot the value in avg.games.attended for each gender
+group.means <- ggplot(df_gender_avg_games) +
+    geom_bar(aes(x=gender, y=avg.games.attended), stat = 'identity') +
+    theme_bw()
+print(group.means)
+```
+
+```{r}
+# But it is a little cumbersome to do this in two steps, we can do it in one step
+# Sizing the Figure Here
+options(repr.plot.width = 2, repr.plot.height = 2)
+# Plot directly from df_survey, summary over x for y
+# The result looks the same
+group.means.joint <- ggplot(df_survey) +
+    geom_bar(aes(x=gender, y=games.attended), stat = "summary", fun.y = "mean") +
+    theme_bw()
+print(group.means.joint)
+```
+
+#### Average Across Two Groups: Gender and Majors
+What is the average game attendance for male and female, econ and non-econ majors? We have 2 female econ majors, 2 female non-econ majors, 4 male econ majors and 2 male non-econ majors, and their average game attendances are: 0, 1, 9.75 and 1 games.
+
+```{r}
+# We can calculate the statistics as a table, and also show obs in each group
+df_survey %>%
+    group_by(gender, econ ) %>%
+    summarise (avg.games.attended = mean(games.attended), N.count = n())
+```
+
+```{r}
+# Let's Show these Visually
+options(repr.plot.width = 4, repr.plot.height = 2)
+# Plot directly from df_survey
+# Using fill for econ, this means econ or not will fill up with different colors
+# Still caculate average
+# Postion "dodge" means that econ and non-econ wil be shown next to each other
+# By default position is to stack different fill groups on top of each other.
+two.group.means <- ggplot(df_survey) +
+    geom_bar(aes(x=gender, y=games.attended, fill=econ),
+             stat = "summary", fun.y = "mean", position = "dodge") +
+    theme_bw()
+print(two.group.means)
+```

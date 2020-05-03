@@ -1,0 +1,5 @@
+---
+title: "Introductory Statistics with R tidyverse"
+author: "Fan Wang"
+date: '`r format(Sys.Date(), "%Y-%m-%d")`'
+---

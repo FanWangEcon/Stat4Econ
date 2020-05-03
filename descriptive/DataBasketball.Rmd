@@ -1,24 +1,49 @@
 ---
-title: "Load a Dataset"
+title: "Opening a Dataset"
+titleshort: "Opening a Dataset"
+description: |
+  Opening a Dataset.
+core:
+  - package: r
+    code: |
+      setwd()
+  - package: readr
+    code: |
+      write_csv()
+date: 2020-05-02
+date_start: 2018-12-01
 output:
-  pdf_document: default
-  html_document: default
+  pdf_document:
+    pandoc_args: '../_output_kniti_pdf.yaml'
+    includes:
+      in_header: '../preamble.tex'
+  html_document:
+    pandoc_args: '../_output_kniti_html.yaml'
+    includes:
+      in_header: '../hdga.html'
+always_allow_html: true
+urlcolor: blue
 ---
 
-**[Back to Fan's Intro Stat Table of Content](https://fanwangecon.github.io/Stat4Econ/)**
+## Opening a Dataset
 
-# A Dataset on Basketball
+```{r global_options, include = FALSE}
+try(source("../.Rprofile"))
+```
 
-We have a dataset on basketball teams.
+`r text_shared_preamble_one`
+`r text_shared_preamble_two`
+`r text_shared_preamble_thr`
 
-**The dataset, *Basketball.csv*, can be downloaded [here](../data/Basketball.csv).**
+We have a dataset on basketball teams. The dataset, *Basketball.csv*, can be downloaded [here](https://github.com/FanWangEcon/Stat4Econ/tree/master/data/Basketball.csv).
 
-We will load in the dataset and do some analysis with it. 
+We will load in the dataset and do some analysis with it.
 
-## What is in the Dataset
 
 ### Paths to Data
-#### Relative Path
+
+**Relative Path**
+
 The dataset is stored in a csv file. The folder structure for this file we are working inside and the data file is:
 
 - main folder: Stat4Econ
@@ -27,24 +52,25 @@ The dataset is stored in a csv file. The folder structure for this file we are w
     + subfolder: descriptive
         * file: DataBasketball.ipynb (the jupyter notebook file)
         * file: DataBasetball.html (the html version of the jupyter notebook file
- 
+
 overall this means:
-- the csv file's location is: **'/Stat4Econ/data/Basketball.csv'**
-- the working R code file's location is: **'/Stat4Econ/descriptive/DataBasketball.ipynb'**
+- the csv file's location is: **'/Stat4Econ/descriptive/data/Basketball.csv'**
+- the working R code file's location is: **'/Stat4Econ/descriptive/data/DataBasketball.ipynb'**
 
-Given this structure, to access the *Basketball.csv* dataset, we need to go one folder up from our current subfolder to the mainfolder, and then choose the data subfolder, and the Basketball.csv file in the subfolder. 
+Given this structure, to access the *Basketball.csv* dataset, we need to go one folder up from our current subfolder to the mainfolder, and then choose the data subfolder, and the Basketball.csv file in the subfolder.
 
-#### Absolute Path
+**Absolute Path**
+
 If these files are not in the same main folder but are in different locations on your computer, you can find the full path to the csv path and copy paste the path below in between the single quotes.
 
 search on google to find out how to get the full path to file:
 - google search for [find full path for file on mac](https://www.google.com/search?q=find+full+path+for+file+on+mac)
-    + this might end up looking like: **'/Users/fan/Downloads/Basketball.csv'**    
+    + this might end up looking like: **'/Users/fan/Downloads/Basketball.csv'**
 - google search for [find full path for file on PC](https://www.google.com/search?q=find+full+path+for+file+on+mac)
     + this might end up looking like: **'C:/Users/fan/Documents/Dropbox/Basketball.csv'**
-    
 
-### Using Relative path to load in data
+
+**Using Relative path to load in data**
 
 We will load in the data using base R read.csv function.
 
@@ -53,17 +79,15 @@ We will load in the data using base R read.csv function.
 
 ```{r}
 # We can load the dataset in first by setting our directory, then loading in the dataset
-setwd('../data/')
-basetball_data <- read.csv('Basketball.csv')
+basetball_data <- read.csv('data/Basketball.csv')
 ```
 
 ```{r}
 # Alternatively, we can just use one line
-basetball_data <- read.csv('../data/Basketball.csv')
+basetball_data <- read.csv('data/Basketball.csv')
 ```
 
 ```{r}
 # Summarize all variables in data frame
 summary(basetball_data)
 ```
-

@@ -1,0 +1,42 @@
+---
+title: "Introductory Statistics with R tidyverse"
+author: "Fan Wang"
+date: '`r format(Sys.Date(), "%Y-%m-%d")`'
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Introductory Statistics with R"
+output:
+  pdf_document:
+    toc: true
+    tod_depth: 5
+    pandoc_args: '_output_kniti_pdf.yaml'
+    includes:
+      in_header: 'preamble_book.tex'
+  html_document:
+    pandoc_args: '_output_kniti_html.yaml'
+always_allow_html: true
+github-repo: fanwangecon/Stat4Econ
+---
+
+```{r global_options, include = FALSE}
+source(".Rprofile")
+```
+
+# Preface {-}
+
+`r text_top_count`
+
+This is a work-in-progress [course website](https://fanwangecon.github.io/Stat4Econ/) for Introductory Statistics for Undergraduate Students, produced by [Fan](https://fanwangecon.github.io/). Course covers a limited subset of topics from *Statistics for Business and Economics* (Anderson Sweeney Williams Camm Cochran 12e).
+
+R is used. Packages from [Tidyverse](https://www.tidyverse.org/) [@R-tidyverse]  are used, including [tibble](https://tibble.tidyverse.org/) [@R-tibble] for framing data, [tidyr](https://dplyr.tidyverse.org/) [@R-tidyr] and [dplyr](https://dplyr.tidyverse.org/) [@R-dplyr] for reshaping data and aggregating statistics, [ggplot2](https://ggplot2.tidyverse.org/) [@R-ggplot2] for graphing, and [readr](https://readr.tidyverse.org/) [@R-readr] for file reading and writing. Materials are presented as R, RMD, PDF and HTML files. To obtain all codes and raw files, see [here](https://fanwangecon.github.io/Stat4Econ/docs/gitsetup.html) for github set up. For HTML files, click on the links below.
+
+From [Fan](https://fanwangecon.github.io/)'s other repositories: For dynamic borrowing and savings problems, see [Dynamic Asset Repository](https://fanwangecon.github.io/CodeDynaAsset/); For code examples, see also [R Example Code](https://fanwangecon.github.io/R4Econ/), [Matlab Example Code](https://fanwangecon.github.io/M4Econ/), and [Stata Example Code](https://fanwangecon.github.io/Stata4Econ/); For intro econ with Matlab, see [Intro Mathematics for Economists](https://fanwangecon.github.io/Math4Econ/). See [here](https://github.com/FanWangEcon) for all of [Fan](https://fanwangecon.github.io/)'s public repositories.
+
+The site is built using [Bookdown](https://bookdown.org/) [@R-bookdown].
+
+Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or problems.
+
+`r text_end_count`

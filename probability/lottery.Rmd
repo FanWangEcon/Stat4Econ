@@ -1,0 +1,155 @@
+---
+title: "Multiple-Step Experiment: Playing the Lottery Three times"
+titleshort: "Multiple-Step Experiment: Playing the Lottery Three times"
+description: |
+  Paths after 1, 2 and 3 plays.
+date: 2020-05-02
+date_start: 2018-12-01
+output:
+  pdf_document:
+    pandoc_args: '../_output_kniti_pdf.yaml'
+    includes:
+      in_header: '../preamble.tex'
+  html_document:
+    pandoc_args: '../_output_kniti_html.yaml'
+    includes:
+      in_header: '../hdga.html'
+always_allow_html: true
+urlcolor: blue
+---
+
+## Multiple-Step Experiment
+
+```{r global_options, include = FALSE}
+try(source("../.Rprofile"))
+```
+
+`r text_shared_preamble_one`
+`r text_shared_preamble_two`
+`r text_shared_preamble_thr`
+
+### Playing the Lottery Three times
+
+In *[Sample Space, Experimental Outcomes, Events, Probabilities](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html)*, we discussed various definitions. We studied various examples in [*Examples of Sample Space and Probabilities*](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespaceexa.html).
+
+In the example below, we have a multiple-step experiment: "If an experiment can be describe as a sequence of $n$ steps with $m$ possible outcomes on each step, then the total number of experimental outcomes is $m^n$." (ASWCC P172) You can use letters other than $n$ and $m$ as well.
+
+Key questions:
+
+- What are the possible experimental outcomes?
+- What are the probabilities associated with each of the experimental outcomes?
+
+We are thinking about the problem from day zero perspective. We could play the lottery three times, on day one, day two and day three.
+
+Suppose you can either win or lose when you play the lottery. Each lottery ticket costs the same. You will buy 1 lottery ticket on each day for three days straight. The chance of winning is the same for each lottery ticket (perhaps the number of people buying lottery is the same every day). You see at the end of each day whether you won or lost.
+
+The question is, what are the possible outcomes after three days? You are standing from the perspective of today, looking forward to what could happen tomorrow, two days from now, three days from now.
+
+#### Assumptions and Symbols
+
+*Assumptions*
+
+Based on the descriptions above, we can write down the following assumptions we are making, which are also the assumptions for the binomial distribution:
+
+1. There are $n$ numbers of identical lottery plays
+2. The outcomes of each lottery are always win or lose, just these two possible outcomes.
+3. The chance of winning each time, $p_{\text{win}}$, is the same during each play. The chance of losing is the same as well, $1-p_{\text{win}}$.
+4. Whether you won or not before does not impact whether you will win in the future.
+
+*Symbols we will use*
+
+1. $n$: denotes the number of lottery plays (number of trials)
+2. $x$: denotes the number of times you win, at most $x=n$, at least $x=0$, the number of losses is $n-x$
+3. $p$: the probability of winning, the probability of losing is therefore $1-p$.
+
+
+The Tree Structure with Probability Written on it, *Notations*:
+
+- W = Win, L = Lose
+- D0 = Day 0, D1 = Day 1, D2 = Day 2
+
+#### Play the Lottery Just once
+
+From day zero perspective, by the end of day one, there are two possible experimental outcomes, with different probabilities associated with each outcome.
+
+- D0:
+    + D1 $W$: $P(E_1) = P(W) = p$
+    + D1 $L$: $P(E_2) = P(L) = 1-p$
+
+There are two experimental outcomes in the sample space:
+$$\Sigma_{i=1}^2 \left(P\left(E_i\right)\right) = p + \left(1-p\right) = 1$$
+
+#### Play the Lottery Twice
+
+From day zero perspective, by the end of day two, there are four possible experimental outcomes, with different probabilities associated with each outcome.
+
+We are assuming that each lottery play is independent, we learned [before](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html) that:
+
+$$ P(A \cap B) = P (A \mid B)\cdot P(B)$$
+
+and when $A$ and $B$ are independent:
+
+$$ P(A \cap B) = P (A)\cdot P(B)$$
+
+- D0:
+    + D1 W:
+        * D2 $W$: $P(E_1) = P(\text{First Game Win} \cap \text{Second Game Win}) =  P(WW) = P(W) \cdot P(W) = p \cdot p$
+        * D2 $L$: $P(E_2) = P(\text{First Game Win} \cap \text{Second Game Lose}) = P(WL) = P(W) \cdot \left(1-P(W)\right) = p \cdot (1-p)$
+    + D1 L:
+        * D2 $W$: $P(E_3) = P(LW)=(1-p) \cdot p$
+        * D2 $L$: $P(E_4) = P(LL)=(1-p) \cdot (1-p)$
+
+There are four experimental outcomes in the sample space:
+
+\begin{align}
+\Sigma_{i=1}^4 \left(P\left(E_i\right)\right) =& p \cdot p + p \cdot (1-p) + (1-p) \cdot p + (1-p) \cdot (1-p)\\
+=& p \cdot (p + 1 - p) + (1-p) \cdot (p + 1 - p) \\
+=& p + (1-p) \\
+=& 1 \\
+\end{align}
+
+#### Play the Lottery Three Times
+
+From day zero perspective, by the end of day three, there are eight possible experimental outcomes, with different probabilities associated with each outcome.
+
+- D0:
+    + D1 $W$:
+        * D2 $W$
+            - D3 $W$: $P(E_1)=P(WWW)=p^{3} \cdot (1-p)^{0}$
+            - D3 $L$: $P(E_2)=P(WWL)=p^{2} \cdot (1-p)^{1}$
+        * D2 $L$:
+            - D3 $W$: $P(E_3)=P(WLW)=p^{2} \cdot (1-p)^{1}$
+            - D3 $L$: $P(E_4)=P(WLL)=p^{1} \cdot (1-p)^{2}$
+    + D1 $L$:
+        * D2 $W$
+            - D3 $W$: $P(E_5)=P(LWW)=p^{2} \cdot (1-p)^{1}$
+            - D3 $L$: $P(E_6)=P(LWL)=p^{1} \cdot (1-p)^{2}$
+        * D2 $L$:
+            - D3 $W$: $P(E_7)=P(LLW)=p^{1} \cdot (1-p)^{2}$
+            - D3 $L$: $P(E_8)=P(LLL)=p^{0} \cdot (1-p)^{3}$
+
+There are eight experimental outcomes in the sample space, and they sum up to one as before:
+
+\begin{align}
+\Sigma_{i=1}^8 \left(P\left(E_i\right)\right) = 1 \\
+\end{align}
+
+#### Probabilities of Events
+
+Generally, after $n$ trials/lotteries, if a particular experimental outcome had $x$ number of wins/successes (which means $n-x$ number of losses/failures), the probability that this particular experimental outcome happen is:
+$$ p^x \cdot p^{n-x} $$
+
+The probabilities we wrote in the previous examples all follow this rule. Remember that if someone won every time, $n=x$, and we will have $p^x \cdot p^{n-x}=p^x \cdot p^0 = p^x \cdot 1 = p^x$.
+
+So far we have discussed different experimental outcomes with unique sequences of wins and losses. In the 3 lottery example above, we have 8 experimental outcomes. If we are mainly interested in the total number of wins and losses, we can group these 8 experimental outcomes into 4 events.
+
+1. Event win three times: W3 = $\left\{E_1\right\}$
+    $$P(W3)=p^{3} \cdot (1-p)^{0}$$
+2. Event win two times: W2 = $\left\{E_2, E_3, E_5\right\}$
+    + There are three experimental outcomes out of the eight where you win two times. The probability of each of these experimental outcomes happening is: $p^{2} \cdot (1-p)^{1}$, hence: $$P(W2) = 3 \cdot p^{2} \cdot (1-p)^{1}$$
+3. Event win one time: W1 = $\left\{E_4, E_6, E_7\right\}$
+    + There are three experimental outcomes out of the eight where you win one time. The probability of each of these experimental outcomes happening is: $p^{1} \cdot (1-p)^{2}$, hence: $$P(W1) = 3 \cdot p^{1} \cdot (1-p)^{2}$$
+4. Event win zero time: W0 = $\left\{E_8\right\}$
+    $$P(W0)=p^{0} \cdot (1-p)^{3}$$
+
+These four events are [mutually exclusive and jointly exhaustive](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html), we can define a new sample space that includes four experimental outcomes, win zero times, win once, win twice, win three times.

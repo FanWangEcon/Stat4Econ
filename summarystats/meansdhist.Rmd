@@ -1,0 +1,282 @@
+---
+title: "Mean and Standard Deviation"
+titleshort: "Mean and Standard Deviation"
+description: |
+  Mean and standard deviation from a dataset with city-month temperatures.
+core:
+  - package: r
+    code: |
+      dim()
+      min()
+      ceiling()
+      lapply()
+      vector(mode="character",length)
+      substring(var, first, last)
+      func <- function(return(list))
+  - package: dplyr
+    code: |
+      mutate()
+      select()
+      filter()
+  - package: tidyr
+    code: |
+      gather(vara, val, -varb)
+  - package: rlang
+    code: |
+      !!sym(str_var_name)
+  - package: ggplot
+    code: |
+      aes(x, y, colour, linetype, shape)
+      facet_wrap(~var, scales='free_y')
+      geom_line()
+      geom_point()
+      geom_jitter(size, width)
+      scale_x_continuous(labels, breaks)
+date: 2020-05-02
+date_start: 2018-12-01
+output:
+  pdf_document:
+    pandoc_args: '../_output_kniti_pdf.yaml'
+    includes:
+      in_header: '../preamble.tex'
+  html_document:
+    pandoc_args: '../_output_kniti_html.yaml'
+    includes:
+      in_header: '../hdga.html'
+always_allow_html: true
+urlcolor: blue
+---
+
+## Mean and Standard Deviation
+
+```{r global_options, include = FALSE}
+try(source("../.Rprofile"))
+```
+
+`r text_shared_preamble_one`
+`r text_shared_preamble_two`
+`r text_shared_preamble_thr`
+
+### Temperature Across Locations over Time
+
+Why do we need the standard deviation? We will demonstrate its usefulness by studying temperature dataset. This dataset covers a variety of cities in the United States across all States and Territories. For each city, we have the average temperature in each month. The unit of observation is at the city/month level. We have variables for the state, the city, the month and the average temperature.
+
+**The dataset, *TempCitiesUSA.csv*, can be downloaded [here](https://github.com/FanWangEcon/Stat4Econ/tree/master/data/TempCitiesUSA.csv).**
+
+```{r}
+# Load in Data Tools
+# For Reading/Loading Data
+library(tidyverse)
+# Load in Data
+df_temp <- read_csv('data/TempCitiesUSA.csv')
+```
+
+**Listing Unique Levels for Categorical Variables in the Dataset**
+
+We can see that the state and city variables are string variables. We can show unique states and cities by months. In the program below, I append the number of observations for each category.
+
+From the tables below, we can see that each city has 12 observations (for the 12 months), and each state has multiple cities.
+
+```{r}
+# A function that shows Unique Values for Categorical Variables in a Table format
+show.unique.values <- function(df, cate.var.str, lvl_str_max_len=15){
+
+    # Unique Categories
+    unique.cates <- df %>%
+        group_by(!!sym(cate.var.str)) %>%
+        summarise(freq = n()) %>%
+        mutate(distinct_N = paste0(!!sym(cate.var.str), ' (n=', freq, ')')) %>%
+        select(distinct_N)
+
+    # At most 10 columns
+    unique.count <- dim(unique.cates)[1]
+    col.count <- min(ceiling(sqrt(unique.count)), 8)
+    row.count <- ceiling(unique.count/col.count)
+
+    # Generate Table to Fill in
+    expand.length = row.count*col.count
+    unique.cates.expand <- vector(mode = "character", length = expand.length)
+
+    # Unique Categories and Counts
+    unique.cates.shorter <- substring(t(unique.cates), first = 1, last = lvl_str_max_len)
+    unique.cates.expand[0:unique.count] <- unique.cates.shorter
+
+    # Reshape
+    dim(unique.cates.expand) <- c(row.count, col.count)
+
+    # Show
+    title <- sprintf("From Dataset: %s, %d unique Levels for: %s",
+                     deparse(substitute(df)), unique.count, cate.var.str)
+    return(list(title=title,
+           levels=unique.cates.expand))
+}
+```
+
+```{r}
+# List of categorical Variables
+cate.vars.list <- c('month', 'state', 'city')
+lapply(cate.vars.list, show.unique.values, df = df_temp, lvl_str_max_len = 30)
+```
+
+#### Scatter Plot of Temperature and Months
+
+We can do a scatter plot where the x-axis is a month and the y-axis is the temperature in each city, to get a sense of the distribution of temperatures. What does this chart show us? Is this the pattern you would have expected?
+
+- the overall temperature is higher during summer months
+- the temperature is more tightly distributed during summer months than January or December
+
+The United State is pretty big, during the winter months some places are frigid, and other areas are very hot. During the summer months, however, most places are warmer.
+
+```{r}
+# Control Graph Size
+options(repr.plot.width = 5, repr.plot.height = 5)
+# Draw Scatter Plot
+# 1. specify x and y
+# 2. label each state
+# 3. add in trend line
+scatter <- ggplot(df_temp, aes(x=month, y=temp.f)) +
+      geom_jitter(size=0.1, width = 0.15) +
+      labs(title = 'Distribution of Temperature Across Cities in USA',
+           x = 'Months',
+           y = 'Temperature in Fahrenheit',
+           caption = 'Temperature data 2017') +
+      scale_x_continuous(labels = as.character(df_temp$month),
+                         breaks = df_temp$month) +
+      theme_bw()
+print(scatter)
+```
+
+#### Scatter Plot of Temperature and Months for 3 States
+
+Now, we will generate a similar chart as above, but let's select three states, and use different colors for each of the three states.
+
+We can see that there are differences in average temperature across cities in each state in each month, but the different states also have different levels of variations in city temperatures within months.
+
+We want to calculate both mean and standard deviations to capture both differences in averages over the year, as well as differences in how temperature varies within a month over the year.
+
+```{r}
+# Control Graph Size
+options(repr.plot.width = 5, repr.plot.height = 5)
+# First Filter Data
+df_temp_txflak <- df_temp %>% filter(state %in% c('AK', 'TX', 'FL'))
+
+# Draw Scatter Plot
+# 1. specify x and y
+# 2. label each state
+# 3. add in trend line
+scatter <- ggplot(df_temp_txflak, aes(x=month, y=temp.f,
+                                      colour=state)) +
+      geom_jitter(size=1, width = 0.15) +
+      labs(title = 'Distribution of Temperature Across Cities\nin Florida (FL), Texas (TX) and Alaska (AK)',
+           x = 'Months',
+           y = 'Temperature in Fahrenheit',
+           caption = 'Temperature data 2017') +
+      scale_x_continuous(labels = as.character(df_temp$month),
+                         breaks = df_temp$month) +
+      theme_bw()
+print(scatter)
+```
+
+#### Mean and Standard Deviation Within Month Acorss USA
+
+We can calculate the average temperature, as well as the standard deviation of temperature, in each month across cities in the USA. Let's show what these are using dplyr, and let's graph them out.
+
+It's pretty amazing what mean, and standard deviation can do for us. We started with a dataset with many many observations, many many temperatures. Now with just 24 numbers below, we have created a way to summarize the large set of observations concisely. Twelve numbers for means for the 12 months, and 12 numbers for the standard deviations in 12 months.
+
+This is like flying in the sky and taking a snapshot of the ground below from thousands of miles up.
+
+The exciting thing here is, which statistics should we generate to adequately summarize what is going on on the ground within all the data observations? In this case here, if we show the mean, it informatively indicates that temperature is hotter during the summer, but it does not show the tightening of the temperature distribution during the summer months that we see in the scatter plot above. Adding standard deviation to our summary statistics, however, allows us also to see that as well.
+
+```{r}
+# Show mean and standard deviation in tabular form
+df_temp_mth_summ <- df_temp %>%
+    group_by(month) %>%
+    summarise(mean_temp = mean(temp.f), sd_temp = sd(temp.f))
+```
+
+```{r}
+# Control Graph Size
+options(repr.plot.width = 5, repr.plot.height = 4)
+# Show mean and standard deviation in graphical form
+# We will gather the data first, it is an essential reshaping command
+lineplot <- df_temp_mth_summ %>%
+    gather(variable, value, -month) %>%
+    ggplot(aes(x=month, y=value, colour=variable, linetype=variable)) +
+        geom_line() +
+        geom_point() +
+        labs(title = 'Mean and SD of Temperature Acorss US Cities',
+             x = 'Months',
+             y = 'Temperature in Fahrenheit',
+             caption = 'Temperature data 2017') +
+        scale_x_continuous(labels = as.character(df_temp_mth_summ$month),
+                           breaks = df_temp_mth_summ$month)
+print(lineplot)
+```
+
+#### Mean and Standard Deviation Within Month Acorss States in USA
+
+We have various states, how do these mean and sd charts vary across the big states that we have, where there are numerous cities in each state?
+
+Let's generate some state-specific charts, using very simple commands below, and see how fascinating the United States is.
+
+Specifically, we will have two charts:
+1. the first chart has 4 subplots for each state showing the mean and sd for each state across months
+2. the second chart has 2 subplots, showing inside each four lines for the four states.
+
+```{r}
+# Control Graph Size
+options(repr.plot.width = 6, repr.plot.height = 6)
+# Show mean and standard deviation in graphical form
+# We start from the dataset:
+# 1. select a subset of states we want
+# 2. group by state and month to generate mean and sd
+# 3. reshape data with gather
+# 4. generate line plots, state by state
+
+lineplot <- df_temp %>%
+    filter(state %in% c('AK', 'CA', 'FL', 'TX')) %>%
+    group_by(state, month) %>%
+    summarise(mean_temp = mean(temp.f), sd_temp = sd(temp.f)) %>%
+    gather(variable, value, -month, -state) %>%
+    ggplot(aes(x=month, y=value,
+               colour=variable, linetype=variable, shape=variable)) +
+        facet_wrap( ~ state) +
+        geom_line() +
+        geom_point() +
+        labs(title = 'Mean and SD of Temperature Acorss US Cities',
+             x = 'Months',
+             y = 'Temperature in Fahrenheit',
+             caption = 'Temperature data 2017') +
+        scale_x_continuous(labels = as.character(df_temp_mth_summ$month),
+                           breaks = df_temp_mth_summ$month)
+print(lineplot)
+```
+
+```{r}
+# Control Graph Size
+options(repr.plot.width = 6, repr.plot.height = 4)
+# Show mean and standard deviation in graphical form
+# We start from the dataset:
+# 1. select a subset of states we want
+# 2. group by state and month to generate mean and sd
+# 3. reshape data with gather
+# 4. generate line plots, state by state
+
+lineplot <- df_temp %>%
+    filter(state %in% c('AK', 'CA', 'FL', 'TX')) %>%
+    group_by(state, month) %>%
+    summarise(mean_temp = mean(temp.f), sd_temp = sd(temp.f)) %>%
+    gather(variable, value, -month, -state) %>%
+    ggplot(aes(x=month, y=value,
+               colour=state, linetype=state, shape=state)) +
+        facet_wrap( ~ variable, scales="free_y") +
+        geom_line() +
+        geom_point() +
+        labs(title = 'Mean and SD of Temperature Acorss US Cities',
+             x = 'Months',
+             y = 'Temperature in Fahrenheit',
+             caption = 'Temperature data 2017') +
+        scale_x_continuous(labels = as.character(df_temp_mth_summ$month),
+                           breaks = df_temp_mth_summ$month)
+print(lineplot)
+```

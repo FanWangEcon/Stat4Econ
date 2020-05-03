@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Summarizing Data | Introductory Statistics with R tidyverse</title>
+  <meta name="description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Summarizing Data | Introductory Statistics with R tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  <meta name="github-repo" content="fanwangecon/Stat4Econ" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Summarizing Data | Introductory Statistics with R tidyverse" />
+  
+  <meta name="twitter:description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  
+
+<meta name="author" content="Fan Wang" />
+
+
+<meta name="date" content="2020-05-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="dataset-tables-and-graphs.html"/>
+<link rel="next" href="basics-of-probability.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92953468-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92953468-4');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introductory Statistics with R tidyverse</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="survey.html"><a href="survey.html"><i class="fa fa-check"></i><b>1</b> Survey</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="survey.html"><a href="survey.html#generate-a-dataset-in-r"><i class="fa fa-check"></i><b>1.1</b> Generate A Dataset in R</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="survey.html"><a href="survey.html#a-random-sample-of-students-in-class"><i class="fa fa-check"></i><b>1.1.1</b> A Random Sample of Students in Class</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html"><i class="fa fa-check"></i><b>2</b> Dataset, Tables and Graphs</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#opening-a-dataset"><i class="fa fa-check"></i><b>2.1</b> Opening a Dataset</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#paths-to-data"><i class="fa fa-check"></i><b>2.1.1</b> Paths to Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#one-variable-graphs-and-tables"><i class="fa fa-check"></i><b>2.2</b> One Variable Graphs and Tables</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#categoricaldiscrete"><i class="fa fa-check"></i><b>2.2.1</b> Categorical/Discrete</a></li>
+<li class="chapter" data-level="2.2.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#continuousquantitative"><i class="fa fa-check"></i><b>2.2.2</b> Continuous/Quantitative</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#multiple-variables-graphs-and-tables"><i class="fa fa-check"></i><b>2.3</b> Multiple Variables Graphs and Tables</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#two-continuous-variables"><i class="fa fa-check"></i><b>2.3.1</b> Two Continuous Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#two-categorical-variables"><i class="fa fa-check"></i><b>2.3.2</b> Two Categorical Variables</a></li>
+<li class="chapter" data-level="2.3.3" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#continuous-and-categorical-variable"><i class="fa fa-check"></i><b>2.3.3</b> Continuous and Categorical Variable</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="summarizing-data.html"><a href="summarizing-data.html"><i class="fa fa-check"></i><b>3</b> Summarizing Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="summarizing-data.html"><a href="summarizing-data.html#mean-and-standard-deviation"><i class="fa fa-check"></i><b>3.1</b> Mean and Standard Deviation</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="summarizing-data.html"><a href="summarizing-data.html#temperature-across-locations-over-time"><i class="fa fa-check"></i><b>3.1.1</b> Temperature Across Locations over Time</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="summarizing-data.html"><a href="summarizing-data.html#coefficient-of-variation-and-correlation"><i class="fa fa-check"></i><b>3.2</b> Coefficient of Variation and Correlation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="summarizing-data.html"><a href="summarizing-data.html#education-and-wage"><i class="fa fa-check"></i><b>3.2.1</b> Education and Wage</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="basics-of-probability.html"><a href="basics-of-probability.html"><i class="fa fa-check"></i><b>4</b> Basics of Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#experimental-outcomes"><i class="fa fa-check"></i><b>4.1</b> Experimental Outcomes</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-space-and-probabilities"><i class="fa fa-check"></i><b>4.1.1</b> Sample Space and Probabilities</a></li>
+<li class="chapter" data-level="4.1.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#union-and-intersection-and-complements"><i class="fa fa-check"></i><b>4.1.2</b> Union and Intersection and Complements</a></li>
+<li class="chapter" data-level="4.1.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#conditional-probability"><i class="fa fa-check"></i><b>4.1.3</b> Conditional Probability</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-space-and-probability-examples"><i class="fa fa-check"></i><b>4.2</b> Sample Space and Probability Examples</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#presidential-election"><i class="fa fa-check"></i><b>4.2.1</b> Presidential Election</a></li>
+<li class="chapter" data-level="4.2.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#throwing-a-dice"><i class="fa fa-check"></i><b>4.2.2</b> Throwing a Dice</a></li>
+<li class="chapter" data-level="4.2.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#two-basketball-games"><i class="fa fa-check"></i><b>4.2.3</b> Two Basketball Games</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-average"><i class="fa fa-check"></i><b>4.3</b> Sample Average</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#an-unfair-dice"><i class="fa fa-check"></i><b>4.3.1</b> An Unfair Dice</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="basics-of-probability.html"><a href="basics-of-probability.html#multiple-step-experiment"><i class="fa fa-check"></i><b>4.4</b> Multiple-Step Experiment</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#playing-the-lottery-three-times"><i class="fa fa-check"></i><b>4.4.1</b> Playing the Lottery Three times</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html"><i class="fa fa-check"></i><b>5</b> Discrete Probability Distribution</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#discrete-random-variable-and-binomial"><i class="fa fa-check"></i><b>5.1</b> Discrete Random Variable and Binomial</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#discrete-random-variable"><i class="fa fa-check"></i><b>5.1.1</b> Discrete Random Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-experiment"><i class="fa fa-check"></i><b>5.2</b> Binomial Experiment</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-example-larceny"><i class="fa fa-check"></i><b>5.2.1</b> Binomial Example: Larceny</a></li>
+<li class="chapter" data-level="5.2.2" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-example-wwii-german-soldier"><i class="fa fa-check"></i><b>5.2.2</b> Binomial Example: WWII German Soldier</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#poisson-distribution"><i class="fa fa-check"></i><b>5.3</b> Poisson Distribution</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#poisson-example-horse-kicking"><i class="fa fa-check"></i><b>5.3.1</b> Poisson Example: Horse-Kicking</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="index-and-code-links.html"><a href="index-and-code-links.html"><i class="fa fa-check"></i><b>A</b> Index and Code Links</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="index-and-code-links.html"><a href="index-and-code-links.html#survey-links"><i class="fa fa-check"></i><b>A.1</b> Survey links</a></li>
+<li class="chapter" data-level="A.2" data-path="index-and-code-links.html"><a href="index-and-code-links.html#dataset-tables-and-graphs-links"><i class="fa fa-check"></i><b>A.2</b> Dataset, Tables and Graphs links</a></li>
+<li class="chapter" data-level="A.3" data-path="index-and-code-links.html"><a href="index-and-code-links.html#summarizing-data-links"><i class="fa fa-check"></i><b>A.3</b> Summarizing Data links</a></li>
+<li class="chapter" data-level="A.4" data-path="index-and-code-links.html"><a href="index-and-code-links.html#basics-of-probability-links"><i class="fa fa-check"></i><b>A.4</b> Basics of Probability links</a></li>
+<li class="chapter" data-level="A.5" data-path="index-and-code-links.html"><a href="index-and-code-links.html#discrete-probability-distribution-links"><i class="fa fa-check"></i><b>A.5</b> Discrete Probability Distribution links</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://fanwangecon.github.io/Stat4Econ/bookdown/index.html" target="blank">Stat4Econ Bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introductory Statistics with R tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="summarizing-data" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Summarizing Data</h1>
+
+<div id="mean-and-standard-deviation" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Mean and Standard Deviation</h2>
+<blockquote>
+<p>Go back to <a href="http://fanwangecon.github.io/">fan</a>’s <a href="https://fanwangecon.github.io/REconTools/">REconTools</a> Package, <a href="https://fanwangecon.github.io/R4Econ/">R Code Examples</a> Repository (<a href="https://fanwangecon.github.io/R4Econ/bookdown">bookdown site</a>), or <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> Repository (<a href="https://fanwangecon.github.io/Stat4Econ/bookdown">bookdown site</a>).</p>
+</blockquote>
+<div id="temperature-across-locations-over-time" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Temperature Across Locations over Time</h3>
+<p>Why do we need the standard deviation? We will demonstrate its usefulness by studying temperature dataset. This dataset covers a variety of cities in the United States across all States and Territories. For each city, we have the average temperature in each month. The unit of observation is at the city/month level. We have variables for the state, the city, the month and the average temperature.</p>
+<p><strong>The dataset, <em>TempCitiesUSA.csv</em>, can be downloaded <a href="https://github.com/FanWangEcon/Stat4Econ/tree/master/data/TempCitiesUSA.csv">here</a>.</strong></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="summarizing-data.html#cb48-1"></a><span class="co"># Load in Data Tools</span></span>
+<span id="cb48-2"><a href="summarizing-data.html#cb48-2"></a><span class="co"># For Reading/Loading Data</span></span>
+<span id="cb48-3"><a href="summarizing-data.html#cb48-3"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb48-4"><a href="summarizing-data.html#cb48-4"></a><span class="co"># Load in Data</span></span>
+<span id="cb48-5"><a href="summarizing-data.html#cb48-5"></a>df_temp &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/TempCitiesUSA.csv&#39;</span>)</span></code></pre></div>
+<p><strong>Listing Unique Levels for Categorical Variables in the Dataset</strong></p>
+<p>We can see that the state and city variables are string variables. We can show unique states and cities by months. In the program below, I append the number of observations for each category.</p>
+<p>From the tables below, we can see that each city has 12 observations (for the 12 months), and each state has multiple cities.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="summarizing-data.html#cb49-1"></a><span class="co"># A function that shows Unique Values for Categorical Variables in a Table format</span></span>
+<span id="cb49-2"><a href="summarizing-data.html#cb49-2"></a>show.unique.values &lt;-<span class="st"> </span><span class="cf">function</span>(df, cate.var.str, <span class="dt">lvl_str_max_len=</span><span class="dv">15</span>){</span>
+<span id="cb49-3"><a href="summarizing-data.html#cb49-3"></a></span>
+<span id="cb49-4"><a href="summarizing-data.html#cb49-4"></a>    <span class="co"># Unique Categories</span></span>
+<span id="cb49-5"><a href="summarizing-data.html#cb49-5"></a>    unique.cates &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
+<span id="cb49-6"><a href="summarizing-data.html#cb49-6"></a><span class="st">        </span><span class="kw">group_by</span>(<span class="op">!!</span><span class="kw">sym</span>(cate.var.str)) <span class="op">%&gt;%</span></span>
+<span id="cb49-7"><a href="summarizing-data.html#cb49-7"></a><span class="st">        </span><span class="kw">summarise</span>(<span class="dt">freq =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb49-8"><a href="summarizing-data.html#cb49-8"></a><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">distinct_N =</span> <span class="kw">paste0</span>(<span class="op">!!</span><span class="kw">sym</span>(cate.var.str), <span class="st">&#39; (n=&#39;</span>, freq, <span class="st">&#39;)&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb49-9"><a href="summarizing-data.html#cb49-9"></a><span class="st">        </span><span class="kw">select</span>(distinct_N)</span>
+<span id="cb49-10"><a href="summarizing-data.html#cb49-10"></a></span>
+<span id="cb49-11"><a href="summarizing-data.html#cb49-11"></a>    <span class="co"># At most 10 columns</span></span>
+<span id="cb49-12"><a href="summarizing-data.html#cb49-12"></a>    unique.count &lt;-<span class="st"> </span><span class="kw">dim</span>(unique.cates)[<span class="dv">1</span>]</span>
+<span id="cb49-13"><a href="summarizing-data.html#cb49-13"></a>    col.count &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">ceiling</span>(<span class="kw">sqrt</span>(unique.count)), <span class="dv">8</span>)</span>
+<span id="cb49-14"><a href="summarizing-data.html#cb49-14"></a>    row.count &lt;-<span class="st"> </span><span class="kw">ceiling</span>(unique.count<span class="op">/</span>col.count)</span>
+<span id="cb49-15"><a href="summarizing-data.html#cb49-15"></a></span>
+<span id="cb49-16"><a href="summarizing-data.html#cb49-16"></a>    <span class="co"># Generate Table to Fill in</span></span>
+<span id="cb49-17"><a href="summarizing-data.html#cb49-17"></a>    expand.length =<span class="st"> </span>row.count<span class="op">*</span>col.count</span>
+<span id="cb49-18"><a href="summarizing-data.html#cb49-18"></a>    unique.cates.expand &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;character&quot;</span>, <span class="dt">length =</span> expand.length)</span>
+<span id="cb49-19"><a href="summarizing-data.html#cb49-19"></a></span>
+<span id="cb49-20"><a href="summarizing-data.html#cb49-20"></a>    <span class="co"># Unique Categories and Counts</span></span>
+<span id="cb49-21"><a href="summarizing-data.html#cb49-21"></a>    unique.cates.shorter &lt;-<span class="st"> </span><span class="kw">substring</span>(<span class="kw">t</span>(unique.cates), <span class="dt">first =</span> <span class="dv">1</span>, <span class="dt">last =</span> lvl_str_max_len)</span>
+<span id="cb49-22"><a href="summarizing-data.html#cb49-22"></a>    unique.cates.expand[<span class="dv">0</span><span class="op">:</span>unique.count] &lt;-<span class="st"> </span>unique.cates.shorter</span>
+<span id="cb49-23"><a href="summarizing-data.html#cb49-23"></a></span>
+<span id="cb49-24"><a href="summarizing-data.html#cb49-24"></a>    <span class="co"># Reshape</span></span>
+<span id="cb49-25"><a href="summarizing-data.html#cb49-25"></a>    <span class="kw">dim</span>(unique.cates.expand) &lt;-<span class="st"> </span><span class="kw">c</span>(row.count, col.count)</span>
+<span id="cb49-26"><a href="summarizing-data.html#cb49-26"></a></span>
+<span id="cb49-27"><a href="summarizing-data.html#cb49-27"></a>    <span class="co"># Show</span></span>
+<span id="cb49-28"><a href="summarizing-data.html#cb49-28"></a>    title &lt;-<span class="st"> </span><span class="kw">sprintf</span>(<span class="st">&quot;From Dataset: %s, %d unique Levels for: %s&quot;</span>,</span>
+<span id="cb49-29"><a href="summarizing-data.html#cb49-29"></a>                     <span class="kw">deparse</span>(<span class="kw">substitute</span>(df)), unique.count, cate.var.str)</span>
+<span id="cb49-30"><a href="summarizing-data.html#cb49-30"></a>    <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">title=</span>title,</span>
+<span id="cb49-31"><a href="summarizing-data.html#cb49-31"></a>           <span class="dt">levels=</span>unique.cates.expand))</span>
+<span id="cb49-32"><a href="summarizing-data.html#cb49-32"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="summarizing-data.html#cb50-1"></a><span class="co"># List of categorical Variables</span></span>
+<span id="cb50-2"><a href="summarizing-data.html#cb50-2"></a>cate.vars.list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;month&#39;</span>, <span class="st">&#39;state&#39;</span>, <span class="st">&#39;city&#39;</span>)</span>
+<span id="cb50-3"><a href="summarizing-data.html#cb50-3"></a><span class="kw">lapply</span>(cate.vars.list, show.unique.values, <span class="dt">df =</span> df_temp, <span class="dt">lvl_str_max_len =</span> <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>## [[1]]
+## [[1]]$title
+## [1] &quot;From Dataset: df_temp, 12 unique Levels for: month&quot;
+## 
+## [[1]]$levels
+##      [,1]        [,2]        [,3]        [,4]        
+## [1,] &quot;1 (n=261)&quot; &quot;4 (n=261)&quot; &quot;7 (n=261)&quot; &quot;10 (n=261)&quot;
+## [2,] &quot;2 (n=261)&quot; &quot;5 (n=261)&quot; &quot;8 (n=261)&quot; &quot;11 (n=261)&quot;
+## [3,] &quot;3 (n=261)&quot; &quot;6 (n=261)&quot; &quot;9 (n=261)&quot; &quot;12 (n=261)&quot;
+## 
+## 
+## [[2]]
+## [[2]]$title
+## [1] &quot;From Dataset: df_temp, 59 unique Levels for: state&quot;
+## 
+## [[2]]$levels
+##      [,1]                  [,2]          [,3]                 [,4]                  [,5]         [,6]         [,7]         [,8]       
+## [1,] &quot;AK (n=204)&quot;          &quot;CO (n=60)&quot;   &quot;ID (n=36)&quot;          &quot;MARSHALL IS. (n=12)&quot; &quot;NC (n=60)&quot;  &quot;OH (n=84)&quot;  &quot;SC (n=24)&quot;  &quot;WI (n=48)&quot;
+## [2,] &quot;AL (n=36)&quot;           &quot;CT (n=24)&quot;   &quot;IL (n=48)&quot;          &quot;MD (n=12)&quot;           &quot;ND (n=48)&quot;  &quot;OK (n=24)&quot;  &quot;SD (n=48)&quot;  &quot;WV (n=48)&quot;
+## [3,] &quot;AMER SAMOA (n=12)&quot;   &quot;D.C. (n=24)&quot; &quot;IN (n=48)&quot;          &quot;ME (n=24)&quot;           &quot;NE (n=96)&quot;  &quot;OR (n=84)&quot;  &quot;TN (n=48)&quot;  &quot;WY (n=48)&quot;
+## [4,] &quot;AR (n=36)&quot;           &quot;DE (n=12)&quot;   &quot;KS (n=60)&quot;          &quot;MI (n=108)&quot;          &quot;NH (n=24)&quot;  &quot;PA (n=72)&quot;  &quot;TX (n=252)&quot; &quot;&quot;         
+## [5,] &quot;AZ (n=60)&quot;           &quot;FL (n=156)&quot;  &quot;KY (n=36)&quot;          &quot;MN (n=60)&quot;           &quot;NJ (n=24)&quot;  &quot;PA. (n=12)&quot; &quot;UT (n=24)&quot;  &quot;&quot;         
+## [6,] &quot;CA (n=180)&quot;          &quot;GA (n=60)&quot;   &quot;LA (n=48)&quot;          &quot;MO (n=48)&quot;           &quot;NM (n=36)&quot;  &quot;PC (n=48)&quot;  &quot;VA (n=48)&quot;  &quot;&quot;         
+## [7,] &quot;CA. (n=12)&quot;          &quot;HI (n=36)&quot;   &quot;MA (n=36)&quot;          &quot;MS (n=36)&quot;           &quot;NV (n=60)&quot;  &quot;PR (n=12)&quot;  &quot;VT (n=12)&quot;  &quot;&quot;         
+## [8,] &quot;CAROLINE IS. (n=12)&quot; &quot;IA (n=36)&quot;   &quot;MARSHALL IS (n=12)&quot; &quot;MT (n=72)&quot;           &quot;NY (n=108)&quot; &quot;RI (n=12)&quot;  &quot;WA (n=72)&quot;  &quot;&quot;         
+## 
+## 
+## [[3]]
+## [[3]]$title
+## [1] &quot;From Dataset: df_temp, 254 unique Levels for: city&quot;
+## 
+## [[3]]$levels
+##       [,1]                      [,2]                       [,3]                             [,4]                         [,5]                            
+##  [1,] &quot;ABERDEEN (n=12)&quot;         &quot;BOSTON (n=12)&quot;            &quot;ELKO (n=12)&quot;                    &quot;HOUGHTON LAKE (n=12)&quot;       &quot;LONG BEACH (n=12)&quot;             
+##  [2,] &quot;ABILENE (n=12)&quot;          &quot;BRIDGEPORT (n=12)&quot;        &quot;ELY (n=12)&quot;                     &quot;HOUSTON (n=12)&quot;             &quot;LOS ANGELES AP (n=12)&quot;         
+##  [3,] &quot;AKRON (n=12)&quot;            &quot;BROWNSVILLE (n=12)&quot;       &quot;ERIE (n=12)&quot;                    &quot;HUNTINGTON (n=12)&quot;          &quot;LOS ANGELES C.O. (n=12)&quot;       
+##  [4,] &quot;ALAMOSA (n=12)&quot;          &quot;BUFFALO (n=12)&quot;           &quot;EUGENE (n=12)&quot;                  &quot;HUNTSVILLE (n=12)&quot;          &quot;LOUISVILLE (n=12)&quot;             
+##  [5,] &quot;ALBANY (n=12)&quot;           &quot;BURLINGTON (n=12)&quot;        &quot;EUREKA (n=12)&quot;                  &quot;HURON (n=12)&quot;               &quot;LUBBOCK (n=12)&quot;                
+##  [6,] &quot;ALBUQUERQUE (n=12)&quot;      &quot;CAPE HATTERAS (n=12)&quot;     &quot;EVANSVILLE (n=12)&quot;              &quot;INDIANAPOLIS (n=12)&quot;        &quot;LYNCHBURG (n=12)&quot;              
+##  [7,] &quot;ALLENTOWN (n=12)&quot;        &quot;CARIBOU (n=12)&quot;           &quot;FAIRBANKS (n=12)&quot;               &quot;INTERNATIONAL FALLS (n=12)&quot; &quot;MACON (n=12)&quot;                  
+##  [8,] &quot;ALPENA (n=12)&quot;           &quot;CASPER (n=12)&quot;            &quot;FARGO (n=12)&quot;                   &quot;ISLIP (n=12)&quot;               &quot;MADISON (n=12)&quot;                
+##  [9,] &quot;AMARILLO (n=12)&quot;         &quot;CHARLESTON (n=12)&quot;        &quot;FLAGSTAFF (n=12)&quot;               &quot;JACKSON (n=24)&quot;             &quot;MAJURO (n=12)&quot;                 
+## [10,] &quot;ANCHORAGE (n=12)&quot;        &quot;CHARLOTTE (n=12)&quot;         &quot;FLINT (n=12)&quot;                   &quot;JACKSONVILLE (n=12)&quot;        &quot;MANSFIELD (n=12)&quot;              
+## [11,] &quot;ANNETTE (n=12)&quot;          &quot;CHATTANOOGA (n=12)&quot;       &quot;FORT MYERS (n=12)&quot;              &quot;JOHNSTON ISLAND (n=12)&quot;     &quot;MARQUETTE (n=12)&quot;              
+## [12,] &quot;APALACHICOLA (n=12)&quot;     &quot;CHEYENNE (n=12)&quot;          &quot;FORT SMITH (n=12)&quot;              &quot;JUNEAU (n=12)&quot;              &quot;MCGRATH (n=12)&quot;                
+## [13,] &quot;ASHEVILLE (n=12)&quot;        &quot;CLAYTON (n=12)&quot;           &quot;FORT WAYNE (n=12)&quot;              &quot;KAHULUI (n=12)&quot;             &quot;MEDFORD (n=12)&quot;                
+## [14,] &quot;ASTORIA (n=12)&quot;          &quot;CLEVELAND (n=12)&quot;         &quot;FRESNO (n=12)&quot;                  &quot;KALISPELL (n=12)&quot;           &quot;MEMPHIS (n=12)&quot;                
+## [15,] &quot;ATHENS (n=12)&quot;           &quot;COLORADO SPRINGS (n=12)&quot;  &quot;GAINESVILLE (n=12)&quot;             &quot;KANSAS CITY (n=12)&quot;         &quot;MERIDIAN (n=12)&quot;               
+## [16,] &quot;ATLANTA (n=12)&quot;          &quot;COLUMBIA (n=24)&quot;          &quot;GALVESTON (n=12)&quot;               &quot;KEY WEST (n=12)&quot;            &quot;MIAMI (n=12)&quot;                  
+## [17,] &quot;ATLANTIC CITY AP (n=12)&quot; &quot;COLUMBUS (n=24)&quot;          &quot;GLASGOW (n=12)&quot;                 &quot;KING SALMON (n=12)&quot;         &quot;MIDLAND-ODESSA (n=12)&quot;         
+## [18,] &quot;AUSTIN/BERGSTROM (n=12)&quot; &quot;CONCORD (n=12)&quot;           &quot;GOODLAND (n=12)&quot;                &quot;KNOXVILLE (n=12)&quot;           &quot;MILFORD (n=12)&quot;                
+## [19,] &quot;AUSTIN/CITY (n=12)&quot;      &quot;CONCORDIA (n=12)&quot;         &quot;GRAND FORKS (n=12)&quot;             &quot;KODIAK (n=12)&quot;              &quot;MILWAUKEE (n=12)&quot;              
+## [20,] &quot;AVOCA (n=12)&quot;            &quot;CORPUS CHRISTI (n=12)&quot;    &quot;GRAND ISLAND (n=12)&quot;            &quot;KOROR (n=12)&quot;               &quot;MINNEAPOLIS-ST.PAUL (n=12)&quot;    
+## [21,] &quot;BAKERSFIELD (n=12)&quot;      &quot;DALLAS-FORT WORTH (n=12)&quot; &quot;GRAND JUNCTION (n=12)&quot;          &quot;KOTZEBUE (n=12)&quot;            &quot;MISSOULA (n=12)&quot;               
+## [22,] &quot;BALTIMORE (n=12)&quot;        &quot;DALLAS-LOVE FIELD (n=12)&quot; &quot;GRAND RAPIDS (n=12)&quot;            &quot;KWAJALEIN (n=12)&quot;           &quot;MOBILE (n=12)&quot;                 
+## [23,] &quot;BARROW (n=12)&quot;           &quot;DAYTON (n=12)&quot;            &quot;GREAT FALLS (n=12)&quot;             &quot;LA CROSSE (n=12)&quot;           &quot;MOLINE (n=12)&quot;                 
+## [24,] &quot;BATON ROUGE (n=12)&quot;      &quot;DAYTONA BEACH (n=12)&quot;     &quot;GREEN BAY (n=12)&quot;               &quot;LAKE CHARLES (n=12)&quot;        &quot;MONTGOMERY (n=12)&quot;             
+## [25,] &quot;BECKLEY (n=12)&quot;          &quot;DEL RIO (n=12)&quot;           &quot;GREENVILLE-SPARTANBURG AP (n=1&quot; &quot;LANDER (n=12)&quot;              &quot;MOUNT SHASTA (n=12)&quot;           
+## [26,] &quot;BETHEL (n=12)&quot;           &quot;DENVER (n=12)&quot;            &quot;GUAM (n=12)&quot;                    &quot;LANSING (n=12)&quot;             &quot;MT. WASHINGTON (n=12)&quot;         
+## [27,] &quot;BILLINGS (n=12)&quot;         &quot;DES MOINES (n=12)&quot;        &quot;HARRISBURG (n=12)&quot;              &quot;LAS VEGAS (n=12)&quot;           &quot;MUSKEGON (n=12)&quot;               
+## [28,] &quot;BINGHAMTON (n=12)&quot;       &quot;DETROIT (n=12)&quot;           &quot;HARTFORD (n=12)&quot;                &quot;LEWISTON (n=12)&quot;            &quot;NASHVILLE (n=12)&quot;              
+## [29,] &quot;BISHOP (n=12)&quot;           &quot;DODGE CITY (n=12)&quot;        &quot;HAVRE (n=12)&quot;                   &quot;LEXINGTON (n=12)&quot;           &quot;NEW ORLEANS (n=12)&quot;            
+## [30,] &quot;BISMARCK (n=12)&quot;         &quot;DULUTH (n=12)&quot;            &quot;HELENA (n=12)&quot;                  &quot;LIHUE (n=12)&quot;               &quot;NEW YORK (JFK AP) (n=12)&quot;      
+## [31,] &quot;BLUE HILL (n=12)&quot;        &quot;EL PASO (n=12)&quot;           &quot;HILO (n=12)&quot;                    &quot;LINCOLN (n=12)&quot;             &quot;NEW YORK (LAGUARDIA AP) (n=12)&quot;
+## [32,] &quot;BOISE (n=12)&quot;            &quot;ELKINS (n=12)&quot;            &quot;HOMER (n=12)&quot;                   &quot;LITTLE ROCK (n=12)&quot;         &quot;NEW YORK C.PARK (n=12)&quot;        
+##       [,6]                       [,7]                        [,8]                         
+##  [1,] &quot;NEWARK (n=12)&quot;            &quot;ROSWELL (n=12)&quot;            &quot;TAMPA (n=12)&quot;               
+##  [2,] &quot;NOME (n=12)&quot;              &quot;SACRAMENTO (n=12)&quot;         &quot;TOLEDO (n=12)&quot;              
+##  [3,] &quot;NORFOLK (n=24)&quot;           &quot;SAINT CLOUD (n=12)&quot;        &quot;TOPEKA (n=12)&quot;              
+##  [4,] &quot;NORTH LITTLE ROCK (n=12)&quot; &quot;SALEM (n=12)&quot;              &quot;TUCSON (n=12)&quot;              
+##  [5,] &quot;NORTH PLATTE (n=12)&quot;      &quot;SALT LAKE CITY (n=12)&quot;     &quot;TULSA (n=12)&quot;               
+##  [6,] &quot;OKLAHOMA CITY (n=12)&quot;     &quot;SAN ANGELO (n=12)&quot;         &quot;TUPELO (n=12)&quot;              
+##  [7,] &quot;OLYMPIA (n=12)&quot;           &quot;SAN ANTONIO (n=12)&quot;        &quot;UNALAKLEET (n=12)&quot;          
+##  [8,] &quot;OMAHA (NORTH) (n=12)&quot;     &quot;SAN DIEGO (n=12)&quot;          &quot;VALDEZ (n=12)&quot;              
+##  [9,] &quot;OMAHA EPPLEY AP (n=12)&quot;   &quot;SAN FRANCISCO AP (n=12)&quot;   &quot;VALENTINE (n=12)&quot;           
+## [10,] &quot;ORLANDO (n=12)&quot;           &quot;SAN FRANCISCO C.O. (n=12)&quot; &quot;VERO BEACH (n=12)&quot;          
+## [11,] &quot;PAGO PAGO (n=12)&quot;         &quot;SAN JUAN (n=12)&quot;           &quot;VICTORIA (n=12)&quot;            
+## [12,] &quot;PENDLETON (n=12)&quot;         &quot;SANTA BARBARA (n=12)&quot;      &quot;WACO (n=12)&quot;                
+## [13,] &quot;PENSACOLA (n=12)&quot;         &quot;SANTA MARIA (n=12)&quot;        &quot;WAKE ISLAN+B1214D (n=1)&quot;    
+## [14,] &quot;PEORIA (n=12)&quot;            &quot;SAULT STE. MARIE (n=12)&quot;   &quot;WAKE ISLAND (n=11)&quot;         
+## [15,] &quot;PHILADELPHIA (n=12)&quot;      &quot;SAVANNAH (n=12)&quot;           &quot;WASHINGTON DULLES AP (n=12)&quot;
+## [16,] &quot;PHOENIX (n=12)&quot;           &quot;SCOTTSBLUFF (n=12)&quot;        &quot;WASHINGTON NAT&#39;L AP (n=12)&quot; 
+## [17,] &quot;PITTSBURGH (n=12)&quot;        &quot;SEATTLE C.O. (n=12)&quot;       &quot;WATERLOO (n=12)&quot;            
+## [18,] &quot;POCATELLO (n=12)&quot;         &quot;SEATTLE SEA-TAC AP (n=12)&quot; &quot;WEST PALM BEACH (n=12)&quot;     
+## [19,] &quot;POHNPEI (n=12)&quot;           &quot;SEXTON SUMMIT (n=12)&quot;      &quot;WICHITA (n=12)&quot;             
+## [20,] &quot;PORT ARTHUR (n=12)&quot;       &quot;SHERIDAN (n=12)&quot;           &quot;WICHITA FALLS (n=12)&quot;       
+## [21,] &quot;PORTLAND (n=24)&quot;          &quot;SHREVEPORT (n=12)&quot;         &quot;WILLIAMSPORT (n=12)&quot;        
+## [22,] &quot;PROVIDENCE (n=12)&quot;        &quot;SIOUX CITY (n=12)&quot;         &quot;WILLISTON (n=12)&quot;           
+## [23,] &quot;PUEBLO (n=12)&quot;            &quot;SIOUX FALLS (n=12)&quot;        &quot;WILMINGTON (n=24)&quot;          
+## [24,] &quot;QUILLAYUTE (n=12)&quot;        &quot;SOUTH BEND (n=12)&quot;         &quot;WINNEMUCCA (n=12)&quot;          
+## [25,] &quot;RALEIGH (n=12)&quot;           &quot;SPOKANE (n=12)&quot;            &quot;WINSLOW (n=12)&quot;             
+## [26,] &quot;RAPID CITY (n=12)&quot;        &quot;SPRINGFIELD (n=24)&quot;        &quot;WORCESTER (n=12)&quot;           
+## [27,] &quot;REDDING (n=12)&quot;           &quot;ST. LOUIS (n=12)&quot;          &quot;YAKIMA (n=12)&quot;              
+## [28,] &quot;RENO (n=12)&quot;              &quot;ST. PAUL ISLAND (n=12)&quot;    &quot;YAKUTAT (n=12)&quot;             
+## [29,] &quot;RICHMOND (n=12)&quot;          &quot;STOCKTON (n=12)&quot;           &quot;YOUNGSTOWN (n=12)&quot;          
+## [30,] &quot;ROANOKE (n=12)&quot;           &quot;SYRACUSE (n=12)&quot;           &quot;YUMA (n=12)&quot;                
+## [31,] &quot;ROCHESTER (n=24)&quot;         &quot;TALKEETNA (n=12)&quot;          &quot;&quot;                           
+## [32,] &quot;ROCKFORD (n=12)&quot;          &quot;TALLAHASSEE (n=12)&quot;        &quot;&quot;</code></pre>
+<div id="scatter-plot-of-temperature-and-months" class="section level4" number="3.1.1.1">
+<h4><span class="header-section-number">3.1.1.1</span> Scatter Plot of Temperature and Months</h4>
+<p>We can do a scatter plot where the x-axis is a month and the y-axis is the temperature in each city, to get a sense of the distribution of temperatures. What does this chart show us? Is this the pattern you would have expected?</p>
+<ul>
+<li>the overall temperature is higher during summer months</li>
+<li>the temperature is more tightly distributed during summer months than January or December</li>
+</ul>
+<p>The United State is pretty big, during the winter months some places are frigid, and other areas are very hot. During the summer months, however, most places are warmer.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="summarizing-data.html#cb52-1"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb52-2"><a href="summarizing-data.html#cb52-2"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">5</span>, <span class="dt">repr.plot.height =</span> <span class="dv">5</span>)</span>
+<span id="cb52-3"><a href="summarizing-data.html#cb52-3"></a><span class="co"># Draw Scatter Plot</span></span>
+<span id="cb52-4"><a href="summarizing-data.html#cb52-4"></a><span class="co"># 1. specify x and y</span></span>
+<span id="cb52-5"><a href="summarizing-data.html#cb52-5"></a><span class="co"># 2. label each state</span></span>
+<span id="cb52-6"><a href="summarizing-data.html#cb52-6"></a><span class="co"># 3. add in trend line</span></span>
+<span id="cb52-7"><a href="summarizing-data.html#cb52-7"></a>scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df_temp, <span class="kw">aes</span>(<span class="dt">x=</span>month, <span class="dt">y=</span>temp.f)) <span class="op">+</span></span>
+<span id="cb52-8"><a href="summarizing-data.html#cb52-8"></a><span class="st">      </span><span class="kw">geom_jitter</span>(<span class="dt">size=</span><span class="fl">0.1</span>, <span class="dt">width =</span> <span class="fl">0.15</span>) <span class="op">+</span></span>
+<span id="cb52-9"><a href="summarizing-data.html#cb52-9"></a><span class="st">      </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Distribution of Temperature Across Cities in USA&#39;</span>,</span>
+<span id="cb52-10"><a href="summarizing-data.html#cb52-10"></a>           <span class="dt">x =</span> <span class="st">&#39;Months&#39;</span>,</span>
+<span id="cb52-11"><a href="summarizing-data.html#cb52-11"></a>           <span class="dt">y =</span> <span class="st">&#39;Temperature in Fahrenheit&#39;</span>,</span>
+<span id="cb52-12"><a href="summarizing-data.html#cb52-12"></a>           <span class="dt">caption =</span> <span class="st">&#39;Temperature data 2017&#39;</span>) <span class="op">+</span></span>
+<span id="cb52-13"><a href="summarizing-data.html#cb52-13"></a><span class="st">      </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> <span class="kw">as.character</span>(df_temp<span class="op">$</span>month),</span>
+<span id="cb52-14"><a href="summarizing-data.html#cb52-14"></a>                         <span class="dt">breaks =</span> df_temp<span class="op">$</span>month) <span class="op">+</span></span>
+<span id="cb52-15"><a href="summarizing-data.html#cb52-15"></a><span class="st">      </span><span class="kw">theme_bw</span>()</span>
+<span id="cb52-16"><a href="summarizing-data.html#cb52-16"></a><span class="kw">print</span>(scatter)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="scatter-plot-of-temperature-and-months-for-3-states" class="section level4" number="3.1.1.2">
+<h4><span class="header-section-number">3.1.1.2</span> Scatter Plot of Temperature and Months for 3 States</h4>
+<p>Now, we will generate a similar chart as above, but let’s select three states, and use different colors for each of the three states.</p>
+<p>We can see that there are differences in average temperature across cities in each state in each month, but the different states also have different levels of variations in city temperatures within months.</p>
+<p>We want to calculate both mean and standard deviations to capture both differences in averages over the year, as well as differences in how temperature varies within a month over the year.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="summarizing-data.html#cb53-1"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb53-2"><a href="summarizing-data.html#cb53-2"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">5</span>, <span class="dt">repr.plot.height =</span> <span class="dv">5</span>)</span>
+<span id="cb53-3"><a href="summarizing-data.html#cb53-3"></a><span class="co"># First Filter Data</span></span>
+<span id="cb53-4"><a href="summarizing-data.html#cb53-4"></a>df_temp_txflak &lt;-<span class="st"> </span>df_temp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(state <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;AK&#39;</span>, <span class="st">&#39;TX&#39;</span>, <span class="st">&#39;FL&#39;</span>))</span>
+<span id="cb53-5"><a href="summarizing-data.html#cb53-5"></a></span>
+<span id="cb53-6"><a href="summarizing-data.html#cb53-6"></a><span class="co"># Draw Scatter Plot</span></span>
+<span id="cb53-7"><a href="summarizing-data.html#cb53-7"></a><span class="co"># 1. specify x and y</span></span>
+<span id="cb53-8"><a href="summarizing-data.html#cb53-8"></a><span class="co"># 2. label each state</span></span>
+<span id="cb53-9"><a href="summarizing-data.html#cb53-9"></a><span class="co"># 3. add in trend line</span></span>
+<span id="cb53-10"><a href="summarizing-data.html#cb53-10"></a>scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df_temp_txflak, <span class="kw">aes</span>(<span class="dt">x=</span>month, <span class="dt">y=</span>temp.f,</span>
+<span id="cb53-11"><a href="summarizing-data.html#cb53-11"></a>                                      <span class="dt">colour=</span>state)) <span class="op">+</span></span>
+<span id="cb53-12"><a href="summarizing-data.html#cb53-12"></a><span class="st">      </span><span class="kw">geom_jitter</span>(<span class="dt">size=</span><span class="dv">1</span>, <span class="dt">width =</span> <span class="fl">0.15</span>) <span class="op">+</span></span>
+<span id="cb53-13"><a href="summarizing-data.html#cb53-13"></a><span class="st">      </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Distribution of Temperature Across Cities</span><span class="ch">\n</span><span class="st">in Florida (FL), Texas (TX) and Alaska (AK)&#39;</span>,</span>
+<span id="cb53-14"><a href="summarizing-data.html#cb53-14"></a>           <span class="dt">x =</span> <span class="st">&#39;Months&#39;</span>,</span>
+<span id="cb53-15"><a href="summarizing-data.html#cb53-15"></a>           <span class="dt">y =</span> <span class="st">&#39;Temperature in Fahrenheit&#39;</span>,</span>
+<span id="cb53-16"><a href="summarizing-data.html#cb53-16"></a>           <span class="dt">caption =</span> <span class="st">&#39;Temperature data 2017&#39;</span>) <span class="op">+</span></span>
+<span id="cb53-17"><a href="summarizing-data.html#cb53-17"></a><span class="st">      </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> <span class="kw">as.character</span>(df_temp<span class="op">$</span>month),</span>
+<span id="cb53-18"><a href="summarizing-data.html#cb53-18"></a>                         <span class="dt">breaks =</span> df_temp<span class="op">$</span>month) <span class="op">+</span></span>
+<span id="cb53-19"><a href="summarizing-data.html#cb53-19"></a><span class="st">      </span><span class="kw">theme_bw</span>()</span>
+<span id="cb53-20"><a href="summarizing-data.html#cb53-20"></a><span class="kw">print</span>(scatter)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="mean-and-standard-deviation-within-month-acorss-usa" class="section level4" number="3.1.1.3">
+<h4><span class="header-section-number">3.1.1.3</span> Mean and Standard Deviation Within Month Acorss USA</h4>
+<p>We can calculate the average temperature, as well as the standard deviation of temperature, in each month across cities in the USA. Let’s show what these are using dplyr, and let’s graph them out.</p>
+<p>It’s pretty amazing what mean, and standard deviation can do for us. We started with a dataset with many many observations, many many temperatures. Now with just 24 numbers below, we have created a way to summarize the large set of observations concisely. Twelve numbers for means for the 12 months, and 12 numbers for the standard deviations in 12 months.</p>
+<p>This is like flying in the sky and taking a snapshot of the ground below from thousands of miles up.</p>
+<p>The exciting thing here is, which statistics should we generate to adequately summarize what is going on on the ground within all the data observations? In this case here, if we show the mean, it informatively indicates that temperature is hotter during the summer, but it does not show the tightening of the temperature distribution during the summer months that we see in the scatter plot above. Adding standard deviation to our summary statistics, however, allows us also to see that as well.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="summarizing-data.html#cb54-1"></a><span class="co"># Show mean and standard deviation in tabular form</span></span>
+<span id="cb54-2"><a href="summarizing-data.html#cb54-2"></a>df_temp_mth_summ &lt;-<span class="st"> </span>df_temp <span class="op">%&gt;%</span></span>
+<span id="cb54-3"><a href="summarizing-data.html#cb54-3"></a><span class="st">    </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span></span>
+<span id="cb54-4"><a href="summarizing-data.html#cb54-4"></a><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">mean_temp =</span> <span class="kw">mean</span>(temp.f), <span class="dt">sd_temp =</span> <span class="kw">sd</span>(temp.f))</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="summarizing-data.html#cb55-1"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb55-2"><a href="summarizing-data.html#cb55-2"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">5</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
+<span id="cb55-3"><a href="summarizing-data.html#cb55-3"></a><span class="co"># Show mean and standard deviation in graphical form</span></span>
+<span id="cb55-4"><a href="summarizing-data.html#cb55-4"></a><span class="co"># We will gather the data first, it is an essential reshaping command</span></span>
+<span id="cb55-5"><a href="summarizing-data.html#cb55-5"></a>lineplot &lt;-<span class="st"> </span>df_temp_mth_summ <span class="op">%&gt;%</span></span>
+<span id="cb55-6"><a href="summarizing-data.html#cb55-6"></a><span class="st">    </span><span class="kw">gather</span>(variable, value, <span class="op">-</span>month) <span class="op">%&gt;%</span></span>
+<span id="cb55-7"><a href="summarizing-data.html#cb55-7"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>month, <span class="dt">y=</span>value, <span class="dt">colour=</span>variable, <span class="dt">linetype=</span>variable)) <span class="op">+</span></span>
+<span id="cb55-8"><a href="summarizing-data.html#cb55-8"></a><span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb55-9"><a href="summarizing-data.html#cb55-9"></a><span class="st">        </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb55-10"><a href="summarizing-data.html#cb55-10"></a><span class="st">        </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Mean and SD of Temperature Acorss US Cities&#39;</span>,</span>
+<span id="cb55-11"><a href="summarizing-data.html#cb55-11"></a>             <span class="dt">x =</span> <span class="st">&#39;Months&#39;</span>,</span>
+<span id="cb55-12"><a href="summarizing-data.html#cb55-12"></a>             <span class="dt">y =</span> <span class="st">&#39;Temperature in Fahrenheit&#39;</span>,</span>
+<span id="cb55-13"><a href="summarizing-data.html#cb55-13"></a>             <span class="dt">caption =</span> <span class="st">&#39;Temperature data 2017&#39;</span>) <span class="op">+</span></span>
+<span id="cb55-14"><a href="summarizing-data.html#cb55-14"></a><span class="st">        </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> <span class="kw">as.character</span>(df_temp_mth_summ<span class="op">$</span>month),</span>
+<span id="cb55-15"><a href="summarizing-data.html#cb55-15"></a>                           <span class="dt">breaks =</span> df_temp_mth_summ<span class="op">$</span>month)</span>
+<span id="cb55-16"><a href="summarizing-data.html#cb55-16"></a><span class="kw">print</span>(lineplot)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="mean-and-standard-deviation-within-month-acorss-states-in-usa" class="section level4" number="3.1.1.4">
+<h4><span class="header-section-number">3.1.1.4</span> Mean and Standard Deviation Within Month Acorss States in USA</h4>
+<p>We have various states, how do these mean and sd charts vary across the big states that we have, where there are numerous cities in each state?</p>
+<p>Let’s generate some state-specific charts, using very simple commands below, and see how fascinating the United States is.</p>
+<p>Specifically, we will have two charts:
+1. the first chart has 4 subplots for each state showing the mean and sd for each state across months
+2. the second chart has 2 subplots, showing inside each four lines for the four states.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="summarizing-data.html#cb56-1"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb56-2"><a href="summarizing-data.html#cb56-2"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">6</span>, <span class="dt">repr.plot.height =</span> <span class="dv">6</span>)</span>
+<span id="cb56-3"><a href="summarizing-data.html#cb56-3"></a><span class="co"># Show mean and standard deviation in graphical form</span></span>
+<span id="cb56-4"><a href="summarizing-data.html#cb56-4"></a><span class="co"># We start from the dataset:</span></span>
+<span id="cb56-5"><a href="summarizing-data.html#cb56-5"></a><span class="co"># 1. select a subset of states we want</span></span>
+<span id="cb56-6"><a href="summarizing-data.html#cb56-6"></a><span class="co"># 2. group by state and month to generate mean and sd</span></span>
+<span id="cb56-7"><a href="summarizing-data.html#cb56-7"></a><span class="co"># 3. reshape data with gather</span></span>
+<span id="cb56-8"><a href="summarizing-data.html#cb56-8"></a><span class="co"># 4. generate line plots, state by state</span></span>
+<span id="cb56-9"><a href="summarizing-data.html#cb56-9"></a></span>
+<span id="cb56-10"><a href="summarizing-data.html#cb56-10"></a>lineplot &lt;-<span class="st"> </span>df_temp <span class="op">%&gt;%</span></span>
+<span id="cb56-11"><a href="summarizing-data.html#cb56-11"></a><span class="st">    </span><span class="kw">filter</span>(state <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;AK&#39;</span>, <span class="st">&#39;CA&#39;</span>, <span class="st">&#39;FL&#39;</span>, <span class="st">&#39;TX&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb56-12"><a href="summarizing-data.html#cb56-12"></a><span class="st">    </span><span class="kw">group_by</span>(state, month) <span class="op">%&gt;%</span></span>
+<span id="cb56-13"><a href="summarizing-data.html#cb56-13"></a><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">mean_temp =</span> <span class="kw">mean</span>(temp.f), <span class="dt">sd_temp =</span> <span class="kw">sd</span>(temp.f)) <span class="op">%&gt;%</span></span>
+<span id="cb56-14"><a href="summarizing-data.html#cb56-14"></a><span class="st">    </span><span class="kw">gather</span>(variable, value, <span class="op">-</span>month, <span class="op">-</span>state) <span class="op">%&gt;%</span></span>
+<span id="cb56-15"><a href="summarizing-data.html#cb56-15"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>month, <span class="dt">y=</span>value,</span>
+<span id="cb56-16"><a href="summarizing-data.html#cb56-16"></a>               <span class="dt">colour=</span>variable, <span class="dt">linetype=</span>variable, <span class="dt">shape=</span>variable)) <span class="op">+</span></span>
+<span id="cb56-17"><a href="summarizing-data.html#cb56-17"></a><span class="st">        </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>state) <span class="op">+</span></span>
+<span id="cb56-18"><a href="summarizing-data.html#cb56-18"></a><span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb56-19"><a href="summarizing-data.html#cb56-19"></a><span class="st">        </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb56-20"><a href="summarizing-data.html#cb56-20"></a><span class="st">        </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Mean and SD of Temperature Acorss US Cities&#39;</span>,</span>
+<span id="cb56-21"><a href="summarizing-data.html#cb56-21"></a>             <span class="dt">x =</span> <span class="st">&#39;Months&#39;</span>,</span>
+<span id="cb56-22"><a href="summarizing-data.html#cb56-22"></a>             <span class="dt">y =</span> <span class="st">&#39;Temperature in Fahrenheit&#39;</span>,</span>
+<span id="cb56-23"><a href="summarizing-data.html#cb56-23"></a>             <span class="dt">caption =</span> <span class="st">&#39;Temperature data 2017&#39;</span>) <span class="op">+</span></span>
+<span id="cb56-24"><a href="summarizing-data.html#cb56-24"></a><span class="st">        </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> <span class="kw">as.character</span>(df_temp_mth_summ<span class="op">$</span>month),</span>
+<span id="cb56-25"><a href="summarizing-data.html#cb56-25"></a>                           <span class="dt">breaks =</span> df_temp_mth_summ<span class="op">$</span>month)</span>
+<span id="cb56-26"><a href="summarizing-data.html#cb56-26"></a><span class="kw">print</span>(lineplot)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="summarizing-data.html#cb57-1"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb57-2"><a href="summarizing-data.html#cb57-2"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">6</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
+<span id="cb57-3"><a href="summarizing-data.html#cb57-3"></a><span class="co"># Show mean and standard deviation in graphical form</span></span>
+<span id="cb57-4"><a href="summarizing-data.html#cb57-4"></a><span class="co"># We start from the dataset:</span></span>
+<span id="cb57-5"><a href="summarizing-data.html#cb57-5"></a><span class="co"># 1. select a subset of states we want</span></span>
+<span id="cb57-6"><a href="summarizing-data.html#cb57-6"></a><span class="co"># 2. group by state and month to generate mean and sd</span></span>
+<span id="cb57-7"><a href="summarizing-data.html#cb57-7"></a><span class="co"># 3. reshape data with gather</span></span>
+<span id="cb57-8"><a href="summarizing-data.html#cb57-8"></a><span class="co"># 4. generate line plots, state by state</span></span>
+<span id="cb57-9"><a href="summarizing-data.html#cb57-9"></a></span>
+<span id="cb57-10"><a href="summarizing-data.html#cb57-10"></a>lineplot &lt;-<span class="st"> </span>df_temp <span class="op">%&gt;%</span></span>
+<span id="cb57-11"><a href="summarizing-data.html#cb57-11"></a><span class="st">    </span><span class="kw">filter</span>(state <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;AK&#39;</span>, <span class="st">&#39;CA&#39;</span>, <span class="st">&#39;FL&#39;</span>, <span class="st">&#39;TX&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb57-12"><a href="summarizing-data.html#cb57-12"></a><span class="st">    </span><span class="kw">group_by</span>(state, month) <span class="op">%&gt;%</span></span>
+<span id="cb57-13"><a href="summarizing-data.html#cb57-13"></a><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">mean_temp =</span> <span class="kw">mean</span>(temp.f), <span class="dt">sd_temp =</span> <span class="kw">sd</span>(temp.f)) <span class="op">%&gt;%</span></span>
+<span id="cb57-14"><a href="summarizing-data.html#cb57-14"></a><span class="st">    </span><span class="kw">gather</span>(variable, value, <span class="op">-</span>month, <span class="op">-</span>state) <span class="op">%&gt;%</span></span>
+<span id="cb57-15"><a href="summarizing-data.html#cb57-15"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>month, <span class="dt">y=</span>value,</span>
+<span id="cb57-16"><a href="summarizing-data.html#cb57-16"></a>               <span class="dt">colour=</span>state, <span class="dt">linetype=</span>state, <span class="dt">shape=</span>state)) <span class="op">+</span></span>
+<span id="cb57-17"><a href="summarizing-data.html#cb57-17"></a><span class="st">        </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>variable, <span class="dt">scales=</span><span class="st">&quot;free_y&quot;</span>) <span class="op">+</span></span>
+<span id="cb57-18"><a href="summarizing-data.html#cb57-18"></a><span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb57-19"><a href="summarizing-data.html#cb57-19"></a><span class="st">        </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb57-20"><a href="summarizing-data.html#cb57-20"></a><span class="st">        </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Mean and SD of Temperature Acorss US Cities&#39;</span>,</span>
+<span id="cb57-21"><a href="summarizing-data.html#cb57-21"></a>             <span class="dt">x =</span> <span class="st">&#39;Months&#39;</span>,</span>
+<span id="cb57-22"><a href="summarizing-data.html#cb57-22"></a>             <span class="dt">y =</span> <span class="st">&#39;Temperature in Fahrenheit&#39;</span>,</span>
+<span id="cb57-23"><a href="summarizing-data.html#cb57-23"></a>             <span class="dt">caption =</span> <span class="st">&#39;Temperature data 2017&#39;</span>) <span class="op">+</span></span>
+<span id="cb57-24"><a href="summarizing-data.html#cb57-24"></a><span class="st">        </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> <span class="kw">as.character</span>(df_temp_mth_summ<span class="op">$</span>month),</span>
+<span id="cb57-25"><a href="summarizing-data.html#cb57-25"></a>                           <span class="dt">breaks =</span> df_temp_mth_summ<span class="op">$</span>month)</span>
+<span id="cb57-26"><a href="summarizing-data.html#cb57-26"></a><span class="kw">print</span>(lineplot)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+</div>
+<div id="coefficient-of-variation-and-correlation" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Coefficient of Variation and Correlation</h2>
+<blockquote>
+<p>Go back to <a href="http://fanwangecon.github.io/">fan</a>’s <a href="https://fanwangecon.github.io/REconTools/">REconTools</a> Package, <a href="https://fanwangecon.github.io/R4Econ/">R Code Examples</a> Repository (<a href="https://fanwangecon.github.io/R4Econ/bookdown">bookdown site</a>), or <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> Repository (<a href="https://fanwangecon.github.io/Stat4Econ/bookdown">bookdown site</a>).</p>
+</blockquote>
+<p>We have various tools at our disposal to summarize variables and the relationship between variables. Imagine that we have multiple toolboxes. This is the first one. There are two levels to this toolbox. Three Basic Tools:</p>
+<ol style="list-style-type: decimal">
+<li>(sample) Mean of X (or Y)</li>
+<li>(sample) Standard Deviation of X (or Y)</li>
+<li>(sample) Covariance of X and Y</li>
+</ol>
+<p>Additionally, we have two tools that combine the tools from the first level:</p>
+<ol style="list-style-type: decimal">
+<li>Coefficient of Variation = (Standard Deviation)/(Mean)</li>
+<li>Correlation = (Covariance of X and Y)/((Standard Deviation of X)*(Standard Deviation of Y))</li>
+</ol>
+<p>The tools on the second level rescale the standard deviation and covariance statistics.</p>
+<div id="education-and-wage" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Education and Wage</h3>
+<p>The dataset, <em>EPIStateEduWage2017.csv</em>, can be downloaded <a href="https://github.com/FanWangEcon/Stat4Econ/tree/master/data/EPIStateEduWage2017.csv">here</a>.</p>
+<p>Two variables:</p>
+<ol style="list-style-type: decimal">
+<li>Fraction of individual with college degree in a state
+<ul>
+<li>this is in Fraction units, the minimum is 0.00, the maximum is 100 percent, which is 1.00</li>
+</ul></li>
+<li>Average hourly salary in the state
+<ul>
+<li>this is in Dollar units</li>
+</ul></li>
+</ol>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="summarizing-data.html#cb58-1"></a><span class="co"># Load in Data Tools</span></span>
+<span id="cb58-2"><a href="summarizing-data.html#cb58-2"></a><span class="co"># For Reading/Loading Data</span></span>
+<span id="cb58-3"><a href="summarizing-data.html#cb58-3"></a><span class="kw">library</span>(readr)</span>
+<span id="cb58-4"><a href="summarizing-data.html#cb58-4"></a><span class="kw">library</span>(tibble)</span>
+<span id="cb58-5"><a href="summarizing-data.html#cb58-5"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb58-6"><a href="summarizing-data.html#cb58-6"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb58-7"><a href="summarizing-data.html#cb58-7"></a><span class="co"># Load in Data</span></span>
+<span id="cb58-8"><a href="summarizing-data.html#cb58-8"></a>df_wgedu &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/EPIStateEduWage2017.csv&#39;</span>)</span></code></pre></div>
+<div id="a-scatter-plot" class="section level4" number="3.2.1.1">
+<h4><span class="header-section-number">3.2.1.1</span> A Scatter Plot</h4>
+<p>We can Visualize the Data with a Scatter Plot. There seems to be a positive relationship between the share of individuals in a state with a college education, and the average hourly salary in that state.</p>
+<p>While most states are along the trend line, we have some states, like WY, that are outliers. WY has a high hourly salary but low share with college education.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="summarizing-data.html#cb59-1"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb59-2"><a href="summarizing-data.html#cb59-2"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">5</span>, <span class="dt">repr.plot.height =</span> <span class="dv">5</span>)</span>
+<span id="cb59-3"><a href="summarizing-data.html#cb59-3"></a><span class="co"># Draw Scatter Plot</span></span>
+<span id="cb59-4"><a href="summarizing-data.html#cb59-4"></a><span class="co"># 1. specify x and y</span></span>
+<span id="cb59-5"><a href="summarizing-data.html#cb59-5"></a><span class="co"># 2. label each state</span></span>
+<span id="cb59-6"><a href="summarizing-data.html#cb59-6"></a><span class="co"># 3. add in trend line</span></span>
+<span id="cb59-7"><a href="summarizing-data.html#cb59-7"></a>scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df_wgedu, <span class="kw">aes</span>(<span class="dt">x=</span>Share.College.Edu, <span class="dt">y=</span>Hourly.Salary)) <span class="op">+</span></span>
+<span id="cb59-8"><a href="summarizing-data.html#cb59-8"></a><span class="st">      </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb59-9"><a href="summarizing-data.html#cb59-9"></a><span class="st">      </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>State), <span class="dt">size=</span><span class="dv">3</span>, <span class="dt">hjust=</span><span class="op">-</span>.<span class="dv">2</span>, <span class="dt">vjust=</span><span class="op">-</span>.<span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb59-10"><a href="summarizing-data.html#cb59-10"></a><span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span></span>
+<span id="cb59-11"><a href="summarizing-data.html#cb59-11"></a><span class="st">      </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Hourly Wage and College Share by States&#39;</span>,</span>
+<span id="cb59-12"><a href="summarizing-data.html#cb59-12"></a>           <span class="dt">x =</span> <span class="st">&#39;Fraction with College Education&#39;</span>,</span>
+<span id="cb59-13"><a href="summarizing-data.html#cb59-13"></a>           <span class="dt">y =</span> <span class="st">&#39;Hourly Wage&#39;</span>,</span>
+<span id="cb59-14"><a href="summarizing-data.html#cb59-14"></a>           <span class="dt">caption =</span> <span class="st">&#39;Economic Policy Institute</span><span class="ch">\n</span><span class="st"> www.epi.org/data/&#39;</span>) <span class="op">+</span></span>
+<span id="cb59-15"><a href="summarizing-data.html#cb59-15"></a><span class="st">      </span><span class="kw">theme_bw</span>()</span>
+<span id="cb59-16"><a href="summarizing-data.html#cb59-16"></a><span class="kw">print</span>(scatter)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="standard-deviations-and-coefficient-of-variation" class="section level4" number="3.2.1.2">
+<h4><span class="header-section-number">3.2.1.2</span> Standard Deviations and Coefficient of Variation</h4>
+<p>The two variables above are in different units. We first calculate the mean, standard deviation, and covariance. With just these, it is hard to compare the standard deviation of the two variables, which are on different scales.</p>
+<p>The sample standard deviations for the two variables are: <span class="math inline">\(0.051\)</span> and <span class="math inline">\(1.51\)</span>, in fraction and dollar units. Can we say the hourly salary has a larger standard deviation? But it is just a different scale. <span class="math inline">\(1.51\)</span> is a large number, but that does not mean that variable has greater variation than the fraction with college education variable.</p>
+<p>Converting the Statistics to Coefficient of Variations, now we have: <span class="math inline">\(0.16\)</span> and <span class="math inline">\(0.09\)</span>. Because of the division, these are both in fraction units–standard deviations as a fraction of the mean. Now these are more comparable.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="summarizing-data.html#cb60-1"></a><span class="co"># We can compute the three basic statistics</span></span>
+<span id="cb60-2"><a href="summarizing-data.html#cb60-2"></a>stats.msdv &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb60-3"><a href="summarizing-data.html#cb60-3"></a>              <span class="co"># Mean, SD and Var for the College Share variable</span></span>
+<span id="cb60-4"><a href="summarizing-data.html#cb60-4"></a>              <span class="dt">Shr.Coll.Mean =</span> <span class="kw">mean</span>(df_wgedu<span class="op">$</span>Share.College.Edu),</span>
+<span id="cb60-5"><a href="summarizing-data.html#cb60-5"></a>              <span class="dt">Shr.Coll.Std =</span> <span class="kw">sd</span>(df_wgedu<span class="op">$</span>Share.College.Edu),</span>
+<span id="cb60-6"><a href="summarizing-data.html#cb60-6"></a>              <span class="dt">Shr.Coll.Var =</span> <span class="kw">var</span>(df_wgedu<span class="op">$</span>Share.College.Edu),</span>
+<span id="cb60-7"><a href="summarizing-data.html#cb60-7"></a></span>
+<span id="cb60-8"><a href="summarizing-data.html#cb60-8"></a>              <span class="co"># Mean, SD and Var for the Hourly Wage Variable</span></span>
+<span id="cb60-9"><a href="summarizing-data.html#cb60-9"></a>              <span class="dt">Hr.Wage.Mean =</span> <span class="kw">mean</span>(df_wgedu<span class="op">$</span>Hourly.Salary),</span>
+<span id="cb60-10"><a href="summarizing-data.html#cb60-10"></a>              <span class="dt">Hr.Wage.Std =</span> <span class="kw">sd</span>(df_wgedu<span class="op">$</span>Hourly.Salary),</span>
+<span id="cb60-11"><a href="summarizing-data.html#cb60-11"></a>              <span class="dt">Hr.Wage.Var =</span> <span class="kw">var</span>(df_wgedu<span class="op">$</span>Hourly.Salary)</span>
+<span id="cb60-12"><a href="summarizing-data.html#cb60-12"></a>              )</span>
+<span id="cb60-13"><a href="summarizing-data.html#cb60-13"></a></span>
+<span id="cb60-14"><a href="summarizing-data.html#cb60-14"></a><span class="co"># We can compute the three basic statistics</span></span>
+<span id="cb60-15"><a href="summarizing-data.html#cb60-15"></a>stats.coefvari &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb60-16"><a href="summarizing-data.html#cb60-16"></a>              <span class="co"># Coefficient of Variation</span></span>
+<span id="cb60-17"><a href="summarizing-data.html#cb60-17"></a>              <span class="dt">Shr.Coll.Coef.Variation =</span> (stats.msdv<span class="op">$</span>Shr.Coll.Std)<span class="op">/</span>(stats.msdv<span class="op">$</span>Shr.Coll.Mean),</span>
+<span id="cb60-18"><a href="summarizing-data.html#cb60-18"></a>              <span class="dt">Hr.Wage.Coef.Variation =</span> (stats.msdv<span class="op">$</span>Hr.Wage.Std)<span class="op">/</span>(stats.msdv<span class="op">$</span>Hr.Wage.Mean)</span>
+<span id="cb60-19"><a href="summarizing-data.html#cb60-19"></a>              )</span>
+<span id="cb60-20"><a href="summarizing-data.html#cb60-20"></a></span>
+<span id="cb60-21"><a href="summarizing-data.html#cb60-21"></a><span class="co"># Let&#39;s Print the Statistics we Computed</span></span>
+<span id="cb60-22"><a href="summarizing-data.html#cb60-22"></a><span class="kw">as_tibble</span>(stats.msdv)</span>
+<span id="cb60-23"><a href="summarizing-data.html#cb60-23"></a><span class="kw">as_tibble</span>(stats.coefvari)</span></code></pre></div>
+</div>
+<div id="covariance-and-correlation" class="section level4" number="3.2.1.3">
+<h4><span class="header-section-number">3.2.1.3</span> Covariance and Correlation</h4>
+<p>For covariance, hard to tell whether it is large or small. To make comparisons possible, we calculate the coefficient of variations and correlation statistics.</p>
+<p>The covariance we get is positive: <span class="math inline">\(0.06\)</span>, but is this actually large positive relationship? <span class="math inline">\(0.06\)</span> seems like a small number.</p>
+<p>Rescaling covariance to correlation, the correlation between the two variables is: <span class="math inline">\(0.78\)</span>. Since the correlation of two variable is below <span class="math inline">\(-1\)</span> and <span class="math inline">\(+1\)</span>, we can now say actually the two variables are very positively related. A higher share of individuals with a college education is strongly positively correlated with a higher hourly salary.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="summarizing-data.html#cb61-1"></a><span class="co"># We can compute the three basic statistics</span></span>
+<span id="cb61-2"><a href="summarizing-data.html#cb61-2"></a>states.covcor &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb61-3"><a href="summarizing-data.html#cb61-3"></a>              <span class="co"># Covariance between the two variables</span></span>
+<span id="cb61-4"><a href="summarizing-data.html#cb61-4"></a>              <span class="dt">Shr.Wage.Cov =</span> <span class="kw">cov</span>(df_wgedu<span class="op">$</span>Hourly.Salary,</span>
+<span id="cb61-5"><a href="summarizing-data.html#cb61-5"></a>                                 df_wgedu<span class="op">$</span>Share.College.Edu),</span>
+<span id="cb61-6"><a href="summarizing-data.html#cb61-6"></a>              <span class="co"># Correlation</span></span>
+<span id="cb61-7"><a href="summarizing-data.html#cb61-7"></a>              <span class="dt">Shr.Wage.Cor =</span> <span class="kw">cor</span>(df_wgedu<span class="op">$</span>Hourly.Salary, df_wgedu<span class="op">$</span>Share.College.Edu),</span>
+<span id="cb61-8"><a href="summarizing-data.html#cb61-8"></a>              <span class="dt">Shr.Wage.Cor.Formula =</span> (<span class="kw">cov</span>(df_wgedu<span class="op">$</span>Hourly.Salary, df_wgedu<span class="op">$</span>Share.College.Edu)</span>
+<span id="cb61-9"><a href="summarizing-data.html#cb61-9"></a>                                      <span class="op">/</span>(stats.msdv<span class="op">$</span>Shr.Coll.Std<span class="op">*</span>stats.msdv<span class="op">$</span>Hr.Wage.Std))</span>
+<span id="cb61-10"><a href="summarizing-data.html#cb61-10"></a>              )</span>
+<span id="cb61-11"><a href="summarizing-data.html#cb61-11"></a></span>
+<span id="cb61-12"><a href="summarizing-data.html#cb61-12"></a><span class="co"># Let&#39;s Print the Statistics we Computed</span></span>
+<span id="cb61-13"><a href="summarizing-data.html#cb61-13"></a><span class="kw">as_tibble</span>(states.covcor)</span></code></pre></div>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="dataset-tables-and-graphs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basics-of-probability.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["Introductory-Statistics-with-R-tidyverse.pdf", "PDF"]],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

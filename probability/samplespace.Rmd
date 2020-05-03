@@ -1,0 +1,147 @@
+---
+title: "Sample Space, Experimental Outcomes, Events, Probabilities"
+titleshort: "Sample Space, Experimental Outcomes, Events, Probabilities"
+description: |
+  Sample Space, Experimental Outcomes, Events and Probability.
+  Union, intersection and complements
+  conditional probability
+date: 2020-05-02
+date_start: 2018-12-01
+output:
+  pdf_document:
+    pandoc_args: '../_output_kniti_pdf.yaml'
+    includes:
+      in_header: '../preamble.tex'
+  html_document:
+    pandoc_args: '../_output_kniti_html.yaml'
+    includes:
+      in_header: '../hdga.html'
+always_allow_html: true
+urlcolor: blue
+---
+
+## Experimental Outcomes
+
+```{r global_options, include = FALSE}
+try(source("../.Rprofile"))
+```
+
+`r text_shared_preamble_one`
+`r text_shared_preamble_two`
+`r text_shared_preamble_thr`
+
+1. Experiment
+    - "We define an experiment as a process that generates well-defined outcomes" (ASWCC P171)
+2. Sample Space
+    - "The sample space for an experiment is the set of all experimental outcomes" (ASWCC P172)
+3. Experimental outcomes
+    - "An experimental outcome is also called a sample point to identify it as an element of the sample space." (ASWCC P172)
+4. Events
+    - "An Event is a collection of Sample Points" (AWSCC P181), could be just one sample point (one experimental outcome)
+5. Probability
+    - "Probability is a numerical measure of the likelihood that an event will occur." (AWSCC P171)
+
+### Sample Space and Probabilities
+
+**Sample Space and Experimental Outcomes**
+
+We can use the letter $S$ or $\Omega$ to denote sample space. Supose we have a set of $n$ experimental outcomes:
+
+$$S = \left\{ E_1, E_2, ..., E_{n-1}, E_n\right\}$$
+
+We can call $S$ a sample space if:
+
+1. $E_i$ are mutually exclusive:
+    - $E_i$ for all $i$ are separate outcomes that do not overlap.
+    - Suppose there are multiple people running for the Presidency, some of these candidates are women, and some of these women are from Texas. If one of the $E_i$ is that a woman becomes the President, and another $E_i$ is that someone from Texas becomes the President, $S$ would not be a sample space, because we could have a woman who is also from Texas win the Presidency.
+2. $E_i$ are jointly exhaustive:
+    - For the experiment with well-defined outcomes, the $E_i$ in $S$ need to cover all possible outcomes.
+    - If you are throwing a six sided dice, there are six possible experimental outcomes, if $S$ only has five of them, it would not be a sample space.
+
+Thinking about the world in terms of sample space is pretty amazing.
+
+**Assigning Probability to Experimental Outcomes**
+
+We can assign probabilities to events of a sample space. Since experimental outcomes are themselves events as well, we can assign probabilities to each experimental outcome.
+
+For the mutually exclusive and jointly exhaustive experimental outcomes of the sample space, there are two equirements for assigning probabilities:
+- Each element of the sample space can not have negative probability of happening, and also can not have more than $1$ probability of happening, with $P$ denotes probability, we have:
+    $$0 \le P(E_i) \le 1$$
+- The probabilities of all the mutually exclusive and jointly exhaustive experimental outcomes in the sample space sum up to $1$. For an experimental with $n$ experimental outcomes:
+    $$\Sigma_{i=1}^{n} P(E_i) = 1$$
+
+```{r}
+# Load Library
+library(tidyverse)
+
+# Define a List of Experimental Outcomes
+experimental.outcomes.list <- c('Heavy Rain', 'Light Rain', 'No Rain')
+
+# Probabilities on experimental outcomes
+experimental.outcome.prob <- c(0.1, 0.2, 0.7)
+
+# Show these in a Tibble
+tibble(tomorrow.experimental.outcomes = experimental.outcomes.list,
+       experimental.outcome.prob = experimental.outcome.prob)
+```
+
+```{r}
+# What could happen tomorrow?
+# We live in a probabilistic world, from today's perspective, tomorrow is uncertain
+# If we draw tomorrow from a hat, given our possible outcomes
+# and the probabilities associated with the outcomes
+# what are the possible tomorrows?
+number.of.tomorrow.to.draw = 20
+tomorrow.weather.draws <- sample(experimental.outcomes.list,
+                                 size = number.of.tomorrow.to.draw,
+                                 replace = TRUE,
+                                 prob = experimental.outcome.prob)
+
+# A little tibble to show results
+# There are only three unique tomorrows, each of three weather outcomes
+# could happen, but the chance of each happening differs by the probabilities
+# we set in experimental.outcome.prob
+tibble(which.tomorrow = paste0('tomorrow:', 1:number.of.tomorrow.to.draw),
+       tomorrow.weather = tomorrow.weather.draws)
+```
+
+### Union and Intersection and Complements
+
+Definitions:
+
+1. Complement of Event $A$:
+    - "Given an event A, the complement of A is defined to be the event consisting of all sample points that are not in A. The complement of A is denoted by $A^c$." (AWSCC P185)
+2. The Union of Events $A$ and $B$:
+    - "The union of A and B is the event containing all sample points belonging to $A$ or $B$ or both. The union is denoted by $A \cup B$." (AWSCC P186)
+3. The Intersection of Events $A$ and $B$:
+    - "Given two events $A$ and $B$, the intersection of $A$ and $B$ is the event containing the sample points belonging to both $A$ and $B$. The intersection is denoted by $A \cap B$." (AWSCC P187)
+
+**Probabilities for Complements and Union**
+
+The Probabilities of Complements add up to 1:
+    $$P(A) + P(A^c) = 1$$
+
+The **Addition Law**:
+    $$P (A \cup B) = P(A) + P(B) - P (A \cap B)$$
+
+If two events $A$ and $B$ are mutually exclusive, which means they do not share any experimental outcomes (sample points), then: $P (A \cap B) = 0$, and $P (A \cup B) = P(A) + P(B)$.
+
+The **Multiplication Law for Indepedent Events**:
+    $$P (A \cap B) = P(A) \cdot P(B)$$
+
+If the probability of event $A$ happening does not change the probability of event $B$ happening, and vice-versa. The two events are independent. Below we arrive this formulation from conditional probability.
+
+### Conditional Probability
+
+We use a straight line $\mid$ to denote conditional probability. Given $A$ happens, what is the probability of $B$ happening?
+
+$$P (A \mid B) = \frac{P(A \cap B)}{P(B)}$$
+
+This says the probability of $A$ happening given that $B$ happens is equal to the ratio of the probability that both $A$ and $B$ happen divided by the probability of $B$ happening.
+
+The formula also means that the probability that both $A$ and $B$ happens is equal to the probability that $B$ happens times the probability that $A$ happens conditional on $B$ happening:
+$$ P(A \cap B) = P (A \mid B)\cdot P(B)$$
+
+If $A$ and $B$ are independent, that means the probability of $A$ happening does not change whether $B$ happens or not, then, $P (A \mid B) = P(A)$, and:
+$$ \text{If A and B are independent: } P(A \cap B) = P(A) \cdot P(B)$$
+This is what we wrote down earlier as well.

@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Dataset, Tables and Graphs | Introductory Statistics with R tidyverse</title>
+  <meta name="description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Dataset, Tables and Graphs | Introductory Statistics with R tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  <meta name="github-repo" content="fanwangecon/Stat4Econ" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Dataset, Tables and Graphs | Introductory Statistics with R tidyverse" />
+  
+  <meta name="twitter:description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  
+
+<meta name="author" content="Fan Wang" />
+
+
+<meta name="date" content="2020-05-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="survey.html"/>
+<link rel="next" href="summarizing-data.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92953468-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92953468-4');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introductory Statistics with R tidyverse</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="survey.html"><a href="survey.html"><i class="fa fa-check"></i><b>1</b> Survey</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="survey.html"><a href="survey.html#generate-a-dataset-in-r"><i class="fa fa-check"></i><b>1.1</b> Generate A Dataset in R</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="survey.html"><a href="survey.html#a-random-sample-of-students-in-class"><i class="fa fa-check"></i><b>1.1.1</b> A Random Sample of Students in Class</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html"><i class="fa fa-check"></i><b>2</b> Dataset, Tables and Graphs</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#opening-a-dataset"><i class="fa fa-check"></i><b>2.1</b> Opening a Dataset</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#paths-to-data"><i class="fa fa-check"></i><b>2.1.1</b> Paths to Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#one-variable-graphs-and-tables"><i class="fa fa-check"></i><b>2.2</b> One Variable Graphs and Tables</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#categoricaldiscrete"><i class="fa fa-check"></i><b>2.2.1</b> Categorical/Discrete</a></li>
+<li class="chapter" data-level="2.2.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#continuousquantitative"><i class="fa fa-check"></i><b>2.2.2</b> Continuous/Quantitative</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#multiple-variables-graphs-and-tables"><i class="fa fa-check"></i><b>2.3</b> Multiple Variables Graphs and Tables</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#two-continuous-variables"><i class="fa fa-check"></i><b>2.3.1</b> Two Continuous Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#two-categorical-variables"><i class="fa fa-check"></i><b>2.3.2</b> Two Categorical Variables</a></li>
+<li class="chapter" data-level="2.3.3" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#continuous-and-categorical-variable"><i class="fa fa-check"></i><b>2.3.3</b> Continuous and Categorical Variable</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="summarizing-data.html"><a href="summarizing-data.html"><i class="fa fa-check"></i><b>3</b> Summarizing Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="summarizing-data.html"><a href="summarizing-data.html#mean-and-standard-deviation"><i class="fa fa-check"></i><b>3.1</b> Mean and Standard Deviation</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="summarizing-data.html"><a href="summarizing-data.html#temperature-across-locations-over-time"><i class="fa fa-check"></i><b>3.1.1</b> Temperature Across Locations over Time</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="summarizing-data.html"><a href="summarizing-data.html#coefficient-of-variation-and-correlation"><i class="fa fa-check"></i><b>3.2</b> Coefficient of Variation and Correlation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="summarizing-data.html"><a href="summarizing-data.html#education-and-wage"><i class="fa fa-check"></i><b>3.2.1</b> Education and Wage</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="basics-of-probability.html"><a href="basics-of-probability.html"><i class="fa fa-check"></i><b>4</b> Basics of Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#experimental-outcomes"><i class="fa fa-check"></i><b>4.1</b> Experimental Outcomes</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-space-and-probabilities"><i class="fa fa-check"></i><b>4.1.1</b> Sample Space and Probabilities</a></li>
+<li class="chapter" data-level="4.1.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#union-and-intersection-and-complements"><i class="fa fa-check"></i><b>4.1.2</b> Union and Intersection and Complements</a></li>
+<li class="chapter" data-level="4.1.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#conditional-probability"><i class="fa fa-check"></i><b>4.1.3</b> Conditional Probability</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-space-and-probability-examples"><i class="fa fa-check"></i><b>4.2</b> Sample Space and Probability Examples</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#presidential-election"><i class="fa fa-check"></i><b>4.2.1</b> Presidential Election</a></li>
+<li class="chapter" data-level="4.2.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#throwing-a-dice"><i class="fa fa-check"></i><b>4.2.2</b> Throwing a Dice</a></li>
+<li class="chapter" data-level="4.2.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#two-basketball-games"><i class="fa fa-check"></i><b>4.2.3</b> Two Basketball Games</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-average"><i class="fa fa-check"></i><b>4.3</b> Sample Average</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#an-unfair-dice"><i class="fa fa-check"></i><b>4.3.1</b> An Unfair Dice</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="basics-of-probability.html"><a href="basics-of-probability.html#multiple-step-experiment"><i class="fa fa-check"></i><b>4.4</b> Multiple-Step Experiment</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#playing-the-lottery-three-times"><i class="fa fa-check"></i><b>4.4.1</b> Playing the Lottery Three times</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html"><i class="fa fa-check"></i><b>5</b> Discrete Probability Distribution</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#discrete-random-variable-and-binomial"><i class="fa fa-check"></i><b>5.1</b> Discrete Random Variable and Binomial</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#discrete-random-variable"><i class="fa fa-check"></i><b>5.1.1</b> Discrete Random Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-experiment"><i class="fa fa-check"></i><b>5.2</b> Binomial Experiment</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-example-larceny"><i class="fa fa-check"></i><b>5.2.1</b> Binomial Example: Larceny</a></li>
+<li class="chapter" data-level="5.2.2" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-example-wwii-german-soldier"><i class="fa fa-check"></i><b>5.2.2</b> Binomial Example: WWII German Soldier</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#poisson-distribution"><i class="fa fa-check"></i><b>5.3</b> Poisson Distribution</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#poisson-example-horse-kicking"><i class="fa fa-check"></i><b>5.3.1</b> Poisson Example: Horse-Kicking</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="index-and-code-links.html"><a href="index-and-code-links.html"><i class="fa fa-check"></i><b>A</b> Index and Code Links</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="index-and-code-links.html"><a href="index-and-code-links.html#survey-links"><i class="fa fa-check"></i><b>A.1</b> Survey links</a></li>
+<li class="chapter" data-level="A.2" data-path="index-and-code-links.html"><a href="index-and-code-links.html#dataset-tables-and-graphs-links"><i class="fa fa-check"></i><b>A.2</b> Dataset, Tables and Graphs links</a></li>
+<li class="chapter" data-level="A.3" data-path="index-and-code-links.html"><a href="index-and-code-links.html#summarizing-data-links"><i class="fa fa-check"></i><b>A.3</b> Summarizing Data links</a></li>
+<li class="chapter" data-level="A.4" data-path="index-and-code-links.html"><a href="index-and-code-links.html#basics-of-probability-links"><i class="fa fa-check"></i><b>A.4</b> Basics of Probability links</a></li>
+<li class="chapter" data-level="A.5" data-path="index-and-code-links.html"><a href="index-and-code-links.html#discrete-probability-distribution-links"><i class="fa fa-check"></i><b>A.5</b> Discrete Probability Distribution links</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://fanwangecon.github.io/Stat4Econ/bookdown/index.html" target="blank">Stat4Econ Bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introductory Statistics with R tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="dataset-tables-and-graphs" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Dataset, Tables and Graphs</h1>
+
+<div id="opening-a-dataset" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Opening a Dataset</h2>
+<blockquote>
+<p>Go back to <a href="http://fanwangecon.github.io/">fan</a>’s <a href="https://fanwangecon.github.io/REconTools/">REconTools</a> Package, <a href="https://fanwangecon.github.io/R4Econ/">R Code Examples</a> Repository (<a href="https://fanwangecon.github.io/R4Econ/bookdown">bookdown site</a>), or <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> Repository (<a href="https://fanwangecon.github.io/Stat4Econ/bookdown">bookdown site</a>).</p>
+</blockquote>
+<p>We have a dataset on basketball teams. The dataset, <em>Basketball.csv</em>, can be downloaded <a href="https://github.com/FanWangEcon/Stat4Econ/tree/master/data/Basketball.csv">here</a>.</p>
+<p>We will load in the dataset and do some analysis with it.</p>
+<div id="paths-to-data" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Paths to Data</h3>
+<p><strong>Relative Path</strong></p>
+<p>The dataset is stored in a csv file. The folder structure for this file we are working inside and the data file is:</p>
+<ul>
+<li>main folder: Stat4Econ
+<ul>
+<li>subfolder: data
+<ul>
+<li>file: Basketball.csv</li>
+</ul></li>
+<li>subfolder: descriptive
+<ul>
+<li>file: DataBasketball.ipynb (the jupyter notebook file)</li>
+<li>file: DataBasetball.html (the html version of the jupyter notebook file</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>overall this means:
+- the csv file’s location is: <strong>‘/Stat4Econ/descriptive/data/Basketball.csv’</strong>
+- the working R code file’s location is: <strong>‘/Stat4Econ/descriptive/data/DataBasketball.ipynb’</strong></p>
+<p>Given this structure, to access the <em>Basketball.csv</em> dataset, we need to go one folder up from our current subfolder to the mainfolder, and then choose the data subfolder, and the Basketball.csv file in the subfolder.</p>
+<p><strong>Absolute Path</strong></p>
+<p>If these files are not in the same main folder but are in different locations on your computer, you can find the full path to the csv path and copy paste the path below in between the single quotes.</p>
+<p>search on google to find out how to get the full path to file:
+- google search for <a href="https://www.google.com/search?q=find+full+path+for+file+on+mac">find full path for file on mac</a>
++ this might end up looking like: <strong>‘/Users/fan/Downloads/Basketball.csv’</strong>
+- google search for <a href="https://www.google.com/search?q=find+full+path+for+file+on+mac">find full path for file on PC</a>
++ this might end up looking like: <strong>‘C:/Users/fan/Documents/Dropbox/Basketball.csv’</strong></p>
+<p><strong>Using Relative path to load in data</strong></p>
+<p>We will load in the data using base R read.csv function.</p>
+<ul>
+<li>For what the variables mean, see <a href="https://en.wikipedia.org/wiki/Basketball_statistics">here</a></li>
+<li>For what NBA team names correspond to, see <a href="https://en.wikipedia.org/w/index.php?title=Wikipedia:WikiProject_National_Basketball_Association/National_Basketball_Association_team_abbreviations">here</a>.</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="dataset-tables-and-graphs.html#cb12-1"></a><span class="co"># We can load the dataset in first by setting our directory, then loading in the dataset</span></span>
+<span id="cb12-2"><a href="dataset-tables-and-graphs.html#cb12-2"></a>basetball_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/Basketball.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="dataset-tables-and-graphs.html#cb13-1"></a><span class="co"># Alternatively, we can just use one line</span></span>
+<span id="cb13-2"><a href="dataset-tables-and-graphs.html#cb13-2"></a>basetball_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/Basketball.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="dataset-tables-and-graphs.html#cb14-1"></a><span class="co"># Summarize all variables in data frame</span></span>
+<span id="cb14-2"><a href="dataset-tables-and-graphs.html#cb14-2"></a><span class="kw">summary</span>(basetball_data)</span></code></pre></div>
+<pre><code>##         ilkid            year        firstname         lastname          team       leag            gp           minutes            pts              oreb       
+##  WILLIKE01 :   27   Min.   :1946   John   :  502   Williams:  441   TOT    : 1611   A: 1247   Min.   : 1.00   Min.   :   0.0   Min.   :   0.0   Min.   :  0.00  
+##  EDWARJA01 :   25   1st Qu.:1974   Bob    :  404   Johnson :  400   NYK    :  947   N:20712   1st Qu.:29.00   1st Qu.: 275.5   1st Qu.: 113.0   1st Qu.:  0.00  
+##  CORBITY01 :   24   Median :1988   Mike   :  395   Smith   :  317   BOS    :  919             Median :60.00   Median :1038.0   Median : 386.0   Median : 22.00  
+##  JACKSJI01 :   24   Mean   :1986   Jim    :  344   Jones   :  298   DET    :  799             Mean   :51.91   Mean   :1204.1   Mean   : 531.1   Mean   : 49.79  
+##  CASSESA01 :   23   3rd Qu.:1999   Chris  :  267   Davis   :  254   PHI    :  736             3rd Qu.:76.00   3rd Qu.:2009.0   3rd Qu.: 811.0   3rd Qu.: 75.00  
+##  MALONMO01 :   23   Max.   :2009   Tom    :  260   Brown   :  209   LAL    :  712             Max.   :90.00   Max.   :3882.0   Max.   :4029.0   Max.   :587.00  
+##  (Other)   :21813                  (Other):19787   (Other) :20040   (Other):16235                                                                               
+##       dreb             reb              asts             stl             blk           turnover           pf             fga              fgm              fta        
+##  Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   0      : 5939   0      : 6855   0      : 5696   Min.   :  0.0   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0  
+##  1st Qu.:   1.0   1st Qu.:  44.0   1st Qu.:  20.0   1      :  607   1      : 1126   1      :  349   1st Qu.: 43.0   1st Qu.: 106.0   1st Qu.:  43.0   1st Qu.:  30.0  
+##  Median :  60.0   Median : 160.0   Median :  71.0   2      :  479   2      :  860   2      :  347   Median :118.0   Median : 345.0   Median : 148.0   Median :  99.0  
+##  Mean   : 117.8   Mean   : 229.7   Mean   : 118.1   3      :  445   3      :  754   NULL   :  294   Mean   :123.6   Mean   : 452.5   Mean   : 204.2   Mean   : 146.9  
+##  3rd Qu.: 180.0   3rd Qu.: 333.0   3rd Qu.: 167.0   5      :  345   4      :  647   3      :  287   3rd Qu.:193.0   3rd Qu.: 696.0   3rd Qu.: 313.0   3rd Qu.: 218.0  
+##  Max.   :1538.0   Max.   :2149.0   Max.   :1164.0   4      :  343   5      :  608   5      :  246   Max.   :386.0   Max.   :3159.0   Max.   :1597.0   Max.   :1363.0  
+##                                                     (Other):13801   (Other):11109   (Other):14740                                                                     
+##       ftm             tpa              tpm       
+##  Min.   :  0.0   Min.   :  0.00   Min.   :  0.0  
+##  1st Qu.: 20.0   1st Qu.:  0.00   1st Qu.:  0.0  
+##  Median : 70.0   Median :  2.00   Median :  0.0  
+##  Mean   :109.6   Mean   : 38.07   Mean   : 13.1  
+##  3rd Qu.:161.0   3rd Qu.: 27.00   3rd Qu.:  7.0  
+##  Max.   :840.0   Max.   :678.00   Max.   :269.0  
+## </code></pre>
+
+</div>
+</div>
+<div id="one-variable-graphs-and-tables" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> One Variable Graphs and Tables</h2>
+<blockquote>
+<p>Go back to <a href="http://fanwangecon.github.io/">fan</a>’s <a href="https://fanwangecon.github.io/REconTools/">REconTools</a> Package, <a href="https://fanwangecon.github.io/R4Econ/">R Code Examples</a> Repository (<a href="https://fanwangecon.github.io/R4Econ/bookdown">bookdown site</a>), or <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> Repository (<a href="https://fanwangecon.github.io/Stat4Econ/bookdown">bookdown site</a>).</p>
+</blockquote>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="dataset-tables-and-graphs.html#cb16-1"></a><span class="co"># For Data Structures</span></span>
+<span id="cb16-2"><a href="dataset-tables-and-graphs.html#cb16-2"></a><span class="kw">library</span>(tibble)</span>
+<span id="cb16-3"><a href="dataset-tables-and-graphs.html#cb16-3"></a><span class="co"># For Data Manipulations</span></span>
+<span id="cb16-4"><a href="dataset-tables-and-graphs.html#cb16-4"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb16-5"><a href="dataset-tables-and-graphs.html#cb16-5"></a><span class="co"># For Reading/Loading Data</span></span>
+<span id="cb16-6"><a href="dataset-tables-and-graphs.html#cb16-6"></a><span class="kw">library</span>(readr)</span>
+<span id="cb16-7"><a href="dataset-tables-and-graphs.html#cb16-7"></a><span class="co"># For plotting</span></span>
+<span id="cb16-8"><a href="dataset-tables-and-graphs.html#cb16-8"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb16-9"><a href="dataset-tables-and-graphs.html#cb16-9"></a><span class="co"># For Additional table output</span></span>
+<span id="cb16-10"><a href="dataset-tables-and-graphs.html#cb16-10"></a><span class="co"># install.packages(&quot;knitr&quot;)</span></span>
+<span id="cb16-11"><a href="dataset-tables-and-graphs.html#cb16-11"></a><span class="kw">library</span>(knitr)</span></code></pre></div>
+<p>Let’s load in the dataset we created from the <a href="https://fanwangecon.github.io/Stat4Econ/survey/htmlpdfr/classsurvey.html">in-class survey</a>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="dataset-tables-and-graphs.html#cb17-1"></a><span class="co"># Load the dataset using readr&#39;s read_csv</span></span>
+<span id="cb17-2"><a href="dataset-tables-and-graphs.html#cb17-2"></a>df_survey &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/classsurvey.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="dataset-tables-and-graphs.html#cb18-1"></a><span class="co"># We have several factor variables, we can set them as factor one by one</span></span>
+<span id="cb18-2"><a href="dataset-tables-and-graphs.html#cb18-2"></a>df_survey[[<span class="st">&#39;gender&#39;</span>]] &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df_survey[[<span class="st">&#39;gender&#39;</span>]])</span>
+<span id="cb18-3"><a href="dataset-tables-and-graphs.html#cb18-3"></a><span class="co"># But that is a little cumbersome, we can using lapply, a core function in r to do this for all factors</span></span>
+<span id="cb18-4"><a href="dataset-tables-and-graphs.html#cb18-4"></a>factor_col_names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;gender&#39;</span>, <span class="st">&#39;major&#39;</span>, <span class="st">&#39;commute&#39;</span>, <span class="st">&#39;games.any&#39;</span>, <span class="st">&#39;econ&#39;</span>)</span>
+<span id="cb18-5"><a href="dataset-tables-and-graphs.html#cb18-5"></a>df_survey[factor_col_names] &lt;-<span class="st"> </span><span class="kw">lapply</span>(df_survey[factor_col_names], as.factor)</span>
+<span id="cb18-6"><a href="dataset-tables-and-graphs.html#cb18-6"></a><span class="co"># Check Variable Types</span></span>
+<span id="cb18-7"><a href="dataset-tables-and-graphs.html#cb18-7"></a><span class="kw">str</span>(df_survey)</span></code></pre></div>
+<pre><code>## tibble [10 x 10] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ ID              : num [1:10] 1 2 3 4 5 6 7 8 9 10
+##  $ ROW             : num [1:10] 3 4 4 4 2 1 2 3 3 4
+##  $ COL             : num [1:10] 1 2 10 1 6 7 6 6 3 13
+##  $ gender          : Factor w/ 2 levels &quot;FEMALE&quot;,&quot;MALE&quot;: 2 1 2 2 1 2 2 2 1 1
+##  $ years.in.houston: num [1:10] 21 21 22 22 20 3 25 20 5 20
+##  $ major           : Factor w/ 5 levels &quot;CONSUMERSCIENCE&quot;,..: 2 3 2 2 2 5 2 1 4 2
+##  $ commute         : Factor w/ 1 level &quot;YES&quot;: 1 1 1 1 1 1 1 1 1 1
+##  $ games.attended  : num [1:10] 0 2 0 14 0 0 25 2 0 0
+##  $ games.any       : Factor w/ 2 levels &quot;Has.Attended&quot;,..: 2 1 2 1 2 2 1 1 2 2
+##  $ econ            : Factor w/ 2 levels &quot;ECON&quot;,&quot;Not.Econ&quot;: 1 2 1 1 1 2 1 2 2 1
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   ID = col_double(),
+##   ..   ROW = col_double(),
+##   ..   COL = col_double(),
+##   ..   gender = col_character(),
+##   ..   years.in.houston = col_double(),
+##   ..   major = col_character(),
+##   ..   commute = col_character(),
+##   ..   games.attended = col_double(),
+##   ..   games.any = col_character(),
+##   ..   econ = col_character()
+##   .. )</code></pre>
+<div id="categoricaldiscrete" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Categorical/Discrete</h3>
+<p>Using categorical/discrete variables, such as Major, Gender, Recent arrival or not, etc, we can generate frequency tables.</p>
+<ul>
+<li>Nominal Variables: These are categorical variables like name, or address, or major.</li>
+<li>Ordinal Variables: These are categorical variables like age, grade in school, that could be ordered sequentially.</li>
+</ul>
+<p>The frequency table shows in separate columns (or rows) the name for all the categories for that categorical variable, and show next to these categories the number of times that category appears in the dataset. This is called a frequency table because frequencies are shown for each category. So if we show a one-way frequency for majors, there would be four rows for the four unique majors from our survey of 10 students, and we would write down the number of students in each of the majors out of the 10 students.</p>
+<p>Rather than showing frequencies, we can also show ratios or percentages by dividing the number of observations in each category by the total number of observations in the survey.</p>
+<p>Graphically, we can show the results from these one-way frequency tables using bar charts and pie charts. The bar charts would have separate bars for each category, and the heights of the bars would show the number of observations in that category, or the fraction of individuals in the categorical. The relative heights of bars are the same whether we show the frequencies or the fractions/ratios. A pie chart might give a more direct visual sense of the fraction of observations in each category.</p>
+<div id="a-frequency-table-and-a-bar-graph" class="section level4" number="2.2.1.1">
+<h4><span class="header-section-number">2.2.1.1</span> A Frequency Table and a Bar Graph</h4>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="dataset-tables-and-graphs.html#cb20-1"></a><span class="co"># This Generates A Frequency table for the number of students of each gender</span></span>
+<span id="cb20-2"><a href="dataset-tables-and-graphs.html#cb20-2"></a>df_survey <span class="op">%&gt;%</span></span>
+<span id="cb20-3"><a href="dataset-tables-and-graphs.html#cb20-3"></a><span class="st">    </span><span class="kw">group_by</span>(gender) <span class="op">%&gt;%</span></span>
+<span id="cb20-4"><a href="dataset-tables-and-graphs.html#cb20-4"></a><span class="st">    </span><span class="kw">summarise</span> (<span class="dt">frequency.count =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb20-5"><a href="dataset-tables-and-graphs.html#cb20-5"></a><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">proportions =</span> frequency.count <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(frequency.count))</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="dataset-tables-and-graphs.html#cb21-1"></a><span class="co"># We can make a bar graph for the Frequency Table</span></span>
+<span id="cb21-2"><a href="dataset-tables-and-graphs.html#cb21-2"></a><span class="co"># graph size</span></span>
+<span id="cb21-3"><a href="dataset-tables-and-graphs.html#cb21-3"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">2</span>, <span class="dt">repr.plot.height =</span> <span class="dv">2</span>)</span>
+<span id="cb21-4"><a href="dataset-tables-and-graphs.html#cb21-4"></a><span class="co"># Graph</span></span>
+<span id="cb21-5"><a href="dataset-tables-and-graphs.html#cb21-5"></a>bar.plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df_survey) <span class="op">+</span></span>
+<span id="cb21-6"><a href="dataset-tables-and-graphs.html#cb21-6"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x=</span>gender)) <span class="op">+</span></span>
+<span id="cb21-7"><a href="dataset-tables-and-graphs.html#cb21-7"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span>
+<span id="cb21-8"><a href="dataset-tables-and-graphs.html#cb21-8"></a><span class="kw">print</span>(bar.plot)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="using-r-functions-to-generate-multiple-frequency-tables" class="section level4" number="2.2.1.2">
+<h4><span class="header-section-number">2.2.1.2</span> Using R Functions to Generate Multiple Frequency Tables</h4>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="dataset-tables-and-graphs.html#cb22-1"></a><span class="co"># There are Multiple Categorical Variables in the dataset</span></span>
+<span id="cb22-2"><a href="dataset-tables-and-graphs.html#cb22-2"></a><span class="co"># Would be nice if we can generate frequency tables for all of them easily</span></span>
+<span id="cb22-3"><a href="dataset-tables-and-graphs.html#cb22-3"></a><span class="co"># Let&#39;s create a list of  that are categorical</span></span>
+<span id="cb22-4"><a href="dataset-tables-and-graphs.html#cb22-4"></a>categorical.nomial.list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;gender&#39;</span>, <span class="st">&#39;major&#39;</span>, <span class="st">&#39;games.any&#39;</span>, <span class="st">&#39;commute&#39;</span>, <span class="st">&#39;econ&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="dataset-tables-and-graphs.html#cb23-1"></a><span class="co"># Let&#39;s Write a Function, not that we need to, but let&#39;s do it</span></span>
+<span id="cb23-2"><a href="dataset-tables-and-graphs.html#cb23-2"></a><span class="co"># We can give the function any name, here: dplyr.freq.table</span></span>
+<span id="cb23-3"><a href="dataset-tables-and-graphs.html#cb23-3"></a>dplyr.freq.table &lt;-<span class="st"> </span><span class="cf">function</span>(df, cate.var.str){</span>
+<span id="cb23-4"><a href="dataset-tables-and-graphs.html#cb23-4"></a></span>
+<span id="cb23-5"><a href="dataset-tables-and-graphs.html#cb23-5"></a>    <span class="co"># A print Statement</span></span>
+<span id="cb23-6"><a href="dataset-tables-and-graphs.html#cb23-6"></a>    <span class="kw">print</span>(<span class="kw">sprintf</span>(<span class="st">&quot;From Dataset: %s, Freq. Table for Variable: %s&quot;</span>, <span class="kw">deparse</span>(<span class="kw">substitute</span>(df)), cate.var.str))</span>
+<span id="cb23-7"><a href="dataset-tables-and-graphs.html#cb23-7"></a></span>
+<span id="cb23-8"><a href="dataset-tables-and-graphs.html#cb23-8"></a>    <span class="co"># Note below: !!sym(cate.var.str), because cate.var.str is string</span></span>
+<span id="cb23-9"><a href="dataset-tables-and-graphs.html#cb23-9"></a>    freq.table &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
+<span id="cb23-10"><a href="dataset-tables-and-graphs.html#cb23-10"></a><span class="st">        </span><span class="kw">group_by</span>(<span class="op">!!</span><span class="kw">sym</span>(cate.var.str)) <span class="op">%&gt;%</span></span>
+<span id="cb23-11"><a href="dataset-tables-and-graphs.html#cb23-11"></a><span class="st">        </span><span class="kw">summarise</span> (<span class="dt">frequency.count =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb23-12"><a href="dataset-tables-and-graphs.html#cb23-12"></a><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">proportions =</span> frequency.count <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(frequency.count))</span>
+<span id="cb23-13"><a href="dataset-tables-and-graphs.html#cb23-13"></a></span>
+<span id="cb23-14"><a href="dataset-tables-and-graphs.html#cb23-14"></a>    <span class="co"># Function returns</span></span>
+<span id="cb23-15"><a href="dataset-tables-and-graphs.html#cb23-15"></a>    <span class="kw">return</span>(freq.table)</span>
+<span id="cb23-16"><a href="dataset-tables-and-graphs.html#cb23-16"></a>}</span>
+<span id="cb23-17"><a href="dataset-tables-and-graphs.html#cb23-17"></a></span>
+<span id="cb23-18"><a href="dataset-tables-and-graphs.html#cb23-18"></a><span class="co"># Let&#39;s call test this function and generate our earlier table</span></span>
+<span id="cb23-19"><a href="dataset-tables-and-graphs.html#cb23-19"></a><span class="kw">dplyr.freq.table</span>(<span class="dt">df =</span> df_survey, <span class="dt">cate.var.str =</span> <span class="st">&#39;gender&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;From Dataset: df_survey, Freq. Table for Variable: gender&quot;</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="dataset-tables-and-graphs.html#cb25-1"></a><span class="co"># Let&#39;s Now Use our function to generate Multiple Frequency Tables</span></span>
+<span id="cb25-2"><a href="dataset-tables-and-graphs.html#cb25-2"></a><span class="co"># We will first use a explicit loop</span></span>
+<span id="cb25-3"><a href="dataset-tables-and-graphs.html#cb25-3"></a><span class="cf">for</span> (ctr <span class="cf">in</span> <span class="kw">seq_along</span>(categorical.nomial.list)) {</span>
+<span id="cb25-4"><a href="dataset-tables-and-graphs.html#cb25-4"></a>    freq.table &lt;-<span class="st"> </span><span class="kw">dplyr.freq.table</span>(<span class="dt">df =</span> df_survey, <span class="dt">cate.var.str =</span> categorical.nomial.list[ctr])</span>
+<span id="cb25-5"><a href="dataset-tables-and-graphs.html#cb25-5"></a>    <span class="kw">print</span>(freq.table)</span>
+<span id="cb25-6"><a href="dataset-tables-and-graphs.html#cb25-6"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;From Dataset: df_survey, Freq. Table for Variable: gender&quot;
+## [1] &quot;From Dataset: df_survey, Freq. Table for Variable: major&quot;
+## [1] &quot;From Dataset: df_survey, Freq. Table for Variable: games.any&quot;
+## [1] &quot;From Dataset: df_survey, Freq. Table for Variable: commute&quot;
+## [1] &quot;From Dataset: df_survey, Freq. Table for Variable: econ&quot;</code></pre>
+<p>Using Lapply to Generate Multiple Frequency Tables with a Single Line:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="dataset-tables-and-graphs.html#cb27-1"></a><span class="co"># We will now use lapply, the single line loop tool in R</span></span>
+<span id="cb27-2"><a href="dataset-tables-and-graphs.html#cb27-2"></a><span class="co"># Below, we are plugging each element of the list one by one into the function</span></span>
+<span id="cb27-3"><a href="dataset-tables-and-graphs.html#cb27-3"></a><span class="co"># dplyr.freq.table, the first argument of the function is the dataset name</span></span>
+<span id="cb27-4"><a href="dataset-tables-and-graphs.html#cb27-4"></a><span class="co"># which is fixed as df = df_survey</span></span>
+<span id="cb27-5"><a href="dataset-tables-and-graphs.html#cb27-5"></a><span class="kw">lapply</span>(categorical.nomial.list,</span>
+<span id="cb27-6"><a href="dataset-tables-and-graphs.html#cb27-6"></a>       dplyr.freq.table,</span>
+<span id="cb27-7"><a href="dataset-tables-and-graphs.html#cb27-7"></a>       <span class="dt">df =</span> df_survey)</span></code></pre></div>
+<pre><code>## [1] &quot;From Dataset: df_survey, Freq. Table for Variable: gender&quot;
+## [1] &quot;From Dataset: df_survey, Freq. Table for Variable: major&quot;
+## [1] &quot;From Dataset: df_survey, Freq. Table for Variable: games.any&quot;
+## [1] &quot;From Dataset: df_survey, Freq. Table for Variable: commute&quot;
+## [1] &quot;From Dataset: df_survey, Freq. Table for Variable: econ&quot;</code></pre>
+<pre><code>## [[1]]
+## 
+## [[2]]
+## 
+## [[3]]
+## 
+## [[4]]
+## 
+## [[5]]</code></pre>
+</div>
+</div>
+<div id="continuousquantitative" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Continuous/Quantitative</h3>
+<p>Graphically, we can show a continuous variable using a histogram. This could be test scores, temperatures, years in Houston, etc. This involves first creating a categorical/discrete variable based on the continuous variable. Since the underlying continuous variable is ordered (low to high temperature unless major which is not ordered), the categorical/discrete variable we generate is an ordered categorical variable (majors could be called unordered categorical variable).</p>
+<div id="histogram-with-lapply" class="section level4" number="2.2.2.1">
+<h4><span class="header-section-number">2.2.2.1</span> Histogram with Lapply</h4>
+<p>To generate the histogram, we:
+1. Make sure that all observations belongs to one category
++ no observations belonging to no categories
++ each observation only belongs to one category
+2. Each category is equidistance along the continuous variable’s original scale.
+3. Then we create a bar graph where each bar is a category, and the height of the bar represents the number of observations within that category.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="dataset-tables-and-graphs.html#cb30-1"></a><span class="co"># We will write a histogram function</span></span>
+<span id="cb30-2"><a href="dataset-tables-and-graphs.html#cb30-2"></a>ggplot.histogram &lt;-<span class="st"> </span><span class="cf">function</span>(df, cts.var.str){</span>
+<span id="cb30-3"><a href="dataset-tables-and-graphs.html#cb30-3"></a></span>
+<span id="cb30-4"><a href="dataset-tables-and-graphs.html#cb30-4"></a>    <span class="co"># Figure Size</span></span>
+<span id="cb30-5"><a href="dataset-tables-and-graphs.html#cb30-5"></a>    <span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">4</span>, <span class="dt">repr.plot.height =</span> <span class="dv">3</span>)</span>
+<span id="cb30-6"><a href="dataset-tables-and-graphs.html#cb30-6"></a></span>
+<span id="cb30-7"><a href="dataset-tables-and-graphs.html#cb30-7"></a>    <span class="co"># Figure Title</span></span>
+<span id="cb30-8"><a href="dataset-tables-and-graphs.html#cb30-8"></a>    title &lt;-<span class="st"> </span><span class="kw">sprintf</span>(<span class="st">&quot;Histogram for %s in %s&quot;</span>, cts.var.str, <span class="kw">deparse</span>(<span class="kw">substitute</span>(df)))</span>
+<span id="cb30-9"><a href="dataset-tables-and-graphs.html#cb30-9"></a></span>
+<span id="cb30-10"><a href="dataset-tables-and-graphs.html#cb30-10"></a>    <span class="co"># We have in our 10 student survey only 10 observations</span></span>
+<span id="cb30-11"><a href="dataset-tables-and-graphs.html#cb30-11"></a>    <span class="co"># We can still generate a histogram for our continuous variables</span></span>
+<span id="cb30-12"><a href="dataset-tables-and-graphs.html#cb30-12"></a>    <span class="co"># Will only use three bins</span></span>
+<span id="cb30-13"><a href="dataset-tables-and-graphs.html#cb30-13"></a>    histogram<span class="fl">.3</span>bins &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df_survey, <span class="kw">aes</span>(<span class="dt">x=</span><span class="op">!!</span><span class="kw">sym</span>(cts.var.str))) <span class="op">+</span></span>
+<span id="cb30-14"><a href="dataset-tables-and-graphs.html#cb30-14"></a><span class="st">      </span><span class="kw">geom_histogram</span>(<span class="dt">bins=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb30-15"><a href="dataset-tables-and-graphs.html#cb30-15"></a><span class="st">      </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="kw">paste0</span>(title),</span>
+<span id="cb30-16"><a href="dataset-tables-and-graphs.html#cb30-16"></a>           <span class="dt">caption =</span> <span class="st">&#39;In Class Survey of 10 Students</span><span class="ch">\n</span><span class="st">3 bins&#39;</span>) <span class="op">+</span></span>
+<span id="cb30-17"><a href="dataset-tables-and-graphs.html#cb30-17"></a><span class="st">      </span><span class="kw">theme_bw</span>()</span>
+<span id="cb30-18"><a href="dataset-tables-and-graphs.html#cb30-18"></a></span>
+<span id="cb30-19"><a href="dataset-tables-and-graphs.html#cb30-19"></a>    <span class="co"># obtain the data in the plot</span></span>
+<span id="cb30-20"><a href="dataset-tables-and-graphs.html#cb30-20"></a>    plot_data &lt;-<span class="st"> </span><span class="kw">ggplot_build</span>(histogram<span class="fl">.3</span>bins)</span>
+<span id="cb30-21"><a href="dataset-tables-and-graphs.html#cb30-21"></a>    <span class="co"># the dataframe below contains all the information for the histogram</span></span>
+<span id="cb30-22"><a href="dataset-tables-and-graphs.html#cb30-22"></a>    <span class="co"># bins and number of observations in each bins</span></span>
+<span id="cb30-23"><a href="dataset-tables-and-graphs.html#cb30-23"></a>    plot_dataframe &lt;-<span class="st"> </span>plot_data<span class="op">$</span>data[[<span class="dv">1</span>]]</span>
+<span id="cb30-24"><a href="dataset-tables-and-graphs.html#cb30-24"></a></span>
+<span id="cb30-25"><a href="dataset-tables-and-graphs.html#cb30-25"></a>    <span class="co"># return outputs</span></span>
+<span id="cb30-26"><a href="dataset-tables-and-graphs.html#cb30-26"></a>    <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">gghist=</span>histogram<span class="fl">.3</span>bins, <span class="dt">hist.df=</span>plot_dataframe))</span>
+<span id="cb30-27"><a href="dataset-tables-and-graphs.html#cb30-27"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="dataset-tables-and-graphs.html#cb31-1"></a><span class="co"># Now the list of continuous Variables and calling the function with lapply</span></span>
+<span id="cb31-2"><a href="dataset-tables-and-graphs.html#cb31-2"></a>cts.list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;years.in.houston&#39;</span>, <span class="st">&#39;games.attended&#39;</span>)</span>
+<span id="cb31-3"><a href="dataset-tables-and-graphs.html#cb31-3"></a></span>
+<span id="cb31-4"><a href="dataset-tables-and-graphs.html#cb31-4"></a><span class="co"># lapply</span></span>
+<span id="cb31-5"><a href="dataset-tables-and-graphs.html#cb31-5"></a>results &lt;-<span class="st"> </span><span class="kw">lapply</span>(cts.list,</span>
+<span id="cb31-6"><a href="dataset-tables-and-graphs.html#cb31-6"></a>       ggplot.histogram,</span>
+<span id="cb31-7"><a href="dataset-tables-and-graphs.html#cb31-7"></a>       <span class="dt">df =</span> df_survey)</span>
+<span id="cb31-8"><a href="dataset-tables-and-graphs.html#cb31-8"></a></span>
+<span id="cb31-9"><a href="dataset-tables-and-graphs.html#cb31-9"></a><span class="co"># Show results</span></span>
+<span id="cb31-10"><a href="dataset-tables-and-graphs.html#cb31-10"></a><span class="cf">for</span> (ctr <span class="cf">in</span> <span class="kw">seq_along</span>(cts.list)){</span>
+<span id="cb31-11"><a href="dataset-tables-and-graphs.html#cb31-11"></a>    <span class="kw">print</span>(results[ctr])</span>
+<span id="cb31-12"><a href="dataset-tables-and-graphs.html#cb31-12"></a>}</span></code></pre></div>
+<pre><code>## [[1]]
+## [[1]]$gghist</code></pre>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+## [[1]]$hist.df
+##   y count  x xmin xmax    density ncount ndensity flipped_aes PANEL group ymin ymax colour   fill size linetype alpha
+## 1 2     2  0 -5.5  5.5 0.01818182   0.25     0.25       FALSE     1    -1    0    2     NA grey35  0.5        1    NA
+## 2 0     0 11  5.5 16.5 0.00000000   0.00     0.00       FALSE     1    -1    0    0     NA grey35  0.5        1    NA
+## 3 8     8 22 16.5 27.5 0.07272727   1.00     1.00       FALSE     1    -1    0    8     NA grey35  0.5        1    NA
+## 
+## 
+## [[1]]
+## [[1]]$gghist</code></pre>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-28-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+## [[1]]$hist.df
+##   y count    x  xmin  xmax density ncount ndensity flipped_aes PANEL group ymin ymax colour   fill size linetype alpha
+## 1 8     8  0.0 -6.25  6.25   0.064  1.000    1.000       FALSE     1    -1    0    8     NA grey35  0.5        1    NA
+## 2 1     1 12.5  6.25 18.75   0.008  0.125    0.125       FALSE     1    -1    0    1     NA grey35  0.5        1    NA
+## 3 1     1 25.0 18.75 31.25   0.008  0.125    0.125       FALSE     1    -1    0    1     NA grey35  0.5        1    NA</code></pre>
+
+</div>
+</div>
+</div>
+<div id="multiple-variables-graphs-and-tables" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Multiple Variables Graphs and Tables</h2>
+<blockquote>
+<p>Go back to <a href="http://fanwangecon.github.io/">fan</a>’s <a href="https://fanwangecon.github.io/REconTools/">REconTools</a> Package, <a href="https://fanwangecon.github.io/R4Econ/">R Code Examples</a> Repository (<a href="https://fanwangecon.github.io/R4Econ/bookdown">bookdown site</a>), or <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> Repository (<a href="https://fanwangecon.github.io/Stat4Econ/bookdown">bookdown site</a>).</p>
+</blockquote>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="dataset-tables-and-graphs.html#cb35-1"></a><span class="co"># For Data Manipulations</span></span>
+<span id="cb35-2"><a href="dataset-tables-and-graphs.html#cb35-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb35-3"><a href="dataset-tables-and-graphs.html#cb35-3"></a><span class="co"># For Additional table output</span></span>
+<span id="cb35-4"><a href="dataset-tables-and-graphs.html#cb35-4"></a><span class="co"># install.packages(&quot;knitr&quot;)</span></span>
+<span id="cb35-5"><a href="dataset-tables-and-graphs.html#cb35-5"></a><span class="kw">library</span>(knitr)</span></code></pre></div>
+<p>Let’s load in the dataset we created from the <a href="https://fanwangecon.github.io/Stat4Econ/survey/htmlpdfr/classsurvey.html">in-class survey</a>.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="dataset-tables-and-graphs.html#cb36-1"></a><span class="co"># Load the dataset using readr&#39;s read_csv</span></span>
+<span id="cb36-2"><a href="dataset-tables-and-graphs.html#cb36-2"></a>df_survey &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/classsurvey.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="dataset-tables-and-graphs.html#cb37-1"></a><span class="co"># We have several factor variables, we can set them as factor one by one</span></span>
+<span id="cb37-2"><a href="dataset-tables-and-graphs.html#cb37-2"></a>df_survey[[<span class="st">&#39;gender&#39;</span>]] &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df_survey[[<span class="st">&#39;gender&#39;</span>]])</span>
+<span id="cb37-3"><a href="dataset-tables-and-graphs.html#cb37-3"></a><span class="co"># But that is a little cumbersome, we can using lapply, a core function in r to do this for all factors</span></span>
+<span id="cb37-4"><a href="dataset-tables-and-graphs.html#cb37-4"></a>factor_col_names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;gender&#39;</span>, <span class="st">&#39;major&#39;</span>, <span class="st">&#39;commute&#39;</span>, <span class="st">&#39;games.any&#39;</span>, <span class="st">&#39;econ&#39;</span>)</span>
+<span id="cb37-5"><a href="dataset-tables-and-graphs.html#cb37-5"></a>df_survey[factor_col_names] &lt;-<span class="st"> </span><span class="kw">lapply</span>(df_survey[factor_col_names], as.factor)</span>
+<span id="cb37-6"><a href="dataset-tables-and-graphs.html#cb37-6"></a><span class="co"># Check Variable Types</span></span>
+<span id="cb37-7"><a href="dataset-tables-and-graphs.html#cb37-7"></a><span class="kw">str</span>(df_survey)</span></code></pre></div>
+<pre><code>## tibble [10 x 10] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ ID              : num [1:10] 1 2 3 4 5 6 7 8 9 10
+##  $ ROW             : num [1:10] 3 4 4 4 2 1 2 3 3 4
+##  $ COL             : num [1:10] 1 2 10 1 6 7 6 6 3 13
+##  $ gender          : Factor w/ 2 levels &quot;FEMALE&quot;,&quot;MALE&quot;: 2 1 2 2 1 2 2 2 1 1
+##  $ years.in.houston: num [1:10] 21 21 22 22 20 3 25 20 5 20
+##  $ major           : Factor w/ 5 levels &quot;CONSUMERSCIENCE&quot;,..: 2 3 2 2 2 5 2 1 4 2
+##  $ commute         : Factor w/ 1 level &quot;YES&quot;: 1 1 1 1 1 1 1 1 1 1
+##  $ games.attended  : num [1:10] 0 2 0 14 0 0 25 2 0 0
+##  $ games.any       : Factor w/ 2 levels &quot;Has.Attended&quot;,..: 2 1 2 1 2 2 1 1 2 2
+##  $ econ            : Factor w/ 2 levels &quot;ECON&quot;,&quot;Not.Econ&quot;: 1 2 1 1 1 2 1 2 2 1
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   ID = col_double(),
+##   ..   ROW = col_double(),
+##   ..   COL = col_double(),
+##   ..   gender = col_character(),
+##   ..   years.in.houston = col_double(),
+##   ..   major = col_character(),
+##   ..   commute = col_character(),
+##   ..   games.attended = col_double(),
+##   ..   games.any = col_character(),
+##   ..   econ = col_character()
+##   .. )</code></pre>
+<div id="two-continuous-variables" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Two Continuous Variables</h3>
+<p>With two continuous/quantitative variables, we can generate a scatter plot. Crucially, each point of the scatter plot represents one individual, the location of that point indicates the x and y values of that individual. The x and y values could be the individual’s test score and hours studied for example.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="dataset-tables-and-graphs.html#cb39-1"></a><span class="co"># We can draw a scatter plot for two continuous variables</span></span>
+<span id="cb39-2"><a href="dataset-tables-and-graphs.html#cb39-2"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb39-3"><a href="dataset-tables-and-graphs.html#cb39-3"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">4</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
+<span id="cb39-4"><a href="dataset-tables-and-graphs.html#cb39-4"></a><span class="co"># Draw Scatter Plot</span></span>
+<span id="cb39-5"><a href="dataset-tables-and-graphs.html#cb39-5"></a><span class="co"># 1. specify x and y</span></span>
+<span id="cb39-6"><a href="dataset-tables-and-graphs.html#cb39-6"></a><span class="co"># 2. label each individual by their ID, add letter I in front of value</span></span>
+<span id="cb39-7"><a href="dataset-tables-and-graphs.html#cb39-7"></a><span class="co"># 3. add in trend line</span></span>
+<span id="cb39-8"><a href="dataset-tables-and-graphs.html#cb39-8"></a>scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df_survey, <span class="kw">aes</span>(<span class="dt">x=</span>games.attended, <span class="dt">y=</span>years.in.houston)) <span class="op">+</span></span>
+<span id="cb39-9"><a href="dataset-tables-and-graphs.html#cb39-9"></a><span class="st">      </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb39-10"><a href="dataset-tables-and-graphs.html#cb39-10"></a><span class="st">      </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste0</span>(<span class="st">&#39;I&#39;</span>, ID)), <span class="dt">size=</span><span class="dv">3</span>, <span class="dt">hjust=</span><span class="op">-</span>.<span class="dv">2</span>, <span class="dt">vjust=</span><span class="op">-</span>.<span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb39-11"><a href="dataset-tables-and-graphs.html#cb39-11"></a><span class="st">      </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="co"># Trend line</span></span>
+<span id="cb39-12"><a href="dataset-tables-and-graphs.html#cb39-12"></a><span class="st">      </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="kw">paste0</span>(<span class="st">&#39;Scatter Plot of Two Continuous/Quantitative Variables&#39;</span></span>
+<span id="cb39-13"><a href="dataset-tables-and-graphs.html#cb39-13"></a>                          ,<span class="st">&#39;</span><span class="ch">\n</span><span class="st">In Class Survey of 10 Students&#39;</span>),</span>
+<span id="cb39-14"><a href="dataset-tables-and-graphs.html#cb39-14"></a>           <span class="dt">x =</span> <span class="st">&#39;Games Attended at the University&#39;</span>,</span>
+<span id="cb39-15"><a href="dataset-tables-and-graphs.html#cb39-15"></a>           <span class="dt">y =</span> <span class="st">&#39;Years Spent in the City of Houston&#39;</span>,</span>
+<span id="cb39-16"><a href="dataset-tables-and-graphs.html#cb39-16"></a>           <span class="dt">caption =</span> <span class="st">&#39;In Class Survey&#39;</span>) <span class="op">+</span></span>
+<span id="cb39-17"><a href="dataset-tables-and-graphs.html#cb39-17"></a><span class="st">      </span><span class="kw">theme_bw</span>()</span>
+<span id="cb39-18"><a href="dataset-tables-and-graphs.html#cb39-18"></a><span class="kw">print</span>(scatter)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="two-categorical-variables" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Two Categorical Variables</h3>
+<p>With two discrete/categorical variables, we can generate two-way frequency tables. This is very similar to what we did for one discrete variable, except now we have columns and rows, representing the categories of the two variables. The two variables could be gender and majors, we would write in each table cell the number of students who are male and econ majors, male and bio majors in for example the first column, and repeat this for girls in the second column.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="dataset-tables-and-graphs.html#cb40-1"></a><span class="co"># We can tabulate Frequencies based on two categorical variables</span></span>
+<span id="cb40-2"><a href="dataset-tables-and-graphs.html#cb40-2"></a>df_survey <span class="op">%&gt;%</span></span>
+<span id="cb40-3"><a href="dataset-tables-and-graphs.html#cb40-3"></a><span class="st">  </span><span class="kw">group_by</span>(gender, econ) <span class="op">%&gt;%</span></span>
+<span id="cb40-4"><a href="dataset-tables-and-graphs.html#cb40-4"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">freq =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb40-5"><a href="dataset-tables-and-graphs.html#cb40-5"></a><span class="st">  </span><span class="kw">spread</span>(gender, freq)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="dataset-tables-and-graphs.html#cb41-1"></a><span class="co"># We can show the fraction of individuals in each of the four groups</span></span>
+<span id="cb41-2"><a href="dataset-tables-and-graphs.html#cb41-2"></a>df_survey <span class="op">%&gt;%</span></span>
+<span id="cb41-3"><a href="dataset-tables-and-graphs.html#cb41-3"></a><span class="st">  </span><span class="kw">group_by</span>(<span class="kw">interaction</span>(gender, econ)) <span class="op">%&gt;%</span></span>
+<span id="cb41-4"><a href="dataset-tables-and-graphs.html#cb41-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">freq =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb41-5"><a href="dataset-tables-and-graphs.html#cb41-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">fraction =</span> freq <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(freq))</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="dataset-tables-and-graphs.html#cb42-1"></a><span class="co"># We can create stacked bar charts as well with the same data</span></span>
+<span id="cb42-2"><a href="dataset-tables-and-graphs.html#cb42-2"></a><span class="co"># graph size</span></span>
+<span id="cb42-3"><a href="dataset-tables-and-graphs.html#cb42-3"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">3</span>, <span class="dt">repr.plot.height =</span> <span class="dv">2</span>)</span>
+<span id="cb42-4"><a href="dataset-tables-and-graphs.html#cb42-4"></a><span class="co"># Graph</span></span>
+<span id="cb42-5"><a href="dataset-tables-and-graphs.html#cb42-5"></a>stacked.bar.plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df_survey) <span class="op">+</span></span>
+<span id="cb42-6"><a href="dataset-tables-and-graphs.html#cb42-6"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x=</span>gender, <span class="dt">fill=</span>econ)) <span class="op">+</span></span>
+<span id="cb42-7"><a href="dataset-tables-and-graphs.html#cb42-7"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span>
+<span id="cb42-8"><a href="dataset-tables-and-graphs.html#cb42-8"></a><span class="kw">print</span>(stacked.bar.plot)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="continuous-and-categorical-variable" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Continuous and Categorical Variable</h3>
+<div id="average-across-groups" class="section level4" number="2.3.3.1">
+<h4><span class="header-section-number">2.3.3.1</span> Average Across Groups</h4>
+<p>We can look at the average game attendance by female and male students in our sample, using a bar plot, where the height of the bars now represent the average of the <em>games.attended</em> variable for each group.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="dataset-tables-and-graphs.html#cb43-1"></a><span class="co"># We can first find the group averages</span></span>
+<span id="cb43-2"><a href="dataset-tables-and-graphs.html#cb43-2"></a>df_gender_avg_games &lt;-<span class="st"> </span>df_survey <span class="op">%&gt;%</span></span>
+<span id="cb43-3"><a href="dataset-tables-and-graphs.html#cb43-3"></a><span class="st">                        </span><span class="kw">group_by</span>(gender) <span class="op">%&gt;%</span></span>
+<span id="cb43-4"><a href="dataset-tables-and-graphs.html#cb43-4"></a><span class="st">                        </span><span class="kw">summarise</span> (<span class="dt">avg.games.attended =</span> <span class="kw">mean</span>(games.attended))</span>
+<span id="cb43-5"><a href="dataset-tables-and-graphs.html#cb43-5"></a>df_gender_avg_games</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="dataset-tables-and-graphs.html#cb44-1"></a><span class="co"># We can graph based on df_gender_avg_games</span></span>
+<span id="cb44-2"><a href="dataset-tables-and-graphs.html#cb44-2"></a><span class="co"># Sizing the Figure Here</span></span>
+<span id="cb44-3"><a href="dataset-tables-and-graphs.html#cb44-3"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">2</span>, <span class="dt">repr.plot.height =</span> <span class="dv">2</span>)</span>
+<span id="cb44-4"><a href="dataset-tables-and-graphs.html#cb44-4"></a><span class="co"># Plot, stat = identity means to plot the value in avg.games.attended for each gender</span></span>
+<span id="cb44-5"><a href="dataset-tables-and-graphs.html#cb44-5"></a>group.means &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df_gender_avg_games) <span class="op">+</span></span>
+<span id="cb44-6"><a href="dataset-tables-and-graphs.html#cb44-6"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x=</span>gender, <span class="dt">y=</span>avg.games.attended), <span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>) <span class="op">+</span></span>
+<span id="cb44-7"><a href="dataset-tables-and-graphs.html#cb44-7"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span>
+<span id="cb44-8"><a href="dataset-tables-and-graphs.html#cb44-8"></a><span class="kw">print</span>(group.means)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="dataset-tables-and-graphs.html#cb45-1"></a><span class="co"># But it is a little cumbersome to do this in two steps, we can do it in one step</span></span>
+<span id="cb45-2"><a href="dataset-tables-and-graphs.html#cb45-2"></a><span class="co"># Sizing the Figure Here</span></span>
+<span id="cb45-3"><a href="dataset-tables-and-graphs.html#cb45-3"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">2</span>, <span class="dt">repr.plot.height =</span> <span class="dv">2</span>)</span>
+<span id="cb45-4"><a href="dataset-tables-and-graphs.html#cb45-4"></a><span class="co"># Plot directly from df_survey, summary over x for y</span></span>
+<span id="cb45-5"><a href="dataset-tables-and-graphs.html#cb45-5"></a><span class="co"># The result looks the same</span></span>
+<span id="cb45-6"><a href="dataset-tables-and-graphs.html#cb45-6"></a>group.means.joint &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df_survey) <span class="op">+</span></span>
+<span id="cb45-7"><a href="dataset-tables-and-graphs.html#cb45-7"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x=</span>gender, <span class="dt">y=</span>games.attended), <span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>) <span class="op">+</span></span>
+<span id="cb45-8"><a href="dataset-tables-and-graphs.html#cb45-8"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span>
+<span id="cb45-9"><a href="dataset-tables-and-graphs.html#cb45-9"></a><span class="kw">print</span>(group.means.joint)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="average-across-two-groups-gender-and-majors" class="section level4" number="2.3.3.2">
+<h4><span class="header-section-number">2.3.3.2</span> Average Across Two Groups: Gender and Majors</h4>
+<p>What is the average game attendance for male and female, econ and non-econ majors? We have 2 female econ majors, 2 female non-econ majors, 4 male econ majors and 2 male non-econ majors, and their average game attendances are: 0, 1, 9.75 and 1 games.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="dataset-tables-and-graphs.html#cb46-1"></a><span class="co"># We can calculate the statistics as a table, and also show obs in each group</span></span>
+<span id="cb46-2"><a href="dataset-tables-and-graphs.html#cb46-2"></a>df_survey <span class="op">%&gt;%</span></span>
+<span id="cb46-3"><a href="dataset-tables-and-graphs.html#cb46-3"></a><span class="st">    </span><span class="kw">group_by</span>(gender, econ ) <span class="op">%&gt;%</span></span>
+<span id="cb46-4"><a href="dataset-tables-and-graphs.html#cb46-4"></a><span class="st">    </span><span class="kw">summarise</span> (<span class="dt">avg.games.attended =</span> <span class="kw">mean</span>(games.attended), <span class="dt">N.count =</span> <span class="kw">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="dataset-tables-and-graphs.html#cb47-1"></a><span class="co"># Let&#39;s Show these Visually</span></span>
+<span id="cb47-2"><a href="dataset-tables-and-graphs.html#cb47-2"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">4</span>, <span class="dt">repr.plot.height =</span> <span class="dv">2</span>)</span>
+<span id="cb47-3"><a href="dataset-tables-and-graphs.html#cb47-3"></a><span class="co"># Plot directly from df_survey</span></span>
+<span id="cb47-4"><a href="dataset-tables-and-graphs.html#cb47-4"></a><span class="co"># Using fill for econ, this means econ or not will fill up with different colors</span></span>
+<span id="cb47-5"><a href="dataset-tables-and-graphs.html#cb47-5"></a><span class="co"># Still caculate average</span></span>
+<span id="cb47-6"><a href="dataset-tables-and-graphs.html#cb47-6"></a><span class="co"># Postion &quot;dodge&quot; means that econ and non-econ wil be shown next to each other</span></span>
+<span id="cb47-7"><a href="dataset-tables-and-graphs.html#cb47-7"></a><span class="co"># By default position is to stack different fill groups on top of each other.</span></span>
+<span id="cb47-8"><a href="dataset-tables-and-graphs.html#cb47-8"></a>two.group.means &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df_survey) <span class="op">+</span></span>
+<span id="cb47-9"><a href="dataset-tables-and-graphs.html#cb47-9"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x=</span>gender, <span class="dt">y=</span>games.attended, <span class="dt">fill=</span>econ),</span>
+<span id="cb47-10"><a href="dataset-tables-and-graphs.html#cb47-10"></a>             <span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></span>
+<span id="cb47-11"><a href="dataset-tables-and-graphs.html#cb47-11"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span>
+<span id="cb47-12"><a href="dataset-tables-and-graphs.html#cb47-12"></a><span class="kw">print</span>(two.group.means)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-41-1.png" width="672" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="survey.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summarizing-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["Introductory-Statistics-with-R-tidyverse.pdf", "PDF"]],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

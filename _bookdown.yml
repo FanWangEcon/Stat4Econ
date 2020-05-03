@@ -1,0 +1,27 @@
+book_filename: "Introductory Statistics with R tidyverse"
+output_dir: "bookdown"
+language:
+  ui:
+    chapter_name: "Chapter "
+delete_merged_file: true
+rmd_files:
+  - index.Rmd
+  - survey/_main.Rmd
+  - survey/classsurvey.Rmd
+  - descriptive/_main.Rmd
+  - descriptive/DataBasketball.Rmd
+  - descriptive/OneVariable.Rmd
+  - descriptive/MultipleVariables.Rmd
+  - summarystats/_main.Rmd
+  - summarystats/meansdhist.Rmd
+  - summarystats/toolboxone.Rmd
+  - probability/_main.Rmd
+  - probability/samplespace.Rmd
+  - probability/samplespaceexa.Rmd
+  - probability/samplespacedice.Rmd
+  - probability/lottery.Rmd
+  - probability_discrete/_main.Rmd
+  - probability_discrete/binomial.Rmd
+  - probability_discrete/poisson.Rmd
+  - README_appendix.md
+  - title.Rmd

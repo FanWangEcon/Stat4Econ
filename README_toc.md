@@ -1,15 +1,3 @@
-[![HitCount](http://hits.dwyl.io/fanwangecon/Stat4Econ.svg)](https://github.com/FanWangEcon/Stat4Econ)  [![Star](https://img.shields.io/github/stars/fanwangecon/Stat4Econ?style=social)](https://github.com/FanWangEcon/Stat4Econ/stargazers) [![Fork](https://img.shields.io/github/forks/fanwangecon/Stat4Econ?style=social)](https://github.com/FanWangEcon/Stat4Econ/network/members) [![Star](https://img.shields.io/github/watchers/fanwangecon/Stat4Econ?style=social)](https://github.com/FanWangEcon/Stat4Econ/watchers)
-
-This is a work-in-progress [course website](https://fanwangecon.github.io/Stat4Econ/) for Introductory Statistics for Undergraduate Students, produced by [Fan](https://fanwangecon.github.io/). Course covers a limited subset of topics from *Statistics for Business and Economics* (Anderson Sweeney Williams Camm Cochran 12e). Book version: [bookdown site](https://fanwangecon.github.io/Stat4Econ/bookdown) and [bookdown pdf](https://fanwangecon.github.io/Stat4Econ/bookdown/Introductory-Statistics-with-R-tidyverse.pdf). Files are from [**Fan**](https://fanwangecon.github.io/)'s [Stat4Econ](https://github.com/FanWangEcon/Stat4Econ) repository.
-
-R is used. Packages from [Tidyverse](https://www.tidyverse.org/) are used, including [tibble](https://tibble.tidyverse.org/) for framing data, [tidyr](https://dplyr.tidyverse.org/) and [dplyr](https://dplyr.tidyverse.org/) for reshaping data and aggregating statistics, [ggplot2](https://ggplot2.tidyverse.org/) for graphing, and [readr](https://readr.tidyverse.org/) for file reading and writing. Materials are presented as R, RMD, PDF and HTML files. To obtain all codes and raw files, see [here](https://fanwangecon.github.io/Stat4Econ/docs/gitsetup.html) for github set up. For HTML files, click on the links below.
-
-From [Fan](https://fanwangecon.github.io/)'s other repositories: For dynamic borrowing and savings problems, see [Dynamic Asset Repository](https://fanwangecon.github.io/CodeDynaAsset/); For code examples, see also [R Example Code](https://fanwangecon.github.io/R4Econ/), [Matlab Example Code](https://fanwangecon.github.io/M4Econ/), and [Stata Example Code](https://fanwangecon.github.io/Stata4Econ/); For intro econ with Matlab, see [Intro Mathematics for Economists](https://fanwangecon.github.io/Math4Econ/), and for intro stat with R, see [Intro Statistics for Undergraduates](https://fanwangecon.github.io/Stat4Econ/). See [here](https://github.com/FanWangEcon) for all of [Fan](https://fanwangecon.github.io/)'s public repositories.
-
-Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or problems.
-
-[![](https://img.shields.io/github/last-commit/fanwangecon/Stat4Econ)](https://github.com/FanWangEcon/Stat4Econ/commits/master) [![](https://img.shields.io/github/commit-activity/m/fanwangecon/Stat4Econ)](https://github.com/FanWangEcon/Stat4Econ/graphs/commit-activity) [![](https://img.shields.io/github/issues/fanwangecon/Stat4Econ)](https://github.com/FanWangEcon/Stat4Econ/issues) [![](https://img.shields.io/github/issues-pr/fanwangecon/Stat4Econ)](https://github.com/FanWangEcon/Stat4Econ/pulls)
-
 # 1  Survey
 
 1. [An In-class Survey](https://fanwangecon.github.io/Stat4Econ/survey/htmlpdfr/classsurvey.html): [**rmd**](https://github.com/FanWangEcon/Stat4Econ/blob/master/survey//classsurvey.Rmd) \| [**r**](https://github.com/FanWangEcon/Stat4Econ/blob/master/survey/htmlpdfr/classsurvey.R) \| [**pdf**](https://github.com/FanWangEcon/Stat4Econ/blob/master/survey/htmlpdfr/classsurvey.pdf) \| [**html**](https://fanwangecon.github.io/Stat4Econ/survey/htmlpdfr/classsurvey.html)
@@ -82,13 +70,3 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
 	+ Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths.
 	+ **r**: *dpois() + ppois()*
 	+ **ggplot**: *geom_bar() + geom_text() + gome_line() + geom_point() + geom_text() + labs() + scale_y_continuous() + scale_x_continuous() + theme()*
-
-----
-Please contact [![](https://img.shields.io/github/followers/fanwangecon?label=FanWangEcon&style=social)](https://github.com/FanWangEcon) [![](https://img.shields.io/twitter/follow/fanwangecon?label=%20&style=social)](https://twitter.com/fanwangecon) for issues or problems.
-
-![RepoSize](https://img.shields.io/github/repo-size/fanwangecon/R4Econ)
-![CodeSize](https://img.shields.io/github/languages/code-size/fanwangecon/R4Econ)
-![Language](https://img.shields.io/github/languages/top/fanwangecon/R4Econ)
-![Release](https://img.shields.io/github/downloads/fanwangecon/R4Econ/total)
-![License](https://img.shields.io/github/license/fanwangecon/R4Econ)
-

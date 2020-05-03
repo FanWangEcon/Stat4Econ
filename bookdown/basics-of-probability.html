@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Basics of Probability | Introductory Statistics with R tidyverse</title>
+  <meta name="description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Basics of Probability | Introductory Statistics with R tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  <meta name="github-repo" content="fanwangecon/Stat4Econ" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Basics of Probability | Introductory Statistics with R tidyverse" />
+  
+  <meta name="twitter:description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  
+
+<meta name="author" content="Fan Wang" />
+
+
+<meta name="date" content="2020-05-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="summarizing-data.html"/>
+<link rel="next" href="discrete-probability-distribution.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92953468-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92953468-4');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introductory Statistics with R tidyverse</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="survey.html"><a href="survey.html"><i class="fa fa-check"></i><b>1</b> Survey</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="survey.html"><a href="survey.html#generate-a-dataset-in-r"><i class="fa fa-check"></i><b>1.1</b> Generate A Dataset in R</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="survey.html"><a href="survey.html#a-random-sample-of-students-in-class"><i class="fa fa-check"></i><b>1.1.1</b> A Random Sample of Students in Class</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html"><i class="fa fa-check"></i><b>2</b> Dataset, Tables and Graphs</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#opening-a-dataset"><i class="fa fa-check"></i><b>2.1</b> Opening a Dataset</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#paths-to-data"><i class="fa fa-check"></i><b>2.1.1</b> Paths to Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#one-variable-graphs-and-tables"><i class="fa fa-check"></i><b>2.2</b> One Variable Graphs and Tables</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#categoricaldiscrete"><i class="fa fa-check"></i><b>2.2.1</b> Categorical/Discrete</a></li>
+<li class="chapter" data-level="2.2.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#continuousquantitative"><i class="fa fa-check"></i><b>2.2.2</b> Continuous/Quantitative</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#multiple-variables-graphs-and-tables"><i class="fa fa-check"></i><b>2.3</b> Multiple Variables Graphs and Tables</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#two-continuous-variables"><i class="fa fa-check"></i><b>2.3.1</b> Two Continuous Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#two-categorical-variables"><i class="fa fa-check"></i><b>2.3.2</b> Two Categorical Variables</a></li>
+<li class="chapter" data-level="2.3.3" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#continuous-and-categorical-variable"><i class="fa fa-check"></i><b>2.3.3</b> Continuous and Categorical Variable</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="summarizing-data.html"><a href="summarizing-data.html"><i class="fa fa-check"></i><b>3</b> Summarizing Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="summarizing-data.html"><a href="summarizing-data.html#mean-and-standard-deviation"><i class="fa fa-check"></i><b>3.1</b> Mean and Standard Deviation</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="summarizing-data.html"><a href="summarizing-data.html#temperature-across-locations-over-time"><i class="fa fa-check"></i><b>3.1.1</b> Temperature Across Locations over Time</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="summarizing-data.html"><a href="summarizing-data.html#coefficient-of-variation-and-correlation"><i class="fa fa-check"></i><b>3.2</b> Coefficient of Variation and Correlation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="summarizing-data.html"><a href="summarizing-data.html#education-and-wage"><i class="fa fa-check"></i><b>3.2.1</b> Education and Wage</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="basics-of-probability.html"><a href="basics-of-probability.html"><i class="fa fa-check"></i><b>4</b> Basics of Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#experimental-outcomes"><i class="fa fa-check"></i><b>4.1</b> Experimental Outcomes</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-space-and-probabilities"><i class="fa fa-check"></i><b>4.1.1</b> Sample Space and Probabilities</a></li>
+<li class="chapter" data-level="4.1.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#union-and-intersection-and-complements"><i class="fa fa-check"></i><b>4.1.2</b> Union and Intersection and Complements</a></li>
+<li class="chapter" data-level="4.1.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#conditional-probability"><i class="fa fa-check"></i><b>4.1.3</b> Conditional Probability</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-space-and-probability-examples"><i class="fa fa-check"></i><b>4.2</b> Sample Space and Probability Examples</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#presidential-election"><i class="fa fa-check"></i><b>4.2.1</b> Presidential Election</a></li>
+<li class="chapter" data-level="4.2.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#throwing-a-dice"><i class="fa fa-check"></i><b>4.2.2</b> Throwing a Dice</a></li>
+<li class="chapter" data-level="4.2.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#two-basketball-games"><i class="fa fa-check"></i><b>4.2.3</b> Two Basketball Games</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-average"><i class="fa fa-check"></i><b>4.3</b> Sample Average</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#an-unfair-dice"><i class="fa fa-check"></i><b>4.3.1</b> An Unfair Dice</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="basics-of-probability.html"><a href="basics-of-probability.html#multiple-step-experiment"><i class="fa fa-check"></i><b>4.4</b> Multiple-Step Experiment</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#playing-the-lottery-three-times"><i class="fa fa-check"></i><b>4.4.1</b> Playing the Lottery Three times</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html"><i class="fa fa-check"></i><b>5</b> Discrete Probability Distribution</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#discrete-random-variable-and-binomial"><i class="fa fa-check"></i><b>5.1</b> Discrete Random Variable and Binomial</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#discrete-random-variable"><i class="fa fa-check"></i><b>5.1.1</b> Discrete Random Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-experiment"><i class="fa fa-check"></i><b>5.2</b> Binomial Experiment</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-example-larceny"><i class="fa fa-check"></i><b>5.2.1</b> Binomial Example: Larceny</a></li>
+<li class="chapter" data-level="5.2.2" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-example-wwii-german-soldier"><i class="fa fa-check"></i><b>5.2.2</b> Binomial Example: WWII German Soldier</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#poisson-distribution"><i class="fa fa-check"></i><b>5.3</b> Poisson Distribution</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#poisson-example-horse-kicking"><i class="fa fa-check"></i><b>5.3.1</b> Poisson Example: Horse-Kicking</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="index-and-code-links.html"><a href="index-and-code-links.html"><i class="fa fa-check"></i><b>A</b> Index and Code Links</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="index-and-code-links.html"><a href="index-and-code-links.html#survey-links"><i class="fa fa-check"></i><b>A.1</b> Survey links</a></li>
+<li class="chapter" data-level="A.2" data-path="index-and-code-links.html"><a href="index-and-code-links.html#dataset-tables-and-graphs-links"><i class="fa fa-check"></i><b>A.2</b> Dataset, Tables and Graphs links</a></li>
+<li class="chapter" data-level="A.3" data-path="index-and-code-links.html"><a href="index-and-code-links.html#summarizing-data-links"><i class="fa fa-check"></i><b>A.3</b> Summarizing Data links</a></li>
+<li class="chapter" data-level="A.4" data-path="index-and-code-links.html"><a href="index-and-code-links.html#basics-of-probability-links"><i class="fa fa-check"></i><b>A.4</b> Basics of Probability links</a></li>
+<li class="chapter" data-level="A.5" data-path="index-and-code-links.html"><a href="index-and-code-links.html#discrete-probability-distribution-links"><i class="fa fa-check"></i><b>A.5</b> Discrete Probability Distribution links</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://fanwangecon.github.io/Stat4Econ/bookdown/index.html" target="blank">Stat4Econ Bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introductory Statistics with R tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basics-of-probability" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Basics of Probability</h1>
+
+<div id="experimental-outcomes" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Experimental Outcomes</h2>
+<blockquote>
+<p>Go back to <a href="http://fanwangecon.github.io/">fan</a>’s <a href="https://fanwangecon.github.io/REconTools/">REconTools</a> Package, <a href="https://fanwangecon.github.io/R4Econ/">R Code Examples</a> Repository (<a href="https://fanwangecon.github.io/R4Econ/bookdown">bookdown site</a>), or <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> Repository (<a href="https://fanwangecon.github.io/Stat4Econ/bookdown">bookdown site</a>).</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li>Experiment
+<ul>
+<li>“We define an experiment as a process that generates well-defined outcomes” (ASWCC P171)</li>
+</ul></li>
+<li>Sample Space
+<ul>
+<li>“The sample space for an experiment is the set of all experimental outcomes” (ASWCC P172)</li>
+</ul></li>
+<li>Experimental outcomes
+<ul>
+<li>“An experimental outcome is also called a sample point to identify it as an element of the sample space.” (ASWCC P172)</li>
+</ul></li>
+<li>Events
+<ul>
+<li>“An Event is a collection of Sample Points” (AWSCC P181), could be just one sample point (one experimental outcome)</li>
+</ul></li>
+<li>Probability
+<ul>
+<li>“Probability is a numerical measure of the likelihood that an event will occur.” (AWSCC P171)</li>
+</ul></li>
+</ol>
+<div id="sample-space-and-probabilities" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Sample Space and Probabilities</h3>
+<p><strong>Sample Space and Experimental Outcomes</strong></p>
+<p>We can use the letter <span class="math inline">\(S\)</span> or <span class="math inline">\(\Omega\)</span> to denote sample space. Supose we have a set of <span class="math inline">\(n\)</span> experimental outcomes:</p>
+<p><span class="math display">\[S = \left\{ E_1, E_2, ..., E_{n-1}, E_n\right\}\]</span></p>
+<p>We can call <span class="math inline">\(S\)</span> a sample space if:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(E_i\)</span> are mutually exclusive:
+<ul>
+<li><span class="math inline">\(E_i\)</span> for all <span class="math inline">\(i\)</span> are separate outcomes that do not overlap.</li>
+<li>Suppose there are multiple people running for the Presidency, some of these candidates are women, and some of these women are from Texas. If one of the <span class="math inline">\(E_i\)</span> is that a woman becomes the President, and another <span class="math inline">\(E_i\)</span> is that someone from Texas becomes the President, <span class="math inline">\(S\)</span> would not be a sample space, because we could have a woman who is also from Texas win the Presidency.</li>
+</ul></li>
+<li><span class="math inline">\(E_i\)</span> are jointly exhaustive:
+<ul>
+<li>For the experiment with well-defined outcomes, the <span class="math inline">\(E_i\)</span> in <span class="math inline">\(S\)</span> need to cover all possible outcomes.</li>
+<li>If you are throwing a six sided dice, there are six possible experimental outcomes, if <span class="math inline">\(S\)</span> only has five of them, it would not be a sample space.</li>
+</ul></li>
+</ol>
+<p>Thinking about the world in terms of sample space is pretty amazing.</p>
+<p><strong>Assigning Probability to Experimental Outcomes</strong></p>
+<p>We can assign probabilities to events of a sample space. Since experimental outcomes are themselves events as well, we can assign probabilities to each experimental outcome.</p>
+<p>For the mutually exclusive and jointly exhaustive experimental outcomes of the sample space, there are two equirements for assigning probabilities:
+- Each element of the sample space can not have negative probability of happening, and also can not have more than <span class="math inline">\(1\)</span> probability of happening, with <span class="math inline">\(P\)</span> denotes probability, we have:
+<span class="math display">\[0 \le P(E_i) \le 1\]</span>
+- The probabilities of all the mutually exclusive and jointly exhaustive experimental outcomes in the sample space sum up to <span class="math inline">\(1\)</span>. For an experimental with <span class="math inline">\(n\)</span> experimental outcomes:
+<span class="math display">\[\Sigma_{i=1}^{n} P(E_i) = 1\]</span></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="basics-of-probability.html#cb62-1"></a><span class="co"># Load Library</span></span>
+<span id="cb62-2"><a href="basics-of-probability.html#cb62-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb62-3"><a href="basics-of-probability.html#cb62-3"></a></span>
+<span id="cb62-4"><a href="basics-of-probability.html#cb62-4"></a><span class="co"># Define a List of Experimental Outcomes</span></span>
+<span id="cb62-5"><a href="basics-of-probability.html#cb62-5"></a>experimental.outcomes.list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Heavy Rain&#39;</span>, <span class="st">&#39;Light Rain&#39;</span>, <span class="st">&#39;No Rain&#39;</span>)</span>
+<span id="cb62-6"><a href="basics-of-probability.html#cb62-6"></a></span>
+<span id="cb62-7"><a href="basics-of-probability.html#cb62-7"></a><span class="co"># Probabilities on experimental outcomes</span></span>
+<span id="cb62-8"><a href="basics-of-probability.html#cb62-8"></a>experimental.outcome.prob &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.7</span>)</span>
+<span id="cb62-9"><a href="basics-of-probability.html#cb62-9"></a></span>
+<span id="cb62-10"><a href="basics-of-probability.html#cb62-10"></a><span class="co"># Show these in a Tibble</span></span>
+<span id="cb62-11"><a href="basics-of-probability.html#cb62-11"></a><span class="kw">tibble</span>(<span class="dt">tomorrow.experimental.outcomes =</span> experimental.outcomes.list,</span>
+<span id="cb62-12"><a href="basics-of-probability.html#cb62-12"></a>       <span class="dt">experimental.outcome.prob =</span> experimental.outcome.prob)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="basics-of-probability.html#cb63-1"></a><span class="co"># What could happen tomorrow?</span></span>
+<span id="cb63-2"><a href="basics-of-probability.html#cb63-2"></a><span class="co"># We live in a probabilistic world, from today&#39;s perspective, tomorrow is uncertain</span></span>
+<span id="cb63-3"><a href="basics-of-probability.html#cb63-3"></a><span class="co"># If we draw tomorrow from a hat, given our possible outcomes</span></span>
+<span id="cb63-4"><a href="basics-of-probability.html#cb63-4"></a><span class="co"># and the probabilities associated with the outcomes</span></span>
+<span id="cb63-5"><a href="basics-of-probability.html#cb63-5"></a><span class="co"># what are the possible tomorrows?</span></span>
+<span id="cb63-6"><a href="basics-of-probability.html#cb63-6"></a>number.of.tomorrow.to.draw =<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb63-7"><a href="basics-of-probability.html#cb63-7"></a>tomorrow.weather.draws &lt;-<span class="st"> </span><span class="kw">sample</span>(experimental.outcomes.list,</span>
+<span id="cb63-8"><a href="basics-of-probability.html#cb63-8"></a>                                 <span class="dt">size =</span> number.of.tomorrow.to.draw,</span>
+<span id="cb63-9"><a href="basics-of-probability.html#cb63-9"></a>                                 <span class="dt">replace =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb63-10"><a href="basics-of-probability.html#cb63-10"></a>                                 <span class="dt">prob =</span> experimental.outcome.prob)</span>
+<span id="cb63-11"><a href="basics-of-probability.html#cb63-11"></a></span>
+<span id="cb63-12"><a href="basics-of-probability.html#cb63-12"></a><span class="co"># A little tibble to show results</span></span>
+<span id="cb63-13"><a href="basics-of-probability.html#cb63-13"></a><span class="co"># There are only three unique tomorrows, each of three weather outcomes</span></span>
+<span id="cb63-14"><a href="basics-of-probability.html#cb63-14"></a><span class="co"># could happen, but the chance of each happening differs by the probabilities</span></span>
+<span id="cb63-15"><a href="basics-of-probability.html#cb63-15"></a><span class="co"># we set in experimental.outcome.prob</span></span>
+<span id="cb63-16"><a href="basics-of-probability.html#cb63-16"></a><span class="kw">tibble</span>(<span class="dt">which.tomorrow =</span> <span class="kw">paste0</span>(<span class="st">&#39;tomorrow:&#39;</span>, <span class="dv">1</span><span class="op">:</span>number.of.tomorrow.to.draw),</span>
+<span id="cb63-17"><a href="basics-of-probability.html#cb63-17"></a>       <span class="dt">tomorrow.weather =</span> tomorrow.weather.draws)</span></code></pre></div>
+</div>
+<div id="union-and-intersection-and-complements" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Union and Intersection and Complements</h3>
+<p>Definitions:</p>
+<ol style="list-style-type: decimal">
+<li>Complement of Event <span class="math inline">\(A\)</span>:
+<ul>
+<li>“Given an event A, the complement of A is defined to be the event consisting of all sample points that are not in A. The complement of A is denoted by <span class="math inline">\(A^c\)</span>.” (AWSCC P185)</li>
+</ul></li>
+<li>The Union of Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>:
+<ul>
+<li>“The union of A and B is the event containing all sample points belonging to <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> or both. The union is denoted by <span class="math inline">\(A \cup B\)</span>.” (AWSCC P186)</li>
+</ul></li>
+<li>The Intersection of Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>:
+<ul>
+<li>“Given two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, the intersection of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is the event containing the sample points belonging to both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. The intersection is denoted by <span class="math inline">\(A \cap B\)</span>.” (AWSCC P187)</li>
+</ul></li>
+</ol>
+<p><strong>Probabilities for Complements and Union</strong></p>
+<p>The Probabilities of Complements add up to 1:
+<span class="math display">\[P(A) + P(A^c) = 1\]</span></p>
+<p>The <strong>Addition Law</strong>:
+<span class="math display">\[P (A \cup B) = P(A) + P(B) - P (A \cap B)\]</span></p>
+<p>If two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are mutually exclusive, which means they do not share any experimental outcomes (sample points), then: <span class="math inline">\(P (A \cap B) = 0\)</span>, and <span class="math inline">\(P (A \cup B) = P(A) + P(B)\)</span>.</p>
+<p>The <strong>Multiplication Law for Indepedent Events</strong>:
+<span class="math display">\[P (A \cap B) = P(A) \cdot P(B)\]</span></p>
+<p>If the probability of event <span class="math inline">\(A\)</span> happening does not change the probability of event <span class="math inline">\(B\)</span> happening, and vice-versa. The two events are independent. Below we arrive this formulation from conditional probability.</p>
+</div>
+<div id="conditional-probability" class="section level3" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Conditional Probability</h3>
+<p>We use a straight line <span class="math inline">\(\mid\)</span> to denote conditional probability. Given <span class="math inline">\(A\)</span> happens, what is the probability of <span class="math inline">\(B\)</span> happening?</p>
+<p><span class="math display">\[P (A \mid B) = \frac{P(A \cap B)}{P(B)}\]</span></p>
+<p>This says the probability of <span class="math inline">\(A\)</span> happening given that <span class="math inline">\(B\)</span> happens is equal to the ratio of the probability that both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> happen divided by the probability of <span class="math inline">\(B\)</span> happening.</p>
+<p>The formula also means that the probability that both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> happens is equal to the probability that <span class="math inline">\(B\)</span> happens times the probability that <span class="math inline">\(A\)</span> happens conditional on <span class="math inline">\(B\)</span> happening:
+<span class="math display">\[ P(A \cap B) = P (A \mid B)\cdot P(B)\]</span></p>
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent, that means the probability of <span class="math inline">\(A\)</span> happening does not change whether <span class="math inline">\(B\)</span> happens or not, then, <span class="math inline">\(P (A \mid B) = P(A)\)</span>, and:
+<span class="math display">\[ \text{If A and B are independent: } P(A \cap B) = P(A) \cdot P(B)\]</span>
+This is what we wrote down earlier as well.</p>
+
+</div>
+</div>
+<div id="sample-space-and-probability-examples" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Sample Space and Probability Examples</h2>
+<blockquote>
+<p>Go back to <a href="http://fanwangecon.github.io/">fan</a>’s <a href="https://fanwangecon.github.io/REconTools/">REconTools</a> Package, <a href="https://fanwangecon.github.io/R4Econ/">R Code Examples</a> Repository (<a href="https://fanwangecon.github.io/R4Econ/bookdown">bookdown site</a>), or <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> Repository (<a href="https://fanwangecon.github.io/Stat4Econ/bookdown">bookdown site</a>).</p>
+</blockquote>
+<p>In <em><a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html">Sample Space, Experimental Outcomes, Events, Probabilities</a></em>, we discussed various definitions. Here are some examples.</p>
+<ul>
+<li>Experiment: Throwing a Quarter</li>
+<li>Experimental outcomes: lands on Heads or lands on Tails</li>
+<li>Sample Space: <span class="math inline">\(S=\left\{H, T\right\}\)</span></li>
+<li>Event: There are only two experimental outcomes.</li>
+<li>Probability:
+<ul>
+<li><span class="math inline">\(1 \ge P(H) \ge 0\)</span></li>
+<li><span class="math inline">\(1 \ge P(T) \ge 0\)</span></li>
+<li><span class="math inline">\(P(H) + P(T) = 1\)</span></li>
+</ul></li>
+</ul>
+<div id="presidential-election" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Presidential Election</h3>
+<p>After various primaries there are four major candidates who could become president. Voting takes place in half a year. Over this year, many events could happen that would increase or decrease the support for candidates. After voting, the outcome is certain. But from today’s perspective, when voting is one year from now, outcomes are uncertain.</p>
+<ul>
+<li>Experiment: Presidential Election in One Year</li>
+<li>Experimental outcomes: candidates <a href="https://en.wikipedia.org/wiki/Donald_Trump">DT</a>, <a href="https://en.wikipedia.org/wiki/Hillary_Clinton">HC</a>, <a href="https://en.wikipedia.org/wiki/Jill_Stein">JS</a>, <a href="https://en.wikipedia.org/wiki/Gary_Johnson">GJ</a> winning.</li>
+<li>Sample Space: {DT, HC, JS, GJ}</li>
+<li>Event:
+<ul>
+<li>A woman wins is an event: <span class="math inline">\(\text{W} = \left\{HC, JS\right\}\)</span></li>
+<li>A man wins: <span class="math inline">\(\text{M} = \left\{DT, GJ\right\}\)</span></li>
+<li>Someone from a small party wins: <span class="math inline">\(\text{S} = \left\{JS, GJ\right\}\)</span></li>
+</ul></li>
+<li>Probability:
+<ul>
+<li>The probability that a woman does not win:
+<span class="math display">\[P(\text{W}^c) = 1 - P(\text{W}) = P(\text{M})\]</span></li>
+<li>There are no experimental outcomes, given the four that we have, where both woman and man wins, the two events are mutually exclusive:
+<span class="math display">\[P(\text{W} \cap \text{M}) = 0\]</span></li>
+<li>The probability that a woman wins conditional on a man winnning is zero:
+<span class="math display">\[P(\text{W} \mid \text{M}) = \frac{P(\text{W} \cap \text{M})}{P(\text{M})} = \frac{0}{P(DT) + P(GJ)} = 0\]</span></li>
+<li>The probability that a woman wins and someone from a small party wins:
+<span class="math display">\[P(\text{W} \cap \text{S}) = P(JS)\]</span></li>
+<li>The probability that a woman wins conditional on someone from a small party winning:
+<span class="math display">\[P(\text{W} \mid \text{S}) = \frac{P(\text{W} \cap \text{S})}{P(\text{S})} = \frac{P(JS)}{P(JS) + P(GJ)} \]</span></li>
+<li>Either a women wins or someone from a small party wins:
+<span class="math display">\[P(\text{W} \cup \text{S}) = P(\text{W}) + P(\text{S}) - P(\text{W} \cap \text{S}) = P(HC) + P(JS) + P(JS) + P(GJ) - P(JS) =  P(HC) + P(JS) + P(GJ)\]</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="throwing-a-dice" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Throwing a Dice</h3>
+<ul>
+<li>Experiment: Throwing a Dice</li>
+<li>Experimental outcomes: lands on one of the six sides</li>
+<li>Sample Space: <span class="math inline">\(S=\left\{1,2,3,4,5,6\right\}\)</span></li>
+<li>Event: One could define many possible events. The experimental outcome is less than 3 is an event, greater than 2 is an event, been odd is an event, etc.</li>
+</ul>
+<p>In <a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html">Throw an Unfair Four Sided Dice</a>, we show what happens when we throw an unfair four sided dice many times. In the example below, we will throw an unfair dice, where the probability of landing on the side with 1 is 50 percent, and the chance of landing on each successive side is half of the chance of landing on the previous side. This is a dice weighted towards the smaller numbers.</p>
+<p>See the table below for the true probabilities of the unfiar dice.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="basics-of-probability.html#cb64-1"></a><span class="co"># Load Library</span></span>
+<span id="cb64-2"><a href="basics-of-probability.html#cb64-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb64-3"><a href="basics-of-probability.html#cb64-3"></a></span>
+<span id="cb64-4"><a href="basics-of-probability.html#cb64-4"></a><span class="co"># Define a List of Experimental Outcomes</span></span>
+<span id="cb64-5"><a href="basics-of-probability.html#cb64-5"></a>experimental.outcomes.list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb64-6"><a href="basics-of-probability.html#cb64-6"></a></span>
+<span id="cb64-7"><a href="basics-of-probability.html#cb64-7"></a><span class="co"># Probabilities on experimental outcomes</span></span>
+<span id="cb64-8"><a href="basics-of-probability.html#cb64-8"></a><span class="co"># Suppose dice is weighted towards 1</span></span>
+<span id="cb64-9"><a href="basics-of-probability.html#cb64-9"></a>fracbase &lt;-<span class="st"> </span><span class="fl">0.50</span></span>
+<span id="cb64-10"><a href="basics-of-probability.html#cb64-10"></a>experimental.outcome.prob &lt;-<span class="st"> </span><span class="kw">c</span>((<span class="dv">1</span><span class="op">-</span>fracbase)<span class="op">^</span><span class="dv">0</span><span class="op">*</span>fracbase,</span>
+<span id="cb64-11"><a href="basics-of-probability.html#cb64-11"></a>                               (<span class="dv">1</span><span class="op">-</span>fracbase)<span class="op">^</span><span class="dv">1</span><span class="op">*</span>fracbase,</span>
+<span id="cb64-12"><a href="basics-of-probability.html#cb64-12"></a>                               (<span class="dv">1</span><span class="op">-</span>fracbase)<span class="op">^</span><span class="dv">2</span><span class="op">*</span>fracbase,</span>
+<span id="cb64-13"><a href="basics-of-probability.html#cb64-13"></a>                               (<span class="dv">1</span><span class="op">-</span>fracbase)<span class="op">^</span><span class="dv">3</span><span class="op">*</span>fracbase,</span>
+<span id="cb64-14"><a href="basics-of-probability.html#cb64-14"></a>                               (<span class="dv">1</span><span class="op">-</span>fracbase)<span class="op">^</span><span class="dv">4</span><span class="op">*</span>fracbase,</span>
+<span id="cb64-15"><a href="basics-of-probability.html#cb64-15"></a>                               (<span class="dv">1</span><span class="op">-</span>fracbase)<span class="op">^</span><span class="dv">5</span>)</span>
+<span id="cb64-16"><a href="basics-of-probability.html#cb64-16"></a></span>
+<span id="cb64-17"><a href="basics-of-probability.html#cb64-17"></a><span class="co"># Show these in a Tibble</span></span>
+<span id="cb64-18"><a href="basics-of-probability.html#cb64-18"></a>dice.true.prob &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">dice.outcomes.list =</span> experimental.outcomes.list,</span>
+<span id="cb64-19"><a href="basics-of-probability.html#cb64-19"></a>                         <span class="dt">dice.true.prob =</span> experimental.outcome.prob)</span>
+<span id="cb64-20"><a href="basics-of-probability.html#cb64-20"></a>dice.true.prob</span></code></pre></div>
+<div id="throw-the-dice-10-times" class="section level4" number="4.2.2.1">
+<h4><span class="header-section-number">4.2.2.1</span> Throw the Dice 10 Times</h4>
+<p>We throw the dice 10 times, each time, get one of the six possible experimental outcomes, the chance of getting these outcomes are determined by the true probabilities of the unfair dice. If we throw 10 times, that does not mean we will get exact side 1 five times. Side 1 having proability of 50 percent means for each throw there is a 50 percent chance of getting side 1. But each throw is independent of other throws, so we could just by chance end up with no side 1 after ten throws, although the chance of that happening is low. How many times did we get each side in the ten random tosses below?</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="basics-of-probability.html#cb65-1"></a><span class="co"># What could happen tomorrow?</span></span>
+<span id="cb65-2"><a href="basics-of-probability.html#cb65-2"></a><span class="co"># We live in a probabilistic world, drawing future from a hat</span></span>
+<span id="cb65-3"><a href="basics-of-probability.html#cb65-3"></a><span class="co"># If we draw 20 times, what happens in the future?</span></span>
+<span id="cb65-4"><a href="basics-of-probability.html#cb65-4"></a><span class="co"># It&#39;s pretty amazing, we get to see the future!</span></span>
+<span id="cb65-5"><a href="basics-of-probability.html#cb65-5"></a>number.of.futures.to.draw =<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb65-6"><a href="basics-of-probability.html#cb65-6"></a>future.dice.draws &lt;-<span class="st"> </span><span class="kw">sample</span>(experimental.outcomes.list,</span>
+<span id="cb65-7"><a href="basics-of-probability.html#cb65-7"></a>                            <span class="dt">size =</span> number.of.futures.to.draw,</span>
+<span id="cb65-8"><a href="basics-of-probability.html#cb65-8"></a>                            <span class="dt">replace =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb65-9"><a href="basics-of-probability.html#cb65-9"></a>                            <span class="dt">prob =</span> experimental.outcome.prob)</span>
+<span id="cb65-10"><a href="basics-of-probability.html#cb65-10"></a></span>
+<span id="cb65-11"><a href="basics-of-probability.html#cb65-11"></a><span class="co"># A little tibble to show results</span></span>
+<span id="cb65-12"><a href="basics-of-probability.html#cb65-12"></a><span class="kw">tibble</span>(<span class="dt">which.future.dice =</span> <span class="kw">paste0</span>(<span class="st">&#39;dice draws:&#39;</span>, <span class="dv">1</span><span class="op">:</span>number.of.futures.to.draw),</span>
+<span id="cb65-13"><a href="basics-of-probability.html#cb65-13"></a>       <span class="dt">dice.draws =</span> future.dice.draws)</span></code></pre></div>
+</div>
+<div id="redefining-sample-space-for-throwing-a-dice" class="section level4" number="4.2.2.2">
+<h4><span class="header-section-number">4.2.2.2</span> Redefining Sample Space for Throwing a Dice</h4>
+<p>Following our definition for sample space above, we can actually define an alternative sample spaces, for example:</p>
+<ul>
+<li>Experiment: Throwing a Dice</li>
+<li>Experimental outcomes: lands on greater or equal to 4, lands on less or equal to 3</li>
+<li>Sample Space: <span class="math inline">\(S=\left\{\text{&#39;less equal to 3&#39;}, \text{&#39;greater equal to 4&#39;}\right\}\)</span></li>
+</ul>
+<p>This is also a sample space with two sample points (or experimental outcomes). Following our <a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html">definitions</a> earlier, these two experimental outcomes are mutually exclusive and jointly exhaustive. We could also call these two experimental outcomes here two different events of the sample space with the six sample points.</p>
+</div>
+</div>
+<div id="two-basketball-games" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Two Basketball Games</h3>
+<ul>
+<li>Experiment: One team plays two games</li>
+<li>Experimental outcomes:
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(E_1\)</span>: win first, win second</li>
+<li><span class="math inline">\(E_2\)</span>: win first, lose second</li>
+<li><span class="math inline">\(E_3\)</span>: lose first, win second</li>
+<li><span class="math inline">\(E_4\)</span>: lose first, lose second</li>
+</ol></li>
+<li>Sample Space: <span class="math inline">\(S=\left\{E_1, E_2, E_3, E_4\right\}\)</span></li>
+<li>Events:
+<ul>
+<li>no wins: <span class="math inline">\(\text{W0} = \left\{E_4\right\}\)</span></li>
+<li>win twice: <span class="math inline">\(\text{W2} = \left\{E_1\right\}\)</span></li>
+<li>win first game: <span class="math inline">\(\text{WF} = \left\{E_1, E_2\right\}\)</span></li>
+<li>win second game: <span class="math inline">\(\text{WS} = \left\{E_1, E_3\right\}\)</span></li>
+<li>etc.</li>
+</ul></li>
+<li>Probability:
+<ul>
+<li>What is the probability of winning the second game and the first game? Using the <a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html">conditional probability formula</a>, it is the probability of winning the first game times the probability of winning the second game conditional on winning the first game:
+<span class="math display">\[P(\text{WS} \cap \text{WF}) = P(\text{WS} \mid \text{WF}) \cdot P(\text{WF}) = P(E_1)\]</span>
+<ul>
+<li>If winning the first game does not change the probability of winning the second game, then we have:
+<span class="math display">\[P(E_1) = P(\text{WS} \mid \text{WF}) \cdot P(\text{WF}) = P(\text{WS}) \cdot P(\text{WF}) \]</span></li>
+<li>If the chance of winning the first and second game are the same, <span class="math inline">\(P(\text{WS})=P(\text{WF})=p\)</span>, then we have:
+<span class="math display">\[P(E_1) = P(\text{WS}) \cdot P(\text{WF}) = p \cdot p = p^2 \]</span></li>
+</ul></li>
+<li>The probability of winning at least one game:
+<span class="math display">\[P(\text{WS} \cup \text{WF}) = P(\text{WS}) +  P(\text{WF}) - P(\text{WS} \cap \text{WF}) = P(E_1) + P(E_2) + P(E_3) \]</span></li>
+</ul></li>
+</ul>
+<div id="redefining-sample-space-for-two-basketball-game" class="section level4" number="4.2.3.1">
+<h4><span class="header-section-number">4.2.3.1</span> Redefining Sample Space for two Basketball Game</h4>
+<p>Following our definition for sample space above, we can actually define an alternative sample spaces using these events:</p>
+<ul>
+<li>Experiment: One team plays two games</li>
+<li>Experimental outcomes: Win 0, 1, or 2 times</li>
+<li>Sample Space: <span class="math inline">\(S=\left\{\text{&#39;0 Win&#39;}, \text{&#39;1 Win&#39;}, \text{&#39;2 Wins&#39;}\right\}\)</span></li>
+</ul>
+<p>This is also a sample space with three sample points (or experimental outcomes). Following our definitions earlier, these three experimental outcomes are mutually exclusive and jointly exhaustive. We could also call these three experimental outcomes here three different events of the sample space with the four paths of game play experimental outcomes (sample points).</p>
+
+</div>
+</div>
+</div>
+<div id="sample-average" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Sample Average</h2>
+<blockquote>
+<p>Go back to <a href="http://fanwangecon.github.io/">fan</a>’s <a href="https://fanwangecon.github.io/REconTools/">REconTools</a> Package, <a href="https://fanwangecon.github.io/R4Econ/">R Code Examples</a> Repository (<a href="https://fanwangecon.github.io/R4Econ/bookdown">bookdown site</a>), or <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> Repository (<a href="https://fanwangecon.github.io/Stat4Econ/bookdown">bookdown site</a>).</p>
+</blockquote>
+<p>In <a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html">Sample Space, Experimental Outcomes, Events, Probabilities</a>, we discussed various definitions. We went over various examples in <a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespaceexa.html">Examples of Sample Space and Probabilities</a>. Here we look at what happens if we throw a four sided dice many times.</p>
+<div id="an-unfair-dice" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> An Unfair Dice</h3>
+<p>Throwing a Dice:</p>
+<ul>
+<li>Experiment: Throwing a <a href="https://en.wikipedia.org/wiki/Four-sided_die">Four Sided Dice</a></li>
+<li>Experimental outcomes: lands on one of the four sides</li>
+<li>Sample Space: <span class="math inline">\(S=\left\{1,2,3,4\right\}\)</span></li>
+</ul>
+<p>In the example below, we will throw an unfair dice, where the probability of landing on the side with 1 is 60 percent, and the chance of landing on each successive side is 60 percent of the chance of landing on the previous side. This is a dice weighted towards the smaller numbers.</p>
+<p>See the table below for the true probabilities of the unfair dice.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="basics-of-probability.html#cb66-1"></a><span class="co"># Load Library</span></span>
+<span id="cb66-2"><a href="basics-of-probability.html#cb66-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb66-3"><a href="basics-of-probability.html#cb66-3"></a></span>
+<span id="cb66-4"><a href="basics-of-probability.html#cb66-4"></a><span class="co"># Define a List of Experimental Outcomes</span></span>
+<span id="cb66-5"><a href="basics-of-probability.html#cb66-5"></a>experimental.outcomes.list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb66-6"><a href="basics-of-probability.html#cb66-6"></a></span>
+<span id="cb66-7"><a href="basics-of-probability.html#cb66-7"></a><span class="co"># Probabilities on experimental outcomes</span></span>
+<span id="cb66-8"><a href="basics-of-probability.html#cb66-8"></a><span class="co"># Suppose dice is weighted towards 1</span></span>
+<span id="cb66-9"><a href="basics-of-probability.html#cb66-9"></a>fracbase &lt;-<span class="st"> </span><span class="fl">0.6</span></span>
+<span id="cb66-10"><a href="basics-of-probability.html#cb66-10"></a>experimental.outcome.prob &lt;-<span class="st"> </span><span class="kw">c</span>((<span class="dv">1</span><span class="op">-</span>fracbase)<span class="op">^</span><span class="dv">0</span><span class="op">*</span>fracbase,</span>
+<span id="cb66-11"><a href="basics-of-probability.html#cb66-11"></a>                               (<span class="dv">1</span><span class="op">-</span>fracbase)<span class="op">^</span><span class="dv">1</span><span class="op">*</span>fracbase,</span>
+<span id="cb66-12"><a href="basics-of-probability.html#cb66-12"></a>                               (<span class="dv">1</span><span class="op">-</span>fracbase)<span class="op">^</span><span class="dv">2</span><span class="op">*</span>fracbase,</span>
+<span id="cb66-13"><a href="basics-of-probability.html#cb66-13"></a>                               (<span class="dv">1</span><span class="op">-</span>fracbase)<span class="op">^</span><span class="dv">3</span>)</span>
+<span id="cb66-14"><a href="basics-of-probability.html#cb66-14"></a></span>
+<span id="cb66-15"><a href="basics-of-probability.html#cb66-15"></a><span class="co"># Show these in a Tibble</span></span>
+<span id="cb66-16"><a href="basics-of-probability.html#cb66-16"></a>dice.true.prob &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">dice.outcomes.list =</span> experimental.outcomes.list,</span>
+<span id="cb66-17"><a href="basics-of-probability.html#cb66-17"></a>                         <span class="dt">dice.true.prob =</span> experimental.outcome.prob)</span>
+<span id="cb66-18"><a href="basics-of-probability.html#cb66-18"></a>dice.true.prob</span></code></pre></div>
+<div id="throw-the-dice-5-times" class="section level4" number="4.3.1.1">
+<h4><span class="header-section-number">4.3.1.1</span> Throw the Dice 5 Times</h4>
+<p>We throw the dice 5 times, each time, get one of the four possible experimental outcomes, the chance of getting these outcomes are determined by the true probabilities of the unfair dice.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="basics-of-probability.html#cb67-1"></a><span class="co"># What could happen tomorrow?</span></span>
+<span id="cb67-2"><a href="basics-of-probability.html#cb67-2"></a><span class="co"># We live in a probabilistic world, drawing future from a hat</span></span>
+<span id="cb67-3"><a href="basics-of-probability.html#cb67-3"></a><span class="co"># If we draw 5 times, what happens in the future?</span></span>
+<span id="cb67-4"><a href="basics-of-probability.html#cb67-4"></a><span class="co"># It&#39;s pretty amazing, we get to see the future!</span></span>
+<span id="cb67-5"><a href="basics-of-probability.html#cb67-5"></a>number.of.futures.to.draw =<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb67-6"><a href="basics-of-probability.html#cb67-6"></a>future.dice.draws &lt;-<span class="st"> </span><span class="kw">sample</span>(experimental.outcomes.list,</span>
+<span id="cb67-7"><a href="basics-of-probability.html#cb67-7"></a>                                 <span class="dt">size =</span> number.of.futures.to.draw,</span>
+<span id="cb67-8"><a href="basics-of-probability.html#cb67-8"></a>                                 <span class="dt">replace =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb67-9"><a href="basics-of-probability.html#cb67-9"></a>                                 <span class="dt">prob =</span> experimental.outcome.prob)</span>
+<span id="cb67-10"><a href="basics-of-probability.html#cb67-10"></a></span>
+<span id="cb67-11"><a href="basics-of-probability.html#cb67-11"></a><span class="co"># A little tibble to show results</span></span>
+<span id="cb67-12"><a href="basics-of-probability.html#cb67-12"></a><span class="kw">tibble</span>(<span class="dt">which.future.dice =</span> <span class="kw">paste0</span>(<span class="st">&#39;dice draws:&#39;</span>, <span class="dv">1</span><span class="op">:</span>number.of.futures.to.draw),</span>
+<span id="cb67-13"><a href="basics-of-probability.html#cb67-13"></a>       <span class="dt">dice.draws =</span> future.dice.draws)</span></code></pre></div>
+</div>
+<div id="throw-the-dice-50-5000-and-500000-times" class="section level4" number="4.3.1.2">
+<h4><span class="header-section-number">4.3.1.2</span> Throw the dice 50, 5000 and 500,000 times</h4>
+<p>If we throw the dice 50 times, 5000 times, 500,000 times, what will happen?</p>
+<p>For each group of experiments, we can aggregate the <em>empirical distribution</em> of the four sides. The more times we throw the dice, the closer our empirical distribution gets to the true distribution. We can see the result from the table below.</p>
+<p>To do this, we first write a function, then we lapply to invoke the function multiple times.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="basics-of-probability.html#cb68-1"></a><span class="co"># Function to Make Many Draws</span></span>
+<span id="cb68-2"><a href="basics-of-probability.html#cb68-2"></a>future.draws &lt;-<span class="st"> </span><span class="cf">function</span>(number.of.futures.to.draw, <span class="dt">select.dice.draws=</span><span class="ot">FALSE</span>) {</span>
+<span id="cb68-3"><a href="basics-of-probability.html#cb68-3"></a>    <span class="co"># Number.of.futures.to.draw = 500</span></span>
+<span id="cb68-4"><a href="basics-of-probability.html#cb68-4"></a>    <span class="co"># Future Draws</span></span>
+<span id="cb68-5"><a href="basics-of-probability.html#cb68-5"></a></span>
+<span id="cb68-6"><a href="basics-of-probability.html#cb68-6"></a>    dice.draws &lt;-<span class="st"> </span><span class="kw">sample</span>(experimental.outcomes.list,</span>
+<span id="cb68-7"><a href="basics-of-probability.html#cb68-7"></a>                      <span class="dt">size =</span> number.of.futures.to.draw,</span>
+<span id="cb68-8"><a href="basics-of-probability.html#cb68-8"></a>                      <span class="dt">replace =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb68-9"><a href="basics-of-probability.html#cb68-9"></a>                      <span class="dt">prob =</span> experimental.outcome.prob)</span>
+<span id="cb68-10"><a href="basics-of-probability.html#cb68-10"></a></span>
+<span id="cb68-11"><a href="basics-of-probability.html#cb68-11"></a>    <span class="co"># Empirical Distribution Name</span></span>
+<span id="cb68-12"><a href="basics-of-probability.html#cb68-12"></a>    sample.frac.var &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;sample.frac.n&#39;</span>, <span class="kw">sprintf</span>(<span class="st">&quot;%d&quot;</span>, number.of.futures.to.draw))</span>
+<span id="cb68-13"><a href="basics-of-probability.html#cb68-13"></a></span>
+<span id="cb68-14"><a href="basics-of-probability.html#cb68-14"></a>    <span class="co"># Group Futures</span></span>
+<span id="cb68-15"><a href="basics-of-probability.html#cb68-15"></a>    group.fracs &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">dice.draw =</span> dice.draws) <span class="op">%&gt;%</span></span>
+<span id="cb68-16"><a href="basics-of-probability.html#cb68-16"></a><span class="st">                    </span><span class="kw">group_by</span>(dice.draw) <span class="op">%&gt;%</span></span>
+<span id="cb68-17"><a href="basics-of-probability.html#cb68-17"></a><span class="st">                    </span><span class="kw">summarise</span>(<span class="dt">freq =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb68-18"><a href="basics-of-probability.html#cb68-18"></a><span class="st">                    </span><span class="kw">mutate</span>(<span class="op">!!</span><span class="dt">sample.frac.var :=</span></span>
+<span id="cb68-19"><a href="basics-of-probability.html#cb68-19"></a>                           <span class="kw">as.numeric</span>(<span class="kw">sprintf</span>(<span class="st">&quot;%0.5f&quot;</span>, freq <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(freq)))) <span class="op">%&gt;%</span></span>
+<span id="cb68-20"><a href="basics-of-probability.html#cb68-20"></a><span class="st">                    </span><span class="kw">arrange</span>(dice.draw) <span class="op">%&gt;%</span></span>
+<span id="cb68-21"><a href="basics-of-probability.html#cb68-21"></a><span class="st">                    </span><span class="kw">select</span>(dice.draw, <span class="op">!!</span>sample.frac.var)</span>
+<span id="cb68-22"><a href="basics-of-probability.html#cb68-22"></a></span>
+<span id="cb68-23"><a href="basics-of-probability.html#cb68-23"></a>    <span class="co"># Whether to includ dice.draws categorical</span></span>
+<span id="cb68-24"><a href="basics-of-probability.html#cb68-24"></a>    <span class="cf">if</span> (select.dice.draws){</span>
+<span id="cb68-25"><a href="basics-of-probability.html#cb68-25"></a><span class="co">#         group.fracs &lt;- group.fracs</span></span>
+<span id="cb68-26"><a href="basics-of-probability.html#cb68-26"></a>    } <span class="cf">else</span> {</span>
+<span id="cb68-27"><a href="basics-of-probability.html#cb68-27"></a>        group.fracs &lt;-<span class="st"> </span>group.fracs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">!!</span>sample.frac.var)</span>
+<span id="cb68-28"><a href="basics-of-probability.html#cb68-28"></a>    }</span>
+<span id="cb68-29"><a href="basics-of-probability.html#cb68-29"></a></span>
+<span id="cb68-30"><a href="basics-of-probability.html#cb68-30"></a>    <span class="co"># Return</span></span>
+<span id="cb68-31"><a href="basics-of-probability.html#cb68-31"></a>    <span class="kw">return</span>(group.fracs)</span>
+<span id="cb68-32"><a href="basics-of-probability.html#cb68-32"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="basics-of-probability.html#cb69-1"></a><span class="co"># Draw future 10, 100, 1000, 10000, 100000 times</span></span>
+<span id="cb69-2"><a href="basics-of-probability.html#cb69-2"></a><span class="co"># How many times we get 1,2,3,4?</span></span>
+<span id="cb69-3"><a href="basics-of-probability.html#cb69-3"></a>number.of.futures.to.draw.list =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">5000</span>, <span class="dv">500000</span>)</span>
+<span id="cb69-4"><a href="basics-of-probability.html#cb69-4"></a></span>
+<span id="cb69-5"><a href="basics-of-probability.html#cb69-5"></a><span class="co"># Apply function</span></span>
+<span id="cb69-6"><a href="basics-of-probability.html#cb69-6"></a><span class="kw">bind_cols</span>(dice.true.prob, <span class="kw">lapply</span>(number.of.futures.to.draw.list, future.draws))</span></code></pre></div>
+</div>
+<div id="throw-four-sided-dice-different-number-of-times-and-melt-data" class="section level4" number="4.3.1.3">
+<h4><span class="header-section-number">4.3.1.3</span> Throw Four Sided Dice Different Number of Times, and Melt Data</h4>
+<p>Using the function we created above, we can draw a graph that shows what happens to the empirical distribution of four dice sides as we increase the number of draws.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="basics-of-probability.html#cb70-1"></a><span class="co"># Generate Data</span></span>
+<span id="cb70-2"><a href="basics-of-probability.html#cb70-2"></a><span class="co"># Log Space Draws of Outcomes</span></span>
+<span id="cb70-3"><a href="basics-of-probability.html#cb70-3"></a>number.future.logspace &lt;-<span class="st"> </span><span class="kw">floor</span>(<span class="kw">exp</span>(<span class="kw">log</span>(<span class="dv">10</span>)<span class="op">*</span><span class="kw">seq</span>(<span class="kw">log10</span>(<span class="dv">100</span>),<span class="kw">log10</span>(<span class="dv">1000000</span>), <span class="dt">length.out=</span><span class="dv">500</span>)))</span>
+<span id="cb70-4"><a href="basics-of-probability.html#cb70-4"></a></span>
+<span id="cb70-5"><a href="basics-of-probability.html#cb70-5"></a><span class="co"># lapply, generating a list of dataframes, then merge together</span></span>
+<span id="cb70-6"><a href="basics-of-probability.html#cb70-6"></a>draw.outcomes &lt;-<span class="st"> </span><span class="kw">lapply</span>(number.future.logspace,</span>
+<span id="cb70-7"><a href="basics-of-probability.html#cb70-7"></a>                        future.draws, <span class="dt">select.dice.draws=</span><span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
+<span id="cb70-8"><a href="basics-of-probability.html#cb70-8"></a><span class="st">                        </span><span class="kw">reduce</span>(full_join, <span class="dt">by =</span> <span class="st">&#39;dice.draw&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb70-9"><a href="basics-of-probability.html#cb70-9"></a><span class="st">                        </span><span class="kw">mutate_all</span>(<span class="kw">funs</span>(<span class="kw">replace_na</span>(.,<span class="dv">0</span>)))</span>
+<span id="cb70-10"><a href="basics-of-probability.html#cb70-10"></a></span>
+<span id="cb70-11"><a href="basics-of-probability.html#cb70-11"></a><span class="co"># Melt Data</span></span>
+<span id="cb70-12"><a href="basics-of-probability.html#cb70-12"></a>draw.outcomes.long &lt;-<span class="st"> </span>draw.outcomes <span class="op">%&gt;%</span></span>
+<span id="cb70-13"><a href="basics-of-probability.html#cb70-13"></a><span class="st">                        </span><span class="kw">gather</span>(variable, value, <span class="op">-</span>dice.draw) <span class="op">%&gt;%</span></span>
+<span id="cb70-14"><a href="basics-of-probability.html#cb70-14"></a><span class="st">                        </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">draw.count =</span></span>
+<span id="cb70-15"><a href="basics-of-probability.html#cb70-15"></a>                                      <span class="kw">as.numeric</span>(<span class="kw">str_extract</span>(variable, <span class="st">&quot;[^.n]+$&quot;</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb70-16"><a href="basics-of-probability.html#cb70-16"></a><span class="st">                        </span><span class="kw">select</span>(dice.draw, draw.count, value)</span>
+<span id="cb70-17"><a href="basics-of-probability.html#cb70-17"></a></span>
+<span id="cb70-18"><a href="basics-of-probability.html#cb70-18"></a><span class="co"># 1 to 6 are categorical factors</span></span>
+<span id="cb70-19"><a href="basics-of-probability.html#cb70-19"></a>draw.outcomes.long<span class="op">$</span>dice.draw &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;dice side = &#39;</span>, draw.outcomes.long<span class="op">$</span>dice.draw)</span>
+<span id="cb70-20"><a href="basics-of-probability.html#cb70-20"></a>draw.outcomes.long<span class="op">$</span>dice.draw &lt;-<span class="st"> </span><span class="kw">factor</span>(draw.outcomes.long<span class="op">$</span>dice.draw)</span>
+<span id="cb70-21"><a href="basics-of-probability.html#cb70-21"></a></span>
+<span id="cb70-22"><a href="basics-of-probability.html#cb70-22"></a><span class="co"># Show Melt Table</span></span>
+<span id="cb70-23"><a href="basics-of-probability.html#cb70-23"></a><span class="kw">head</span>(draw.outcomes.long, <span class="dt">n=</span><span class="dv">10</span>)</span>
+<span id="cb70-24"><a href="basics-of-probability.html#cb70-24"></a><span class="kw">tail</span>(draw.outcomes.long, <span class="dt">n=</span><span class="dv">10</span>)</span></code></pre></div>
+<p>Graphically, What happens when the number of dice throws increase? A crucial thing to understand about probability is that we are not saying if you throw 10 dice, there will be exactly 6 dice out of the 10 that will land on side=1 (given 60 percent probability of landing on side 1).</p>
+<p>What we are saying is that, given that each dice throw is independent, if we throw the dice many many times, the empirical distribution of dice throws will approximate the actual true probability of landing on each of the four sides of the dice.</p>
+<p>The graph between demonstrates this. The x-axis is in <a href="https://en.wikipedia.org/wiki/Logarithmic_scale">log-scale</a>. We start with 10 throws, and end with 1 million throws. The Y-axis is the empirical probability, with 0.1=10 percent. We have four colors for each of the four sides.</p>
+<p>We can see that the empirical probability based on actual dice throws converges to the true probability as we increase the number of dice throws.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="basics-of-probability.html#cb71-1"></a><span class="co"># Graph</span></span>
+<span id="cb71-2"><a href="basics-of-probability.html#cb71-2"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb71-3"><a href="basics-of-probability.html#cb71-3"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">6</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
+<span id="cb71-4"><a href="basics-of-probability.html#cb71-4"></a></span>
+<span id="cb71-5"><a href="basics-of-probability.html#cb71-5"></a><span class="co"># x-labels</span></span>
+<span id="cb71-6"><a href="basics-of-probability.html#cb71-6"></a>x.labels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;n=100&#39;</span>, <span class="st">&#39;n=1000&#39;</span>, <span class="st">&#39;n=10k&#39;</span>, <span class="st">&#39;n=100k&#39;</span>, <span class="st">&#39;n=1mil&#39;</span>)</span>
+<span id="cb71-7"><a href="basics-of-probability.html#cb71-7"></a>x.breaks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>)</span>
+<span id="cb71-8"><a href="basics-of-probability.html#cb71-8"></a></span>
+<span id="cb71-9"><a href="basics-of-probability.html#cb71-9"></a><span class="co"># title line 2</span></span>
+<span id="cb71-10"><a href="basics-of-probability.html#cb71-10"></a>title_line2 &lt;-<span class="st"> </span><span class="kw">sprintf</span>(<span class="st">&quot;P(S=1)=%0.3f, P(S=2)=%0.3f, P(S=3)=%0.3f, P(S=4)=%0.3f&quot;</span>,</span>
+<span id="cb71-11"><a href="basics-of-probability.html#cb71-11"></a>                   experimental.outcome.prob[<span class="dv">1</span>], experimental.outcome.prob[<span class="dv">2</span>],</span>
+<span id="cb71-12"><a href="basics-of-probability.html#cb71-12"></a>                   experimental.outcome.prob[<span class="dv">3</span>], experimental.outcome.prob[<span class="dv">4</span>])</span>
+<span id="cb71-13"><a href="basics-of-probability.html#cb71-13"></a></span>
+<span id="cb71-14"><a href="basics-of-probability.html#cb71-14"></a><span class="co"># Graph Results--Draw</span></span>
+<span id="cb71-15"><a href="basics-of-probability.html#cb71-15"></a>line.plot &lt;-<span class="st"> </span>draw.outcomes.long <span class="op">%&gt;%</span></span>
+<span id="cb71-16"><a href="basics-of-probability.html#cb71-16"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>draw.count, <span class="dt">y=</span>value,</span>
+<span id="cb71-17"><a href="basics-of-probability.html#cb71-17"></a>             <span class="dt">group=</span>dice.draw,</span>
+<span id="cb71-18"><a href="basics-of-probability.html#cb71-18"></a>             <span class="dt">colour=</span>dice.draw)) <span class="op">+</span></span>
+<span id="cb71-19"><a href="basics-of-probability.html#cb71-19"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="fl">0.75</span>) <span class="op">+</span></span>
+<span id="cb71-20"><a href="basics-of-probability.html#cb71-20"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="kw">paste0</span>(<span class="st">&#39;Law of Large Number, Unfair Four Sided Dice</span><span class="ch">\n</span><span class="st">&#39;</span>, title_line2),</span>
+<span id="cb71-21"><a href="basics-of-probability.html#cb71-21"></a>       <span class="dt">x =</span> <span class="st">&#39;Number of Times Throwing the Four-sided Dice&#39;</span>,</span>
+<span id="cb71-22"><a href="basics-of-probability.html#cb71-22"></a>       <span class="dt">y =</span> <span class="st">&#39;Empirical Probability Based on Dice Throws&#39;</span>,</span>
+<span id="cb71-23"><a href="basics-of-probability.html#cb71-23"></a>       <span class="dt">caption =</span> <span class="st">&#39;As n increases, approximates true probabilities&#39;</span>) <span class="op">+</span></span>
+<span id="cb71-24"><a href="basics-of-probability.html#cb71-24"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">trans=</span><span class="st">&#39;log10&#39;</span>, <span class="dt">labels =</span> x.labels, <span class="dt">breaks =</span> x.breaks) <span class="op">+</span></span>
+<span id="cb71-25"><a href="basics-of-probability.html#cb71-25"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span>
+<span id="cb71-26"><a href="basics-of-probability.html#cb71-26"></a></span>
+<span id="cb71-27"><a href="basics-of-probability.html#cb71-27"></a><span class="kw">print</span>(line.plot)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-69-1.png" width="672" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+</div>
+<div id="multiple-step-experiment" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Multiple-Step Experiment</h2>
+<blockquote>
+<p>Go back to <a href="http://fanwangecon.github.io/">fan</a>’s <a href="https://fanwangecon.github.io/REconTools/">REconTools</a> Package, <a href="https://fanwangecon.github.io/R4Econ/">R Code Examples</a> Repository (<a href="https://fanwangecon.github.io/R4Econ/bookdown">bookdown site</a>), or <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> Repository (<a href="https://fanwangecon.github.io/Stat4Econ/bookdown">bookdown site</a>).</p>
+</blockquote>
+<div id="playing-the-lottery-three-times" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Playing the Lottery Three times</h3>
+<p>In <em><a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html">Sample Space, Experimental Outcomes, Events, Probabilities</a></em>, we discussed various definitions. We studied various examples in <a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespaceexa.html"><em>Examples of Sample Space and Probabilities</em></a>.</p>
+<p>In the example below, we have a multiple-step experiment: “If an experiment can be describe as a sequence of <span class="math inline">\(n\)</span> steps with <span class="math inline">\(m\)</span> possible outcomes on each step, then the total number of experimental outcomes is <span class="math inline">\(m^n\)</span>.” (ASWCC P172) You can use letters other than <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span> as well.</p>
+<p>Key questions:</p>
+<ul>
+<li>What are the possible experimental outcomes?</li>
+<li>What are the probabilities associated with each of the experimental outcomes?</li>
+</ul>
+<p>We are thinking about the problem from day zero perspective. We could play the lottery three times, on day one, day two and day three.</p>
+<p>Suppose you can either win or lose when you play the lottery. Each lottery ticket costs the same. You will buy 1 lottery ticket on each day for three days straight. The chance of winning is the same for each lottery ticket (perhaps the number of people buying lottery is the same every day). You see at the end of each day whether you won or lost.</p>
+<p>The question is, what are the possible outcomes after three days? You are standing from the perspective of today, looking forward to what could happen tomorrow, two days from now, three days from now.</p>
+<div id="assumptions-and-symbols" class="section level4" number="4.4.1.1">
+<h4><span class="header-section-number">4.4.1.1</span> Assumptions and Symbols</h4>
+<p><em>Assumptions</em></p>
+<p>Based on the descriptions above, we can write down the following assumptions we are making, which are also the assumptions for the binomial distribution:</p>
+<ol style="list-style-type: decimal">
+<li>There are <span class="math inline">\(n\)</span> numbers of identical lottery plays</li>
+<li>The outcomes of each lottery are always win or lose, just these two possible outcomes.</li>
+<li>The chance of winning each time, <span class="math inline">\(p_{\text{win}}\)</span>, is the same during each play. The chance of losing is the same as well, <span class="math inline">\(1-p_{\text{win}}\)</span>.</li>
+<li>Whether you won or not before does not impact whether you will win in the future.</li>
+</ol>
+<p><em>Symbols we will use</em></p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(n\)</span>: denotes the number of lottery plays (number of trials)</li>
+<li><span class="math inline">\(x\)</span>: denotes the number of times you win, at most <span class="math inline">\(x=n\)</span>, at least <span class="math inline">\(x=0\)</span>, the number of losses is <span class="math inline">\(n-x\)</span></li>
+<li><span class="math inline">\(p\)</span>: the probability of winning, the probability of losing is therefore <span class="math inline">\(1-p\)</span>.</li>
+</ol>
+<p>The Tree Structure with Probability Written on it, <em>Notations</em>:</p>
+<ul>
+<li>W = Win, L = Lose</li>
+<li>D0 = Day 0, D1 = Day 1, D2 = Day 2</li>
+</ul>
+</div>
+<div id="play-the-lottery-just-once" class="section level4" number="4.4.1.2">
+<h4><span class="header-section-number">4.4.1.2</span> Play the Lottery Just once</h4>
+<p>From day zero perspective, by the end of day one, there are two possible experimental outcomes, with different probabilities associated with each outcome.</p>
+<ul>
+<li>D0:
+<ul>
+<li>D1 <span class="math inline">\(W\)</span>: <span class="math inline">\(P(E_1) = P(W) = p\)</span></li>
+<li>D1 <span class="math inline">\(L\)</span>: <span class="math inline">\(P(E_2) = P(L) = 1-p\)</span></li>
+</ul></li>
+</ul>
+<p>There are two experimental outcomes in the sample space:
+<span class="math display">\[\Sigma_{i=1}^2 \left(P\left(E_i\right)\right) = p + \left(1-p\right) = 1\]</span></p>
+</div>
+<div id="play-the-lottery-twice" class="section level4" number="4.4.1.3">
+<h4><span class="header-section-number">4.4.1.3</span> Play the Lottery Twice</h4>
+<p>From day zero perspective, by the end of day two, there are four possible experimental outcomes, with different probabilities associated with each outcome.</p>
+<p>We are assuming that each lottery play is independent, we learned <a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html">before</a> that:</p>
+<p><span class="math display">\[ P(A \cap B) = P (A \mid B)\cdot P(B)\]</span></p>
+<p>and when <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent:</p>
+<p><span class="math display">\[ P(A \cap B) = P (A)\cdot P(B)\]</span></p>
+<ul>
+<li>D0:
+<ul>
+<li>D1 W:
+<ul>
+<li>D2 <span class="math inline">\(W\)</span>: <span class="math inline">\(P(E_1) = P(\text{First Game Win} \cap \text{Second Game Win}) = P(WW) = P(W) \cdot P(W) = p \cdot p\)</span></li>
+<li>D2 <span class="math inline">\(L\)</span>: <span class="math inline">\(P(E_2) = P(\text{First Game Win} \cap \text{Second Game Lose}) = P(WL) = P(W) \cdot \left(1-P(W)\right) = p \cdot (1-p)\)</span></li>
+</ul></li>
+<li>D1 L:
+<ul>
+<li>D2 <span class="math inline">\(W\)</span>: <span class="math inline">\(P(E_3) = P(LW)=(1-p) \cdot p\)</span></li>
+<li>D2 <span class="math inline">\(L\)</span>: <span class="math inline">\(P(E_4) = P(LL)=(1-p) \cdot (1-p)\)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>There are four experimental outcomes in the sample space:</p>
+<p><span class="math display">\[\begin{align}
+\Sigma_{i=1}^4 \left(P\left(E_i\right)\right) =&amp; p \cdot p + p \cdot (1-p) + (1-p) \cdot p + (1-p) \cdot (1-p)\\
+=&amp; p \cdot (p + 1 - p) + (1-p) \cdot (p + 1 - p) \\
+=&amp; p + (1-p) \\
+=&amp; 1 \\
+\end{align}\]</span></p>
+</div>
+<div id="play-the-lottery-three-times" class="section level4" number="4.4.1.4">
+<h4><span class="header-section-number">4.4.1.4</span> Play the Lottery Three Times</h4>
+<p>From day zero perspective, by the end of day three, there are eight possible experimental outcomes, with different probabilities associated with each outcome.</p>
+<ul>
+<li>D0:
+<ul>
+<li>D1 <span class="math inline">\(W\)</span>:
+<ul>
+<li>D2 <span class="math inline">\(W\)</span>
+<ul>
+<li>D3 <span class="math inline">\(W\)</span>: <span class="math inline">\(P(E_1)=P(WWW)=p^{3} \cdot (1-p)^{0}\)</span></li>
+<li>D3 <span class="math inline">\(L\)</span>: <span class="math inline">\(P(E_2)=P(WWL)=p^{2} \cdot (1-p)^{1}\)</span></li>
+</ul></li>
+<li>D2 <span class="math inline">\(L\)</span>:
+<ul>
+<li>D3 <span class="math inline">\(W\)</span>: <span class="math inline">\(P(E_3)=P(WLW)=p^{2} \cdot (1-p)^{1}\)</span></li>
+<li>D3 <span class="math inline">\(L\)</span>: <span class="math inline">\(P(E_4)=P(WLL)=p^{1} \cdot (1-p)^{2}\)</span></li>
+</ul></li>
+</ul></li>
+<li>D1 <span class="math inline">\(L\)</span>:
+<ul>
+<li>D2 <span class="math inline">\(W\)</span>
+<ul>
+<li>D3 <span class="math inline">\(W\)</span>: <span class="math inline">\(P(E_5)=P(LWW)=p^{2} \cdot (1-p)^{1}\)</span></li>
+<li>D3 <span class="math inline">\(L\)</span>: <span class="math inline">\(P(E_6)=P(LWL)=p^{1} \cdot (1-p)^{2}\)</span></li>
+</ul></li>
+<li>D2 <span class="math inline">\(L\)</span>:
+<ul>
+<li>D3 <span class="math inline">\(W\)</span>: <span class="math inline">\(P(E_7)=P(LLW)=p^{1} \cdot (1-p)^{2}\)</span></li>
+<li>D3 <span class="math inline">\(L\)</span>: <span class="math inline">\(P(E_8)=P(LLL)=p^{0} \cdot (1-p)^{3}\)</span></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>There are eight experimental outcomes in the sample space, and they sum up to one as before:</p>
+<p><span class="math display">\[\begin{align}
+\Sigma_{i=1}^8 \left(P\left(E_i\right)\right) = 1 \\
+\end{align}\]</span></p>
+</div>
+<div id="probabilities-of-events" class="section level4" number="4.4.1.5">
+<h4><span class="header-section-number">4.4.1.5</span> Probabilities of Events</h4>
+<p>Generally, after <span class="math inline">\(n\)</span> trials/lotteries, if a particular experimental outcome had <span class="math inline">\(x\)</span> number of wins/successes (which means <span class="math inline">\(n-x\)</span> number of losses/failures), the probability that this particular experimental outcome happen is:
+<span class="math display">\[ p^x \cdot p^{n-x} \]</span></p>
+<p>The probabilities we wrote in the previous examples all follow this rule. Remember that if someone won every time, <span class="math inline">\(n=x\)</span>, and we will have <span class="math inline">\(p^x \cdot p^{n-x}=p^x \cdot p^0 = p^x \cdot 1 = p^x\)</span>.</p>
+<p>So far we have discussed different experimental outcomes with unique sequences of wins and losses. In the 3 lottery example above, we have 8 experimental outcomes. If we are mainly interested in the total number of wins and losses, we can group these 8 experimental outcomes into 4 events.</p>
+<ol style="list-style-type: decimal">
+<li>Event win three times: W3 = <span class="math inline">\(\left\{E_1\right\}\)</span>
+<span class="math display">\[P(W3)=p^{3} \cdot (1-p)^{0}\]</span></li>
+<li>Event win two times: W2 = <span class="math inline">\(\left\{E_2, E_3, E_5\right\}\)</span>
+<ul>
+<li>There are three experimental outcomes out of the eight where you win two times. The probability of each of these experimental outcomes happening is: <span class="math inline">\(p^{2} \cdot (1-p)^{1}\)</span>, hence: <span class="math display">\[P(W2) = 3 \cdot p^{2} \cdot (1-p)^{1}\]</span></li>
+</ul></li>
+<li>Event win one time: W1 = <span class="math inline">\(\left\{E_4, E_6, E_7\right\}\)</span>
+<ul>
+<li>There are three experimental outcomes out of the eight where you win one time. The probability of each of these experimental outcomes happening is: <span class="math inline">\(p^{1} \cdot (1-p)^{2}\)</span>, hence: <span class="math display">\[P(W1) = 3 \cdot p^{1} \cdot (1-p)^{2}\]</span></li>
+</ul></li>
+<li>Event win zero time: W0 = <span class="math inline">\(\left\{E_8\right\}\)</span>
+<span class="math display">\[P(W0)=p^{0} \cdot (1-p)^{3}\]</span></li>
+</ol>
+<p>These four events are <a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html">mutually exclusive and jointly exhaustive</a>, we can define a new sample space that includes four experimental outcomes, win zero times, win once, win twice, win three times.</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="summarizing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="discrete-probability-distribution.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["Introductory-Statistics-with-R-tidyverse.pdf", "PDF"]],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

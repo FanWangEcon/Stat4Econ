@@ -1,0 +1,56 @@
+# output:
+#   html_document: default
+#   word_document: default
+#   pdf_document:
+#     includes:
+#       in_header: preamble_book.tex
+#   html_notebook: default
+# urlcolor: blue
+# always_allow_html: yes
+bookdown::gitbook:
+  css: style.css
+  includes:
+    in_header: hdga.html
+  config:
+    toc:
+      before: |
+        <li><a href="./">Introductory Statistics with R tidyverse</a></li>
+      after: |
+        <li><a href="https://fanwangecon.github.io/Stat4Econ/bookdown/index.html" target="blank">Stat4Econ Bookdown</a></li>
+    # edit: https://github.com/FanWangEcon/R4Econ%s
+    download: [["Introductory-Statistics-with-R-tidyverse.pdf", "PDF"]]
+bookdown::pdf_book:
+  toc: true
+  tod_depth: 5
+  includes:
+    in_header: preamble_book.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+  bookdown::gitbook:
+  config:
+    toc:
+      collapse: subsection
+      scroll_highlight: yes
+      before: null
+      after: null
+    toolbar:
+      position: fixed
+    edit : null
+    download: [["Introductory-Statistics-with-R-tidyverse.pdf", "PDF"]]
+    search: yes
+    fontsettings:
+      theme: white
+      family: sans
+      size: 2
+    sharing:
+      facebook: yes
+      github: no
+      twitter: yes
+      linkedin: no
+      weibo: no
+      instapaper: no
+      vk: no
+      all: ['facebook', 'twitter', 'linkedin', 'weibo', 'instapaper']
+    info: yes
+bookdown::epub_book: default

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>A Index and Code Links | Introductory Statistics with R tidyverse</title>
+  <meta name="description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="A Index and Code Links | Introductory Statistics with R tidyverse" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  <meta name="github-repo" content="fanwangecon/Stat4Econ" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Index and Code Links | Introductory Statistics with R tidyverse" />
+  
+  <meta name="twitter:description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
+  
+
+<meta name="author" content="Fan Wang" />
+
+
+<meta name="date" content="2020-05-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="discrete-probability-distribution.html"/>
+
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92953468-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92953468-4');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introductory Statistics with R tidyverse</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="survey.html"><a href="survey.html"><i class="fa fa-check"></i><b>1</b> Survey</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="survey.html"><a href="survey.html#generate-a-dataset-in-r"><i class="fa fa-check"></i><b>1.1</b> Generate A Dataset in R</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="survey.html"><a href="survey.html#a-random-sample-of-students-in-class"><i class="fa fa-check"></i><b>1.1.1</b> A Random Sample of Students in Class</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html"><i class="fa fa-check"></i><b>2</b> Dataset, Tables and Graphs</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#opening-a-dataset"><i class="fa fa-check"></i><b>2.1</b> Opening a Dataset</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#paths-to-data"><i class="fa fa-check"></i><b>2.1.1</b> Paths to Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#one-variable-graphs-and-tables"><i class="fa fa-check"></i><b>2.2</b> One Variable Graphs and Tables</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#categoricaldiscrete"><i class="fa fa-check"></i><b>2.2.1</b> Categorical/Discrete</a></li>
+<li class="chapter" data-level="2.2.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#continuousquantitative"><i class="fa fa-check"></i><b>2.2.2</b> Continuous/Quantitative</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#multiple-variables-graphs-and-tables"><i class="fa fa-check"></i><b>2.3</b> Multiple Variables Graphs and Tables</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#two-continuous-variables"><i class="fa fa-check"></i><b>2.3.1</b> Two Continuous Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#two-categorical-variables"><i class="fa fa-check"></i><b>2.3.2</b> Two Categorical Variables</a></li>
+<li class="chapter" data-level="2.3.3" data-path="dataset-tables-and-graphs.html"><a href="dataset-tables-and-graphs.html#continuous-and-categorical-variable"><i class="fa fa-check"></i><b>2.3.3</b> Continuous and Categorical Variable</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="summarizing-data.html"><a href="summarizing-data.html"><i class="fa fa-check"></i><b>3</b> Summarizing Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="summarizing-data.html"><a href="summarizing-data.html#mean-and-standard-deviation"><i class="fa fa-check"></i><b>3.1</b> Mean and Standard Deviation</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="summarizing-data.html"><a href="summarizing-data.html#temperature-across-locations-over-time"><i class="fa fa-check"></i><b>3.1.1</b> Temperature Across Locations over Time</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="summarizing-data.html"><a href="summarizing-data.html#coefficient-of-variation-and-correlation"><i class="fa fa-check"></i><b>3.2</b> Coefficient of Variation and Correlation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="summarizing-data.html"><a href="summarizing-data.html#education-and-wage"><i class="fa fa-check"></i><b>3.2.1</b> Education and Wage</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="basics-of-probability.html"><a href="basics-of-probability.html"><i class="fa fa-check"></i><b>4</b> Basics of Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#experimental-outcomes"><i class="fa fa-check"></i><b>4.1</b> Experimental Outcomes</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-space-and-probabilities"><i class="fa fa-check"></i><b>4.1.1</b> Sample Space and Probabilities</a></li>
+<li class="chapter" data-level="4.1.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#union-and-intersection-and-complements"><i class="fa fa-check"></i><b>4.1.2</b> Union and Intersection and Complements</a></li>
+<li class="chapter" data-level="4.1.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#conditional-probability"><i class="fa fa-check"></i><b>4.1.3</b> Conditional Probability</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-space-and-probability-examples"><i class="fa fa-check"></i><b>4.2</b> Sample Space and Probability Examples</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#presidential-election"><i class="fa fa-check"></i><b>4.2.1</b> Presidential Election</a></li>
+<li class="chapter" data-level="4.2.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#throwing-a-dice"><i class="fa fa-check"></i><b>4.2.2</b> Throwing a Dice</a></li>
+<li class="chapter" data-level="4.2.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#two-basketball-games"><i class="fa fa-check"></i><b>4.2.3</b> Two Basketball Games</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-average"><i class="fa fa-check"></i><b>4.3</b> Sample Average</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#an-unfair-dice"><i class="fa fa-check"></i><b>4.3.1</b> An Unfair Dice</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="basics-of-probability.html"><a href="basics-of-probability.html#multiple-step-experiment"><i class="fa fa-check"></i><b>4.4</b> Multiple-Step Experiment</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#playing-the-lottery-three-times"><i class="fa fa-check"></i><b>4.4.1</b> Playing the Lottery Three times</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html"><i class="fa fa-check"></i><b>5</b> Discrete Probability Distribution</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#discrete-random-variable-and-binomial"><i class="fa fa-check"></i><b>5.1</b> Discrete Random Variable and Binomial</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#discrete-random-variable"><i class="fa fa-check"></i><b>5.1.1</b> Discrete Random Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-experiment"><i class="fa fa-check"></i><b>5.2</b> Binomial Experiment</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-example-larceny"><i class="fa fa-check"></i><b>5.2.1</b> Binomial Example: Larceny</a></li>
+<li class="chapter" data-level="5.2.2" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#binomial-example-wwii-german-soldier"><i class="fa fa-check"></i><b>5.2.2</b> Binomial Example: WWII German Soldier</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#poisson-distribution"><i class="fa fa-check"></i><b>5.3</b> Poisson Distribution</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="discrete-probability-distribution.html"><a href="discrete-probability-distribution.html#poisson-example-horse-kicking"><i class="fa fa-check"></i><b>5.3.1</b> Poisson Example: Horse-Kicking</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="index-and-code-links.html"><a href="index-and-code-links.html"><i class="fa fa-check"></i><b>A</b> Index and Code Links</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="index-and-code-links.html"><a href="index-and-code-links.html#survey-links"><i class="fa fa-check"></i><b>A.1</b> Survey links</a></li>
+<li class="chapter" data-level="A.2" data-path="index-and-code-links.html"><a href="index-and-code-links.html#dataset-tables-and-graphs-links"><i class="fa fa-check"></i><b>A.2</b> Dataset, Tables and Graphs links</a></li>
+<li class="chapter" data-level="A.3" data-path="index-and-code-links.html"><a href="index-and-code-links.html#summarizing-data-links"><i class="fa fa-check"></i><b>A.3</b> Summarizing Data links</a></li>
+<li class="chapter" data-level="A.4" data-path="index-and-code-links.html"><a href="index-and-code-links.html#basics-of-probability-links"><i class="fa fa-check"></i><b>A.4</b> Basics of Probability links</a></li>
+<li class="chapter" data-level="A.5" data-path="index-and-code-links.html"><a href="index-and-code-links.html#discrete-probability-distribution-links"><i class="fa fa-check"></i><b>A.5</b> Discrete Probability Distribution links</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://fanwangecon.github.io/Stat4Econ/bookdown/index.html" target="blank">Stat4Econ Bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introductory Statistics with R tidyverse</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="index-and-code-links" class="section level1" number="6">
+<h1><span class="header-section-number">A</span> Index and Code Links</h1>
+<div id="survey-links" class="section level2" number="6.1">
+<h2><span class="header-section-number">A.1</span> Survey links</h2>
+<ol style="list-style-type: decimal">
+<li><a href="https://fanwangecon.github.io/Stat4Econ/survey/htmlpdfr/classsurvey.html">An In-class Survey</a>: <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/survey//classsurvey.Rmd"><strong>rmd</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/survey/htmlpdfr/classsurvey.R"><strong>r</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/survey/htmlpdfr/classsurvey.pdf"><strong>pdf</strong></a> | <a href="https://fanwangecon.github.io/Stat4Econ/survey/htmlpdfr/classsurvey.html"><strong>html</strong></a>
+<ul>
+<li>create a tibble dataset</li>
+<li>draw 10 random students from 50 and build a survey</li>
+<li><strong>r</strong>: <em>factor() + ifelse()</em></li>
+<li><strong>dplyr</strong>: <em>group_by() + mutate() + summarise()</em></li>
+<li><strong>tibble</strong>: <em>add_row()</em></li>
+<li><strong>readr</strong>: <em>write_csv()</em></li>
+</ul></li>
+</ol>
+</div>
+<div id="dataset-tables-and-graphs-links" class="section level2" number="6.2">
+<h2><span class="header-section-number">A.2</span> Dataset, Tables and Graphs links</h2>
+<ol style="list-style-type: decimal">
+<li><a href="https://fanwangecon.github.io/Stat4Econ/descriptive/htmlpdfr/DataBasketball.html">Opening a Dataset</a>: <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/descriptive//DataBasketball.Rmd"><strong>rmd</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/descriptive/htmlpdfr/DataBasketball.R"><strong>r</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/descriptive/htmlpdfr/DataBasketball.pdf"><strong>pdf</strong></a> | <a href="https://fanwangecon.github.io/Stat4Econ/descriptive/htmlpdfr/DataBasketball.html"><strong>html</strong></a>
+<ul>
+<li>Opening a Dataset.</li>
+<li><strong>r</strong>: <em>setwd()</em></li>
+<li><strong>readr</strong>: <em>write_csv()</em></li>
+</ul></li>
+<li><a href="https://fanwangecon.github.io/Stat4Econ/descriptive/htmlpdfr/OneVariable.html">One Variable Graphs and Tables</a>: <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/descriptive//OneVariable.Rmd"><strong>rmd</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/descriptive/htmlpdfr/OneVariable.R"><strong>r</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/descriptive/htmlpdfr/OneVariable.pdf"><strong>pdf</strong></a> | <a href="https://fanwangecon.github.io/Stat4Econ/descriptive/htmlpdfr/OneVariable.html"><strong>html</strong></a>
+<ul>
+<li>Frequency table, bar chart and histogram.</li>
+<li>R function and lapply to generate graphs/tables for different variables.</li>
+<li><strong>r</strong>: <em>c(‘word1’,‘word2’) + function() + for (ctr in c(1,2)) {} + lapply()</em></li>
+<li><strong>dplyr</strong>: <em>group_by() + summarize() + n()</em></li>
+<li><strong>ggplot</strong>: <em>geom_bar() + geom_histogram() + labs(title = ‘title’, caption = ‘caption’)</em></li>
+</ul></li>
+<li><a href="https://fanwangecon.github.io/Stat4Econ/descriptive/htmlpdfr/MultipleVariables.html">Multiple Variables Graphs and Tables</a>: <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/descriptive//MultipleVariables.Rmd"><strong>rmd</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/descriptive/htmlpdfr/MultipleVariables.R"><strong>r</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/descriptive/htmlpdfr/MultipleVariables.pdf"><strong>pdf</strong></a> | <a href="https://fanwangecon.github.io/Stat4Econ/descriptive/htmlpdfr/MultipleVariables.html"><strong>html</strong></a>
+<ul>
+<li>Two-way frequency table, stacked bar chart annd scatter-plot</li>
+<li><strong>r</strong>: <em>interaction()</em></li>
+<li><strong>dplyr</strong>: <em>group_by(var) + summarize(freq = n()) + spread(gender, freq)</em></li>
+<li><strong>ggplot</strong>: <em>aes(x,y,fill) + geom_bar(stat=‘identity’, fun.y=‘mean’, position=‘dodge’) + geom_point(size) + geom_text(size,hjust,vjust) + geom_smooth(method=lm) + labs(title,x,y,caption)</em></li>
+</ul></li>
+</ol>
+</div>
+<div id="summarizing-data-links" class="section level2" number="6.3">
+<h2><span class="header-section-number">A.3</span> Summarizing Data links</h2>
+<ol style="list-style-type: decimal">
+<li><a href="https://fanwangecon.github.io/Stat4Econ/summarystats/htmlpdfr/meansdhist.html">Mean and Standard Deviation</a>: <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/summarystats//meansdhist.Rmd"><strong>rmd</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/summarystats/htmlpdfr/meansdhist.R"><strong>r</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/summarystats/htmlpdfr/meansdhist.pdf"><strong>pdf</strong></a> | <a href="https://fanwangecon.github.io/Stat4Econ/summarystats/htmlpdfr/meansdhist.html"><strong>html</strong></a>
+<ul>
+<li>Mean and standard deviation from a dataset with city-month temperatures.</li>
+<li><strong>r</strong>: <em>dim() + min() + ceiling() + lapply() + vector(mode=“character”,length) + substring(var, first, last) + func &lt;- function(return(list))</em></li>
+<li><strong>dplyr</strong>: <em>mutate() + select() + filter()</em></li>
+<li><strong>tidyr</strong>: <em>gather(vara, val, -varb)</em></li>
+<li><strong>rlang</strong>: <em>!!sym(str_var_name)</em></li>
+<li><strong>ggplot</strong>: <em>aes(x, y, colour, linetype, shape) + facet_wrap(~var, scales=‘free_y’) + geom_line() + geom_point() + geom_jitter(size, width) + scale_x_continuous(labels, breaks)</em></li>
+</ul></li>
+<li><a href="https://fanwangecon.github.io/Stat4Econ/summarystats/htmlpdfr/toolboxone.html">Rescaling Standard Deviation and Covariance</a>: <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/summarystats//toolboxone.Rmd"><strong>rmd</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/summarystats/htmlpdfr/toolboxone.R"><strong>r</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/summarystats/htmlpdfr/toolboxone.pdf"><strong>pdf</strong></a> | <a href="https://fanwangecon.github.io/Stat4Econ/summarystats/htmlpdfr/toolboxone.html"><strong>html</strong></a>
+<ul>
+<li>Scatter-plot of a dataset with state-level wage and education data.</li>
+<li>Coefficient of variation and standard deviation, correlation and covariance.</li>
+<li><strong>r</strong>: <em>mean() + sd() + var() + cov() + cor()</em></li>
+<li><strong>ggplot</strong>: <em>geom_point(size) + geom_text() + geom_smooth()</em></li>
+</ul></li>
+</ol>
+</div>
+<div id="basics-of-probability-links" class="section level2" number="6.4">
+<h2><span class="header-section-number">A.4</span> Basics of Probability links</h2>
+<ol style="list-style-type: decimal">
+<li><a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html">Sample Space, Experimental Outcomes, Events, Probabilities</a>: <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability//samplespace.Rmd"><strong>rmd</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespace.R"><strong>r</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespace.pdf"><strong>pdf</strong></a> | <a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html"><strong>html</strong></a>
+<ul>
+<li>Sample Space, Experimental Outcomes, Events and Probability.</li>
+<li>Union, intersection and complements</li>
+<li>conditional probability</li>
+</ul></li>
+<li><a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespaceexa.html">Examples of Sample Space and Probabilities</a>: <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability//samplespaceexa.Rmd"><strong>rmd</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespaceexa.R"><strong>r</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespaceexa.pdf"><strong>pdf</strong></a> | <a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespaceexa.html"><strong>html</strong></a>
+<ul>
+<li>Throwing a quarter, four candidates for election, six-sided unfair dice, two basketball games</li>
+<li><strong>r</strong>: <em>sample(size, replace, prob)</em></li>
+</ul></li>
+<li><a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html">Throw an Unfair Four Sided Dice</a>: <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability//samplespacedice.Rmd"><strong>rmd</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespacedice.R"><strong>r</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespacedice.pdf"><strong>pdf</strong></a> | <a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html"><strong>html</strong></a>
+<ul>
+<li>Throw an unfair dice many times, law of large number.</li>
+<li><strong>r</strong>: <em>head() + tail() + factor() + sample() + as.numeric() + paste0(‘dice=’, var) + sprintf(‘%0.3f’, 1.1234) + sprintf(“P(S=1)=%0.3f, P(S=2)=%0.3f”, 1.1, 1.2345)</em></li>
+<li><strong>stringr</strong>: <em>str_extract() + as.numeric(str_extract(variable, “[^.n]+$”)))</em></li>
+<li><strong>dplyr</strong>: <em>mutate(!!str_mean_var := as.numeric(sprintf(‘%0.5f’, freq / sum(freq))))</em></li>
+<li><strong>ggplot</strong>: <em>geom_line() + scale_x_continuous(trans=‘log10’, labels=c(‘n=100’, ‘n=1000’), breaks=c(100, 1000))</em></li>
+</ul></li>
+<li><a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/lottery.html">Multiple-Step Experiment: Playing the Lottery Three times</a>: <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability//lottery.Rmd"><strong>rmd</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/lottery.R"><strong>r</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/lottery.pdf"><strong>pdf</strong></a> | <a href="https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/lottery.html"><strong>html</strong></a>
+<ul>
+<li>Paths after 1, 2 and 3 plays.</li>
+</ul></li>
+</ol>
+</div>
+<div id="discrete-probability-distribution-links" class="section level2" number="6.5">
+<h2><span class="header-section-number">A.5</span> Discrete Probability Distribution links</h2>
+<ol style="list-style-type: decimal">
+<li><a href="https://fanwangecon.github.io/Stat4Econ/probability_discrete/htmlpdfr/binomial.html">Discrete Random Variable and Binomial Experiment</a>: <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability_discrete//binomial.Rmd"><strong>rmd</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability_discrete/htmlpdfr/binomial.R"><strong>r</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability_discrete/htmlpdfr/binomial.pdf"><strong>pdf</strong></a> | <a href="https://fanwangecon.github.io/Stat4Econ/probability_discrete/htmlpdfr/binomial.html"><strong>html</strong></a>
+<ul>
+<li>Discrete Random Variable, expected value and variance.</li>
+<li>Binomial Properties, examples using USA larceny clearance rate, WWII German soldier survival rate</li>
+<li><strong>r</strong>: <em>dbinom() + pbinom() + sprintf(paste0(‘abc\n’, ‘efg = %s’), ‘opq’) + round(1.123, 2) + lapply()</em></li>
+<li><strong>ggplot</strong>: <em>df %&gt;% ggplot(aes(x)) + geom_bar(aes(y=prob), stat=‘identity’, alpha=0.5, width=0.5, fill) + geom_text(aes(y=prob, label=paste0(sprintf(‘%2.1f’, p), ‘%’)), vjust, size, color, fontface) + labs(title, x, y, caption) + scale_y_continuous(sec.axis, name) + + scale_x_continuous(labels, breaks) + theme(axis.text.y, axis.text.y.right, axis.text.y.left)</em></li>
+</ul></li>
+<li><a href="https://fanwangecon.github.io/Stat4Econ/probability_discrete/htmlpdfr/poisson.html">Poisson Probability Distribution</a>: <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability_discrete//poisson.Rmd"><strong>rmd</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability_discrete/htmlpdfr/poisson.R"><strong>r</strong></a> | <a href="https://github.com/FanWangEcon/Stat4Econ/blob/master/probability_discrete/htmlpdfr/poisson.pdf"><strong>pdf</strong></a> | <a href="https://fanwangecon.github.io/Stat4Econ/probability_discrete/htmlpdfr/poisson.html"><strong>html</strong></a>
+<ul>
+<li>Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths.</li>
+<li><strong>r</strong>: <em>dpois() + ppois()</em></li>
+<li><strong>ggplot</strong>: <em>geom_bar() + geom_text() + gome_line() + geom_point() + geom_text() + labs() + scale_y_continuous() + scale_x_continuous() + theme()</em></li>
+</ul></li>
+</ol>
+
+
+<div id="refs" class="references hanging-indent">
+<div>
+<p>Müller, Kirill, and Hadley Wickham. 2019. <em>Tibble: Simple Data Frames</em>. <a href="https://CRAN.R-project.org/package=tibble">https://CRAN.R-project.org/package=tibble</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley. 2019. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, and Hiroaki Yutani. 2019. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2019. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, and Lionel Henry. 2019. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, Jim Hester, and Romain Francois. 2018. <em>Readr: Read Rectangular Text Data</em>. <a href="https://CRAN.R-project.org/package=readr">https://CRAN.R-project.org/package=readr</a>.</p>
+</div>
+<div>
+<p>Xie, Yihui. 2020. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.</p>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="discrete-probability-distribution.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["Introductory-Statistics-with-R-tidyverse.pdf", "PDF"]],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

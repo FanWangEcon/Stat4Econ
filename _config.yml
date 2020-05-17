@@ -1,5 +1,5 @@
 theme: jekyll-theme-slate
-title: Intro Statistics for Undergraduates
+title: R Examples Introductory Statistics
 google_analytics: UA-92953468-4
 plugins:
   - jekyll-sitemap

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Dataset, Tables and Graphs | Introductory Statistics with R tidyverse</title>
   <meta name="description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Dataset, Tables and Graphs | Introductory Statistics with R tidyverse" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Fan Wang" />
 
 
-<meta name="date" content="2020-05-02" />
+<meta name="date" content="2020-05-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -298,30 +298,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-2"><a href="dataset-tables-and-graphs.html#cb13-2"></a>basetball_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/Basketball.csv&#39;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="dataset-tables-and-graphs.html#cb14-1"></a><span class="co"># Summarize all variables in data frame</span></span>
 <span id="cb14-2"><a href="dataset-tables-and-graphs.html#cb14-2"></a><span class="kw">summary</span>(basetball_data)</span></code></pre></div>
-<pre><code>##         ilkid            year        firstname         lastname          team       leag            gp           minutes            pts              oreb       
-##  WILLIKE01 :   27   Min.   :1946   John   :  502   Williams:  441   TOT    : 1611   A: 1247   Min.   : 1.00   Min.   :   0.0   Min.   :   0.0   Min.   :  0.00  
-##  EDWARJA01 :   25   1st Qu.:1974   Bob    :  404   Johnson :  400   NYK    :  947   N:20712   1st Qu.:29.00   1st Qu.: 275.5   1st Qu.: 113.0   1st Qu.:  0.00  
-##  CORBITY01 :   24   Median :1988   Mike   :  395   Smith   :  317   BOS    :  919             Median :60.00   Median :1038.0   Median : 386.0   Median : 22.00  
-##  JACKSJI01 :   24   Mean   :1986   Jim    :  344   Jones   :  298   DET    :  799             Mean   :51.91   Mean   :1204.1   Mean   : 531.1   Mean   : 49.79  
-##  CASSESA01 :   23   3rd Qu.:1999   Chris  :  267   Davis   :  254   PHI    :  736             3rd Qu.:76.00   3rd Qu.:2009.0   3rd Qu.: 811.0   3rd Qu.: 75.00  
-##  MALONMO01 :   23   Max.   :2009   Tom    :  260   Brown   :  209   LAL    :  712             Max.   :90.00   Max.   :3882.0   Max.   :4029.0   Max.   :587.00  
-##  (Other)   :21813                  (Other):19787   (Other) :20040   (Other):16235                                                                               
-##       dreb             reb              asts             stl             blk           turnover           pf             fga              fgm              fta        
-##  Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   0      : 5939   0      : 6855   0      : 5696   Min.   :  0.0   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0  
-##  1st Qu.:   1.0   1st Qu.:  44.0   1st Qu.:  20.0   1      :  607   1      : 1126   1      :  349   1st Qu.: 43.0   1st Qu.: 106.0   1st Qu.:  43.0   1st Qu.:  30.0  
-##  Median :  60.0   Median : 160.0   Median :  71.0   2      :  479   2      :  860   2      :  347   Median :118.0   Median : 345.0   Median : 148.0   Median :  99.0  
-##  Mean   : 117.8   Mean   : 229.7   Mean   : 118.1   3      :  445   3      :  754   NULL   :  294   Mean   :123.6   Mean   : 452.5   Mean   : 204.2   Mean   : 146.9  
-##  3rd Qu.: 180.0   3rd Qu.: 333.0   3rd Qu.: 167.0   5      :  345   4      :  647   3      :  287   3rd Qu.:193.0   3rd Qu.: 696.0   3rd Qu.: 313.0   3rd Qu.: 218.0  
-##  Max.   :1538.0   Max.   :2149.0   Max.   :1164.0   4      :  343   5      :  608   5      :  246   Max.   :386.0   Max.   :3159.0   Max.   :1597.0   Max.   :1363.0  
-##                                                     (Other):13801   (Other):11109   (Other):14740                                                                     
-##       ftm             tpa              tpm       
-##  Min.   :  0.0   Min.   :  0.00   Min.   :  0.0  
-##  1st Qu.: 20.0   1st Qu.:  0.00   1st Qu.:  0.0  
-##  Median : 70.0   Median :  2.00   Median :  0.0  
-##  Mean   :109.6   Mean   : 38.07   Mean   : 13.1  
-##  3rd Qu.:161.0   3rd Qu.: 27.00   3rd Qu.:  7.0  
-##  Max.   :840.0   Max.   :678.00   Max.   :269.0  
-## </code></pre>
+<pre><code>##     ilkid                year       firstname           lastname             team               leag                 gp           minutes      
+##  Length:21959       Min.   :1946   Length:21959       Length:21959       Length:21959       Length:21959       Min.   : 1.00   Min.   :   0.0  
+##  Class :character   1st Qu.:1974   Class :character   Class :character   Class :character   Class :character   1st Qu.:29.00   1st Qu.: 275.5  
+##  Mode  :character   Median :1988   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Median :60.00   Median :1038.0  
+##                     Mean   :1986                                                                               Mean   :51.91   Mean   :1204.1  
+##                     3rd Qu.:1999                                                                               3rd Qu.:76.00   3rd Qu.:2009.0  
+##                     Max.   :2009                                                                               Max.   :90.00   Max.   :3882.0  
+##       pts              oreb             dreb             reb              asts            stl                blk              turnover        
+##  Min.   :   0.0   Min.   :  0.00   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Length:21959       Length:21959       Length:21959      
+##  1st Qu.: 113.0   1st Qu.:  0.00   1st Qu.:   1.0   1st Qu.:  44.0   1st Qu.:  20.0   Class :character   Class :character   Class :character  
+##  Median : 386.0   Median : 22.00   Median :  60.0   Median : 160.0   Median :  71.0   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   : 531.1   Mean   : 49.79   Mean   : 117.8   Mean   : 229.7   Mean   : 118.1                                                           
+##  3rd Qu.: 811.0   3rd Qu.: 75.00   3rd Qu.: 180.0   3rd Qu.: 333.0   3rd Qu.: 167.0                                                           
+##  Max.   :4029.0   Max.   :587.00   Max.   :1538.0   Max.   :2149.0   Max.   :1164.0                                                           
+##        pf             fga              fgm              fta              ftm             tpa              tpm       
+##  Min.   :  0.0   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Min.   :  0.0   Min.   :  0.00   Min.   :  0.0  
+##  1st Qu.: 43.0   1st Qu.: 106.0   1st Qu.:  43.0   1st Qu.:  30.0   1st Qu.: 20.0   1st Qu.:  0.00   1st Qu.:  0.0  
+##  Median :118.0   Median : 345.0   Median : 148.0   Median :  99.0   Median : 70.0   Median :  2.00   Median :  0.0  
+##  Mean   :123.6   Mean   : 452.5   Mean   : 204.2   Mean   : 146.9   Mean   :109.6   Mean   : 38.07   Mean   : 13.1  
+##  3rd Qu.:193.0   3rd Qu.: 696.0   3rd Qu.: 313.0   3rd Qu.: 218.0   3rd Qu.:161.0   3rd Qu.: 27.00   3rd Qu.:  7.0  
+##  Max.   :386.0   Max.   :3159.0   Max.   :1597.0   Max.   :1363.0   Max.   :840.0   Max.   :678.00   Max.   :269.0</code></pre>
 
 </div>
 </div>

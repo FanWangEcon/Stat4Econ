@@ -1,4 +1,4 @@
-## ----global_options, include = FALSE-----------------------------------------------------------------------------------------------------------------------------------
+## ----global_options, include = FALSE-------------------------------------------------------------------------------------------------------------------
 try(source("../.Rprofile"))
 # Install Tibble and dplyr inside RStudio for Example by installing Tidyverse: install.packages("tidyverse")
 # tibble is a table tool from tidyverse
@@ -9,11 +9,11 @@ library(dplyr)
 library(readr)
 
 
-## ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------------------------------------
 head(mtcars, 5)
 
 
-## ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------------------------------------
 # Setting seed means we will get the same set of random numbers each time
 set.seed(12345)
 # in R, draw integers between 1 and 4, 10 times
@@ -24,7 +24,7 @@ COL.RAND.DRAWS = sample(1:13, 10, replace = TRUE)
 rbind(ROW.RAND.DRAWS, COL.RAND.DRAWS)
 
 
-## ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------------------------------------
 df <- tibble(ID = integer(), ROW = integer(), COL = integer(),
              gender = factor(),
              years.in.houston = double(),
@@ -61,7 +61,7 @@ str(df)
 df
 
 
-## ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------------------------------------
 # Generate Binary Variable of Having attended any games or not
 df$games.any <- ifelse(df$games.attended>0, 1, 0)
 df$games.any <- factor(df$games.any, levels = c(1,0), labels = c('Has.Attended', 'Never.Attended'))
@@ -74,7 +74,7 @@ df$econ <- factor(df$econ, levels = c(1, 0), labels = c('ECON', 'Not.Econ'))
 df
 
 
-## ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------------------------------------
 # Using the dplyr package, we can find the fraction of individuals in factor variables
 # Fraction of individuals who attended any games
 df %>%
@@ -83,7 +83,7 @@ df %>%
   mutate(fraction = freq / sum(freq))
 
 
-## ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------------------------------------
 # Average Game Attendance Overall, and for each sub-group, conditional on attending any or no attendance
 # This creates a column that has overall average for games.attended, showing in every row:
 df %>% summarise(games.attended.avg =mean(games.attended))
@@ -91,7 +91,7 @@ df %>% summarise(games.attended.avg =mean(games.attended))
 df %>% group_by(games.any) %>% summarise(games.attended.avg = mean(games.attended))
 
 
-## ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------------------------------------
 # To show both overall average and the group specific average together
 #   the first mutate adds to df a column that has the overall average, same value every row
 #   then when we group by, we can calculate within group average for games.attended
@@ -102,7 +102,7 @@ df %>%
    summarise(avg.group=mean(games.attended),avg.overall=mean(avg))
 
 
-## ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------------------------------------
 # This File is written in a subfolder survey of folder Stat4Econ
 # In Stat4Econ, there is another folder called data
 # Typing in ../ means go back to the master folder

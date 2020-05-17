@@ -144,7 +144,7 @@
 
 \title{Introductory Statistics with R tidyverse}
 \author{Fan Wang}
-\date{2020-05-02}
+\date{2020-05-16}
 
 \begin{document}
 \maketitle
@@ -494,30 +494,27 @@ We will load in the data using base R read.csv function.
 \end{Shaded}
 
 \begin{verbatim}
-##         ilkid            year        firstname         lastname          team       leag            gp           minutes            pts              oreb       
-##  WILLIKE01 :   27   Min.   :1946   John   :  502   Williams:  441   TOT    : 1611   A: 1247   Min.   : 1.00   Min.   :   0.0   Min.   :   0.0   Min.   :  0.00  
-##  EDWARJA01 :   25   1st Qu.:1974   Bob    :  404   Johnson :  400   NYK    :  947   N:20712   1st Qu.:29.00   1st Qu.: 275.5   1st Qu.: 113.0   1st Qu.:  0.00  
-##  CORBITY01 :   24   Median :1988   Mike   :  395   Smith   :  317   BOS    :  919             Median :60.00   Median :1038.0   Median : 386.0   Median : 22.00  
-##  JACKSJI01 :   24   Mean   :1986   Jim    :  344   Jones   :  298   DET    :  799             Mean   :51.91   Mean   :1204.1   Mean   : 531.1   Mean   : 49.79  
-##  CASSESA01 :   23   3rd Qu.:1999   Chris  :  267   Davis   :  254   PHI    :  736             3rd Qu.:76.00   3rd Qu.:2009.0   3rd Qu.: 811.0   3rd Qu.: 75.00  
-##  MALONMO01 :   23   Max.   :2009   Tom    :  260   Brown   :  209   LAL    :  712             Max.   :90.00   Max.   :3882.0   Max.   :4029.0   Max.   :587.00  
-##  (Other)   :21813                  (Other):19787   (Other) :20040   (Other):16235                                                                               
-##       dreb             reb              asts             stl             blk           turnover           pf             fga              fgm              fta        
-##  Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   0      : 5939   0      : 6855   0      : 5696   Min.   :  0.0   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0  
-##  1st Qu.:   1.0   1st Qu.:  44.0   1st Qu.:  20.0   1      :  607   1      : 1126   1      :  349   1st Qu.: 43.0   1st Qu.: 106.0   1st Qu.:  43.0   1st Qu.:  30.0  
-##  Median :  60.0   Median : 160.0   Median :  71.0   2      :  479   2      :  860   2      :  347   Median :118.0   Median : 345.0   Median : 148.0   Median :  99.0  
-##  Mean   : 117.8   Mean   : 229.7   Mean   : 118.1   3      :  445   3      :  754   NULL   :  294   Mean   :123.6   Mean   : 452.5   Mean   : 204.2   Mean   : 146.9  
-##  3rd Qu.: 180.0   3rd Qu.: 333.0   3rd Qu.: 167.0   5      :  345   4      :  647   3      :  287   3rd Qu.:193.0   3rd Qu.: 696.0   3rd Qu.: 313.0   3rd Qu.: 218.0  
-##  Max.   :1538.0   Max.   :2149.0   Max.   :1164.0   4      :  343   5      :  608   5      :  246   Max.   :386.0   Max.   :3159.0   Max.   :1597.0   Max.   :1363.0  
-##                                                     (Other):13801   (Other):11109   (Other):14740                                                                     
-##       ftm             tpa              tpm       
-##  Min.   :  0.0   Min.   :  0.00   Min.   :  0.0  
-##  1st Qu.: 20.0   1st Qu.:  0.00   1st Qu.:  0.0  
-##  Median : 70.0   Median :  2.00   Median :  0.0  
-##  Mean   :109.6   Mean   : 38.07   Mean   : 13.1  
-##  3rd Qu.:161.0   3rd Qu.: 27.00   3rd Qu.:  7.0  
-##  Max.   :840.0   Max.   :678.00   Max.   :269.0  
-## 
+##     ilkid                year       firstname           lastname             team               leag                 gp           minutes      
+##  Length:21959       Min.   :1946   Length:21959       Length:21959       Length:21959       Length:21959       Min.   : 1.00   Min.   :   0.0  
+##  Class :character   1st Qu.:1974   Class :character   Class :character   Class :character   Class :character   1st Qu.:29.00   1st Qu.: 275.5  
+##  Mode  :character   Median :1988   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Median :60.00   Median :1038.0  
+##                     Mean   :1986                                                                               Mean   :51.91   Mean   :1204.1  
+##                     3rd Qu.:1999                                                                               3rd Qu.:76.00   3rd Qu.:2009.0  
+##                     Max.   :2009                                                                               Max.   :90.00   Max.   :3882.0  
+##       pts              oreb             dreb             reb              asts            stl                blk              turnover        
+##  Min.   :   0.0   Min.   :  0.00   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Length:21959       Length:21959       Length:21959      
+##  1st Qu.: 113.0   1st Qu.:  0.00   1st Qu.:   1.0   1st Qu.:  44.0   1st Qu.:  20.0   Class :character   Class :character   Class :character  
+##  Median : 386.0   Median : 22.00   Median :  60.0   Median : 160.0   Median :  71.0   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   : 531.1   Mean   : 49.79   Mean   : 117.8   Mean   : 229.7   Mean   : 118.1                                                           
+##  3rd Qu.: 811.0   3rd Qu.: 75.00   3rd Qu.: 180.0   3rd Qu.: 333.0   3rd Qu.: 167.0                                                           
+##  Max.   :4029.0   Max.   :587.00   Max.   :1538.0   Max.   :2149.0   Max.   :1164.0                                                           
+##        pf             fga              fgm              fta              ftm             tpa              tpm       
+##  Min.   :  0.0   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Min.   :  0.0   Min.   :  0.00   Min.   :  0.0  
+##  1st Qu.: 43.0   1st Qu.: 106.0   1st Qu.:  43.0   1st Qu.:  30.0   1st Qu.: 20.0   1st Qu.:  0.00   1st Qu.:  0.0  
+##  Median :118.0   Median : 345.0   Median : 148.0   Median :  99.0   Median : 70.0   Median :  2.00   Median :  0.0  
+##  Mean   :123.6   Mean   : 452.5   Mean   : 204.2   Mean   : 146.9   Mean   :109.6   Mean   : 38.07   Mean   : 13.1  
+##  3rd Qu.:193.0   3rd Qu.: 696.0   3rd Qu.: 313.0   3rd Qu.: 218.0   3rd Qu.:161.0   3rd Qu.: 27.00   3rd Qu.:  7.0  
+##  Max.   :386.0   Max.   :3159.0   Max.   :1597.0   Max.   :1363.0   Max.   :840.0   Max.   :678.00   Max.   :269.0
 \end{verbatim}
 
 \hypertarget{one-variable-graphs-and-tables}{%
@@ -1154,72 +1151,72 @@ From the tables below, we can see that each city has 12 observations (for the 12
 ## [1] "From Dataset: df_temp, 254 unique Levels for: city"
 ## 
 ## [[3]]$levels
-##       [,1]                      [,2]                       [,3]                             [,4]                         [,5]                            
-##  [1,] "ABERDEEN (n=12)"         "BOSTON (n=12)"            "ELKO (n=12)"                    "HOUGHTON LAKE (n=12)"       "LONG BEACH (n=12)"             
-##  [2,] "ABILENE (n=12)"          "BRIDGEPORT (n=12)"        "ELY (n=12)"                     "HOUSTON (n=12)"             "LOS ANGELES AP (n=12)"         
-##  [3,] "AKRON (n=12)"            "BROWNSVILLE (n=12)"       "ERIE (n=12)"                    "HUNTINGTON (n=12)"          "LOS ANGELES C.O. (n=12)"       
-##  [4,] "ALAMOSA (n=12)"          "BUFFALO (n=12)"           "EUGENE (n=12)"                  "HUNTSVILLE (n=12)"          "LOUISVILLE (n=12)"             
-##  [5,] "ALBANY (n=12)"           "BURLINGTON (n=12)"        "EUREKA (n=12)"                  "HURON (n=12)"               "LUBBOCK (n=12)"                
-##  [6,] "ALBUQUERQUE (n=12)"      "CAPE HATTERAS (n=12)"     "EVANSVILLE (n=12)"              "INDIANAPOLIS (n=12)"        "LYNCHBURG (n=12)"              
-##  [7,] "ALLENTOWN (n=12)"        "CARIBOU (n=12)"           "FAIRBANKS (n=12)"               "INTERNATIONAL FALLS (n=12)" "MACON (n=12)"                  
-##  [8,] "ALPENA (n=12)"           "CASPER (n=12)"            "FARGO (n=12)"                   "ISLIP (n=12)"               "MADISON (n=12)"                
-##  [9,] "AMARILLO (n=12)"         "CHARLESTON (n=12)"        "FLAGSTAFF (n=12)"               "JACKSON (n=24)"             "MAJURO (n=12)"                 
-## [10,] "ANCHORAGE (n=12)"        "CHARLOTTE (n=12)"         "FLINT (n=12)"                   "JACKSONVILLE (n=12)"        "MANSFIELD (n=12)"              
-## [11,] "ANNETTE (n=12)"          "CHATTANOOGA (n=12)"       "FORT MYERS (n=12)"              "JOHNSTON ISLAND (n=12)"     "MARQUETTE (n=12)"              
-## [12,] "APALACHICOLA (n=12)"     "CHEYENNE (n=12)"          "FORT SMITH (n=12)"              "JUNEAU (n=12)"              "MCGRATH (n=12)"                
-## [13,] "ASHEVILLE (n=12)"        "CLAYTON (n=12)"           "FORT WAYNE (n=12)"              "KAHULUI (n=12)"             "MEDFORD (n=12)"                
-## [14,] "ASTORIA (n=12)"          "CLEVELAND (n=12)"         "FRESNO (n=12)"                  "KALISPELL (n=12)"           "MEMPHIS (n=12)"                
-## [15,] "ATHENS (n=12)"           "COLORADO SPRINGS (n=12)"  "GAINESVILLE (n=12)"             "KANSAS CITY (n=12)"         "MERIDIAN (n=12)"               
-## [16,] "ATLANTA (n=12)"          "COLUMBIA (n=24)"          "GALVESTON (n=12)"               "KEY WEST (n=12)"            "MIAMI (n=12)"                  
-## [17,] "ATLANTIC CITY AP (n=12)" "COLUMBUS (n=24)"          "GLASGOW (n=12)"                 "KING SALMON (n=12)"         "MIDLAND-ODESSA (n=12)"         
-## [18,] "AUSTIN/BERGSTROM (n=12)" "CONCORD (n=12)"           "GOODLAND (n=12)"                "KNOXVILLE (n=12)"           "MILFORD (n=12)"                
-## [19,] "AUSTIN/CITY (n=12)"      "CONCORDIA (n=12)"         "GRAND FORKS (n=12)"             "KODIAK (n=12)"              "MILWAUKEE (n=12)"              
-## [20,] "AVOCA (n=12)"            "CORPUS CHRISTI (n=12)"    "GRAND ISLAND (n=12)"            "KOROR (n=12)"               "MINNEAPOLIS-ST.PAUL (n=12)"    
-## [21,] "BAKERSFIELD (n=12)"      "DALLAS-FORT WORTH (n=12)" "GRAND JUNCTION (n=12)"          "KOTZEBUE (n=12)"            "MISSOULA (n=12)"               
-## [22,] "BALTIMORE (n=12)"        "DALLAS-LOVE FIELD (n=12)" "GRAND RAPIDS (n=12)"            "KWAJALEIN (n=12)"           "MOBILE (n=12)"                 
-## [23,] "BARROW (n=12)"           "DAYTON (n=12)"            "GREAT FALLS (n=12)"             "LA CROSSE (n=12)"           "MOLINE (n=12)"                 
-## [24,] "BATON ROUGE (n=12)"      "DAYTONA BEACH (n=12)"     "GREEN BAY (n=12)"               "LAKE CHARLES (n=12)"        "MONTGOMERY (n=12)"             
-## [25,] "BECKLEY (n=12)"          "DEL RIO (n=12)"           "GREENVILLE-SPARTANBURG AP (n=1" "LANDER (n=12)"              "MOUNT SHASTA (n=12)"           
-## [26,] "BETHEL (n=12)"           "DENVER (n=12)"            "GUAM (n=12)"                    "LANSING (n=12)"             "MT. WASHINGTON (n=12)"         
-## [27,] "BILLINGS (n=12)"         "DES MOINES (n=12)"        "HARRISBURG (n=12)"              "LAS VEGAS (n=12)"           "MUSKEGON (n=12)"               
-## [28,] "BINGHAMTON (n=12)"       "DETROIT (n=12)"           "HARTFORD (n=12)"                "LEWISTON (n=12)"            "NASHVILLE (n=12)"              
-## [29,] "BISHOP (n=12)"           "DODGE CITY (n=12)"        "HAVRE (n=12)"                   "LEXINGTON (n=12)"           "NEW ORLEANS (n=12)"            
-## [30,] "BISMARCK (n=12)"         "DULUTH (n=12)"            "HELENA (n=12)"                  "LIHUE (n=12)"               "NEW YORK (JFK AP) (n=12)"      
-## [31,] "BLUE HILL (n=12)"        "EL PASO (n=12)"           "HILO (n=12)"                    "LINCOLN (n=12)"             "NEW YORK (LAGUARDIA AP) (n=12)"
-## [32,] "BOISE (n=12)"            "ELKINS (n=12)"            "HOMER (n=12)"                   "LITTLE ROCK (n=12)"         "NEW YORK C.PARK (n=12)"        
-##       [,6]                       [,7]                        [,8]                         
-##  [1,] "NEWARK (n=12)"            "ROSWELL (n=12)"            "TAMPA (n=12)"               
-##  [2,] "NOME (n=12)"              "SACRAMENTO (n=12)"         "TOLEDO (n=12)"              
-##  [3,] "NORFOLK (n=24)"           "SAINT CLOUD (n=12)"        "TOPEKA (n=12)"              
-##  [4,] "NORTH LITTLE ROCK (n=12)" "SALEM (n=12)"              "TUCSON (n=12)"              
-##  [5,] "NORTH PLATTE (n=12)"      "SALT LAKE CITY (n=12)"     "TULSA (n=12)"               
-##  [6,] "OKLAHOMA CITY (n=12)"     "SAN ANGELO (n=12)"         "TUPELO (n=12)"              
-##  [7,] "OLYMPIA (n=12)"           "SAN ANTONIO (n=12)"        "UNALAKLEET (n=12)"          
-##  [8,] "OMAHA (NORTH) (n=12)"     "SAN DIEGO (n=12)"          "VALDEZ (n=12)"              
-##  [9,] "OMAHA EPPLEY AP (n=12)"   "SAN FRANCISCO AP (n=12)"   "VALENTINE (n=12)"           
-## [10,] "ORLANDO (n=12)"           "SAN FRANCISCO C.O. (n=12)" "VERO BEACH (n=12)"          
-## [11,] "PAGO PAGO (n=12)"         "SAN JUAN (n=12)"           "VICTORIA (n=12)"            
-## [12,] "PENDLETON (n=12)"         "SANTA BARBARA (n=12)"      "WACO (n=12)"                
-## [13,] "PENSACOLA (n=12)"         "SANTA MARIA (n=12)"        "WAKE ISLAN+B1214D (n=1)"    
-## [14,] "PEORIA (n=12)"            "SAULT STE. MARIE (n=12)"   "WAKE ISLAND (n=11)"         
-## [15,] "PHILADELPHIA (n=12)"      "SAVANNAH (n=12)"           "WASHINGTON DULLES AP (n=12)"
-## [16,] "PHOENIX (n=12)"           "SCOTTSBLUFF (n=12)"        "WASHINGTON NAT'L AP (n=12)" 
-## [17,] "PITTSBURGH (n=12)"        "SEATTLE C.O. (n=12)"       "WATERLOO (n=12)"            
-## [18,] "POCATELLO (n=12)"         "SEATTLE SEA-TAC AP (n=12)" "WEST PALM BEACH (n=12)"     
-## [19,] "POHNPEI (n=12)"           "SEXTON SUMMIT (n=12)"      "WICHITA (n=12)"             
-## [20,] "PORT ARTHUR (n=12)"       "SHERIDAN (n=12)"           "WICHITA FALLS (n=12)"       
-## [21,] "PORTLAND (n=24)"          "SHREVEPORT (n=12)"         "WILLIAMSPORT (n=12)"        
-## [22,] "PROVIDENCE (n=12)"        "SIOUX CITY (n=12)"         "WILLISTON (n=12)"           
-## [23,] "PUEBLO (n=12)"            "SIOUX FALLS (n=12)"        "WILMINGTON (n=24)"          
-## [24,] "QUILLAYUTE (n=12)"        "SOUTH BEND (n=12)"         "WINNEMUCCA (n=12)"          
-## [25,] "RALEIGH (n=12)"           "SPOKANE (n=12)"            "WINSLOW (n=12)"             
-## [26,] "RAPID CITY (n=12)"        "SPRINGFIELD (n=24)"        "WORCESTER (n=12)"           
-## [27,] "REDDING (n=12)"           "ST. LOUIS (n=12)"          "YAKIMA (n=12)"              
-## [28,] "RENO (n=12)"              "ST. PAUL ISLAND (n=12)"    "YAKUTAT (n=12)"             
-## [29,] "RICHMOND (n=12)"          "STOCKTON (n=12)"           "YOUNGSTOWN (n=12)"          
-## [30,] "ROANOKE (n=12)"           "SYRACUSE (n=12)"           "YUMA (n=12)"                
-## [31,] "ROCHESTER (n=24)"         "TALKEETNA (n=12)"          ""                           
-## [32,] "ROCKFORD (n=12)"          "TALLAHASSEE (n=12)"        ""
+##       [,1]                      [,2]                       [,3]                             [,4]                        
+##  [1,] "ABERDEEN (n=12)"         "BOSTON (n=12)"            "ELKO (n=12)"                    "HOUGHTON LAKE (n=12)"      
+##  [2,] "ABILENE (n=12)"          "BRIDGEPORT (n=12)"        "ELY (n=12)"                     "HOUSTON (n=12)"            
+##  [3,] "AKRON (n=12)"            "BROWNSVILLE (n=12)"       "ERIE (n=12)"                    "HUNTINGTON (n=12)"         
+##  [4,] "ALAMOSA (n=12)"          "BUFFALO (n=12)"           "EUGENE (n=12)"                  "HUNTSVILLE (n=12)"         
+##  [5,] "ALBANY (n=12)"           "BURLINGTON (n=12)"        "EUREKA (n=12)"                  "HURON (n=12)"              
+##  [6,] "ALBUQUERQUE (n=12)"      "CAPE HATTERAS (n=12)"     "EVANSVILLE (n=12)"              "INDIANAPOLIS (n=12)"       
+##  [7,] "ALLENTOWN (n=12)"        "CARIBOU (n=12)"           "FAIRBANKS (n=12)"               "INTERNATIONAL FALLS (n=12)"
+##  [8,] "ALPENA (n=12)"           "CASPER (n=12)"            "FARGO (n=12)"                   "ISLIP (n=12)"              
+##  [9,] "AMARILLO (n=12)"         "CHARLESTON (n=12)"        "FLAGSTAFF (n=12)"               "JACKSON (n=24)"            
+## [10,] "ANCHORAGE (n=12)"        "CHARLOTTE (n=12)"         "FLINT (n=12)"                   "JACKSONVILLE (n=12)"       
+## [11,] "ANNETTE (n=12)"          "CHATTANOOGA (n=12)"       "FORT MYERS (n=12)"              "JOHNSTON ISLAND (n=12)"    
+## [12,] "APALACHICOLA (n=12)"     "CHEYENNE (n=12)"          "FORT SMITH (n=12)"              "JUNEAU (n=12)"             
+## [13,] "ASHEVILLE (n=12)"        "CLAYTON (n=12)"           "FORT WAYNE (n=12)"              "KAHULUI (n=12)"            
+## [14,] "ASTORIA (n=12)"          "CLEVELAND (n=12)"         "FRESNO (n=12)"                  "KALISPELL (n=12)"          
+## [15,] "ATHENS (n=12)"           "COLORADO SPRINGS (n=12)"  "GAINESVILLE (n=12)"             "KANSAS CITY (n=12)"        
+## [16,] "ATLANTA (n=12)"          "COLUMBIA (n=24)"          "GALVESTON (n=12)"               "KEY WEST (n=12)"           
+## [17,] "ATLANTIC CITY AP (n=12)" "COLUMBUS (n=24)"          "GLASGOW (n=12)"                 "KING SALMON (n=12)"        
+## [18,] "AUSTIN/BERGSTROM (n=12)" "CONCORD (n=12)"           "GOODLAND (n=12)"                "KNOXVILLE (n=12)"          
+## [19,] "AUSTIN/CITY (n=12)"      "CONCORDIA (n=12)"         "GRAND FORKS (n=12)"             "KODIAK (n=12)"             
+## [20,] "AVOCA (n=12)"            "CORPUS CHRISTI (n=12)"    "GRAND ISLAND (n=12)"            "KOROR (n=12)"              
+## [21,] "BAKERSFIELD (n=12)"      "DALLAS-FORT WORTH (n=12)" "GRAND JUNCTION (n=12)"          "KOTZEBUE (n=12)"           
+## [22,] "BALTIMORE (n=12)"        "DALLAS-LOVE FIELD (n=12)" "GRAND RAPIDS (n=12)"            "KWAJALEIN (n=12)"          
+## [23,] "BARROW (n=12)"           "DAYTON (n=12)"            "GREAT FALLS (n=12)"             "LA CROSSE (n=12)"          
+## [24,] "BATON ROUGE (n=12)"      "DAYTONA BEACH (n=12)"     "GREEN BAY (n=12)"               "LAKE CHARLES (n=12)"       
+## [25,] "BECKLEY (n=12)"          "DEL RIO (n=12)"           "GREENVILLE-SPARTANBURG AP (n=1" "LANDER (n=12)"             
+## [26,] "BETHEL (n=12)"           "DENVER (n=12)"            "GUAM (n=12)"                    "LANSING (n=12)"            
+## [27,] "BILLINGS (n=12)"         "DES MOINES (n=12)"        "HARRISBURG (n=12)"              "LAS VEGAS (n=12)"          
+## [28,] "BINGHAMTON (n=12)"       "DETROIT (n=12)"           "HARTFORD (n=12)"                "LEWISTON (n=12)"           
+## [29,] "BISHOP (n=12)"           "DODGE CITY (n=12)"        "HAVRE (n=12)"                   "LEXINGTON (n=12)"          
+## [30,] "BISMARCK (n=12)"         "DULUTH (n=12)"            "HELENA (n=12)"                  "LIHUE (n=12)"              
+## [31,] "BLUE HILL (n=12)"        "EL PASO (n=12)"           "HILO (n=12)"                    "LINCOLN (n=12)"            
+## [32,] "BOISE (n=12)"            "ELKINS (n=12)"            "HOMER (n=12)"                   "LITTLE ROCK (n=12)"        
+##       [,5]                             [,6]                       [,7]                        [,8]                         
+##  [1,] "LONG BEACH (n=12)"              "NEWARK (n=12)"            "ROSWELL (n=12)"            "TAMPA (n=12)"               
+##  [2,] "LOS ANGELES AP (n=12)"          "NOME (n=12)"              "SACRAMENTO (n=12)"         "TOLEDO (n=12)"              
+##  [3,] "LOS ANGELES C.O. (n=12)"        "NORFOLK (n=24)"           "SAINT CLOUD (n=12)"        "TOPEKA (n=12)"              
+##  [4,] "LOUISVILLE (n=12)"              "NORTH LITTLE ROCK (n=12)" "SALEM (n=12)"              "TUCSON (n=12)"              
+##  [5,] "LUBBOCK (n=12)"                 "NORTH PLATTE (n=12)"      "SALT LAKE CITY (n=12)"     "TULSA (n=12)"               
+##  [6,] "LYNCHBURG (n=12)"               "OKLAHOMA CITY (n=12)"     "SAN ANGELO (n=12)"         "TUPELO (n=12)"              
+##  [7,] "MACON (n=12)"                   "OLYMPIA (n=12)"           "SAN ANTONIO (n=12)"        "UNALAKLEET (n=12)"          
+##  [8,] "MADISON (n=12)"                 "OMAHA (NORTH) (n=12)"     "SAN DIEGO (n=12)"          "VALDEZ (n=12)"              
+##  [9,] "MAJURO (n=12)"                  "OMAHA EPPLEY AP (n=12)"   "SAN FRANCISCO AP (n=12)"   "VALENTINE (n=12)"           
+## [10,] "MANSFIELD (n=12)"               "ORLANDO (n=12)"           "SAN FRANCISCO C.O. (n=12)" "VERO BEACH (n=12)"          
+## [11,] "MARQUETTE (n=12)"               "PAGO PAGO (n=12)"         "SAN JUAN (n=12)"           "VICTORIA (n=12)"            
+## [12,] "MCGRATH (n=12)"                 "PENDLETON (n=12)"         "SANTA BARBARA (n=12)"      "WACO (n=12)"                
+## [13,] "MEDFORD (n=12)"                 "PENSACOLA (n=12)"         "SANTA MARIA (n=12)"        "WAKE ISLAN+B1214D (n=1)"    
+## [14,] "MEMPHIS (n=12)"                 "PEORIA (n=12)"            "SAULT STE. MARIE (n=12)"   "WAKE ISLAND (n=11)"         
+## [15,] "MERIDIAN (n=12)"                "PHILADELPHIA (n=12)"      "SAVANNAH (n=12)"           "WASHINGTON DULLES AP (n=12)"
+## [16,] "MIAMI (n=12)"                   "PHOENIX (n=12)"           "SCOTTSBLUFF (n=12)"        "WASHINGTON NAT'L AP (n=12)" 
+## [17,] "MIDLAND-ODESSA (n=12)"          "PITTSBURGH (n=12)"        "SEATTLE C.O. (n=12)"       "WATERLOO (n=12)"            
+## [18,] "MILFORD (n=12)"                 "POCATELLO (n=12)"         "SEATTLE SEA-TAC AP (n=12)" "WEST PALM BEACH (n=12)"     
+## [19,] "MILWAUKEE (n=12)"               "POHNPEI (n=12)"           "SEXTON SUMMIT (n=12)"      "WICHITA (n=12)"             
+## [20,] "MINNEAPOLIS-ST.PAUL (n=12)"     "PORT ARTHUR (n=12)"       "SHERIDAN (n=12)"           "WICHITA FALLS (n=12)"       
+## [21,] "MISSOULA (n=12)"                "PORTLAND (n=24)"          "SHREVEPORT (n=12)"         "WILLIAMSPORT (n=12)"        
+## [22,] "MOBILE (n=12)"                  "PROVIDENCE (n=12)"        "SIOUX CITY (n=12)"         "WILLISTON (n=12)"           
+## [23,] "MOLINE (n=12)"                  "PUEBLO (n=12)"            "SIOUX FALLS (n=12)"        "WILMINGTON (n=24)"          
+## [24,] "MONTGOMERY (n=12)"              "QUILLAYUTE (n=12)"        "SOUTH BEND (n=12)"         "WINNEMUCCA (n=12)"          
+## [25,] "MOUNT SHASTA (n=12)"            "RALEIGH (n=12)"           "SPOKANE (n=12)"            "WINSLOW (n=12)"             
+## [26,] "MT. WASHINGTON (n=12)"          "RAPID CITY (n=12)"        "SPRINGFIELD (n=24)"        "WORCESTER (n=12)"           
+## [27,] "MUSKEGON (n=12)"                "REDDING (n=12)"           "ST. LOUIS (n=12)"          "YAKIMA (n=12)"              
+## [28,] "NASHVILLE (n=12)"               "RENO (n=12)"              "ST. PAUL ISLAND (n=12)"    "YAKUTAT (n=12)"             
+## [29,] "NEW ORLEANS (n=12)"             "RICHMOND (n=12)"          "STOCKTON (n=12)"           "YOUNGSTOWN (n=12)"          
+## [30,] "NEW YORK (JFK AP) (n=12)"       "ROANOKE (n=12)"           "SYRACUSE (n=12)"           "YUMA (n=12)"                
+## [31,] "NEW YORK (LAGUARDIA AP) (n=12)" "ROCHESTER (n=24)"         "TALKEETNA (n=12)"          ""                           
+## [32,] "NEW YORK C.PARK (n=12)"         "ROCKFORD (n=12)"          "TALLAHASSEE (n=12)"        ""
 \end{verbatim}
 
 \hypertarget{scatter-plot-of-temperature-and-months}{%
@@ -2515,8 +2512,6 @@ These four events are \href{https://fanwangecon.github.io/Stat4Econ/probability/
 \begin{quote}
 Go back to \href{http://fanwangecon.github.io/}{fan}'s \href{https://fanwangecon.github.io/REconTools/}{REconTools} Package, \href{https://fanwangecon.github.io/R4Econ/}{R Code Examples} Repository (\href{https://fanwangecon.github.io/R4Econ/bookdown}{bookdown site}), or \href{https://fanwangecon.github.io/Stat4Econ/}{Intro Stats with R} Repository (\href{https://fanwangecon.github.io/Stat4Econ/bookdown}{bookdown site}).
 \end{quote}
-
-\textbf{\href{https://fanwangecon.github.io/Stat4Econ/}{Back to Fan's Intro Stat Table of Content}}
 
 We have been looking at various examples of discrete Random Variables in \href{https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html}{Sample Space, Experimental Outcomes, Events, Probabilities}, \href{https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespaceexa.html}{Examples of Sample Space and Probabilities}, \href{https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/lottery.html}{Multiple-Step Experiment: Playing the Lottery Three times}, and \href{https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html}{Throw an Unfair Four Sided Dice}.
 

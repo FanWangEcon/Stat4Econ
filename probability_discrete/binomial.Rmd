@@ -46,8 +46,6 @@ try(source("../.Rprofile"))
 `r text_shared_preamble_two`
 `r text_shared_preamble_thr`
 
-**[Back to Fan's Intro Stat Table of Content](https://fanwangecon.github.io/Stat4Econ/)**
-
 We have been looking at various examples of discrete Random Variables in [Sample Space, Experimental Outcomes, Events, Probabilities](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespace.html), [Examples of Sample Space and Probabilities](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespaceexa.html), [Multiple-Step Experiment: Playing the Lottery Three times](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/lottery.html), and [Throw an Unfair Four Sided Dice](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html).
 
 Now we state this a little bit more formally.

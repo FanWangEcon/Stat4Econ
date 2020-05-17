@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Summarizing Data | Introductory Statistics with R tidyverse</title>
   <meta name="description" content="Poisson Properties, Ladislaus Bortkiewicz and Prussian army horse-kick deaths." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Summarizing Data | Introductory Statistics with R tidyverse" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Fan Wang" />
 
 
-<meta name="date" content="2020-05-02" />
+<meta name="date" content="2020-05-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -334,72 +334,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [1] &quot;From Dataset: df_temp, 254 unique Levels for: city&quot;
 ## 
 ## [[3]]$levels
-##       [,1]                      [,2]                       [,3]                             [,4]                         [,5]                            
-##  [1,] &quot;ABERDEEN (n=12)&quot;         &quot;BOSTON (n=12)&quot;            &quot;ELKO (n=12)&quot;                    &quot;HOUGHTON LAKE (n=12)&quot;       &quot;LONG BEACH (n=12)&quot;             
-##  [2,] &quot;ABILENE (n=12)&quot;          &quot;BRIDGEPORT (n=12)&quot;        &quot;ELY (n=12)&quot;                     &quot;HOUSTON (n=12)&quot;             &quot;LOS ANGELES AP (n=12)&quot;         
-##  [3,] &quot;AKRON (n=12)&quot;            &quot;BROWNSVILLE (n=12)&quot;       &quot;ERIE (n=12)&quot;                    &quot;HUNTINGTON (n=12)&quot;          &quot;LOS ANGELES C.O. (n=12)&quot;       
-##  [4,] &quot;ALAMOSA (n=12)&quot;          &quot;BUFFALO (n=12)&quot;           &quot;EUGENE (n=12)&quot;                  &quot;HUNTSVILLE (n=12)&quot;          &quot;LOUISVILLE (n=12)&quot;             
-##  [5,] &quot;ALBANY (n=12)&quot;           &quot;BURLINGTON (n=12)&quot;        &quot;EUREKA (n=12)&quot;                  &quot;HURON (n=12)&quot;               &quot;LUBBOCK (n=12)&quot;                
-##  [6,] &quot;ALBUQUERQUE (n=12)&quot;      &quot;CAPE HATTERAS (n=12)&quot;     &quot;EVANSVILLE (n=12)&quot;              &quot;INDIANAPOLIS (n=12)&quot;        &quot;LYNCHBURG (n=12)&quot;              
-##  [7,] &quot;ALLENTOWN (n=12)&quot;        &quot;CARIBOU (n=12)&quot;           &quot;FAIRBANKS (n=12)&quot;               &quot;INTERNATIONAL FALLS (n=12)&quot; &quot;MACON (n=12)&quot;                  
-##  [8,] &quot;ALPENA (n=12)&quot;           &quot;CASPER (n=12)&quot;            &quot;FARGO (n=12)&quot;                   &quot;ISLIP (n=12)&quot;               &quot;MADISON (n=12)&quot;                
-##  [9,] &quot;AMARILLO (n=12)&quot;         &quot;CHARLESTON (n=12)&quot;        &quot;FLAGSTAFF (n=12)&quot;               &quot;JACKSON (n=24)&quot;             &quot;MAJURO (n=12)&quot;                 
-## [10,] &quot;ANCHORAGE (n=12)&quot;        &quot;CHARLOTTE (n=12)&quot;         &quot;FLINT (n=12)&quot;                   &quot;JACKSONVILLE (n=12)&quot;        &quot;MANSFIELD (n=12)&quot;              
-## [11,] &quot;ANNETTE (n=12)&quot;          &quot;CHATTANOOGA (n=12)&quot;       &quot;FORT MYERS (n=12)&quot;              &quot;JOHNSTON ISLAND (n=12)&quot;     &quot;MARQUETTE (n=12)&quot;              
-## [12,] &quot;APALACHICOLA (n=12)&quot;     &quot;CHEYENNE (n=12)&quot;          &quot;FORT SMITH (n=12)&quot;              &quot;JUNEAU (n=12)&quot;              &quot;MCGRATH (n=12)&quot;                
-## [13,] &quot;ASHEVILLE (n=12)&quot;        &quot;CLAYTON (n=12)&quot;           &quot;FORT WAYNE (n=12)&quot;              &quot;KAHULUI (n=12)&quot;             &quot;MEDFORD (n=12)&quot;                
-## [14,] &quot;ASTORIA (n=12)&quot;          &quot;CLEVELAND (n=12)&quot;         &quot;FRESNO (n=12)&quot;                  &quot;KALISPELL (n=12)&quot;           &quot;MEMPHIS (n=12)&quot;                
-## [15,] &quot;ATHENS (n=12)&quot;           &quot;COLORADO SPRINGS (n=12)&quot;  &quot;GAINESVILLE (n=12)&quot;             &quot;KANSAS CITY (n=12)&quot;         &quot;MERIDIAN (n=12)&quot;               
-## [16,] &quot;ATLANTA (n=12)&quot;          &quot;COLUMBIA (n=24)&quot;          &quot;GALVESTON (n=12)&quot;               &quot;KEY WEST (n=12)&quot;            &quot;MIAMI (n=12)&quot;                  
-## [17,] &quot;ATLANTIC CITY AP (n=12)&quot; &quot;COLUMBUS (n=24)&quot;          &quot;GLASGOW (n=12)&quot;                 &quot;KING SALMON (n=12)&quot;         &quot;MIDLAND-ODESSA (n=12)&quot;         
-## [18,] &quot;AUSTIN/BERGSTROM (n=12)&quot; &quot;CONCORD (n=12)&quot;           &quot;GOODLAND (n=12)&quot;                &quot;KNOXVILLE (n=12)&quot;           &quot;MILFORD (n=12)&quot;                
-## [19,] &quot;AUSTIN/CITY (n=12)&quot;      &quot;CONCORDIA (n=12)&quot;         &quot;GRAND FORKS (n=12)&quot;             &quot;KODIAK (n=12)&quot;              &quot;MILWAUKEE (n=12)&quot;              
-## [20,] &quot;AVOCA (n=12)&quot;            &quot;CORPUS CHRISTI (n=12)&quot;    &quot;GRAND ISLAND (n=12)&quot;            &quot;KOROR (n=12)&quot;               &quot;MINNEAPOLIS-ST.PAUL (n=12)&quot;    
-## [21,] &quot;BAKERSFIELD (n=12)&quot;      &quot;DALLAS-FORT WORTH (n=12)&quot; &quot;GRAND JUNCTION (n=12)&quot;          &quot;KOTZEBUE (n=12)&quot;            &quot;MISSOULA (n=12)&quot;               
-## [22,] &quot;BALTIMORE (n=12)&quot;        &quot;DALLAS-LOVE FIELD (n=12)&quot; &quot;GRAND RAPIDS (n=12)&quot;            &quot;KWAJALEIN (n=12)&quot;           &quot;MOBILE (n=12)&quot;                 
-## [23,] &quot;BARROW (n=12)&quot;           &quot;DAYTON (n=12)&quot;            &quot;GREAT FALLS (n=12)&quot;             &quot;LA CROSSE (n=12)&quot;           &quot;MOLINE (n=12)&quot;                 
-## [24,] &quot;BATON ROUGE (n=12)&quot;      &quot;DAYTONA BEACH (n=12)&quot;     &quot;GREEN BAY (n=12)&quot;               &quot;LAKE CHARLES (n=12)&quot;        &quot;MONTGOMERY (n=12)&quot;             
-## [25,] &quot;BECKLEY (n=12)&quot;          &quot;DEL RIO (n=12)&quot;           &quot;GREENVILLE-SPARTANBURG AP (n=1&quot; &quot;LANDER (n=12)&quot;              &quot;MOUNT SHASTA (n=12)&quot;           
-## [26,] &quot;BETHEL (n=12)&quot;           &quot;DENVER (n=12)&quot;            &quot;GUAM (n=12)&quot;                    &quot;LANSING (n=12)&quot;             &quot;MT. WASHINGTON (n=12)&quot;         
-## [27,] &quot;BILLINGS (n=12)&quot;         &quot;DES MOINES (n=12)&quot;        &quot;HARRISBURG (n=12)&quot;              &quot;LAS VEGAS (n=12)&quot;           &quot;MUSKEGON (n=12)&quot;               
-## [28,] &quot;BINGHAMTON (n=12)&quot;       &quot;DETROIT (n=12)&quot;           &quot;HARTFORD (n=12)&quot;                &quot;LEWISTON (n=12)&quot;            &quot;NASHVILLE (n=12)&quot;              
-## [29,] &quot;BISHOP (n=12)&quot;           &quot;DODGE CITY (n=12)&quot;        &quot;HAVRE (n=12)&quot;                   &quot;LEXINGTON (n=12)&quot;           &quot;NEW ORLEANS (n=12)&quot;            
-## [30,] &quot;BISMARCK (n=12)&quot;         &quot;DULUTH (n=12)&quot;            &quot;HELENA (n=12)&quot;                  &quot;LIHUE (n=12)&quot;               &quot;NEW YORK (JFK AP) (n=12)&quot;      
-## [31,] &quot;BLUE HILL (n=12)&quot;        &quot;EL PASO (n=12)&quot;           &quot;HILO (n=12)&quot;                    &quot;LINCOLN (n=12)&quot;             &quot;NEW YORK (LAGUARDIA AP) (n=12)&quot;
-## [32,] &quot;BOISE (n=12)&quot;            &quot;ELKINS (n=12)&quot;            &quot;HOMER (n=12)&quot;                   &quot;LITTLE ROCK (n=12)&quot;         &quot;NEW YORK C.PARK (n=12)&quot;        
-##       [,6]                       [,7]                        [,8]                         
-##  [1,] &quot;NEWARK (n=12)&quot;            &quot;ROSWELL (n=12)&quot;            &quot;TAMPA (n=12)&quot;               
-##  [2,] &quot;NOME (n=12)&quot;              &quot;SACRAMENTO (n=12)&quot;         &quot;TOLEDO (n=12)&quot;              
-##  [3,] &quot;NORFOLK (n=24)&quot;           &quot;SAINT CLOUD (n=12)&quot;        &quot;TOPEKA (n=12)&quot;              
-##  [4,] &quot;NORTH LITTLE ROCK (n=12)&quot; &quot;SALEM (n=12)&quot;              &quot;TUCSON (n=12)&quot;              
-##  [5,] &quot;NORTH PLATTE (n=12)&quot;      &quot;SALT LAKE CITY (n=12)&quot;     &quot;TULSA (n=12)&quot;               
-##  [6,] &quot;OKLAHOMA CITY (n=12)&quot;     &quot;SAN ANGELO (n=12)&quot;         &quot;TUPELO (n=12)&quot;              
-##  [7,] &quot;OLYMPIA (n=12)&quot;           &quot;SAN ANTONIO (n=12)&quot;        &quot;UNALAKLEET (n=12)&quot;          
-##  [8,] &quot;OMAHA (NORTH) (n=12)&quot;     &quot;SAN DIEGO (n=12)&quot;          &quot;VALDEZ (n=12)&quot;              
-##  [9,] &quot;OMAHA EPPLEY AP (n=12)&quot;   &quot;SAN FRANCISCO AP (n=12)&quot;   &quot;VALENTINE (n=12)&quot;           
-## [10,] &quot;ORLANDO (n=12)&quot;           &quot;SAN FRANCISCO C.O. (n=12)&quot; &quot;VERO BEACH (n=12)&quot;          
-## [11,] &quot;PAGO PAGO (n=12)&quot;         &quot;SAN JUAN (n=12)&quot;           &quot;VICTORIA (n=12)&quot;            
-## [12,] &quot;PENDLETON (n=12)&quot;         &quot;SANTA BARBARA (n=12)&quot;      &quot;WACO (n=12)&quot;                
-## [13,] &quot;PENSACOLA (n=12)&quot;         &quot;SANTA MARIA (n=12)&quot;        &quot;WAKE ISLAN+B1214D (n=1)&quot;    
-## [14,] &quot;PEORIA (n=12)&quot;            &quot;SAULT STE. MARIE (n=12)&quot;   &quot;WAKE ISLAND (n=11)&quot;         
-## [15,] &quot;PHILADELPHIA (n=12)&quot;      &quot;SAVANNAH (n=12)&quot;           &quot;WASHINGTON DULLES AP (n=12)&quot;
-## [16,] &quot;PHOENIX (n=12)&quot;           &quot;SCOTTSBLUFF (n=12)&quot;        &quot;WASHINGTON NAT&#39;L AP (n=12)&quot; 
-## [17,] &quot;PITTSBURGH (n=12)&quot;        &quot;SEATTLE C.O. (n=12)&quot;       &quot;WATERLOO (n=12)&quot;            
-## [18,] &quot;POCATELLO (n=12)&quot;         &quot;SEATTLE SEA-TAC AP (n=12)&quot; &quot;WEST PALM BEACH (n=12)&quot;     
-## [19,] &quot;POHNPEI (n=12)&quot;           &quot;SEXTON SUMMIT (n=12)&quot;      &quot;WICHITA (n=12)&quot;             
-## [20,] &quot;PORT ARTHUR (n=12)&quot;       &quot;SHERIDAN (n=12)&quot;           &quot;WICHITA FALLS (n=12)&quot;       
-## [21,] &quot;PORTLAND (n=24)&quot;          &quot;SHREVEPORT (n=12)&quot;         &quot;WILLIAMSPORT (n=12)&quot;        
-## [22,] &quot;PROVIDENCE (n=12)&quot;        &quot;SIOUX CITY (n=12)&quot;         &quot;WILLISTON (n=12)&quot;           
-## [23,] &quot;PUEBLO (n=12)&quot;            &quot;SIOUX FALLS (n=12)&quot;        &quot;WILMINGTON (n=24)&quot;          
-## [24,] &quot;QUILLAYUTE (n=12)&quot;        &quot;SOUTH BEND (n=12)&quot;         &quot;WINNEMUCCA (n=12)&quot;          
-## [25,] &quot;RALEIGH (n=12)&quot;           &quot;SPOKANE (n=12)&quot;            &quot;WINSLOW (n=12)&quot;             
-## [26,] &quot;RAPID CITY (n=12)&quot;        &quot;SPRINGFIELD (n=24)&quot;        &quot;WORCESTER (n=12)&quot;           
-## [27,] &quot;REDDING (n=12)&quot;           &quot;ST. LOUIS (n=12)&quot;          &quot;YAKIMA (n=12)&quot;              
-## [28,] &quot;RENO (n=12)&quot;              &quot;ST. PAUL ISLAND (n=12)&quot;    &quot;YAKUTAT (n=12)&quot;             
-## [29,] &quot;RICHMOND (n=12)&quot;          &quot;STOCKTON (n=12)&quot;           &quot;YOUNGSTOWN (n=12)&quot;          
-## [30,] &quot;ROANOKE (n=12)&quot;           &quot;SYRACUSE (n=12)&quot;           &quot;YUMA (n=12)&quot;                
-## [31,] &quot;ROCHESTER (n=24)&quot;         &quot;TALKEETNA (n=12)&quot;          &quot;&quot;                           
-## [32,] &quot;ROCKFORD (n=12)&quot;          &quot;TALLAHASSEE (n=12)&quot;        &quot;&quot;</code></pre>
+##       [,1]                      [,2]                       [,3]                             [,4]                        
+##  [1,] &quot;ABERDEEN (n=12)&quot;         &quot;BOSTON (n=12)&quot;            &quot;ELKO (n=12)&quot;                    &quot;HOUGHTON LAKE (n=12)&quot;      
+##  [2,] &quot;ABILENE (n=12)&quot;          &quot;BRIDGEPORT (n=12)&quot;        &quot;ELY (n=12)&quot;                     &quot;HOUSTON (n=12)&quot;            
+##  [3,] &quot;AKRON (n=12)&quot;            &quot;BROWNSVILLE (n=12)&quot;       &quot;ERIE (n=12)&quot;                    &quot;HUNTINGTON (n=12)&quot;         
+##  [4,] &quot;ALAMOSA (n=12)&quot;          &quot;BUFFALO (n=12)&quot;           &quot;EUGENE (n=12)&quot;                  &quot;HUNTSVILLE (n=12)&quot;         
+##  [5,] &quot;ALBANY (n=12)&quot;           &quot;BURLINGTON (n=12)&quot;        &quot;EUREKA (n=12)&quot;                  &quot;HURON (n=12)&quot;              
+##  [6,] &quot;ALBUQUERQUE (n=12)&quot;      &quot;CAPE HATTERAS (n=12)&quot;     &quot;EVANSVILLE (n=12)&quot;              &quot;INDIANAPOLIS (n=12)&quot;       
+##  [7,] &quot;ALLENTOWN (n=12)&quot;        &quot;CARIBOU (n=12)&quot;           &quot;FAIRBANKS (n=12)&quot;               &quot;INTERNATIONAL FALLS (n=12)&quot;
+##  [8,] &quot;ALPENA (n=12)&quot;           &quot;CASPER (n=12)&quot;            &quot;FARGO (n=12)&quot;                   &quot;ISLIP (n=12)&quot;              
+##  [9,] &quot;AMARILLO (n=12)&quot;         &quot;CHARLESTON (n=12)&quot;        &quot;FLAGSTAFF (n=12)&quot;               &quot;JACKSON (n=24)&quot;            
+## [10,] &quot;ANCHORAGE (n=12)&quot;        &quot;CHARLOTTE (n=12)&quot;         &quot;FLINT (n=12)&quot;                   &quot;JACKSONVILLE (n=12)&quot;       
+## [11,] &quot;ANNETTE (n=12)&quot;          &quot;CHATTANOOGA (n=12)&quot;       &quot;FORT MYERS (n=12)&quot;              &quot;JOHNSTON ISLAND (n=12)&quot;    
+## [12,] &quot;APALACHICOLA (n=12)&quot;     &quot;CHEYENNE (n=12)&quot;          &quot;FORT SMITH (n=12)&quot;              &quot;JUNEAU (n=12)&quot;             
+## [13,] &quot;ASHEVILLE (n=12)&quot;        &quot;CLAYTON (n=12)&quot;           &quot;FORT WAYNE (n=12)&quot;              &quot;KAHULUI (n=12)&quot;            
+## [14,] &quot;ASTORIA (n=12)&quot;          &quot;CLEVELAND (n=12)&quot;         &quot;FRESNO (n=12)&quot;                  &quot;KALISPELL (n=12)&quot;          
+## [15,] &quot;ATHENS (n=12)&quot;           &quot;COLORADO SPRINGS (n=12)&quot;  &quot;GAINESVILLE (n=12)&quot;             &quot;KANSAS CITY (n=12)&quot;        
+## [16,] &quot;ATLANTA (n=12)&quot;          &quot;COLUMBIA (n=24)&quot;          &quot;GALVESTON (n=12)&quot;               &quot;KEY WEST (n=12)&quot;           
+## [17,] &quot;ATLANTIC CITY AP (n=12)&quot; &quot;COLUMBUS (n=24)&quot;          &quot;GLASGOW (n=12)&quot;                 &quot;KING SALMON (n=12)&quot;        
+## [18,] &quot;AUSTIN/BERGSTROM (n=12)&quot; &quot;CONCORD (n=12)&quot;           &quot;GOODLAND (n=12)&quot;                &quot;KNOXVILLE (n=12)&quot;          
+## [19,] &quot;AUSTIN/CITY (n=12)&quot;      &quot;CONCORDIA (n=12)&quot;         &quot;GRAND FORKS (n=12)&quot;             &quot;KODIAK (n=12)&quot;             
+## [20,] &quot;AVOCA (n=12)&quot;            &quot;CORPUS CHRISTI (n=12)&quot;    &quot;GRAND ISLAND (n=12)&quot;            &quot;KOROR (n=12)&quot;              
+## [21,] &quot;BAKERSFIELD (n=12)&quot;      &quot;DALLAS-FORT WORTH (n=12)&quot; &quot;GRAND JUNCTION (n=12)&quot;          &quot;KOTZEBUE (n=12)&quot;           
+## [22,] &quot;BALTIMORE (n=12)&quot;        &quot;DALLAS-LOVE FIELD (n=12)&quot; &quot;GRAND RAPIDS (n=12)&quot;            &quot;KWAJALEIN (n=12)&quot;          
+## [23,] &quot;BARROW (n=12)&quot;           &quot;DAYTON (n=12)&quot;            &quot;GREAT FALLS (n=12)&quot;             &quot;LA CROSSE (n=12)&quot;          
+## [24,] &quot;BATON ROUGE (n=12)&quot;      &quot;DAYTONA BEACH (n=12)&quot;     &quot;GREEN BAY (n=12)&quot;               &quot;LAKE CHARLES (n=12)&quot;       
+## [25,] &quot;BECKLEY (n=12)&quot;          &quot;DEL RIO (n=12)&quot;           &quot;GREENVILLE-SPARTANBURG AP (n=1&quot; &quot;LANDER (n=12)&quot;             
+## [26,] &quot;BETHEL (n=12)&quot;           &quot;DENVER (n=12)&quot;            &quot;GUAM (n=12)&quot;                    &quot;LANSING (n=12)&quot;            
+## [27,] &quot;BILLINGS (n=12)&quot;         &quot;DES MOINES (n=12)&quot;        &quot;HARRISBURG (n=12)&quot;              &quot;LAS VEGAS (n=12)&quot;          
+## [28,] &quot;BINGHAMTON (n=12)&quot;       &quot;DETROIT (n=12)&quot;           &quot;HARTFORD (n=12)&quot;                &quot;LEWISTON (n=12)&quot;           
+## [29,] &quot;BISHOP (n=12)&quot;           &quot;DODGE CITY (n=12)&quot;        &quot;HAVRE (n=12)&quot;                   &quot;LEXINGTON (n=12)&quot;          
+## [30,] &quot;BISMARCK (n=12)&quot;         &quot;DULUTH (n=12)&quot;            &quot;HELENA (n=12)&quot;                  &quot;LIHUE (n=12)&quot;              
+## [31,] &quot;BLUE HILL (n=12)&quot;        &quot;EL PASO (n=12)&quot;           &quot;HILO (n=12)&quot;                    &quot;LINCOLN (n=12)&quot;            
+## [32,] &quot;BOISE (n=12)&quot;            &quot;ELKINS (n=12)&quot;            &quot;HOMER (n=12)&quot;                   &quot;LITTLE ROCK (n=12)&quot;        
+##       [,5]                             [,6]                       [,7]                        [,8]                         
+##  [1,] &quot;LONG BEACH (n=12)&quot;              &quot;NEWARK (n=12)&quot;            &quot;ROSWELL (n=12)&quot;            &quot;TAMPA (n=12)&quot;               
+##  [2,] &quot;LOS ANGELES AP (n=12)&quot;          &quot;NOME (n=12)&quot;              &quot;SACRAMENTO (n=12)&quot;         &quot;TOLEDO (n=12)&quot;              
+##  [3,] &quot;LOS ANGELES C.O. (n=12)&quot;        &quot;NORFOLK (n=24)&quot;           &quot;SAINT CLOUD (n=12)&quot;        &quot;TOPEKA (n=12)&quot;              
+##  [4,] &quot;LOUISVILLE (n=12)&quot;              &quot;NORTH LITTLE ROCK (n=12)&quot; &quot;SALEM (n=12)&quot;              &quot;TUCSON (n=12)&quot;              
+##  [5,] &quot;LUBBOCK (n=12)&quot;                 &quot;NORTH PLATTE (n=12)&quot;      &quot;SALT LAKE CITY (n=12)&quot;     &quot;TULSA (n=12)&quot;               
+##  [6,] &quot;LYNCHBURG (n=12)&quot;               &quot;OKLAHOMA CITY (n=12)&quot;     &quot;SAN ANGELO (n=12)&quot;         &quot;TUPELO (n=12)&quot;              
+##  [7,] &quot;MACON (n=12)&quot;                   &quot;OLYMPIA (n=12)&quot;           &quot;SAN ANTONIO (n=12)&quot;        &quot;UNALAKLEET (n=12)&quot;          
+##  [8,] &quot;MADISON (n=12)&quot;                 &quot;OMAHA (NORTH) (n=12)&quot;     &quot;SAN DIEGO (n=12)&quot;          &quot;VALDEZ (n=12)&quot;              
+##  [9,] &quot;MAJURO (n=12)&quot;                  &quot;OMAHA EPPLEY AP (n=12)&quot;   &quot;SAN FRANCISCO AP (n=12)&quot;   &quot;VALENTINE (n=12)&quot;           
+## [10,] &quot;MANSFIELD (n=12)&quot;               &quot;ORLANDO (n=12)&quot;           &quot;SAN FRANCISCO C.O. (n=12)&quot; &quot;VERO BEACH (n=12)&quot;          
+## [11,] &quot;MARQUETTE (n=12)&quot;               &quot;PAGO PAGO (n=12)&quot;         &quot;SAN JUAN (n=12)&quot;           &quot;VICTORIA (n=12)&quot;            
+## [12,] &quot;MCGRATH (n=12)&quot;                 &quot;PENDLETON (n=12)&quot;         &quot;SANTA BARBARA (n=12)&quot;      &quot;WACO (n=12)&quot;                
+## [13,] &quot;MEDFORD (n=12)&quot;                 &quot;PENSACOLA (n=12)&quot;         &quot;SANTA MARIA (n=12)&quot;        &quot;WAKE ISLAN+B1214D (n=1)&quot;    
+## [14,] &quot;MEMPHIS (n=12)&quot;                 &quot;PEORIA (n=12)&quot;            &quot;SAULT STE. MARIE (n=12)&quot;   &quot;WAKE ISLAND (n=11)&quot;         
+## [15,] &quot;MERIDIAN (n=12)&quot;                &quot;PHILADELPHIA (n=12)&quot;      &quot;SAVANNAH (n=12)&quot;           &quot;WASHINGTON DULLES AP (n=12)&quot;
+## [16,] &quot;MIAMI (n=12)&quot;                   &quot;PHOENIX (n=12)&quot;           &quot;SCOTTSBLUFF (n=12)&quot;        &quot;WASHINGTON NAT&#39;L AP (n=12)&quot; 
+## [17,] &quot;MIDLAND-ODESSA (n=12)&quot;          &quot;PITTSBURGH (n=12)&quot;        &quot;SEATTLE C.O. (n=12)&quot;       &quot;WATERLOO (n=12)&quot;            
+## [18,] &quot;MILFORD (n=12)&quot;                 &quot;POCATELLO (n=12)&quot;         &quot;SEATTLE SEA-TAC AP (n=12)&quot; &quot;WEST PALM BEACH (n=12)&quot;     
+## [19,] &quot;MILWAUKEE (n=12)&quot;               &quot;POHNPEI (n=12)&quot;           &quot;SEXTON SUMMIT (n=12)&quot;      &quot;WICHITA (n=12)&quot;             
+## [20,] &quot;MINNEAPOLIS-ST.PAUL (n=12)&quot;     &quot;PORT ARTHUR (n=12)&quot;       &quot;SHERIDAN (n=12)&quot;           &quot;WICHITA FALLS (n=12)&quot;       
+## [21,] &quot;MISSOULA (n=12)&quot;                &quot;PORTLAND (n=24)&quot;          &quot;SHREVEPORT (n=12)&quot;         &quot;WILLIAMSPORT (n=12)&quot;        
+## [22,] &quot;MOBILE (n=12)&quot;                  &quot;PROVIDENCE (n=12)&quot;        &quot;SIOUX CITY (n=12)&quot;         &quot;WILLISTON (n=12)&quot;           
+## [23,] &quot;MOLINE (n=12)&quot;                  &quot;PUEBLO (n=12)&quot;            &quot;SIOUX FALLS (n=12)&quot;        &quot;WILMINGTON (n=24)&quot;          
+## [24,] &quot;MONTGOMERY (n=12)&quot;              &quot;QUILLAYUTE (n=12)&quot;        &quot;SOUTH BEND (n=12)&quot;         &quot;WINNEMUCCA (n=12)&quot;          
+## [25,] &quot;MOUNT SHASTA (n=12)&quot;            &quot;RALEIGH (n=12)&quot;           &quot;SPOKANE (n=12)&quot;            &quot;WINSLOW (n=12)&quot;             
+## [26,] &quot;MT. WASHINGTON (n=12)&quot;          &quot;RAPID CITY (n=12)&quot;        &quot;SPRINGFIELD (n=24)&quot;        &quot;WORCESTER (n=12)&quot;           
+## [27,] &quot;MUSKEGON (n=12)&quot;                &quot;REDDING (n=12)&quot;           &quot;ST. LOUIS (n=12)&quot;          &quot;YAKIMA (n=12)&quot;              
+## [28,] &quot;NASHVILLE (n=12)&quot;               &quot;RENO (n=12)&quot;              &quot;ST. PAUL ISLAND (n=12)&quot;    &quot;YAKUTAT (n=12)&quot;             
+## [29,] &quot;NEW ORLEANS (n=12)&quot;             &quot;RICHMOND (n=12)&quot;          &quot;STOCKTON (n=12)&quot;           &quot;YOUNGSTOWN (n=12)&quot;          
+## [30,] &quot;NEW YORK (JFK AP) (n=12)&quot;       &quot;ROANOKE (n=12)&quot;           &quot;SYRACUSE (n=12)&quot;           &quot;YUMA (n=12)&quot;                
+## [31,] &quot;NEW YORK (LAGUARDIA AP) (n=12)&quot; &quot;ROCHESTER (n=24)&quot;         &quot;TALKEETNA (n=12)&quot;          &quot;&quot;                           
+## [32,] &quot;NEW YORK C.PARK (n=12)&quot;         &quot;ROCKFORD (n=12)&quot;          &quot;TALLAHASSEE (n=12)&quot;        &quot;&quot;</code></pre>
 <div id="scatter-plot-of-temperature-and-months" class="section level4" number="3.1.1.1">
 <h4><span class="header-section-number">3.1.1.1</span> Scatter Plot of Temperature and Months</h4>
 <p>We can do a scatter plot where the x-axis is a month and the y-axis is the temperature in each city, to get a sense of the distribution of temperatures. What does this chart show us? Is this the pattern you would have expected?</p>

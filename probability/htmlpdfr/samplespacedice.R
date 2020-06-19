@@ -1,8 +1,8 @@
-## ----global_options, include = FALSE-------------------------------------------------------------------------------------------------------------------
+## ----global_options, include = FALSE------------------------------------------------------------------------------------------------
 try(source("../.Rprofile"))
 
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------------------------------------------------------------------
 # Load Library
 library(tidyverse)
 
@@ -20,10 +20,10 @@ experimental.outcome.prob <- c((1-fracbase)^0*fracbase,
 # Show these in a Tibble
 dice.true.prob <- tibble(dice.outcomes.list = experimental.outcomes.list,
                          dice.true.prob = experimental.outcome.prob)
-dice.true.prob
+kable(dice.true.prob) %>% kable_styling_fc()
 
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------------------------------------------------------------------
 # What could happen tomorrow?
 # We live in a probabilistic world, drawing future from a hat
 # If we draw 5 times, what happens in the future?
@@ -35,11 +35,11 @@ future.dice.draws <- sample(experimental.outcomes.list,
                                  prob = experimental.outcome.prob)
 
 # A little tibble to show results
-tibble(which.future.dice = paste0('dice draws:', 1:number.of.futures.to.draw),
-       dice.draws = future.dice.draws)
+kable(tibble(which.future.dice = paste0('dice draws:', 1:number.of.futures.to.draw),
+       dice.draws = future.dice.draws)) %>% kable_styling_fc()
 
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------------------------------------------------------------------
 # Function to Make Many Draws
 future.draws <- function(number.of.futures.to.draw, select.dice.draws=FALSE) {
     # Number.of.futures.to.draw = 500
@@ -74,16 +74,18 @@ future.draws <- function(number.of.futures.to.draw, select.dice.draws=FALSE) {
 }
 
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------------------------------------------------------------------
 # Draw future 10, 100, 1000, 10000, 100000 times
 # How many times we get 1,2,3,4?
 number.of.futures.to.draw.list = c(1000, 5000, 500000)
 
 # Apply function
-bind_cols(dice.true.prob, lapply(number.of.futures.to.draw.list, future.draws))
+kable(bind_cols(dice.true.prob, 
+                lapply(number.of.futures.to.draw.list, future.draws))) %>%
+  kable_styling_fc()
 
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------------------------------------------------------------------
 # Generate Data
 # Log Space Draws of Outcomes
 number.future.logspace <- floor(exp(log(10)*seq(log10(100),log10(1000000), length.out=500)))
@@ -106,11 +108,11 @@ draw.outcomes.long$dice.draw <- paste0('dice side = ', draw.outcomes.long$dice.d
 draw.outcomes.long$dice.draw <- factor(draw.outcomes.long$dice.draw)
 
 # Show Melt Table
-head(draw.outcomes.long, n=10)
-tail(draw.outcomes.long, n=10)
+kable(head(draw.outcomes.long, n=10)) %>% kable_styling_fc()
+kable(tail(draw.outcomes.long, n=10)) %>% kable_styling_fc()
 
 
-## ------------------------------------------------------------------------------------------------------------------------------------------------------
+## -----------------------------------------------------------------------------------------------------------------------------------
 # Graph
 # Control Graph Size
 options(repr.plot.width = 6, repr.plot.height = 4)

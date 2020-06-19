@@ -24,7 +24,7 @@
 <meta name="author" content="Fan Wang" />
 
 
-<meta name="date" content="2020-05-16" />
+<meta name="date" content="2020-06-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="dataset-tables-and-graphs.html"/>
 <link rel="next" href="basics-of-probability.html"/>
-<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92953468-4"></script>
 <script>
@@ -193,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#throwing-a-dice"><i class="fa fa-check"></i><b>4.2.2</b> Throwing a Dice</a></li>
 <li class="chapter" data-level="4.2.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#two-basketball-games"><i class="fa fa-check"></i><b>4.2.3</b> Two Basketball Games</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-average"><i class="fa fa-check"></i><b>4.3</b> Sample Average</a>
+<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#law-of-large-number"><i class="fa fa-check"></i><b>4.3</b> Law of Large Number</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#an-unfair-dice"><i class="fa fa-check"></i><b>4.3.1</b> An Unfair Dice</a></li>
 </ul></li>
@@ -318,15 +319,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [1] &quot;From Dataset: df_temp, 59 unique Levels for: state&quot;
 ## 
 ## [[2]]$levels
-##      [,1]                  [,2]          [,3]                 [,4]                  [,5]         [,6]         [,7]         [,8]       
-## [1,] &quot;AK (n=204)&quot;          &quot;CO (n=60)&quot;   &quot;ID (n=36)&quot;          &quot;MARSHALL IS. (n=12)&quot; &quot;NC (n=60)&quot;  &quot;OH (n=84)&quot;  &quot;SC (n=24)&quot;  &quot;WI (n=48)&quot;
-## [2,] &quot;AL (n=36)&quot;           &quot;CT (n=24)&quot;   &quot;IL (n=48)&quot;          &quot;MD (n=12)&quot;           &quot;ND (n=48)&quot;  &quot;OK (n=24)&quot;  &quot;SD (n=48)&quot;  &quot;WV (n=48)&quot;
-## [3,] &quot;AMER SAMOA (n=12)&quot;   &quot;D.C. (n=24)&quot; &quot;IN (n=48)&quot;          &quot;ME (n=24)&quot;           &quot;NE (n=96)&quot;  &quot;OR (n=84)&quot;  &quot;TN (n=48)&quot;  &quot;WY (n=48)&quot;
-## [4,] &quot;AR (n=36)&quot;           &quot;DE (n=12)&quot;   &quot;KS (n=60)&quot;          &quot;MI (n=108)&quot;          &quot;NH (n=24)&quot;  &quot;PA (n=72)&quot;  &quot;TX (n=252)&quot; &quot;&quot;         
-## [5,] &quot;AZ (n=60)&quot;           &quot;FL (n=156)&quot;  &quot;KY (n=36)&quot;          &quot;MN (n=60)&quot;           &quot;NJ (n=24)&quot;  &quot;PA. (n=12)&quot; &quot;UT (n=24)&quot;  &quot;&quot;         
-## [6,] &quot;CA (n=180)&quot;          &quot;GA (n=60)&quot;   &quot;LA (n=48)&quot;          &quot;MO (n=48)&quot;           &quot;NM (n=36)&quot;  &quot;PC (n=48)&quot;  &quot;VA (n=48)&quot;  &quot;&quot;         
-## [7,] &quot;CA. (n=12)&quot;          &quot;HI (n=36)&quot;   &quot;MA (n=36)&quot;          &quot;MS (n=36)&quot;           &quot;NV (n=60)&quot;  &quot;PR (n=12)&quot;  &quot;VT (n=12)&quot;  &quot;&quot;         
-## [8,] &quot;CAROLINE IS. (n=12)&quot; &quot;IA (n=36)&quot;   &quot;MARSHALL IS (n=12)&quot; &quot;MT (n=72)&quot;           &quot;NY (n=108)&quot; &quot;RI (n=12)&quot;  &quot;WA (n=72)&quot;  &quot;&quot;         
+##      [,1]                  [,2]          [,3]                 [,4]                  [,5]         [,6]         [,7]        
+## [1,] &quot;AK (n=204)&quot;          &quot;CO (n=60)&quot;   &quot;ID (n=36)&quot;          &quot;MARSHALL IS. (n=12)&quot; &quot;NC (n=60)&quot;  &quot;OH (n=84)&quot;  &quot;SC (n=24)&quot; 
+## [2,] &quot;AL (n=36)&quot;           &quot;CT (n=24)&quot;   &quot;IL (n=48)&quot;          &quot;MD (n=12)&quot;           &quot;ND (n=48)&quot;  &quot;OK (n=24)&quot;  &quot;SD (n=48)&quot; 
+## [3,] &quot;AMER SAMOA (n=12)&quot;   &quot;D.C. (n=24)&quot; &quot;IN (n=48)&quot;          &quot;ME (n=24)&quot;           &quot;NE (n=96)&quot;  &quot;OR (n=84)&quot;  &quot;TN (n=48)&quot; 
+## [4,] &quot;AR (n=36)&quot;           &quot;DE (n=12)&quot;   &quot;KS (n=60)&quot;          &quot;MI (n=108)&quot;          &quot;NH (n=24)&quot;  &quot;PA (n=72)&quot;  &quot;TX (n=252)&quot;
+## [5,] &quot;AZ (n=60)&quot;           &quot;FL (n=156)&quot;  &quot;KY (n=36)&quot;          &quot;MN (n=60)&quot;           &quot;NJ (n=24)&quot;  &quot;PA. (n=12)&quot; &quot;UT (n=24)&quot; 
+## [6,] &quot;CA (n=180)&quot;          &quot;GA (n=60)&quot;   &quot;LA (n=48)&quot;          &quot;MO (n=48)&quot;           &quot;NM (n=36)&quot;  &quot;PC (n=48)&quot;  &quot;VA (n=48)&quot; 
+## [7,] &quot;CA. (n=12)&quot;          &quot;HI (n=36)&quot;   &quot;MA (n=36)&quot;          &quot;MS (n=36)&quot;           &quot;NV (n=60)&quot;  &quot;PR (n=12)&quot;  &quot;VT (n=12)&quot; 
+## [8,] &quot;CAROLINE IS. (n=12)&quot; &quot;IA (n=36)&quot;   &quot;MARSHALL IS (n=12)&quot; &quot;MT (n=72)&quot;           &quot;NY (n=108)&quot; &quot;RI (n=12)&quot;  &quot;WA (n=72)&quot; 
+##      [,8]       
+## [1,] &quot;WI (n=48)&quot;
+## [2,] &quot;WV (n=48)&quot;
+## [3,] &quot;WY (n=48)&quot;
+## [4,] &quot;&quot;         
+## [5,] &quot;&quot;         
+## [6,] &quot;&quot;         
+## [7,] &quot;&quot;         
+## [8,] &quot;&quot;         
 ## 
 ## 
 ## [[3]]
@@ -424,7 +434,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb52-14"><a href="summarizing-data.html#cb52-14"></a>                         <span class="dt">breaks =</span> df_temp<span class="op">$</span>month) <span class="op">+</span></span>
 <span id="cb52-15"><a href="summarizing-data.html#cb52-15"></a><span class="st">      </span><span class="kw">theme_bw</span>()</span>
 <span id="cb52-16"><a href="summarizing-data.html#cb52-16"></a><span class="kw">print</span>(scatter)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="scatter-plot-of-temperature-and-months-for-3-states" class="section level4" number="3.1.1.2">
 <h4><span class="header-section-number">3.1.1.2</span> Scatter Plot of Temperature and Months for 3 States</h4>
@@ -451,7 +461,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb53-18"><a href="summarizing-data.html#cb53-18"></a>                         <span class="dt">breaks =</span> df_temp<span class="op">$</span>month) <span class="op">+</span></span>
 <span id="cb53-19"><a href="summarizing-data.html#cb53-19"></a><span class="st">      </span><span class="kw">theme_bw</span>()</span>
 <span id="cb53-20"><a href="summarizing-data.html#cb53-20"></a><span class="kw">print</span>(scatter)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="mean-and-standard-deviation-within-month-acorss-usa" class="section level4" number="3.1.1.3">
 <h4><span class="header-section-number">3.1.1.3</span> Mean and Standard Deviation Within Month Acorss USA</h4>
@@ -479,7 +489,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb55-14"><a href="summarizing-data.html#cb55-14"></a><span class="st">        </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> <span class="kw">as.character</span>(df_temp_mth_summ<span class="op">$</span>month),</span>
 <span id="cb55-15"><a href="summarizing-data.html#cb55-15"></a>                           <span class="dt">breaks =</span> df_temp_mth_summ<span class="op">$</span>month)</span>
 <span id="cb55-16"><a href="summarizing-data.html#cb55-16"></a><span class="kw">print</span>(lineplot)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-56-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="mean-and-standard-deviation-within-month-acorss-states-in-usa" class="section level4" number="3.1.1.4">
 <h4><span class="header-section-number">3.1.1.4</span> Mean and Standard Deviation Within Month Acorss States in USA</h4>
@@ -514,7 +524,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb56-24"><a href="summarizing-data.html#cb56-24"></a><span class="st">        </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> <span class="kw">as.character</span>(df_temp_mth_summ<span class="op">$</span>month),</span>
 <span id="cb56-25"><a href="summarizing-data.html#cb56-25"></a>                           <span class="dt">breaks =</span> df_temp_mth_summ<span class="op">$</span>month)</span>
 <span id="cb56-26"><a href="summarizing-data.html#cb56-26"></a><span class="kw">print</span>(lineplot)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-57-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="summarizing-data.html#cb57-1"></a><span class="co"># Control Graph Size</span></span>
 <span id="cb57-2"><a href="summarizing-data.html#cb57-2"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">6</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
 <span id="cb57-3"><a href="summarizing-data.html#cb57-3"></a><span class="co"># Show mean and standard deviation in graphical form</span></span>
@@ -541,7 +551,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb57-24"><a href="summarizing-data.html#cb57-24"></a><span class="st">        </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> <span class="kw">as.character</span>(df_temp_mth_summ<span class="op">$</span>month),</span>
 <span id="cb57-25"><a href="summarizing-data.html#cb57-25"></a>                           <span class="dt">breaks =</span> df_temp_mth_summ<span class="op">$</span>month)</span>
 <span id="cb57-26"><a href="summarizing-data.html#cb57-26"></a><span class="kw">print</span>(lineplot)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-58-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
@@ -605,7 +615,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb59-14"><a href="summarizing-data.html#cb59-14"></a>           <span class="dt">caption =</span> <span class="st">&#39;Economic Policy Institute</span><span class="ch">\n</span><span class="st"> www.epi.org/data/&#39;</span>) <span class="op">+</span></span>
 <span id="cb59-15"><a href="summarizing-data.html#cb59-15"></a><span class="st">      </span><span class="kw">theme_bw</span>()</span>
 <span id="cb59-16"><a href="summarizing-data.html#cb59-16"></a><span class="kw">print</span>(scatter)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="standard-deviations-and-coefficient-of-variation" class="section level4" number="3.2.1.2">
 <h4><span class="header-section-number">3.2.1.2</span> Standard Deviations and Coefficient of Variation</h4>

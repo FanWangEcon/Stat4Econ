@@ -1,20 +1,42 @@
 ---
-title: An R Markdown document converted from "C:/Users/fan/Stat4Econ/probability/countrules.ipynb"
-output: html_document
+title: "Counting Rules"
+titleshort: "Counting Rules"
+description: |
+  Counting Rules
+date: 2020-06-19
+date_start: 2018-12-01
+output:
+  pdf_document:
+    pandoc_args: '../_output_kniti_pdf.yaml'
+    includes:
+      in_header: '../preamble.tex'
+  html_document:
+    pandoc_args: '../_output_kniti_html.yaml'
+    includes:
+      in_header: '../hdga.html'
+always_allow_html: true
+urlcolor: blue
 ---
 
-**[Back to Fan's Intro Stat Table of Content](https://fanwangecon.github.io/Stat4Econ/)**
+## Sample Space and Probability Examples
 
-# Counting Rules
+```{r global_options, include = FALSE}
+try(source("../.Rprofile"))
+```
+
+`r text_shared_preamble_one`
+`r text_shared_preamble_two`
+`r text_shared_preamble_thr`
+
+## Counting Rules
 
 There are different experimental comes, and probabilities associated with different experimental outcomes.
 
-To figure out what the probabilities associted with different experimental outcomes are, we need to first know what possible experimental outcomes exist in the sample space.
+To figure out what the probabilities associated with different experimental outcomes are, we need to first know what possible experimental outcomes exist in the sample space.
 
+### Trivial Counting
 
-## Trivial Counting
-
-Often, we do not need to employ additional mathmatical tools, and can count directly  the number of experimental outcomes in a sample space.
+Often, we do not need to employ additional mathematical tools, and can count directly  the number of experimental outcomes in a sample space.
 
 If we *toss a quarter* once, there are two outcomes, heads vs tails, which are the two elements in the sample space.
 
@@ -41,26 +63,22 @@ The school basketball team will play 5 games this season. The team can only win 
 - $S = \left\{0, 1, 2, 3, 4, 5 \right\}$
 - Number of experimental outcomes: 6
 
-
 Note that in all the examples above, specifying the number of experimental outcomes does not tell us the probability that each outcome will be realized by. The dice could be weighted and the quarter could have a heavier side. Then knowing that there are 2 sides to a quarter and six sides to a dice does not tell us what the chance of getting each side is. The fact that there are four presidential candidate does not mean that each has $25$ percent chance of winning. A better basketball team would have higher chances of winning more games than a worse team, but the sample space of all possible experimental outcomes would be the same
 
-
-## Multi-Step Experiment
+### Multi-Step Experiment
 
 If we have a sequence of independent experiments, then each sequence of outcomes is a different experimental outcome, and the probability associated with each experimental outcome is determined by:
 
-\begin{eqnarray}
-&   & P\left(\text{(outcome A experiment 1)} \cap \text{(outcome B experiment 2)}  \cap \text{(outcome C experiment 3)}\right) \\
-& = & P(A^{E_1}) \cdot P(B^{E_2}) \cdot P(C^{E_3})
-\end{eqnarray}
-
+$$
+P\left(\text{(outcome A experiment 1)} \cap \text{(outcome B experiment 2)}  \cap \text{(outcome C experiment 3)}\right) \\
+ = P(A^{E_1}) \cdot P(B^{E_2}) \cdot P(C^{E_3})
+$$
 
 We discussed this in [Multiple-Step Experiment: Playing the Lottery Three times](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/lottery.html).
 
-## Combination
+### Combination
 
-## Permutation
-
+### Permutation
 
 - In the tossing quarter or tossing dice examples:
     + it could be that the quarter and dice are fair: if that is the case then the probability of getting each side of the dice is $\frac{1}{6}$, and the probability of getting each side of quarter is $\frac{1}{2}$.  In these cases, the probability that each experimental outcome happens is the same (uniform), and so the number of experimental outcomes is linked to the probability for each outcome.

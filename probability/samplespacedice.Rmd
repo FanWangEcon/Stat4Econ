@@ -1,6 +1,6 @@
 ---
-title: "Throw an Unfair Four Sided Dice"
-titleshort: "Throw an Unfair Four Sided Dice"
+title: "Law of Large Number, Sample Average, and Unfair Dice"
+titleshort: "Law of Large Number Unfair Dice"
 description: |
   Throw an unfair dice many times, law of large number.
 core:
@@ -25,7 +25,7 @@ core:
     code: |
       geom_line()
       scale_x_continuous(trans='log10', labels=c('n=100', 'n=1000'), breaks=c(100, 1000))
-date: 2020-05-02
+date: 2020-06-19
 date_start: 2018-12-01
 output:
   pdf_document:
@@ -40,7 +40,7 @@ always_allow_html: true
 urlcolor: blue
 ---
 
-## Sample Average
+## Law of Large Number
 
 ```{r global_options, include = FALSE}
 try(source("../.Rprofile"))
@@ -82,7 +82,7 @@ experimental.outcome.prob <- c((1-fracbase)^0*fracbase,
 # Show these in a Tibble
 dice.true.prob <- tibble(dice.outcomes.list = experimental.outcomes.list,
                          dice.true.prob = experimental.outcome.prob)
-dice.true.prob
+kable(dice.true.prob) %>% kable_styling_fc()
 ```
 
 #### Throw the Dice 5 Times
@@ -101,8 +101,8 @@ future.dice.draws <- sample(experimental.outcomes.list,
                                  prob = experimental.outcome.prob)
 
 # A little tibble to show results
-tibble(which.future.dice = paste0('dice draws:', 1:number.of.futures.to.draw),
-       dice.draws = future.dice.draws)
+kable(tibble(which.future.dice = paste0('dice draws:', 1:number.of.futures.to.draw),
+       dice.draws = future.dice.draws)) %>% kable_styling_fc()
 ```
 
 #### Throw the dice 50, 5000 and 500,000 times
@@ -154,7 +154,9 @@ future.draws <- function(number.of.futures.to.draw, select.dice.draws=FALSE) {
 number.of.futures.to.draw.list = c(1000, 5000, 500000)
 
 # Apply function
-bind_cols(dice.true.prob, lapply(number.of.futures.to.draw.list, future.draws))
+kable(bind_cols(dice.true.prob, 
+                lapply(number.of.futures.to.draw.list, future.draws))) %>%
+  kable_styling_fc()
 ```
 
 #### Throw Four Sided Dice Different Number of Times, and Melt Data
@@ -184,11 +186,11 @@ draw.outcomes.long$dice.draw <- paste0('dice side = ', draw.outcomes.long$dice.d
 draw.outcomes.long$dice.draw <- factor(draw.outcomes.long$dice.draw)
 
 # Show Melt Table
-head(draw.outcomes.long, n=10)
-tail(draw.outcomes.long, n=10)
+kable(head(draw.outcomes.long, n=10)) %>% kable_styling_fc()
+kable(tail(draw.outcomes.long, n=10)) %>% kable_styling_fc()
 ```
 
-Graphically, What happens when the number of dice throws increase? A crucial thing to understand about probability is that we are not saying if you throw 10 dice, there will be exactly 6 dice out of the 10 that will land on side=1 (given 60 percent probability of landing on side 1).
+Graphically, What happens when the number of dice throws increases? A crucial thing to understand about probability is that we are not saying if you throw 10 dice, there will be exactly 6 dice out of the 10 that will land on side=1 (given 60 percent probability of landing on side 1).
 
 What we are saying is that, given that each dice throw is independent, if we throw the dice many many times, the empirical distribution of dice throws will approximate the actual true probability of landing on each of the four sides of the dice.
 

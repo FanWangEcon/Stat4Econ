@@ -24,7 +24,7 @@
 <meta name="author" content="Fan Wang" />
 
 
-<meta name="date" content="2020-05-16" />
+<meta name="date" content="2020-06-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="summarizing-data.html"/>
 <link rel="next" href="discrete-probability-distribution.html"/>
-<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92953468-4"></script>
 <script>
@@ -193,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#throwing-a-dice"><i class="fa fa-check"></i><b>4.2.2</b> Throwing a Dice</a></li>
 <li class="chapter" data-level="4.2.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#two-basketball-games"><i class="fa fa-check"></i><b>4.2.3</b> Two Basketball Games</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-average"><i class="fa fa-check"></i><b>4.3</b> Sample Average</a>
+<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#law-of-large-number"><i class="fa fa-check"></i><b>4.3</b> Law of Large Number</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#an-unfair-dice"><i class="fa fa-check"></i><b>4.3.1</b> An Unfair Dice</a></li>
 </ul></li>
@@ -313,8 +314,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb62-8"><a href="basics-of-probability.html#cb62-8"></a>experimental.outcome.prob &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.7</span>)</span>
 <span id="cb62-9"><a href="basics-of-probability.html#cb62-9"></a></span>
 <span id="cb62-10"><a href="basics-of-probability.html#cb62-10"></a><span class="co"># Show these in a Tibble</span></span>
-<span id="cb62-11"><a href="basics-of-probability.html#cb62-11"></a><span class="kw">tibble</span>(<span class="dt">tomorrow.experimental.outcomes =</span> experimental.outcomes.list,</span>
-<span id="cb62-12"><a href="basics-of-probability.html#cb62-12"></a>       <span class="dt">experimental.outcome.prob =</span> experimental.outcome.prob)</span></code></pre></div>
+<span id="cb62-11"><a href="basics-of-probability.html#cb62-11"></a><span class="kw">kable</span>(<span class="kw">tibble</span>(<span class="dt">tomorrow.experimental.outcomes =</span> experimental.outcomes.list,</span>
+<span id="cb62-12"><a href="basics-of-probability.html#cb62-12"></a>       <span class="dt">experimental.outcome.prob =</span> experimental.outcome.prob)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable_styling_fc</span>()</span></code></pre></div>
+<table class="table table-striped table-hover table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+tomorrow.experimental.outcomes
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+experimental.outcome.prob
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Heavy Rain
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Light Rain
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No Rain
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="basics-of-probability.html#cb63-1"></a><span class="co"># What could happen tomorrow?</span></span>
 <span id="cb63-2"><a href="basics-of-probability.html#cb63-2"></a><span class="co"># We live in a probabilistic world, from today&#39;s perspective, tomorrow is uncertain</span></span>
 <span id="cb63-3"><a href="basics-of-probability.html#cb63-3"></a><span class="co"># If we draw tomorrow from a hat, given our possible outcomes</span></span>
@@ -330,8 +369,182 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb63-13"><a href="basics-of-probability.html#cb63-13"></a><span class="co"># There are only three unique tomorrows, each of three weather outcomes</span></span>
 <span id="cb63-14"><a href="basics-of-probability.html#cb63-14"></a><span class="co"># could happen, but the chance of each happening differs by the probabilities</span></span>
 <span id="cb63-15"><a href="basics-of-probability.html#cb63-15"></a><span class="co"># we set in experimental.outcome.prob</span></span>
-<span id="cb63-16"><a href="basics-of-probability.html#cb63-16"></a><span class="kw">tibble</span>(<span class="dt">which.tomorrow =</span> <span class="kw">paste0</span>(<span class="st">&#39;tomorrow:&#39;</span>, <span class="dv">1</span><span class="op">:</span>number.of.tomorrow.to.draw),</span>
-<span id="cb63-17"><a href="basics-of-probability.html#cb63-17"></a>       <span class="dt">tomorrow.weather =</span> tomorrow.weather.draws)</span></code></pre></div>
+<span id="cb63-16"><a href="basics-of-probability.html#cb63-16"></a><span class="kw">kable</span>(<span class="kw">tibble</span>(<span class="dt">which.tomorrow =</span> <span class="kw">paste0</span>(<span class="st">&#39;tomorrow:&#39;</span>, <span class="dv">1</span><span class="op">:</span>number.of.tomorrow.to.draw),</span>
+<span id="cb63-17"><a href="basics-of-probability.html#cb63-17"></a>       <span class="dt">tomorrow.weather =</span> tomorrow.weather.draws)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable_styling_fc</span>()</span></code></pre></div>
+<table class="table table-striped table-hover table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+which.tomorrow
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+tomorrow.weather
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+tomorrow:1
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:2
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:3
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:4
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:5
+</td>
+<td style="text-align:left;">
+Light Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:6
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:7
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:8
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:9
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:10
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:11
+</td>
+<td style="text-align:left;">
+Light Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:12
+</td>
+<td style="text-align:left;">
+Heavy Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:13
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:14
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:15
+</td>
+<td style="text-align:left;">
+Light Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:16
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:17
+</td>
+<td style="text-align:left;">
+Heavy Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:18
+</td>
+<td style="text-align:left;">
+Light Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:19
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tomorrow:20
+</td>
+<td style="text-align:left;">
+No Rain
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="union-and-intersection-and-complements" class="section level3" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Union and Intersection and Complements</h3>
@@ -450,7 +663,69 @@ This is what we wrote down earlier as well.</p>
 <span id="cb64-17"><a href="basics-of-probability.html#cb64-17"></a><span class="co"># Show these in a Tibble</span></span>
 <span id="cb64-18"><a href="basics-of-probability.html#cb64-18"></a>dice.true.prob &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">dice.outcomes.list =</span> experimental.outcomes.list,</span>
 <span id="cb64-19"><a href="basics-of-probability.html#cb64-19"></a>                         <span class="dt">dice.true.prob =</span> experimental.outcome.prob)</span>
-<span id="cb64-20"><a href="basics-of-probability.html#cb64-20"></a>dice.true.prob</span></code></pre></div>
+<span id="cb64-20"><a href="basics-of-probability.html#cb64-20"></a><span class="kw">kable</span>(dice.true.prob) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable_styling_fc</span>()</span></code></pre></div>
+<table class="table table-striped table-hover table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+dice.outcomes.list
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+dice.true.prob
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.50000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.25000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.12500
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.06250
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.03125
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.03125
+</td>
+</tr>
+</tbody>
+</table>
 <div id="throw-the-dice-10-times" class="section level4" number="4.2.2.1">
 <h4><span class="header-section-number">4.2.2.1</span> Throw the Dice 10 Times</h4>
 <p>We throw the dice 10 times, each time, get one of the six possible experimental outcomes, the chance of getting these outcomes are determined by the true probabilities of the unfair dice. If we throw 10 times, that does not mean we will get exact side 1 five times. Side 1 having proability of 50 percent means for each throw there is a 50 percent chance of getting side 1. But each throw is independent of other throws, so we could just by chance end up with no side 1 after ten throws, although the chance of that happening is low. How many times did we get each side in the ten random tosses below?</p>
@@ -465,8 +740,102 @@ This is what we wrote down earlier as well.</p>
 <span id="cb65-9"><a href="basics-of-probability.html#cb65-9"></a>                            <span class="dt">prob =</span> experimental.outcome.prob)</span>
 <span id="cb65-10"><a href="basics-of-probability.html#cb65-10"></a></span>
 <span id="cb65-11"><a href="basics-of-probability.html#cb65-11"></a><span class="co"># A little tibble to show results</span></span>
-<span id="cb65-12"><a href="basics-of-probability.html#cb65-12"></a><span class="kw">tibble</span>(<span class="dt">which.future.dice =</span> <span class="kw">paste0</span>(<span class="st">&#39;dice draws:&#39;</span>, <span class="dv">1</span><span class="op">:</span>number.of.futures.to.draw),</span>
-<span id="cb65-13"><a href="basics-of-probability.html#cb65-13"></a>       <span class="dt">dice.draws =</span> future.dice.draws)</span></code></pre></div>
+<span id="cb65-12"><a href="basics-of-probability.html#cb65-12"></a><span class="kw">kable</span>(<span class="kw">tibble</span>(<span class="dt">which.future.dice =</span> <span class="kw">paste0</span>(<span class="st">&#39;dice draws:&#39;</span>, <span class="dv">1</span><span class="op">:</span>number.of.futures.to.draw),</span>
+<span id="cb65-13"><a href="basics-of-probability.html#cb65-13"></a>       <span class="dt">dice.draws =</span> future.dice.draws)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable_styling_fc</span>()</span></code></pre></div>
+<table class="table table-striped table-hover table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+which.future.dice
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+dice.draws
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+dice draws:1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:2
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:3
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:4
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:5
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:6
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:7
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:8
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:9
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:10
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="redefining-sample-space-for-throwing-a-dice" class="section level4" number="4.2.2.2">
 <h4><span class="header-section-number">4.2.2.2</span> Redefining Sample Space for Throwing a Dice</h4>
@@ -526,8 +895,8 @@ This is what we wrote down earlier as well.</p>
 </div>
 </div>
 </div>
-<div id="sample-average" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Sample Average</h2>
+<div id="law-of-large-number" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Law of Large Number</h2>
 <blockquote>
 <p>Go back to <a href="http://fanwangecon.github.io/">fan</a>’s <a href="https://fanwangecon.github.io/REconTools/">REconTools</a> Package, <a href="https://fanwangecon.github.io/R4Econ/">R Code Examples</a> Repository (<a href="https://fanwangecon.github.io/R4Econ/bookdown">bookdown site</a>), or <a href="https://fanwangecon.github.io/Stat4Econ/">Intro Stats with R</a> Repository (<a href="https://fanwangecon.github.io/Stat4Econ/bookdown">bookdown site</a>).</p>
 </blockquote>
@@ -559,7 +928,53 @@ This is what we wrote down earlier as well.</p>
 <span id="cb66-15"><a href="basics-of-probability.html#cb66-15"></a><span class="co"># Show these in a Tibble</span></span>
 <span id="cb66-16"><a href="basics-of-probability.html#cb66-16"></a>dice.true.prob &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">dice.outcomes.list =</span> experimental.outcomes.list,</span>
 <span id="cb66-17"><a href="basics-of-probability.html#cb66-17"></a>                         <span class="dt">dice.true.prob =</span> experimental.outcome.prob)</span>
-<span id="cb66-18"><a href="basics-of-probability.html#cb66-18"></a>dice.true.prob</span></code></pre></div>
+<span id="cb66-18"><a href="basics-of-probability.html#cb66-18"></a><span class="kw">kable</span>(dice.true.prob) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable_styling_fc</span>()</span></code></pre></div>
+<table class="table table-striped table-hover table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+dice.outcomes.list
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+dice.true.prob
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.600
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.240
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.096
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.064
+</td>
+</tr>
+</tbody>
+</table>
 <div id="throw-the-dice-5-times" class="section level4" number="4.3.1.1">
 <h4><span class="header-section-number">4.3.1.1</span> Throw the Dice 5 Times</h4>
 <p>We throw the dice 5 times, each time, get one of the four possible experimental outcomes, the chance of getting these outcomes are determined by the true probabilities of the unfair dice.</p>
@@ -574,8 +989,62 @@ This is what we wrote down earlier as well.</p>
 <span id="cb67-9"><a href="basics-of-probability.html#cb67-9"></a>                                 <span class="dt">prob =</span> experimental.outcome.prob)</span>
 <span id="cb67-10"><a href="basics-of-probability.html#cb67-10"></a></span>
 <span id="cb67-11"><a href="basics-of-probability.html#cb67-11"></a><span class="co"># A little tibble to show results</span></span>
-<span id="cb67-12"><a href="basics-of-probability.html#cb67-12"></a><span class="kw">tibble</span>(<span class="dt">which.future.dice =</span> <span class="kw">paste0</span>(<span class="st">&#39;dice draws:&#39;</span>, <span class="dv">1</span><span class="op">:</span>number.of.futures.to.draw),</span>
-<span id="cb67-13"><a href="basics-of-probability.html#cb67-13"></a>       <span class="dt">dice.draws =</span> future.dice.draws)</span></code></pre></div>
+<span id="cb67-12"><a href="basics-of-probability.html#cb67-12"></a><span class="kw">kable</span>(<span class="kw">tibble</span>(<span class="dt">which.future.dice =</span> <span class="kw">paste0</span>(<span class="st">&#39;dice draws:&#39;</span>, <span class="dv">1</span><span class="op">:</span>number.of.futures.to.draw),</span>
+<span id="cb67-13"><a href="basics-of-probability.html#cb67-13"></a>       <span class="dt">dice.draws =</span> future.dice.draws)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable_styling_fc</span>()</span></code></pre></div>
+<table class="table table-striped table-hover table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+which.future.dice
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+dice.draws
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+dice draws:1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:2
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:3
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:4
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice draws:5
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="throw-the-dice-50-5000-and-500000-times" class="section level4" number="4.3.1.2">
 <h4><span class="header-section-number">4.3.1.2</span> Throw the dice 50, 5000 and 500,000 times</h4>
@@ -619,7 +1088,100 @@ This is what we wrote down earlier as well.</p>
 <span id="cb69-3"><a href="basics-of-probability.html#cb69-3"></a>number.of.futures.to.draw.list =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">5000</span>, <span class="dv">500000</span>)</span>
 <span id="cb69-4"><a href="basics-of-probability.html#cb69-4"></a></span>
 <span id="cb69-5"><a href="basics-of-probability.html#cb69-5"></a><span class="co"># Apply function</span></span>
-<span id="cb69-6"><a href="basics-of-probability.html#cb69-6"></a><span class="kw">bind_cols</span>(dice.true.prob, <span class="kw">lapply</span>(number.of.futures.to.draw.list, future.draws))</span></code></pre></div>
+<span id="cb69-6"><a href="basics-of-probability.html#cb69-6"></a><span class="kw">kable</span>(<span class="kw">bind_cols</span>(dice.true.prob, </span>
+<span id="cb69-7"><a href="basics-of-probability.html#cb69-7"></a>                <span class="kw">lapply</span>(number.of.futures.to.draw.list, future.draws))) <span class="op">%&gt;%</span></span>
+<span id="cb69-8"><a href="basics-of-probability.html#cb69-8"></a><span class="st">  </span><span class="kw">kable_styling_fc</span>()</span></code></pre></div>
+<table class="table table-striped table-hover table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+dice.outcomes.list
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+dice.true.prob
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+sample.frac.n1000
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+sample.frac.n5000
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+sample.frac.n500000
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.600
+</td>
+<td style="text-align:right;">
+0.568
+</td>
+<td style="text-align:right;">
+0.6068
+</td>
+<td style="text-align:right;">
+0.59939
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.240
+</td>
+<td style="text-align:right;">
+0.276
+</td>
+<td style="text-align:right;">
+0.2404
+</td>
+<td style="text-align:right;">
+0.24024
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.096
+</td>
+<td style="text-align:right;">
+0.091
+</td>
+<td style="text-align:right;">
+0.0926
+</td>
+<td style="text-align:right;">
+0.09622
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.064
+</td>
+<td style="text-align:right;">
+0.065
+</td>
+<td style="text-align:right;">
+0.0602
+</td>
+<td style="text-align:right;">
+0.06415
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="throw-four-sided-dice-different-number-of-times-and-melt-data" class="section level4" number="4.3.1.3">
 <h4><span class="header-section-number">4.3.1.3</span> Throw Four Sided Dice Different Number of Times, and Melt Data</h4>
@@ -646,40 +1208,294 @@ This is what we wrote down earlier as well.</p>
 <span id="cb70-20"><a href="basics-of-probability.html#cb70-20"></a>draw.outcomes.long<span class="op">$</span>dice.draw &lt;-<span class="st"> </span><span class="kw">factor</span>(draw.outcomes.long<span class="op">$</span>dice.draw)</span>
 <span id="cb70-21"><a href="basics-of-probability.html#cb70-21"></a></span>
 <span id="cb70-22"><a href="basics-of-probability.html#cb70-22"></a><span class="co"># Show Melt Table</span></span>
-<span id="cb70-23"><a href="basics-of-probability.html#cb70-23"></a><span class="kw">head</span>(draw.outcomes.long, <span class="dt">n=</span><span class="dv">10</span>)</span>
-<span id="cb70-24"><a href="basics-of-probability.html#cb70-24"></a><span class="kw">tail</span>(draw.outcomes.long, <span class="dt">n=</span><span class="dv">10</span>)</span></code></pre></div>
-<p>Graphically, What happens when the number of dice throws increase? A crucial thing to understand about probability is that we are not saying if you throw 10 dice, there will be exactly 6 dice out of the 10 that will land on side=1 (given 60 percent probability of landing on side 1).</p>
+<span id="cb70-23"><a href="basics-of-probability.html#cb70-23"></a><span class="kw">kable</span>(<span class="kw">head</span>(draw.outcomes.long, <span class="dt">n=</span><span class="dv">10</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable_styling_fc</span>()</span></code></pre></div>
+<table class="table table-striped table-hover table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+dice.draw
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+draw.count
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+dice side = 1
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0.59000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 2
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0.32000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 3
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0.06000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 4
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0.03000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 1
+</td>
+<td style="text-align:right;">
+101
+</td>
+<td style="text-align:right;">
+0.59406
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 2
+</td>
+<td style="text-align:right;">
+101
+</td>
+<td style="text-align:right;">
+0.24752
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 3
+</td>
+<td style="text-align:right;">
+101
+</td>
+<td style="text-align:right;">
+0.07921
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 4
+</td>
+<td style="text-align:right;">
+101
+</td>
+<td style="text-align:right;">
+0.07921
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 1
+</td>
+<td style="text-align:right;">
+103
+</td>
+<td style="text-align:right;">
+0.59223
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 2
+</td>
+<td style="text-align:right;">
+103
+</td>
+<td style="text-align:right;">
+0.27184
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="basics-of-probability.html#cb71-1"></a><span class="kw">kable</span>(<span class="kw">tail</span>(draw.outcomes.long, <span class="dt">n=</span><span class="dv">10</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable_styling_fc</span>()</span></code></pre></div>
+<table class="table table-striped table-hover table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+dice.draw
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+draw.count
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+dice side = 3
+</td>
+<td style="text-align:right;">
+963757
+</td>
+<td style="text-align:right;">
+0.09585
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 4
+</td>
+<td style="text-align:right;">
+963757
+</td>
+<td style="text-align:right;">
+0.06368
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 1
+</td>
+<td style="text-align:right;">
+981711
+</td>
+<td style="text-align:right;">
+0.60043
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 2
+</td>
+<td style="text-align:right;">
+981711
+</td>
+<td style="text-align:right;">
+0.23932
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 3
+</td>
+<td style="text-align:right;">
+981711
+</td>
+<td style="text-align:right;">
+0.09628
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 4
+</td>
+<td style="text-align:right;">
+981711
+</td>
+<td style="text-align:right;">
+0.06397
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 1
+</td>
+<td style="text-align:right;">
+1000000
+</td>
+<td style="text-align:right;">
+0.60107
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 2
+</td>
+<td style="text-align:right;">
+1000000
+</td>
+<td style="text-align:right;">
+0.23974
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 3
+</td>
+<td style="text-align:right;">
+1000000
+</td>
+<td style="text-align:right;">
+0.09537
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dice side = 4
+</td>
+<td style="text-align:right;">
+1000000
+</td>
+<td style="text-align:right;">
+0.06382
+</td>
+</tr>
+</tbody>
+</table>
+<p>Graphically, What happens when the number of dice throws increases? A crucial thing to understand about probability is that we are not saying if you throw 10 dice, there will be exactly 6 dice out of the 10 that will land on side=1 (given 60 percent probability of landing on side 1).</p>
 <p>What we are saying is that, given that each dice throw is independent, if we throw the dice many many times, the empirical distribution of dice throws will approximate the actual true probability of landing on each of the four sides of the dice.</p>
 <p>The graph between demonstrates this. The x-axis is in <a href="https://en.wikipedia.org/wiki/Logarithmic_scale">log-scale</a>. We start with 10 throws, and end with 1 million throws. The Y-axis is the empirical probability, with 0.1=10 percent. We have four colors for each of the four sides.</p>
 <p>We can see that the empirical probability based on actual dice throws converges to the true probability as we increase the number of dice throws.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="basics-of-probability.html#cb71-1"></a><span class="co"># Graph</span></span>
-<span id="cb71-2"><a href="basics-of-probability.html#cb71-2"></a><span class="co"># Control Graph Size</span></span>
-<span id="cb71-3"><a href="basics-of-probability.html#cb71-3"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">6</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
-<span id="cb71-4"><a href="basics-of-probability.html#cb71-4"></a></span>
-<span id="cb71-5"><a href="basics-of-probability.html#cb71-5"></a><span class="co"># x-labels</span></span>
-<span id="cb71-6"><a href="basics-of-probability.html#cb71-6"></a>x.labels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;n=100&#39;</span>, <span class="st">&#39;n=1000&#39;</span>, <span class="st">&#39;n=10k&#39;</span>, <span class="st">&#39;n=100k&#39;</span>, <span class="st">&#39;n=1mil&#39;</span>)</span>
-<span id="cb71-7"><a href="basics-of-probability.html#cb71-7"></a>x.breaks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>)</span>
-<span id="cb71-8"><a href="basics-of-probability.html#cb71-8"></a></span>
-<span id="cb71-9"><a href="basics-of-probability.html#cb71-9"></a><span class="co"># title line 2</span></span>
-<span id="cb71-10"><a href="basics-of-probability.html#cb71-10"></a>title_line2 &lt;-<span class="st"> </span><span class="kw">sprintf</span>(<span class="st">&quot;P(S=1)=%0.3f, P(S=2)=%0.3f, P(S=3)=%0.3f, P(S=4)=%0.3f&quot;</span>,</span>
-<span id="cb71-11"><a href="basics-of-probability.html#cb71-11"></a>                   experimental.outcome.prob[<span class="dv">1</span>], experimental.outcome.prob[<span class="dv">2</span>],</span>
-<span id="cb71-12"><a href="basics-of-probability.html#cb71-12"></a>                   experimental.outcome.prob[<span class="dv">3</span>], experimental.outcome.prob[<span class="dv">4</span>])</span>
-<span id="cb71-13"><a href="basics-of-probability.html#cb71-13"></a></span>
-<span id="cb71-14"><a href="basics-of-probability.html#cb71-14"></a><span class="co"># Graph Results--Draw</span></span>
-<span id="cb71-15"><a href="basics-of-probability.html#cb71-15"></a>line.plot &lt;-<span class="st"> </span>draw.outcomes.long <span class="op">%&gt;%</span></span>
-<span id="cb71-16"><a href="basics-of-probability.html#cb71-16"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>draw.count, <span class="dt">y=</span>value,</span>
-<span id="cb71-17"><a href="basics-of-probability.html#cb71-17"></a>             <span class="dt">group=</span>dice.draw,</span>
-<span id="cb71-18"><a href="basics-of-probability.html#cb71-18"></a>             <span class="dt">colour=</span>dice.draw)) <span class="op">+</span></span>
-<span id="cb71-19"><a href="basics-of-probability.html#cb71-19"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="fl">0.75</span>) <span class="op">+</span></span>
-<span id="cb71-20"><a href="basics-of-probability.html#cb71-20"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="kw">paste0</span>(<span class="st">&#39;Law of Large Number, Unfair Four Sided Dice</span><span class="ch">\n</span><span class="st">&#39;</span>, title_line2),</span>
-<span id="cb71-21"><a href="basics-of-probability.html#cb71-21"></a>       <span class="dt">x =</span> <span class="st">&#39;Number of Times Throwing the Four-sided Dice&#39;</span>,</span>
-<span id="cb71-22"><a href="basics-of-probability.html#cb71-22"></a>       <span class="dt">y =</span> <span class="st">&#39;Empirical Probability Based on Dice Throws&#39;</span>,</span>
-<span id="cb71-23"><a href="basics-of-probability.html#cb71-23"></a>       <span class="dt">caption =</span> <span class="st">&#39;As n increases, approximates true probabilities&#39;</span>) <span class="op">+</span></span>
-<span id="cb71-24"><a href="basics-of-probability.html#cb71-24"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">trans=</span><span class="st">&#39;log10&#39;</span>, <span class="dt">labels =</span> x.labels, <span class="dt">breaks =</span> x.breaks) <span class="op">+</span></span>
-<span id="cb71-25"><a href="basics-of-probability.html#cb71-25"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span>
-<span id="cb71-26"><a href="basics-of-probability.html#cb71-26"></a></span>
-<span id="cb71-27"><a href="basics-of-probability.html#cb71-27"></a><span class="kw">print</span>(line.plot)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-69-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="basics-of-probability.html#cb72-1"></a><span class="co"># Graph</span></span>
+<span id="cb72-2"><a href="basics-of-probability.html#cb72-2"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb72-3"><a href="basics-of-probability.html#cb72-3"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">6</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
+<span id="cb72-4"><a href="basics-of-probability.html#cb72-4"></a></span>
+<span id="cb72-5"><a href="basics-of-probability.html#cb72-5"></a><span class="co"># x-labels</span></span>
+<span id="cb72-6"><a href="basics-of-probability.html#cb72-6"></a>x.labels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;n=100&#39;</span>, <span class="st">&#39;n=1000&#39;</span>, <span class="st">&#39;n=10k&#39;</span>, <span class="st">&#39;n=100k&#39;</span>, <span class="st">&#39;n=1mil&#39;</span>)</span>
+<span id="cb72-7"><a href="basics-of-probability.html#cb72-7"></a>x.breaks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>)</span>
+<span id="cb72-8"><a href="basics-of-probability.html#cb72-8"></a></span>
+<span id="cb72-9"><a href="basics-of-probability.html#cb72-9"></a><span class="co"># title line 2</span></span>
+<span id="cb72-10"><a href="basics-of-probability.html#cb72-10"></a>title_line2 &lt;-<span class="st"> </span><span class="kw">sprintf</span>(<span class="st">&quot;P(S=1)=%0.3f, P(S=2)=%0.3f, P(S=3)=%0.3f, P(S=4)=%0.3f&quot;</span>,</span>
+<span id="cb72-11"><a href="basics-of-probability.html#cb72-11"></a>                   experimental.outcome.prob[<span class="dv">1</span>], experimental.outcome.prob[<span class="dv">2</span>],</span>
+<span id="cb72-12"><a href="basics-of-probability.html#cb72-12"></a>                   experimental.outcome.prob[<span class="dv">3</span>], experimental.outcome.prob[<span class="dv">4</span>])</span>
+<span id="cb72-13"><a href="basics-of-probability.html#cb72-13"></a></span>
+<span id="cb72-14"><a href="basics-of-probability.html#cb72-14"></a><span class="co"># Graph Results--Draw</span></span>
+<span id="cb72-15"><a href="basics-of-probability.html#cb72-15"></a>line.plot &lt;-<span class="st"> </span>draw.outcomes.long <span class="op">%&gt;%</span></span>
+<span id="cb72-16"><a href="basics-of-probability.html#cb72-16"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>draw.count, <span class="dt">y=</span>value,</span>
+<span id="cb72-17"><a href="basics-of-probability.html#cb72-17"></a>             <span class="dt">group=</span>dice.draw,</span>
+<span id="cb72-18"><a href="basics-of-probability.html#cb72-18"></a>             <span class="dt">colour=</span>dice.draw)) <span class="op">+</span></span>
+<span id="cb72-19"><a href="basics-of-probability.html#cb72-19"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="fl">0.75</span>) <span class="op">+</span></span>
+<span id="cb72-20"><a href="basics-of-probability.html#cb72-20"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="kw">paste0</span>(<span class="st">&#39;Law of Large Number, Unfair Four Sided Dice</span><span class="ch">\n</span><span class="st">&#39;</span>, title_line2),</span>
+<span id="cb72-21"><a href="basics-of-probability.html#cb72-21"></a>       <span class="dt">x =</span> <span class="st">&#39;Number of Times Throwing the Four-sided Dice&#39;</span>,</span>
+<span id="cb72-22"><a href="basics-of-probability.html#cb72-22"></a>       <span class="dt">y =</span> <span class="st">&#39;Empirical Probability Based on Dice Throws&#39;</span>,</span>
+<span id="cb72-23"><a href="basics-of-probability.html#cb72-23"></a>       <span class="dt">caption =</span> <span class="st">&#39;As n increases, approximates true probabilities&#39;</span>) <span class="op">+</span></span>
+<span id="cb72-24"><a href="basics-of-probability.html#cb72-24"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">trans=</span><span class="st">&#39;log10&#39;</span>, <span class="dt">labels =</span> x.labels, <span class="dt">breaks =</span> x.breaks) <span class="op">+</span></span>
+<span id="cb72-25"><a href="basics-of-probability.html#cb72-25"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span>
+<span id="cb72-26"><a href="basics-of-probability.html#cb72-26"></a></span>
+<span id="cb72-27"><a href="basics-of-probability.html#cb72-27"></a><span class="kw">print</span>(line.plot)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-76-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

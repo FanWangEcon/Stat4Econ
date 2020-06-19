@@ -144,7 +144,7 @@
 
 \title{Introductory Statistics with R tidyverse}
 \author{Fan Wang}
-\date{2020-05-16}
+\date{2020-06-19}
 
 \begin{document}
 \maketitle
@@ -494,27 +494,34 @@ We will load in the data using base R read.csv function.
 \end{Shaded}
 
 \begin{verbatim}
-##     ilkid                year       firstname           lastname             team               leag                 gp           minutes      
-##  Length:21959       Min.   :1946   Length:21959       Length:21959       Length:21959       Length:21959       Min.   : 1.00   Min.   :   0.0  
-##  Class :character   1st Qu.:1974   Class :character   Class :character   Class :character   Class :character   1st Qu.:29.00   1st Qu.: 275.5  
-##  Mode  :character   Median :1988   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Median :60.00   Median :1038.0  
-##                     Mean   :1986                                                                               Mean   :51.91   Mean   :1204.1  
-##                     3rd Qu.:1999                                                                               3rd Qu.:76.00   3rd Qu.:2009.0  
-##                     Max.   :2009                                                                               Max.   :90.00   Max.   :3882.0  
-##       pts              oreb             dreb             reb              asts            stl                blk              turnover        
-##  Min.   :   0.0   Min.   :  0.00   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Length:21959       Length:21959       Length:21959      
-##  1st Qu.: 113.0   1st Qu.:  0.00   1st Qu.:   1.0   1st Qu.:  44.0   1st Qu.:  20.0   Class :character   Class :character   Class :character  
-##  Median : 386.0   Median : 22.00   Median :  60.0   Median : 160.0   Median :  71.0   Mode  :character   Mode  :character   Mode  :character  
-##  Mean   : 531.1   Mean   : 49.79   Mean   : 117.8   Mean   : 229.7   Mean   : 118.1                                                           
-##  3rd Qu.: 811.0   3rd Qu.: 75.00   3rd Qu.: 180.0   3rd Qu.: 333.0   3rd Qu.: 167.0                                                           
-##  Max.   :4029.0   Max.   :587.00   Max.   :1538.0   Max.   :2149.0   Max.   :1164.0                                                           
-##        pf             fga              fgm              fta              ftm             tpa              tpm       
-##  Min.   :  0.0   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Min.   :  0.0   Min.   :  0.00   Min.   :  0.0  
-##  1st Qu.: 43.0   1st Qu.: 106.0   1st Qu.:  43.0   1st Qu.:  30.0   1st Qu.: 20.0   1st Qu.:  0.00   1st Qu.:  0.0  
-##  Median :118.0   Median : 345.0   Median : 148.0   Median :  99.0   Median : 70.0   Median :  2.00   Median :  0.0  
-##  Mean   :123.6   Mean   : 452.5   Mean   : 204.2   Mean   : 146.9   Mean   :109.6   Mean   : 38.07   Mean   : 13.1  
-##  3rd Qu.:193.0   3rd Qu.: 696.0   3rd Qu.: 313.0   3rd Qu.: 218.0   3rd Qu.:161.0   3rd Qu.: 27.00   3rd Qu.:  7.0  
-##  Max.   :386.0   Max.   :3159.0   Max.   :1597.0   Max.   :1363.0   Max.   :840.0   Max.   :678.00   Max.   :269.0
+##     ilkid                year       firstname           lastname             team               leag                 gp       
+##  Length:21959       Min.   :1946   Length:21959       Length:21959       Length:21959       Length:21959       Min.   : 1.00  
+##  Class :character   1st Qu.:1974   Class :character   Class :character   Class :character   Class :character   1st Qu.:29.00  
+##  Mode  :character   Median :1988   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Median :60.00  
+##                     Mean   :1986                                                                               Mean   :51.91  
+##                     3rd Qu.:1999                                                                               3rd Qu.:76.00  
+##                     Max.   :2009                                                                               Max.   :90.00  
+##     minutes            pts              oreb             dreb             reb              asts            stl           
+##  Min.   :   0.0   Min.   :   0.0   Min.   :  0.00   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Length:21959      
+##  1st Qu.: 275.5   1st Qu.: 113.0   1st Qu.:  0.00   1st Qu.:   1.0   1st Qu.:  44.0   1st Qu.:  20.0   Class :character  
+##  Median :1038.0   Median : 386.0   Median : 22.00   Median :  60.0   Median : 160.0   Median :  71.0   Mode  :character  
+##  Mean   :1204.1   Mean   : 531.1   Mean   : 49.79   Mean   : 117.8   Mean   : 229.7   Mean   : 118.1                     
+##  3rd Qu.:2009.0   3rd Qu.: 811.0   3rd Qu.: 75.00   3rd Qu.: 180.0   3rd Qu.: 333.0   3rd Qu.: 167.0                     
+##  Max.   :3882.0   Max.   :4029.0   Max.   :587.00   Max.   :1538.0   Max.   :2149.0   Max.   :1164.0                     
+##      blk              turnover               pf             fga              fgm              fta              ftm       
+##  Length:21959       Length:21959       Min.   :  0.0   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Min.   :  0.0  
+##  Class :character   Class :character   1st Qu.: 43.0   1st Qu.: 106.0   1st Qu.:  43.0   1st Qu.:  30.0   1st Qu.: 20.0  
+##  Mode  :character   Mode  :character   Median :118.0   Median : 345.0   Median : 148.0   Median :  99.0   Median : 70.0  
+##                                        Mean   :123.6   Mean   : 452.5   Mean   : 204.2   Mean   : 146.9   Mean   :109.6  
+##                                        3rd Qu.:193.0   3rd Qu.: 696.0   3rd Qu.: 313.0   3rd Qu.: 218.0   3rd Qu.:161.0  
+##                                        Max.   :386.0   Max.   :3159.0   Max.   :1597.0   Max.   :1363.0   Max.   :840.0  
+##       tpa              tpm       
+##  Min.   :  0.00   Min.   :  0.0  
+##  1st Qu.:  0.00   1st Qu.:  0.0  
+##  Median :  2.00   Median :  0.0  
+##  Mean   : 38.07   Mean   : 13.1  
+##  3rd Qu.: 27.00   3rd Qu.:  7.0  
+##  Max.   :678.00   Max.   :269.0
 \end{verbatim}
 
 \hypertarget{one-variable-graphs-and-tables}{%
@@ -1135,15 +1142,24 @@ From the tables below, we can see that each city has 12 observations (for the 12
 ## [1] "From Dataset: df_temp, 59 unique Levels for: state"
 ## 
 ## [[2]]$levels
-##      [,1]                  [,2]          [,3]                 [,4]                  [,5]         [,6]         [,7]         [,8]       
-## [1,] "AK (n=204)"          "CO (n=60)"   "ID (n=36)"          "MARSHALL IS. (n=12)" "NC (n=60)"  "OH (n=84)"  "SC (n=24)"  "WI (n=48)"
-## [2,] "AL (n=36)"           "CT (n=24)"   "IL (n=48)"          "MD (n=12)"           "ND (n=48)"  "OK (n=24)"  "SD (n=48)"  "WV (n=48)"
-## [3,] "AMER SAMOA (n=12)"   "D.C. (n=24)" "IN (n=48)"          "ME (n=24)"           "NE (n=96)"  "OR (n=84)"  "TN (n=48)"  "WY (n=48)"
-## [4,] "AR (n=36)"           "DE (n=12)"   "KS (n=60)"          "MI (n=108)"          "NH (n=24)"  "PA (n=72)"  "TX (n=252)" ""         
-## [5,] "AZ (n=60)"           "FL (n=156)"  "KY (n=36)"          "MN (n=60)"           "NJ (n=24)"  "PA. (n=12)" "UT (n=24)"  ""         
-## [6,] "CA (n=180)"          "GA (n=60)"   "LA (n=48)"          "MO (n=48)"           "NM (n=36)"  "PC (n=48)"  "VA (n=48)"  ""         
-## [7,] "CA. (n=12)"          "HI (n=36)"   "MA (n=36)"          "MS (n=36)"           "NV (n=60)"  "PR (n=12)"  "VT (n=12)"  ""         
-## [8,] "CAROLINE IS. (n=12)" "IA (n=36)"   "MARSHALL IS (n=12)" "MT (n=72)"           "NY (n=108)" "RI (n=12)"  "WA (n=72)"  ""         
+##      [,1]                  [,2]          [,3]                 [,4]                  [,5]         [,6]         [,7]        
+## [1,] "AK (n=204)"          "CO (n=60)"   "ID (n=36)"          "MARSHALL IS. (n=12)" "NC (n=60)"  "OH (n=84)"  "SC (n=24)" 
+## [2,] "AL (n=36)"           "CT (n=24)"   "IL (n=48)"          "MD (n=12)"           "ND (n=48)"  "OK (n=24)"  "SD (n=48)" 
+## [3,] "AMER SAMOA (n=12)"   "D.C. (n=24)" "IN (n=48)"          "ME (n=24)"           "NE (n=96)"  "OR (n=84)"  "TN (n=48)" 
+## [4,] "AR (n=36)"           "DE (n=12)"   "KS (n=60)"          "MI (n=108)"          "NH (n=24)"  "PA (n=72)"  "TX (n=252)"
+## [5,] "AZ (n=60)"           "FL (n=156)"  "KY (n=36)"          "MN (n=60)"           "NJ (n=24)"  "PA. (n=12)" "UT (n=24)" 
+## [6,] "CA (n=180)"          "GA (n=60)"   "LA (n=48)"          "MO (n=48)"           "NM (n=36)"  "PC (n=48)"  "VA (n=48)" 
+## [7,] "CA. (n=12)"          "HI (n=36)"   "MA (n=36)"          "MS (n=36)"           "NV (n=60)"  "PR (n=12)"  "VT (n=12)" 
+## [8,] "CAROLINE IS. (n=12)" "IA (n=36)"   "MARSHALL IS (n=12)" "MT (n=72)"           "NY (n=108)" "RI (n=12)"  "WA (n=72)" 
+##      [,8]       
+## [1,] "WI (n=48)"
+## [2,] "WV (n=48)"
+## [3,] "WY (n=48)"
+## [4,] ""         
+## [5,] ""         
+## [6,] ""         
+## [7,] ""         
+## [8,] ""         
 ## 
 ## 
 ## [[3]]
@@ -1696,10 +1712,25 @@ For the mutually exclusive and jointly exhaustive experimental outcomes of the s
 \NormalTok{experimental.outcome.prob \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.7}\NormalTok{)}
 
 \CommentTok{\# Show these in a Tibble}
-\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{tomorrow.experimental.outcomes =}\NormalTok{ experimental.outcomes.list,}
-       \DataTypeTok{experimental.outcome.prob =}\NormalTok{ experimental.outcome.prob)}
+\KeywordTok{kable}\NormalTok{(}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{tomorrow.experimental.outcomes =}\NormalTok{ experimental.outcomes.list,}
+       \DataTypeTok{experimental.outcome.prob =}\NormalTok{ experimental.outcome.prob)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{kable\_styling\_fc}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{l|r}
+\hline
+tomorrow.experimental.outcomes & experimental.outcome.prob\\
+\hline
+\rowcolor{gray!6}  Heavy Rain & 0.1\\
+\hline
+Light Rain & 0.2\\
+\hline
+\rowcolor{gray!6}  No Rain & 0.7\\
+\hline
+\end{tabular}
+\end{table}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1718,10 +1749,59 @@ For the mutually exclusive and jointly exhaustive experimental outcomes of the s
 \CommentTok{\# There are only three unique tomorrows, each of three weather outcomes}
 \CommentTok{\# could happen, but the chance of each happening differs by the probabilities}
 \CommentTok{\# we set in experimental.outcome.prob}
-\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{which.tomorrow =} \KeywordTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}tomorrow:\textquotesingle{}}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\NormalTok{number.of.tomorrow.to.draw),}
-       \DataTypeTok{tomorrow.weather =}\NormalTok{ tomorrow.weather.draws)}
+\KeywordTok{kable}\NormalTok{(}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{which.tomorrow =} \KeywordTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}tomorrow:\textquotesingle{}}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\NormalTok{number.of.tomorrow.to.draw),}
+       \DataTypeTok{tomorrow.weather =}\NormalTok{ tomorrow.weather.draws)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{kable\_styling\_fc}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{l|l}
+\hline
+which.tomorrow & tomorrow.weather\\
+\hline
+\rowcolor{gray!6}  tomorrow:1 & No Rain\\
+\hline
+tomorrow:2 & No Rain\\
+\hline
+\rowcolor{gray!6}  tomorrow:3 & No Rain\\
+\hline
+tomorrow:4 & No Rain\\
+\hline
+\rowcolor{gray!6}  tomorrow:5 & Light Rain\\
+\hline
+tomorrow:6 & No Rain\\
+\hline
+\rowcolor{gray!6}  tomorrow:7 & No Rain\\
+\hline
+tomorrow:8 & No Rain\\
+\hline
+\rowcolor{gray!6}  tomorrow:9 & No Rain\\
+\hline
+tomorrow:10 & No Rain\\
+\hline
+\rowcolor{gray!6}  tomorrow:11 & Light Rain\\
+\hline
+tomorrow:12 & Heavy Rain\\
+\hline
+\rowcolor{gray!6}  tomorrow:13 & No Rain\\
+\hline
+tomorrow:14 & No Rain\\
+\hline
+\rowcolor{gray!6}  tomorrow:15 & Light Rain\\
+\hline
+tomorrow:16 & No Rain\\
+\hline
+\rowcolor{gray!6}  tomorrow:17 & Heavy Rain\\
+\hline
+tomorrow:18 & Light Rain\\
+\hline
+\rowcolor{gray!6}  tomorrow:19 & No Rain\\
+\hline
+tomorrow:20 & No Rain\\
+\hline
+\end{tabular}
+\end{table}
 
 \hypertarget{union-and-intersection-and-complements}{%
 \subsection{Union and Intersection and Complements}\label{union-and-intersection-and-complements}}
@@ -1912,9 +1992,30 @@ See the table below for the true probabilities of the unfiar dice.
 \CommentTok{\# Show these in a Tibble}
 \NormalTok{dice.true.prob \textless{}{-}}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{dice.outcomes.list =}\NormalTok{ experimental.outcomes.list,}
                          \DataTypeTok{dice.true.prob =}\NormalTok{ experimental.outcome.prob)}
-\NormalTok{dice.true.prob}
+\KeywordTok{kable}\NormalTok{(dice.true.prob) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{kable\_styling\_fc}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{r|r}
+\hline
+dice.outcomes.list & dice.true.prob\\
+\hline
+\rowcolor{gray!6}  1 & 0.50000\\
+\hline
+2 & 0.25000\\
+\hline
+\rowcolor{gray!6}  3 & 0.12500\\
+\hline
+4 & 0.06250\\
+\hline
+\rowcolor{gray!6}  5 & 0.03125\\
+\hline
+6 & 0.03125\\
+\hline
+\end{tabular}
+\end{table}
 
 \hypertarget{throw-the-dice-10-times}{%
 \subsubsection{Throw the Dice 10 Times}\label{throw-the-dice-10-times}}
@@ -1934,10 +2035,39 @@ We throw the dice 10 times, each time, get one of the six possible experimental 
                             \DataTypeTok{prob =}\NormalTok{ experimental.outcome.prob)}
 
 \CommentTok{\# A little tibble to show results}
-\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{which.future.dice =} \KeywordTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}dice draws:\textquotesingle{}}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\NormalTok{number.of.futures.to.draw),}
-       \DataTypeTok{dice.draws =}\NormalTok{ future.dice.draws)}
+\KeywordTok{kable}\NormalTok{(}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{which.future.dice =} \KeywordTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}dice draws:\textquotesingle{}}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\NormalTok{number.of.futures.to.draw),}
+       \DataTypeTok{dice.draws =}\NormalTok{ future.dice.draws)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{kable\_styling\_fc}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{l|r}
+\hline
+which.future.dice & dice.draws\\
+\hline
+\rowcolor{gray!6}  dice draws:1 & 1\\
+\hline
+dice draws:2 & 1\\
+\hline
+\rowcolor{gray!6}  dice draws:3 & 1\\
+\hline
+dice draws:4 & 2\\
+\hline
+\rowcolor{gray!6}  dice draws:5 & 6\\
+\hline
+dice draws:6 & 3\\
+\hline
+\rowcolor{gray!6}  dice draws:7 & 1\\
+\hline
+dice draws:8 & 1\\
+\hline
+\rowcolor{gray!6}  dice draws:9 & 2\\
+\hline
+dice draws:10 & 1\\
+\hline
+\end{tabular}
+\end{table}
 
 \hypertarget{redefining-sample-space-for-throwing-a-dice}{%
 \subsubsection{Redefining Sample Space for Throwing a Dice}\label{redefining-sample-space-for-throwing-a-dice}}
@@ -2037,8 +2167,8 @@ Following our definition for sample space above, we can actually define an alter
 
 This is also a sample space with three sample points (or experimental outcomes). Following our definitions earlier, these three experimental outcomes are mutually exclusive and jointly exhaustive. We could also call these three experimental outcomes here three different events of the sample space with the four paths of game play experimental outcomes (sample points).
 
-\hypertarget{sample-average}{%
-\section{Sample Average}\label{sample-average}}
+\hypertarget{law-of-large-number}{%
+\section{Law of Large Number}\label{law-of-large-number}}
 
 \begin{quote}
 Go back to \href{http://fanwangecon.github.io/}{fan}'s \href{https://fanwangecon.github.io/REconTools/}{REconTools} Package, \href{https://fanwangecon.github.io/R4Econ/}{R Code Examples} Repository (\href{https://fanwangecon.github.io/R4Econ/bookdown}{bookdown site}), or \href{https://fanwangecon.github.io/Stat4Econ/}{Intro Stats with R} Repository (\href{https://fanwangecon.github.io/Stat4Econ/bookdown}{bookdown site}).
@@ -2084,9 +2214,26 @@ See the table below for the true probabilities of the unfair dice.
 \CommentTok{\# Show these in a Tibble}
 \NormalTok{dice.true.prob \textless{}{-}}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{dice.outcomes.list =}\NormalTok{ experimental.outcomes.list,}
                          \DataTypeTok{dice.true.prob =}\NormalTok{ experimental.outcome.prob)}
-\NormalTok{dice.true.prob}
+\KeywordTok{kable}\NormalTok{(dice.true.prob) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{kable\_styling\_fc}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{r|r}
+\hline
+dice.outcomes.list & dice.true.prob\\
+\hline
+\rowcolor{gray!6}  1 & 0.600\\
+\hline
+2 & 0.240\\
+\hline
+\rowcolor{gray!6}  3 & 0.096\\
+\hline
+4 & 0.064\\
+\hline
+\end{tabular}
+\end{table}
 
 \hypertarget{throw-the-dice-5-times}{%
 \subsubsection{Throw the Dice 5 Times}\label{throw-the-dice-5-times}}
@@ -2106,10 +2253,29 @@ We throw the dice 5 times, each time, get one of the four possible experimental 
                                  \DataTypeTok{prob =}\NormalTok{ experimental.outcome.prob)}
 
 \CommentTok{\# A little tibble to show results}
-\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{which.future.dice =} \KeywordTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}dice draws:\textquotesingle{}}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\NormalTok{number.of.futures.to.draw),}
-       \DataTypeTok{dice.draws =}\NormalTok{ future.dice.draws)}
+\KeywordTok{kable}\NormalTok{(}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{which.future.dice =} \KeywordTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}dice draws:\textquotesingle{}}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\NormalTok{number.of.futures.to.draw),}
+       \DataTypeTok{dice.draws =}\NormalTok{ future.dice.draws)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{kable\_styling\_fc}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{l|r}
+\hline
+which.future.dice & dice.draws\\
+\hline
+\rowcolor{gray!6}  dice draws:1 & 2\\
+\hline
+dice draws:2 & 1\\
+\hline
+\rowcolor{gray!6}  dice draws:3 & 1\\
+\hline
+dice draws:4 & 1\\
+\hline
+\rowcolor{gray!6}  dice draws:5 & 2\\
+\hline
+\end{tabular}
+\end{table}
 
 \hypertarget{throw-the-dice-50-5000-and-500000-times}{%
 \subsubsection{Throw the dice 50, 5000 and 500,000 times}\label{throw-the-dice-50-5000-and-500000-times}}
@@ -2164,9 +2330,28 @@ To do this, we first write a function, then we lapply to invoke the function mul
 \NormalTok{number.of.futures.to.draw.list =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1000}\NormalTok{, }\DecValTok{5000}\NormalTok{, }\DecValTok{500000}\NormalTok{)}
 
 \CommentTok{\# Apply function}
-\KeywordTok{bind\_cols}\NormalTok{(dice.true.prob, }\KeywordTok{lapply}\NormalTok{(number.of.futures.to.draw.list, future.draws))}
+\KeywordTok{kable}\NormalTok{(}\KeywordTok{bind\_cols}\NormalTok{(dice.true.prob, }
+                \KeywordTok{lapply}\NormalTok{(number.of.futures.to.draw.list, future.draws))) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{kable\_styling\_fc}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{r|r|r|r|r}
+\hline
+dice.outcomes.list & dice.true.prob & sample.frac.n1000 & sample.frac.n5000 & sample.frac.n500000\\
+\hline
+\rowcolor{gray!6}  1 & 0.600 & 0.568 & 0.6068 & 0.59939\\
+\hline
+2 & 0.240 & 0.276 & 0.2404 & 0.24024\\
+\hline
+\rowcolor{gray!6}  3 & 0.096 & 0.091 & 0.0926 & 0.09622\\
+\hline
+4 & 0.064 & 0.065 & 0.0602 & 0.06415\\
+\hline
+\end{tabular}
+\end{table}
 
 \hypertarget{throw-four-sided-dice-different-number-of-times-and-melt-data}{%
 \subsubsection{Throw Four Sided Dice Different Number of Times, and Melt Data}\label{throw-four-sided-dice-different-number-of-times-and-melt-data}}
@@ -2197,12 +2382,75 @@ Using the function we created above, we can draw a graph that shows what happens
 \NormalTok{draw.outcomes.long}\OperatorTok{$}\NormalTok{dice.draw \textless{}{-}}\StringTok{ }\KeywordTok{factor}\NormalTok{(draw.outcomes.long}\OperatorTok{$}\NormalTok{dice.draw)}
 
 \CommentTok{\# Show Melt Table}
-\KeywordTok{head}\NormalTok{(draw.outcomes.long, }\DataTypeTok{n=}\DecValTok{10}\NormalTok{)}
-\KeywordTok{tail}\NormalTok{(draw.outcomes.long, }\DataTypeTok{n=}\DecValTok{10}\NormalTok{)}
+\KeywordTok{kable}\NormalTok{(}\KeywordTok{head}\NormalTok{(draw.outcomes.long, }\DataTypeTok{n=}\DecValTok{10}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{kable\_styling\_fc}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-Graphically, What happens when the number of dice throws increase? A crucial thing to understand about probability is that we are not saying if you throw 10 dice, there will be exactly 6 dice out of the 10 that will land on side=1 (given 60 percent probability of landing on side 1).
+\begin{table}[!h]
+\centering
+\begin{tabular}{l|r|r}
+\hline
+dice.draw & draw.count & value\\
+\hline
+\rowcolor{gray!6}  dice side = 1 & 100 & 0.59000\\
+\hline
+dice side = 2 & 100 & 0.32000\\
+\hline
+\rowcolor{gray!6}  dice side = 3 & 100 & 0.06000\\
+\hline
+dice side = 4 & 100 & 0.03000\\
+\hline
+\rowcolor{gray!6}  dice side = 1 & 101 & 0.59406\\
+\hline
+dice side = 2 & 101 & 0.24752\\
+\hline
+\rowcolor{gray!6}  dice side = 3 & 101 & 0.07921\\
+\hline
+dice side = 4 & 101 & 0.07921\\
+\hline
+\rowcolor{gray!6}  dice side = 1 & 103 & 0.59223\\
+\hline
+dice side = 2 & 103 & 0.27184\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{kable}\NormalTok{(}\KeywordTok{tail}\NormalTok{(draw.outcomes.long, }\DataTypeTok{n=}\DecValTok{10}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{kable\_styling\_fc}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{l|r|r}
+\hline
+dice.draw & draw.count & value\\
+\hline
+\rowcolor{gray!6}  dice side = 3 & 963757 & 0.09585\\
+\hline
+dice side = 4 & 963757 & 0.06368\\
+\hline
+\rowcolor{gray!6}  dice side = 1 & 981711 & 0.60043\\
+\hline
+dice side = 2 & 981711 & 0.23932\\
+\hline
+\rowcolor{gray!6}  dice side = 3 & 981711 & 0.09628\\
+\hline
+dice side = 4 & 981711 & 0.06397\\
+\hline
+\rowcolor{gray!6}  dice side = 1 & 1000000 & 0.60107\\
+\hline
+dice side = 2 & 1000000 & 0.23974\\
+\hline
+\rowcolor{gray!6}  dice side = 3 & 1000000 & 0.09537\\
+\hline
+dice side = 4 & 1000000 & 0.06382\\
+\hline
+\end{tabular}
+\end{table}
+
+Graphically, What happens when the number of dice throws increases? A crucial thing to understand about probability is that we are not saying if you throw 10 dice, there will be exactly 6 dice out of the 10 that will land on side=1 (given 60 percent probability of landing on side 1).
 
 What we are saying is that, given that each dice throw is independent, if we throw the dice many many times, the empirical distribution of dice throws will approximate the actual true probability of landing on each of the four sides of the dice.
 
@@ -3246,7 +3494,7 @@ If you are running the Prussian Army, you would want to know these statistics. Y
     \textbf{r}: \emph{sample(size, replace, prob)}
   \end{itemize}
 \item
-  \href{https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html}{Throw an Unfair Four Sided Dice}: \href{https://github.com/FanWangEcon/Stat4Econ/blob/master/probability//samplespacedice.Rmd}{\textbf{rmd}} \textbar{} \href{https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespacedice.R}{\textbf{r}} \textbar{} \href{https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespacedice.pdf}{\textbf{pdf}} \textbar{} \href{https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html}{\textbf{html}}
+  \href{https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html}{Law of Large Number Unfair Dice}: \href{https://github.com/FanWangEcon/Stat4Econ/blob/master/probability//samplespacedice.Rmd}{\textbf{rmd}} \textbar{} \href{https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespacedice.R}{\textbf{r}} \textbar{} \href{https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespacedice.pdf}{\textbf{pdf}} \textbar{} \href{https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html}{\textbf{html}}
 
   \begin{itemize}
   \tightlist

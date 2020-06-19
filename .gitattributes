@@ -5,3 +5,7 @@
 *.ipynb linguist-vendored
 *.csv linguist-vendored
 *.xlsx linguist-vendored
+*.tex linguist-vendored
+*.css linguist-vendored
+*.scss linguist-vendored
+*.js linguist-vendored

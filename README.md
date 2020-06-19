@@ -64,7 +64,7 @@ Please contact [FanWangEcon](https://fanwangecon.github.io/) for issues or probl
 2. [Examples of Sample Space and Probabilities](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespaceexa.html): [**rmd**](https://github.com/FanWangEcon/Stat4Econ/blob/master/probability//samplespaceexa.Rmd) \| [**r**](https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespaceexa.R) \| [**pdf**](https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespaceexa.pdf) \| [**html**](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespaceexa.html)
 	+ Throwing a quarter, four candidates for election, six-sided unfair dice, two basketball games
 	+ **r**: *sample(size, replace, prob)*
-3. [Throw an Unfair Four Sided Dice](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html): [**rmd**](https://github.com/FanWangEcon/Stat4Econ/blob/master/probability//samplespacedice.Rmd) \| [**r**](https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespacedice.R) \| [**pdf**](https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespacedice.pdf) \| [**html**](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html)
+3. [Law of Large Number Unfair Dice](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html): [**rmd**](https://github.com/FanWangEcon/Stat4Econ/blob/master/probability//samplespacedice.Rmd) \| [**r**](https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespacedice.R) \| [**pdf**](https://github.com/FanWangEcon/Stat4Econ/blob/master/probability/htmlpdfr/samplespacedice.pdf) \| [**html**](https://fanwangecon.github.io/Stat4Econ/probability/htmlpdfr/samplespacedice.html)
 	+ Throw an unfair dice many times, law of large number.
 	+ **r**: *head() + tail() + factor() + sample() + as.numeric() + paste0('dice=', var) + sprintf('%0.3f', 1.1234) + sprintf("P(S=1)=%0.3f, P(S=2)=%0.3f", 1.1, 1.2345)*
 	+ **stringr**: *str_extract() + as.numeric(str_extract(variable, "[^.n]+$")))*
@@ -93,3 +93,4 @@ Please contact [![](https://img.shields.io/github/followers/fanwangecon?label=Fa
 ![Language](https://img.shields.io/github/languages/top/fanwangecon/R4Econ)
 ![Release](https://img.shields.io/github/downloads/fanwangecon/R4Econ/total)
 ![License](https://img.shields.io/github/license/fanwangecon/R4Econ)
+

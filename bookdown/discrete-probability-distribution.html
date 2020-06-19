@@ -24,7 +24,7 @@
 <meta name="author" content="Fan Wang" />
 
 
-<meta name="date" content="2020-05-16" />
+<meta name="date" content="2020-06-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="basics-of-probability.html"/>
 <link rel="next" href="index-and-code-links.html"/>
-<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92953468-4"></script>
 <script>
@@ -193,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#throwing-a-dice"><i class="fa fa-check"></i><b>4.2.2</b> Throwing a Dice</a></li>
 <li class="chapter" data-level="4.2.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#two-basketball-games"><i class="fa fa-check"></i><b>4.2.3</b> Two Basketball Games</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-average"><i class="fa fa-check"></i><b>4.3</b> Sample Average</a>
+<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#law-of-large-number"><i class="fa fa-check"></i><b>4.3</b> Law of Large Number</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#an-unfair-dice"><i class="fa fa-check"></i><b>4.3.1</b> An Unfair Dice</a></li>
 </ul></li>
@@ -336,45 +337,45 @@ We can find the expected value and variance by summing over all terms following:
 <span class="math display">\[f\left(x=2;n=10,p=0.183\right) = \frac{10!}{\left(10-2\right)! \cdot 2!} \cdot 0.183^2 \cdot \left(1-0.183\right)^{10-2} = 0.299\]</span></p>
 <p>We can use the r function, <em>dbinom</em>, to calculate these probabilites: <em>dbinom(2,10,0.183)</em>. Additionally, <em>pbinom(2,10,0.183)</em> tells us the cumulative probability that at most 2 out of 10 are arrested.</p>
 <p>We do this in the code below. From the graph below, we can see that there is a 13.3% chance that none of the 10 thieves would be arrested, and alomst 0 percent chance that all 10 of then would be arrested. The chance that 6 out of the 10 thiefs would be arrested is less than 1 percent.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="discrete-probability-distribution.html#cb72-1"></a><span class="co"># library</span></span>
-<span id="cb72-2"><a href="discrete-probability-distribution.html#cb72-2"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb72-3"><a href="discrete-probability-distribution.html#cb72-3"></a></span>
-<span id="cb72-4"><a href="discrete-probability-distribution.html#cb72-4"></a><span class="co"># Parameters</span></span>
-<span id="cb72-5"><a href="discrete-probability-distribution.html#cb72-5"></a>n &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb72-6"><a href="discrete-probability-distribution.html#cb72-6"></a>p &lt;-<span class="st"> </span><span class="fl">0.183</span></span>
-<span id="cb72-7"><a href="discrete-probability-distribution.html#cb72-7"></a></span>
-<span id="cb72-8"><a href="discrete-probability-distribution.html#cb72-8"></a><span class="co"># A vector of different arrest counts</span></span>
-<span id="cb72-9"><a href="discrete-probability-distribution.html#cb72-9"></a>zero2max &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span>n</span>
-<span id="cb72-10"><a href="discrete-probability-distribution.html#cb72-10"></a></span>
-<span id="cb72-11"><a href="discrete-probability-distribution.html#cb72-11"></a><span class="co"># Probability for different arrest counts</span></span>
-<span id="cb72-12"><a href="discrete-probability-distribution.html#cb72-12"></a>prob_of_arrests &lt;-<span class="st"> </span><span class="kw">dbinom</span>(zero2max, n, p)</span>
-<span id="cb72-13"><a href="discrete-probability-distribution.html#cb72-13"></a></span>
-<span id="cb72-14"><a href="discrete-probability-distribution.html#cb72-14"></a><span class="co"># Control Graph Size</span></span>
-<span id="cb72-15"><a href="discrete-probability-distribution.html#cb72-15"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">5</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
-<span id="cb72-16"><a href="discrete-probability-distribution.html#cb72-16"></a></span>
-<span id="cb72-17"><a href="discrete-probability-distribution.html#cb72-17"></a><span class="co"># Number of Arrests Probabilities</span></span>
-<span id="cb72-18"><a href="discrete-probability-distribution.html#cb72-18"></a>arrest.prob.mass &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">arrests=</span>zero2max, <span class="dt">prob=</span>prob_of_arrests)</span>
-<span id="cb72-19"><a href="discrete-probability-distribution.html#cb72-19"></a></span>
-<span id="cb72-20"><a href="discrete-probability-distribution.html#cb72-20"></a><span class="co"># Titles Strings etc</span></span>
-<span id="cb72-21"><a href="discrete-probability-distribution.html#cb72-21"></a>graph.title &lt;-<span class="st"> </span><span class="kw">sprintf</span>(<span class="st">&#39;Prob for Number of Theft-Criminals Arrested out of %s&#39;</span> ,n)</span>
-<span id="cb72-22"><a href="discrete-probability-distribution.html#cb72-22"></a>graph.caption &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
-<span id="cb72-23"><a href="discrete-probability-distribution.html#cb72-23"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Assuming the binomial properties apply</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
-<span id="cb72-24"><a href="discrete-probability-distribution.html#cb72-24"></a>           <span class="st">&#39;2004 Larceny/Left USA Clearance Rate = %s&#39;</span>), p)</span>
-<span id="cb72-25"><a href="discrete-probability-distribution.html#cb72-25"></a></span>
-<span id="cb72-26"><a href="discrete-probability-distribution.html#cb72-26"></a><span class="co"># Create a Table and Graph it</span></span>
-<span id="cb72-27"><a href="discrete-probability-distribution.html#cb72-27"></a>arrest.graph &lt;-<span class="st"> </span>arrest.prob.mass <span class="op">%&gt;%</span></span>
-<span id="cb72-28"><a href="discrete-probability-distribution.html#cb72-28"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>arrests, <span class="dt">y=</span>prob, <span class="dt">label =</span> <span class="kw">sprintf</span>(<span class="st">&#39;%0.3f&#39;</span>, prob))) <span class="op">+</span></span>
-<span id="cb72-29"><a href="discrete-probability-distribution.html#cb72-29"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>) <span class="op">+</span></span>
-<span id="cb72-30"><a href="discrete-probability-distribution.html#cb72-30"></a><span class="st">    </span><span class="kw">geom_text</span>(<span class="dt">vjust =</span> <span class="fl">-0.5</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
-<span id="cb72-31"><a href="discrete-probability-distribution.html#cb72-31"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> graph.title,</span>
-<span id="cb72-32"><a href="discrete-probability-distribution.html#cb72-32"></a>         <span class="dt">x =</span> <span class="st">&#39;Number of Criminals Arrests&#39;</span>,</span>
-<span id="cb72-33"><a href="discrete-probability-distribution.html#cb72-33"></a>         <span class="dt">y =</span> <span class="st">&#39;Prob of x Arrested&#39;</span>,</span>
-<span id="cb72-34"><a href="discrete-probability-distribution.html#cb72-34"></a>         <span class="dt">caption =</span> graph.caption) <span class="op">+</span></span>
-<span id="cb72-35"><a href="discrete-probability-distribution.html#cb72-35"></a><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> zero2max, <span class="dt">breaks =</span> zero2max) <span class="op">+</span></span>
-<span id="cb72-36"><a href="discrete-probability-distribution.html#cb72-36"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span>
-<span id="cb72-37"><a href="discrete-probability-distribution.html#cb72-37"></a></span>
-<span id="cb72-38"><a href="discrete-probability-distribution.html#cb72-38"></a><span class="kw">print</span>(arrest.graph)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-72-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="discrete-probability-distribution.html#cb73-1"></a><span class="co"># library</span></span>
+<span id="cb73-2"><a href="discrete-probability-distribution.html#cb73-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb73-3"><a href="discrete-probability-distribution.html#cb73-3"></a></span>
+<span id="cb73-4"><a href="discrete-probability-distribution.html#cb73-4"></a><span class="co"># Parameters</span></span>
+<span id="cb73-5"><a href="discrete-probability-distribution.html#cb73-5"></a>n &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb73-6"><a href="discrete-probability-distribution.html#cb73-6"></a>p &lt;-<span class="st"> </span><span class="fl">0.183</span></span>
+<span id="cb73-7"><a href="discrete-probability-distribution.html#cb73-7"></a></span>
+<span id="cb73-8"><a href="discrete-probability-distribution.html#cb73-8"></a><span class="co"># A vector of different arrest counts</span></span>
+<span id="cb73-9"><a href="discrete-probability-distribution.html#cb73-9"></a>zero2max &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span>n</span>
+<span id="cb73-10"><a href="discrete-probability-distribution.html#cb73-10"></a></span>
+<span id="cb73-11"><a href="discrete-probability-distribution.html#cb73-11"></a><span class="co"># Probability for different arrest counts</span></span>
+<span id="cb73-12"><a href="discrete-probability-distribution.html#cb73-12"></a>prob_of_arrests &lt;-<span class="st"> </span><span class="kw">dbinom</span>(zero2max, n, p)</span>
+<span id="cb73-13"><a href="discrete-probability-distribution.html#cb73-13"></a></span>
+<span id="cb73-14"><a href="discrete-probability-distribution.html#cb73-14"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb73-15"><a href="discrete-probability-distribution.html#cb73-15"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">5</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
+<span id="cb73-16"><a href="discrete-probability-distribution.html#cb73-16"></a></span>
+<span id="cb73-17"><a href="discrete-probability-distribution.html#cb73-17"></a><span class="co"># Number of Arrests Probabilities</span></span>
+<span id="cb73-18"><a href="discrete-probability-distribution.html#cb73-18"></a>arrest.prob.mass &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">arrests=</span>zero2max, <span class="dt">prob=</span>prob_of_arrests)</span>
+<span id="cb73-19"><a href="discrete-probability-distribution.html#cb73-19"></a></span>
+<span id="cb73-20"><a href="discrete-probability-distribution.html#cb73-20"></a><span class="co"># Titles Strings etc</span></span>
+<span id="cb73-21"><a href="discrete-probability-distribution.html#cb73-21"></a>graph.title &lt;-<span class="st"> </span><span class="kw">sprintf</span>(<span class="st">&#39;Prob for Number of Theft-Criminals Arrested out of %s&#39;</span> ,n)</span>
+<span id="cb73-22"><a href="discrete-probability-distribution.html#cb73-22"></a>graph.caption &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
+<span id="cb73-23"><a href="discrete-probability-distribution.html#cb73-23"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Assuming the binomial properties apply</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
+<span id="cb73-24"><a href="discrete-probability-distribution.html#cb73-24"></a>           <span class="st">&#39;2004 Larceny/Left USA Clearance Rate = %s&#39;</span>), p)</span>
+<span id="cb73-25"><a href="discrete-probability-distribution.html#cb73-25"></a></span>
+<span id="cb73-26"><a href="discrete-probability-distribution.html#cb73-26"></a><span class="co"># Create a Table and Graph it</span></span>
+<span id="cb73-27"><a href="discrete-probability-distribution.html#cb73-27"></a>arrest.graph &lt;-<span class="st"> </span>arrest.prob.mass <span class="op">%&gt;%</span></span>
+<span id="cb73-28"><a href="discrete-probability-distribution.html#cb73-28"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>arrests, <span class="dt">y=</span>prob, <span class="dt">label =</span> <span class="kw">sprintf</span>(<span class="st">&#39;%0.3f&#39;</span>, prob))) <span class="op">+</span></span>
+<span id="cb73-29"><a href="discrete-probability-distribution.html#cb73-29"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>) <span class="op">+</span></span>
+<span id="cb73-30"><a href="discrete-probability-distribution.html#cb73-30"></a><span class="st">    </span><span class="kw">geom_text</span>(<span class="dt">vjust =</span> <span class="fl">-0.5</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb73-31"><a href="discrete-probability-distribution.html#cb73-31"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> graph.title,</span>
+<span id="cb73-32"><a href="discrete-probability-distribution.html#cb73-32"></a>         <span class="dt">x =</span> <span class="st">&#39;Number of Criminals Arrests&#39;</span>,</span>
+<span id="cb73-33"><a href="discrete-probability-distribution.html#cb73-33"></a>         <span class="dt">y =</span> <span class="st">&#39;Prob of x Arrested&#39;</span>,</span>
+<span id="cb73-34"><a href="discrete-probability-distribution.html#cb73-34"></a>         <span class="dt">caption =</span> graph.caption) <span class="op">+</span></span>
+<span id="cb73-35"><a href="discrete-probability-distribution.html#cb73-35"></a><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> zero2max, <span class="dt">breaks =</span> zero2max) <span class="op">+</span></span>
+<span id="cb73-36"><a href="discrete-probability-distribution.html#cb73-36"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span>
+<span id="cb73-37"><a href="discrete-probability-distribution.html#cb73-37"></a></span>
+<span id="cb73-38"><a href="discrete-probability-distribution.html#cb73-38"></a><span class="kw">print</span>(arrest.graph)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-79-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="what-is-the-chance-of-arrest-at-least-x-out-of-n-people" class="section level4" number="5.2.1.2">
 <h4><span class="header-section-number">5.2.1.2</span> What is the Chance of Arrest at Least X out of N People</h4>
@@ -388,67 +389,67 @@ We can find the expected value and variance by summing over all terms following:
 \]</span></p>
 <p>Given the low clearance rate, there is a <span class="math inline">\(90\)</span> percent chance that at most 3 out of 10 criminals are arrested.</p>
 <p>We can graph this out. We will graph the previous graph again but overlay the cumulative probability on top.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="discrete-probability-distribution.html#cb73-1"></a><span class="co"># Cumulative Probability for different arrest counts, before dbinom, now pbinom</span></span>
-<span id="cb73-2"><a href="discrete-probability-distribution.html#cb73-2"></a>cumulative_prob_of_arrests &lt;-<span class="st"> </span><span class="kw">pbinom</span>(zero2max, n, p)</span>
-<span id="cb73-3"><a href="discrete-probability-distribution.html#cb73-3"></a></span>
-<span id="cb73-4"><a href="discrete-probability-distribution.html#cb73-4"></a><span class="co"># Data File that Includes Cumulative Probability and Mass</span></span>
-<span id="cb73-5"><a href="discrete-probability-distribution.html#cb73-5"></a>arrest.prob &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">arrests=</span>(zero2max), <span class="dt">prob=</span>prob_of_arrests, <span class="dt">cum.prob=</span>cumulative_prob_of_arrests)</span>
-<span id="cb73-6"><a href="discrete-probability-distribution.html#cb73-6"></a></span>
-<span id="cb73-7"><a href="discrete-probability-distribution.html#cb73-7"></a><span class="co"># Control Graph Size</span></span>
-<span id="cb73-8"><a href="discrete-probability-distribution.html#cb73-8"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">5</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
-<span id="cb73-9"><a href="discrete-probability-distribution.html#cb73-9"></a></span>
-<span id="cb73-10"><a href="discrete-probability-distribution.html#cb73-10"></a><span class="co"># Create a Table and Graph it</span></span>
-<span id="cb73-11"><a href="discrete-probability-distribution.html#cb73-11"></a><span class="co">#     geom_text(aes(y=prob, label = sprintf(&#39;%0.3f&#39;, prob)), vjust = -0.5, size = 3) +</span></span>
-<span id="cb73-12"><a href="discrete-probability-distribution.html#cb73-12"></a></span>
-<span id="cb73-13"><a href="discrete-probability-distribution.html#cb73-13"></a>axis.sec.ratio &lt;-<span class="st"> </span><span class="kw">max</span>(cumulative_prob_of_arrests)<span class="op">/</span><span class="kw">max</span>(prob_of_arrests)</span>
-<span id="cb73-14"><a href="discrete-probability-distribution.html#cb73-14"></a>right.axis.color &lt;-<span class="st"> &#39;blue&#39;</span></span>
-<span id="cb73-15"><a href="discrete-probability-distribution.html#cb73-15"></a>left.axis.color &lt;-<span class="st"> &#39;red&#39;</span></span>
-<span id="cb73-16"><a href="discrete-probability-distribution.html#cb73-16"></a></span>
-<span id="cb73-17"><a href="discrete-probability-distribution.html#cb73-17"></a><span class="co"># Probabilities</span></span>
-<span id="cb73-18"><a href="discrete-probability-distribution.html#cb73-18"></a>arrest.graph &lt;-<span class="st"> </span>arrest.prob <span class="op">%&gt;%</span></span>
-<span id="cb73-19"><a href="discrete-probability-distribution.html#cb73-19"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>arrests)) <span class="op">+</span></span>
-<span id="cb73-20"><a href="discrete-probability-distribution.html#cb73-20"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y=</span>prob),</span>
-<span id="cb73-21"><a href="discrete-probability-distribution.html#cb73-21"></a>             <span class="dt">stat=</span><span class="st">&#39;identity&#39;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>, <span class="dt">width=</span><span class="fl">0.5</span>, <span class="dt">fill=</span>left.axis.color) <span class="op">+</span></span>
-<span id="cb73-22"><a href="discrete-probability-distribution.html#cb73-22"></a><span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">y=</span>prob,</span>
-<span id="cb73-23"><a href="discrete-probability-distribution.html#cb73-23"></a>                  <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="kw">sprintf</span>(<span class="st">&#39;%2.1f&#39;</span>, prob<span class="op">*</span><span class="dv">100</span>), <span class="st">&#39;%&#39;</span>)),</span>
-<span id="cb73-24"><a href="discrete-probability-distribution.html#cb73-24"></a>              <span class="dt">vjust =</span> <span class="fl">-0.5</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color=</span>left.axis.color, <span class="dt">fontface=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb73-25"><a href="discrete-probability-distribution.html#cb73-25"></a></span>
-<span id="cb73-26"><a href="discrete-probability-distribution.html#cb73-26"></a><span class="co"># Cumulative Probabilities</span></span>
-<span id="cb73-27"><a href="discrete-probability-distribution.html#cb73-27"></a>arrest.graph &lt;-<span class="st"> </span>arrest.graph <span class="op">+</span></span>
-<span id="cb73-28"><a href="discrete-probability-distribution.html#cb73-28"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio),</span>
-<span id="cb73-29"><a href="discrete-probability-distribution.html#cb73-29"></a>              <span class="dt">alpha=</span><span class="fl">0.25</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span>right.axis.color) <span class="op">+</span></span>
-<span id="cb73-30"><a href="discrete-probability-distribution.html#cb73-30"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio),</span>
-<span id="cb73-31"><a href="discrete-probability-distribution.html#cb73-31"></a>               <span class="dt">alpha=</span><span class="fl">0.75</span>, <span class="dt">size=</span><span class="dv">2</span>, <span class="dt">shape=</span><span class="dv">23</span>, <span class="dt">fill=</span>right.axis.color) <span class="op">+</span></span>
-<span id="cb73-32"><a href="discrete-probability-distribution.html#cb73-32"></a><span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio,</span>
-<span id="cb73-33"><a href="discrete-probability-distribution.html#cb73-33"></a>                  <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="kw">sprintf</span>(<span class="st">&#39;%2.0f&#39;</span>, cum.prob<span class="op">*</span><span class="dv">100</span>), <span class="st">&#39;%&#39;</span>)),</span>
-<span id="cb73-34"><a href="discrete-probability-distribution.html#cb73-34"></a>              <span class="dt">vjust =</span> <span class="fl">-0.5</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color=</span>right.axis.color, <span class="dt">fontface=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb73-35"><a href="discrete-probability-distribution.html#cb73-35"></a></span>
-<span id="cb73-36"><a href="discrete-probability-distribution.html#cb73-36"></a><span class="co"># Titles Strings etc</span></span>
-<span id="cb73-37"><a href="discrete-probability-distribution.html#cb73-37"></a>graph.title &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
-<span id="cb73-38"><a href="discrete-probability-distribution.html#cb73-38"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Number of Theft-Criminals Arrested out of %s</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
-<span id="cb73-39"><a href="discrete-probability-distribution.html#cb73-39"></a>           <span class="st">&#39;Prob Mass (Left) and Cumulative Prob (Right)&#39;</span>), n)</span>
-<span id="cb73-40"><a href="discrete-probability-distribution.html#cb73-40"></a>graph.caption &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
-<span id="cb73-41"><a href="discrete-probability-distribution.html#cb73-41"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Assuming the binomial properties apply</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
-<span id="cb73-42"><a href="discrete-probability-distribution.html#cb73-42"></a>           <span class="st">&#39;2004 Larceny/Left USA Clearance Rate = %s&#39;</span>), p)</span>
-<span id="cb73-43"><a href="discrete-probability-distribution.html#cb73-43"></a>graph.title.x &lt;-<span class="st"> &#39;Number of Criminals Arrests&#39;</span></span>
-<span id="cb73-44"><a href="discrete-probability-distribution.html#cb73-44"></a>graph.title.y.axisleft &lt;-<span class="st"> &#39;Prob of x Arrested&#39;</span></span>
-<span id="cb73-45"><a href="discrete-probability-distribution.html#cb73-45"></a>graph.title.y.axisright &lt;-<span class="st"> &#39;Prob of at most x Arrested&#39;</span></span>
-<span id="cb73-46"><a href="discrete-probability-distribution.html#cb73-46"></a></span>
-<span id="cb73-47"><a href="discrete-probability-distribution.html#cb73-47"></a><span class="co"># Title</span></span>
-<span id="cb73-48"><a href="discrete-probability-distribution.html#cb73-48"></a>arrest.graph &lt;-<span class="st"> </span>arrest.graph <span class="op">+</span></span>
-<span id="cb73-49"><a href="discrete-probability-distribution.html#cb73-49"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> graph.title,</span>
-<span id="cb73-50"><a href="discrete-probability-distribution.html#cb73-50"></a>         <span class="dt">x =</span> graph.title.x, <span class="dt">y =</span> graph.title.y.axisleft,</span>
-<span id="cb73-51"><a href="discrete-probability-distribution.html#cb73-51"></a>         <span class="dt">caption =</span> graph.caption) <span class="op">+</span></span>
-<span id="cb73-52"><a href="discrete-probability-distribution.html#cb73-52"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">sec.axis =</span></span>
-<span id="cb73-53"><a href="discrete-probability-distribution.html#cb73-53"></a>                       <span class="kw">sec_axis</span>(<span class="op">~</span>.<span class="op">*</span>axis.sec.ratio, <span class="dt">name =</span> graph.title.y.axisright)) <span class="op">+</span></span>
-<span id="cb73-54"><a href="discrete-probability-distribution.html#cb73-54"></a><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> zero2max, <span class="dt">breaks =</span> zero2max) <span class="op">+</span></span>
-<span id="cb73-55"><a href="discrete-probability-distribution.html#cb73-55"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&#39;bold&#39;</span>),</span>
-<span id="cb73-56"><a href="discrete-probability-distribution.html#cb73-56"></a>          <span class="dt">axis.text.y.right =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> right.axis.color),</span>
-<span id="cb73-57"><a href="discrete-probability-distribution.html#cb73-57"></a>          <span class="dt">axis.text.y.left =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> left.axis.color))</span>
-<span id="cb73-58"><a href="discrete-probability-distribution.html#cb73-58"></a></span>
-<span id="cb73-59"><a href="discrete-probability-distribution.html#cb73-59"></a><span class="co"># Print</span></span>
-<span id="cb73-60"><a href="discrete-probability-distribution.html#cb73-60"></a><span class="kw">print</span>(arrest.graph)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-73-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="discrete-probability-distribution.html#cb74-1"></a><span class="co"># Cumulative Probability for different arrest counts, before dbinom, now pbinom</span></span>
+<span id="cb74-2"><a href="discrete-probability-distribution.html#cb74-2"></a>cumulative_prob_of_arrests &lt;-<span class="st"> </span><span class="kw">pbinom</span>(zero2max, n, p)</span>
+<span id="cb74-3"><a href="discrete-probability-distribution.html#cb74-3"></a></span>
+<span id="cb74-4"><a href="discrete-probability-distribution.html#cb74-4"></a><span class="co"># Data File that Includes Cumulative Probability and Mass</span></span>
+<span id="cb74-5"><a href="discrete-probability-distribution.html#cb74-5"></a>arrest.prob &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">arrests=</span>(zero2max), <span class="dt">prob=</span>prob_of_arrests, <span class="dt">cum.prob=</span>cumulative_prob_of_arrests)</span>
+<span id="cb74-6"><a href="discrete-probability-distribution.html#cb74-6"></a></span>
+<span id="cb74-7"><a href="discrete-probability-distribution.html#cb74-7"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb74-8"><a href="discrete-probability-distribution.html#cb74-8"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">5</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
+<span id="cb74-9"><a href="discrete-probability-distribution.html#cb74-9"></a></span>
+<span id="cb74-10"><a href="discrete-probability-distribution.html#cb74-10"></a><span class="co"># Create a Table and Graph it</span></span>
+<span id="cb74-11"><a href="discrete-probability-distribution.html#cb74-11"></a><span class="co">#     geom_text(aes(y=prob, label = sprintf(&#39;%0.3f&#39;, prob)), vjust = -0.5, size = 3) +</span></span>
+<span id="cb74-12"><a href="discrete-probability-distribution.html#cb74-12"></a></span>
+<span id="cb74-13"><a href="discrete-probability-distribution.html#cb74-13"></a>axis.sec.ratio &lt;-<span class="st"> </span><span class="kw">max</span>(cumulative_prob_of_arrests)<span class="op">/</span><span class="kw">max</span>(prob_of_arrests)</span>
+<span id="cb74-14"><a href="discrete-probability-distribution.html#cb74-14"></a>right.axis.color &lt;-<span class="st"> &#39;blue&#39;</span></span>
+<span id="cb74-15"><a href="discrete-probability-distribution.html#cb74-15"></a>left.axis.color &lt;-<span class="st"> &#39;red&#39;</span></span>
+<span id="cb74-16"><a href="discrete-probability-distribution.html#cb74-16"></a></span>
+<span id="cb74-17"><a href="discrete-probability-distribution.html#cb74-17"></a><span class="co"># Probabilities</span></span>
+<span id="cb74-18"><a href="discrete-probability-distribution.html#cb74-18"></a>arrest.graph &lt;-<span class="st"> </span>arrest.prob <span class="op">%&gt;%</span></span>
+<span id="cb74-19"><a href="discrete-probability-distribution.html#cb74-19"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>arrests)) <span class="op">+</span></span>
+<span id="cb74-20"><a href="discrete-probability-distribution.html#cb74-20"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y=</span>prob),</span>
+<span id="cb74-21"><a href="discrete-probability-distribution.html#cb74-21"></a>             <span class="dt">stat=</span><span class="st">&#39;identity&#39;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>, <span class="dt">width=</span><span class="fl">0.5</span>, <span class="dt">fill=</span>left.axis.color) <span class="op">+</span></span>
+<span id="cb74-22"><a href="discrete-probability-distribution.html#cb74-22"></a><span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">y=</span>prob,</span>
+<span id="cb74-23"><a href="discrete-probability-distribution.html#cb74-23"></a>                  <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="kw">sprintf</span>(<span class="st">&#39;%2.1f&#39;</span>, prob<span class="op">*</span><span class="dv">100</span>), <span class="st">&#39;%&#39;</span>)),</span>
+<span id="cb74-24"><a href="discrete-probability-distribution.html#cb74-24"></a>              <span class="dt">vjust =</span> <span class="fl">-0.5</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color=</span>left.axis.color, <span class="dt">fontface=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb74-25"><a href="discrete-probability-distribution.html#cb74-25"></a></span>
+<span id="cb74-26"><a href="discrete-probability-distribution.html#cb74-26"></a><span class="co"># Cumulative Probabilities</span></span>
+<span id="cb74-27"><a href="discrete-probability-distribution.html#cb74-27"></a>arrest.graph &lt;-<span class="st"> </span>arrest.graph <span class="op">+</span></span>
+<span id="cb74-28"><a href="discrete-probability-distribution.html#cb74-28"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio),</span>
+<span id="cb74-29"><a href="discrete-probability-distribution.html#cb74-29"></a>              <span class="dt">alpha=</span><span class="fl">0.25</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span>right.axis.color) <span class="op">+</span></span>
+<span id="cb74-30"><a href="discrete-probability-distribution.html#cb74-30"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio),</span>
+<span id="cb74-31"><a href="discrete-probability-distribution.html#cb74-31"></a>               <span class="dt">alpha=</span><span class="fl">0.75</span>, <span class="dt">size=</span><span class="dv">2</span>, <span class="dt">shape=</span><span class="dv">23</span>, <span class="dt">fill=</span>right.axis.color) <span class="op">+</span></span>
+<span id="cb74-32"><a href="discrete-probability-distribution.html#cb74-32"></a><span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio,</span>
+<span id="cb74-33"><a href="discrete-probability-distribution.html#cb74-33"></a>                  <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="kw">sprintf</span>(<span class="st">&#39;%2.0f&#39;</span>, cum.prob<span class="op">*</span><span class="dv">100</span>), <span class="st">&#39;%&#39;</span>)),</span>
+<span id="cb74-34"><a href="discrete-probability-distribution.html#cb74-34"></a>              <span class="dt">vjust =</span> <span class="fl">-0.5</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color=</span>right.axis.color, <span class="dt">fontface=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb74-35"><a href="discrete-probability-distribution.html#cb74-35"></a></span>
+<span id="cb74-36"><a href="discrete-probability-distribution.html#cb74-36"></a><span class="co"># Titles Strings etc</span></span>
+<span id="cb74-37"><a href="discrete-probability-distribution.html#cb74-37"></a>graph.title &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
+<span id="cb74-38"><a href="discrete-probability-distribution.html#cb74-38"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Number of Theft-Criminals Arrested out of %s</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
+<span id="cb74-39"><a href="discrete-probability-distribution.html#cb74-39"></a>           <span class="st">&#39;Prob Mass (Left) and Cumulative Prob (Right)&#39;</span>), n)</span>
+<span id="cb74-40"><a href="discrete-probability-distribution.html#cb74-40"></a>graph.caption &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
+<span id="cb74-41"><a href="discrete-probability-distribution.html#cb74-41"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Assuming the binomial properties apply</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
+<span id="cb74-42"><a href="discrete-probability-distribution.html#cb74-42"></a>           <span class="st">&#39;2004 Larceny/Left USA Clearance Rate = %s&#39;</span>), p)</span>
+<span id="cb74-43"><a href="discrete-probability-distribution.html#cb74-43"></a>graph.title.x &lt;-<span class="st"> &#39;Number of Criminals Arrests&#39;</span></span>
+<span id="cb74-44"><a href="discrete-probability-distribution.html#cb74-44"></a>graph.title.y.axisleft &lt;-<span class="st"> &#39;Prob of x Arrested&#39;</span></span>
+<span id="cb74-45"><a href="discrete-probability-distribution.html#cb74-45"></a>graph.title.y.axisright &lt;-<span class="st"> &#39;Prob of at most x Arrested&#39;</span></span>
+<span id="cb74-46"><a href="discrete-probability-distribution.html#cb74-46"></a></span>
+<span id="cb74-47"><a href="discrete-probability-distribution.html#cb74-47"></a><span class="co"># Title</span></span>
+<span id="cb74-48"><a href="discrete-probability-distribution.html#cb74-48"></a>arrest.graph &lt;-<span class="st"> </span>arrest.graph <span class="op">+</span></span>
+<span id="cb74-49"><a href="discrete-probability-distribution.html#cb74-49"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> graph.title,</span>
+<span id="cb74-50"><a href="discrete-probability-distribution.html#cb74-50"></a>         <span class="dt">x =</span> graph.title.x, <span class="dt">y =</span> graph.title.y.axisleft,</span>
+<span id="cb74-51"><a href="discrete-probability-distribution.html#cb74-51"></a>         <span class="dt">caption =</span> graph.caption) <span class="op">+</span></span>
+<span id="cb74-52"><a href="discrete-probability-distribution.html#cb74-52"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">sec.axis =</span></span>
+<span id="cb74-53"><a href="discrete-probability-distribution.html#cb74-53"></a>                       <span class="kw">sec_axis</span>(<span class="op">~</span>.<span class="op">*</span>axis.sec.ratio, <span class="dt">name =</span> graph.title.y.axisright)) <span class="op">+</span></span>
+<span id="cb74-54"><a href="discrete-probability-distribution.html#cb74-54"></a><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> zero2max, <span class="dt">breaks =</span> zero2max) <span class="op">+</span></span>
+<span id="cb74-55"><a href="discrete-probability-distribution.html#cb74-55"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&#39;bold&#39;</span>),</span>
+<span id="cb74-56"><a href="discrete-probability-distribution.html#cb74-56"></a>          <span class="dt">axis.text.y.right =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> right.axis.color),</span>
+<span id="cb74-57"><a href="discrete-probability-distribution.html#cb74-57"></a>          <span class="dt">axis.text.y.left =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> left.axis.color))</span>
+<span id="cb74-58"><a href="discrete-probability-distribution.html#cb74-58"></a></span>
+<span id="cb74-59"><a href="discrete-probability-distribution.html#cb74-59"></a><span class="co"># Print</span></span>
+<span id="cb74-60"><a href="discrete-probability-distribution.html#cb74-60"></a><span class="kw">print</span>(arrest.graph)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-80-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="binomial-example-wwii-german-soldier" class="section level3" number="5.2.2">
@@ -460,19 +461,19 @@ We can find the expected value and variance by summing over all terms following:
 <li><span class="math inline">\(p=1-0.309=0.691\)</span>: <span class="math inline">\(p\)</span> is the chance of survival.</li>
 <li><span class="math inline">\(x\)</span>: if <span class="math inline">\(x=1\)</span>, that means 1 out of 100 survived.</li>
 </ul>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="discrete-probability-distribution.html#cb74-1"></a><span class="co"># Parameters</span></span>
-<span id="cb74-2"><a href="discrete-probability-distribution.html#cb74-2"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb74-3"><a href="discrete-probability-distribution.html#cb74-3"></a>p &lt;-<span class="st"> </span><span class="dv">1</span><span class="fl">-0.309</span></span>
-<span id="cb74-4"><a href="discrete-probability-distribution.html#cb74-4"></a></span>
-<span id="cb74-5"><a href="discrete-probability-distribution.html#cb74-5"></a><span class="co"># Generate Data</span></span>
-<span id="cb74-6"><a href="discrete-probability-distribution.html#cb74-6"></a><span class="co"># A vector of different survival counts</span></span>
-<span id="cb74-7"><a href="discrete-probability-distribution.html#cb74-7"></a>zero2max &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span>n</span>
-<span id="cb74-8"><a href="discrete-probability-distribution.html#cb74-8"></a><span class="co"># Probability for different survival counts</span></span>
-<span id="cb74-9"><a href="discrete-probability-distribution.html#cb74-9"></a>prob_of_survives &lt;-<span class="st"> </span><span class="kw">dbinom</span>(zero2max, n, p)</span>
-<span id="cb74-10"><a href="discrete-probability-distribution.html#cb74-10"></a><span class="co"># Cumulative Probability for different survival counts, before dbinom, now pbinom</span></span>
-<span id="cb74-11"><a href="discrete-probability-distribution.html#cb74-11"></a>cumulative_prob_of_survives &lt;-<span class="st"> </span><span class="kw">pbinom</span>(zero2max, n, p)</span>
-<span id="cb74-12"><a href="discrete-probability-distribution.html#cb74-12"></a><span class="co"># Data File that Includes Cumulative Probability and Mass</span></span>
-<span id="cb74-13"><a href="discrete-probability-distribution.html#cb74-13"></a>survive.prob &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">survives=</span>(zero2max), <span class="dt">prob=</span>prob_of_survives, <span class="dt">cum.prob=</span>cumulative_prob_of_survives)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="discrete-probability-distribution.html#cb75-1"></a><span class="co"># Parameters</span></span>
+<span id="cb75-2"><a href="discrete-probability-distribution.html#cb75-2"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb75-3"><a href="discrete-probability-distribution.html#cb75-3"></a>p &lt;-<span class="st"> </span><span class="dv">1</span><span class="fl">-0.309</span></span>
+<span id="cb75-4"><a href="discrete-probability-distribution.html#cb75-4"></a></span>
+<span id="cb75-5"><a href="discrete-probability-distribution.html#cb75-5"></a><span class="co"># Generate Data</span></span>
+<span id="cb75-6"><a href="discrete-probability-distribution.html#cb75-6"></a><span class="co"># A vector of different survival counts</span></span>
+<span id="cb75-7"><a href="discrete-probability-distribution.html#cb75-7"></a>zero2max &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span>n</span>
+<span id="cb75-8"><a href="discrete-probability-distribution.html#cb75-8"></a><span class="co"># Probability for different survival counts</span></span>
+<span id="cb75-9"><a href="discrete-probability-distribution.html#cb75-9"></a>prob_of_survives &lt;-<span class="st"> </span><span class="kw">dbinom</span>(zero2max, n, p)</span>
+<span id="cb75-10"><a href="discrete-probability-distribution.html#cb75-10"></a><span class="co"># Cumulative Probability for different survival counts, before dbinom, now pbinom</span></span>
+<span id="cb75-11"><a href="discrete-probability-distribution.html#cb75-11"></a>cumulative_prob_of_survives &lt;-<span class="st"> </span><span class="kw">pbinom</span>(zero2max, n, p)</span>
+<span id="cb75-12"><a href="discrete-probability-distribution.html#cb75-12"></a><span class="co"># Data File that Includes Cumulative Probability and Mass</span></span>
+<span id="cb75-13"><a href="discrete-probability-distribution.html#cb75-13"></a>survive.prob &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">survives=</span>(zero2max), <span class="dt">prob=</span>prob_of_survives, <span class="dt">cum.prob=</span>cumulative_prob_of_survives)</span></code></pre></div>
 <div id="wwii-german-soldiergraph" class="section level4" number="5.2.2.1">
 <h4><span class="header-section-number">5.2.2.1</span> WWII German Soldier–Graph</h4>
 <p>We can see the results graphically as well below. Note that the graph looks normal. This is indeed the case, when <span class="math inline">\(n\)</span> gets larger, the bionomial distribution approximates the normal distribution, with mean <span class="math inline">\(n\cdot p\)</span> and variance <span class="math inline">\(n \cdot p \cdot (1-p)\)</span>.</p>
@@ -481,71 +482,71 @@ We can find the expected value and variance by summing over all terms following:
 <ul>
 <li>Given a 30.9 percent death rate, nearly all German towns will have between 57 to 80 soldiers returning from the war out the 100 they sent to join the German army.</li>
 </ul>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="discrete-probability-distribution.html#cb75-1"></a><span class="co"># Control Graph Size</span></span>
-<span id="cb75-2"><a href="discrete-probability-distribution.html#cb75-2"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">5</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
-<span id="cb75-3"><a href="discrete-probability-distribution.html#cb75-3"></a><span class="co"># Two axis colors</span></span>
-<span id="cb75-4"><a href="discrete-probability-distribution.html#cb75-4"></a>axis.sec.ratio &lt;-<span class="st"> </span><span class="kw">max</span>(cumulative_prob_of_survives)<span class="op">/</span><span class="kw">max</span>(prob_of_survives)</span>
-<span id="cb75-5"><a href="discrete-probability-distribution.html#cb75-5"></a>right.axis.color &lt;-<span class="st"> &#39;blue&#39;</span></span>
-<span id="cb75-6"><a href="discrete-probability-distribution.html#cb75-6"></a>left.axis.color &lt;-<span class="st"> &#39;red&#39;</span></span>
-<span id="cb75-7"><a href="discrete-probability-distribution.html#cb75-7"></a></span>
-<span id="cb75-8"><a href="discrete-probability-distribution.html#cb75-8"></a><span class="co"># Probabilities</span></span>
-<span id="cb75-9"><a href="discrete-probability-distribution.html#cb75-9"></a>survive.graph &lt;-<span class="st"> </span>survive.prob <span class="op">%&gt;%</span></span>
-<span id="cb75-10"><a href="discrete-probability-distribution.html#cb75-10"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>survives)) <span class="op">+</span></span>
-<span id="cb75-11"><a href="discrete-probability-distribution.html#cb75-11"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y=</span>prob),</span>
-<span id="cb75-12"><a href="discrete-probability-distribution.html#cb75-12"></a>             <span class="dt">stat=</span><span class="st">&#39;identity&#39;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>, <span class="dt">width=</span><span class="fl">0.5</span>, <span class="dt">fill=</span>left.axis.color)</span>
-<span id="cb75-13"><a href="discrete-probability-distribution.html#cb75-13"></a></span>
-<span id="cb75-14"><a href="discrete-probability-distribution.html#cb75-14"></a><span class="co"># Cumulative Probabilities</span></span>
-<span id="cb75-15"><a href="discrete-probability-distribution.html#cb75-15"></a>survive.graph &lt;-<span class="st"> </span>survive.graph <span class="op">+</span></span>
-<span id="cb75-16"><a href="discrete-probability-distribution.html#cb75-16"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio),</span>
-<span id="cb75-17"><a href="discrete-probability-distribution.html#cb75-17"></a>              <span class="dt">alpha=</span><span class="fl">0.75</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span>right.axis.color)</span>
-<span id="cb75-18"><a href="discrete-probability-distribution.html#cb75-18"></a></span>
-<span id="cb75-19"><a href="discrete-probability-distribution.html#cb75-19"></a><span class="co"># Titles Strings etc</span></span>
-<span id="cb75-20"><a href="discrete-probability-distribution.html#cb75-20"></a>graph.title &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
-<span id="cb75-21"><a href="discrete-probability-distribution.html#cb75-21"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Number of Surviving Soldiers out of %s from Town</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
-<span id="cb75-22"><a href="discrete-probability-distribution.html#cb75-22"></a>           <span class="st">&#39;Prob Mass (Left) and Cumulative Prob (Right)&#39;</span>) ,n)</span>
-<span id="cb75-23"><a href="discrete-probability-distribution.html#cb75-23"></a>graph.caption &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
-<span id="cb75-24"><a href="discrete-probability-distribution.html#cb75-24"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Assuming the binomial properties apply</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
-<span id="cb75-25"><a href="discrete-probability-distribution.html#cb75-25"></a>           <span class="st">&#39;German Army Soldier WWII survival rate = %s&#39;</span>), p)</span>
-<span id="cb75-26"><a href="discrete-probability-distribution.html#cb75-26"></a>graph.title.x &lt;-<span class="st"> &#39;Number of Soldiers Survived&#39;</span></span>
-<span id="cb75-27"><a href="discrete-probability-distribution.html#cb75-27"></a>graph.title.y.axisleft &lt;-<span class="st"> &#39;Prob of x survived&#39;</span></span>
-<span id="cb75-28"><a href="discrete-probability-distribution.html#cb75-28"></a>graph.title.y.axisright &lt;-<span class="st"> &#39;Prob of at most x surviveed&#39;</span></span>
-<span id="cb75-29"><a href="discrete-probability-distribution.html#cb75-29"></a></span>
-<span id="cb75-30"><a href="discrete-probability-distribution.html#cb75-30"></a><span class="co"># Titles etc</span></span>
-<span id="cb75-31"><a href="discrete-probability-distribution.html#cb75-31"></a>survive.graph &lt;-<span class="st"> </span>survive.graph <span class="op">+</span></span>
-<span id="cb75-32"><a href="discrete-probability-distribution.html#cb75-32"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> graph.title,</span>
-<span id="cb75-33"><a href="discrete-probability-distribution.html#cb75-33"></a>         <span class="dt">x =</span> graph.title.x,</span>
-<span id="cb75-34"><a href="discrete-probability-distribution.html#cb75-34"></a>         <span class="dt">y =</span> graph.title.y.axisleft,</span>
-<span id="cb75-35"><a href="discrete-probability-distribution.html#cb75-35"></a>         <span class="dt">caption =</span> graph.caption) <span class="op">+</span></span>
-<span id="cb75-36"><a href="discrete-probability-distribution.html#cb75-36"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">sec.axis =</span></span>
-<span id="cb75-37"><a href="discrete-probability-distribution.html#cb75-37"></a>                       <span class="kw">sec_axis</span>(<span class="op">~</span>.<span class="op">*</span>axis.sec.ratio, <span class="dt">name =</span> graph.title.y.axisright)) <span class="op">+</span></span>
-<span id="cb75-38"><a href="discrete-probability-distribution.html#cb75-38"></a><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> zero2max[<span class="kw">floor</span>(<span class="kw">seq</span>(<span class="dv">1</span>,n,<span class="dt">length.out=</span><span class="dv">10</span>))],</span>
-<span id="cb75-39"><a href="discrete-probability-distribution.html#cb75-39"></a>                       <span class="dt">breaks =</span> zero2max[<span class="kw">floor</span>(<span class="kw">seq</span>(<span class="dv">1</span>,n,<span class="dt">length.out=</span><span class="dv">10</span>))]) <span class="op">+</span></span>
-<span id="cb75-40"><a href="discrete-probability-distribution.html#cb75-40"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&#39;bold&#39;</span>),</span>
-<span id="cb75-41"><a href="discrete-probability-distribution.html#cb75-41"></a>          <span class="dt">axis.text.y.right =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> right.axis.color),</span>
-<span id="cb75-42"><a href="discrete-probability-distribution.html#cb75-42"></a>          <span class="dt">axis.text.y.left =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> left.axis.color))</span>
-<span id="cb75-43"><a href="discrete-probability-distribution.html#cb75-43"></a></span>
-<span id="cb75-44"><a href="discrete-probability-distribution.html#cb75-44"></a><span class="co"># Print</span></span>
-<span id="cb75-45"><a href="discrete-probability-distribution.html#cb75-45"></a><span class="kw">print</span>(survive.graph)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-75-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="discrete-probability-distribution.html#cb76-1"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb76-2"><a href="discrete-probability-distribution.html#cb76-2"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">5</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
+<span id="cb76-3"><a href="discrete-probability-distribution.html#cb76-3"></a><span class="co"># Two axis colors</span></span>
+<span id="cb76-4"><a href="discrete-probability-distribution.html#cb76-4"></a>axis.sec.ratio &lt;-<span class="st"> </span><span class="kw">max</span>(cumulative_prob_of_survives)<span class="op">/</span><span class="kw">max</span>(prob_of_survives)</span>
+<span id="cb76-5"><a href="discrete-probability-distribution.html#cb76-5"></a>right.axis.color &lt;-<span class="st"> &#39;blue&#39;</span></span>
+<span id="cb76-6"><a href="discrete-probability-distribution.html#cb76-6"></a>left.axis.color &lt;-<span class="st"> &#39;red&#39;</span></span>
+<span id="cb76-7"><a href="discrete-probability-distribution.html#cb76-7"></a></span>
+<span id="cb76-8"><a href="discrete-probability-distribution.html#cb76-8"></a><span class="co"># Probabilities</span></span>
+<span id="cb76-9"><a href="discrete-probability-distribution.html#cb76-9"></a>survive.graph &lt;-<span class="st"> </span>survive.prob <span class="op">%&gt;%</span></span>
+<span id="cb76-10"><a href="discrete-probability-distribution.html#cb76-10"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>survives)) <span class="op">+</span></span>
+<span id="cb76-11"><a href="discrete-probability-distribution.html#cb76-11"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y=</span>prob),</span>
+<span id="cb76-12"><a href="discrete-probability-distribution.html#cb76-12"></a>             <span class="dt">stat=</span><span class="st">&#39;identity&#39;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>, <span class="dt">width=</span><span class="fl">0.5</span>, <span class="dt">fill=</span>left.axis.color)</span>
+<span id="cb76-13"><a href="discrete-probability-distribution.html#cb76-13"></a></span>
+<span id="cb76-14"><a href="discrete-probability-distribution.html#cb76-14"></a><span class="co"># Cumulative Probabilities</span></span>
+<span id="cb76-15"><a href="discrete-probability-distribution.html#cb76-15"></a>survive.graph &lt;-<span class="st"> </span>survive.graph <span class="op">+</span></span>
+<span id="cb76-16"><a href="discrete-probability-distribution.html#cb76-16"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio),</span>
+<span id="cb76-17"><a href="discrete-probability-distribution.html#cb76-17"></a>              <span class="dt">alpha=</span><span class="fl">0.75</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span>right.axis.color)</span>
+<span id="cb76-18"><a href="discrete-probability-distribution.html#cb76-18"></a></span>
+<span id="cb76-19"><a href="discrete-probability-distribution.html#cb76-19"></a><span class="co"># Titles Strings etc</span></span>
+<span id="cb76-20"><a href="discrete-probability-distribution.html#cb76-20"></a>graph.title &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
+<span id="cb76-21"><a href="discrete-probability-distribution.html#cb76-21"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Number of Surviving Soldiers out of %s from Town</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
+<span id="cb76-22"><a href="discrete-probability-distribution.html#cb76-22"></a>           <span class="st">&#39;Prob Mass (Left) and Cumulative Prob (Right)&#39;</span>) ,n)</span>
+<span id="cb76-23"><a href="discrete-probability-distribution.html#cb76-23"></a>graph.caption &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
+<span id="cb76-24"><a href="discrete-probability-distribution.html#cb76-24"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Assuming the binomial properties apply</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
+<span id="cb76-25"><a href="discrete-probability-distribution.html#cb76-25"></a>           <span class="st">&#39;German Army Soldier WWII survival rate = %s&#39;</span>), p)</span>
+<span id="cb76-26"><a href="discrete-probability-distribution.html#cb76-26"></a>graph.title.x &lt;-<span class="st"> &#39;Number of Soldiers Survived&#39;</span></span>
+<span id="cb76-27"><a href="discrete-probability-distribution.html#cb76-27"></a>graph.title.y.axisleft &lt;-<span class="st"> &#39;Prob of x survived&#39;</span></span>
+<span id="cb76-28"><a href="discrete-probability-distribution.html#cb76-28"></a>graph.title.y.axisright &lt;-<span class="st"> &#39;Prob of at most x surviveed&#39;</span></span>
+<span id="cb76-29"><a href="discrete-probability-distribution.html#cb76-29"></a></span>
+<span id="cb76-30"><a href="discrete-probability-distribution.html#cb76-30"></a><span class="co"># Titles etc</span></span>
+<span id="cb76-31"><a href="discrete-probability-distribution.html#cb76-31"></a>survive.graph &lt;-<span class="st"> </span>survive.graph <span class="op">+</span></span>
+<span id="cb76-32"><a href="discrete-probability-distribution.html#cb76-32"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> graph.title,</span>
+<span id="cb76-33"><a href="discrete-probability-distribution.html#cb76-33"></a>         <span class="dt">x =</span> graph.title.x,</span>
+<span id="cb76-34"><a href="discrete-probability-distribution.html#cb76-34"></a>         <span class="dt">y =</span> graph.title.y.axisleft,</span>
+<span id="cb76-35"><a href="discrete-probability-distribution.html#cb76-35"></a>         <span class="dt">caption =</span> graph.caption) <span class="op">+</span></span>
+<span id="cb76-36"><a href="discrete-probability-distribution.html#cb76-36"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">sec.axis =</span></span>
+<span id="cb76-37"><a href="discrete-probability-distribution.html#cb76-37"></a>                       <span class="kw">sec_axis</span>(<span class="op">~</span>.<span class="op">*</span>axis.sec.ratio, <span class="dt">name =</span> graph.title.y.axisright)) <span class="op">+</span></span>
+<span id="cb76-38"><a href="discrete-probability-distribution.html#cb76-38"></a><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> zero2max[<span class="kw">floor</span>(<span class="kw">seq</span>(<span class="dv">1</span>,n,<span class="dt">length.out=</span><span class="dv">10</span>))],</span>
+<span id="cb76-39"><a href="discrete-probability-distribution.html#cb76-39"></a>                       <span class="dt">breaks =</span> zero2max[<span class="kw">floor</span>(<span class="kw">seq</span>(<span class="dv">1</span>,n,<span class="dt">length.out=</span><span class="dv">10</span>))]) <span class="op">+</span></span>
+<span id="cb76-40"><a href="discrete-probability-distribution.html#cb76-40"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&#39;bold&#39;</span>),</span>
+<span id="cb76-41"><a href="discrete-probability-distribution.html#cb76-41"></a>          <span class="dt">axis.text.y.right =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> right.axis.color),</span>
+<span id="cb76-42"><a href="discrete-probability-distribution.html#cb76-42"></a>          <span class="dt">axis.text.y.left =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> left.axis.color))</span>
+<span id="cb76-43"><a href="discrete-probability-distribution.html#cb76-43"></a></span>
+<span id="cb76-44"><a href="discrete-probability-distribution.html#cb76-44"></a><span class="co"># Print</span></span>
+<span id="cb76-45"><a href="discrete-probability-distribution.html#cb76-45"></a><span class="kw">print</span>(survive.graph)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-82-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="wwii-german-soldiertable" class="section level4" number="5.2.2.2">
 <h4><span class="header-section-number">5.2.2.2</span> WWII German Soldier–Table</h4>
 <p>We can see from the table of results what is the distribution of the number of soldiers returning to each village in greater detail.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="discrete-probability-distribution.html#cb76-1"></a><span class="co"># print(survive.prob)</span></span>
-<span id="cb76-2"><a href="discrete-probability-distribution.html#cb76-2"></a><span class="co"># start_idx &lt;- 81</span></span>
-<span id="cb76-3"><a href="discrete-probability-distribution.html#cb76-3"></a>f_table &lt;-<span class="st"> </span><span class="cf">function</span>(start_idx) {</span>
-<span id="cb76-4"><a href="discrete-probability-distribution.html#cb76-4"></a></span>
-<span id="cb76-5"><a href="discrete-probability-distribution.html#cb76-5"></a>    survive.subset &lt;-<span class="st"> </span><span class="kw">round</span>(survive.prob[<span class="kw">seq</span>(start_idx, start_idx<span class="op">+</span><span class="dv">20</span>),], <span class="dv">4</span>)</span>
-<span id="cb76-6"><a href="discrete-probability-distribution.html#cb76-6"></a>    survive.subset<span class="op">$</span>prob &lt;-<span class="st"> </span><span class="kw">paste0</span>(survive.subset<span class="op">$</span>prob<span class="op">*</span><span class="dv">100</span>,</span>
-<span id="cb76-7"><a href="discrete-probability-distribution.html#cb76-7"></a>                                  <span class="st">&#39;% chance EXACTLY (n=&#39;</span>, survive.subset<span class="op">$</span>survives, <span class="st">&#39;) survived&#39;</span>)</span>
-<span id="cb76-8"><a href="discrete-probability-distribution.html#cb76-8"></a>    survive.subset<span class="op">$</span>one.minus.cum.prob &lt;-<span class="st"> </span><span class="kw">paste0</span>((<span class="dv">1</span><span class="op">-</span>survive.subset<span class="op">$</span>cum.prob)<span class="op">*</span><span class="dv">100</span>,</span>
-<span id="cb76-9"><a href="discrete-probability-distribution.html#cb76-9"></a>                                                <span class="st">&#39;% chance AT LEAST (n=&#39;</span>, survive.subset<span class="op">$</span>survives, <span class="st">&#39;) survived&#39;</span>)</span>
-<span id="cb76-10"><a href="discrete-probability-distribution.html#cb76-10"></a>    survive.subset<span class="op">$</span>cum.prob &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">round</span>((survive.subset<span class="op">$</span>cum.prob)<span class="op">*</span><span class="dv">100</span>, <span class="dv">4</span>),</span>
-<span id="cb76-11"><a href="discrete-probability-distribution.html#cb76-11"></a>                                      <span class="st">&#39;% chance AT MOST (n=&#39;</span>, survive.subset<span class="op">$</span>survives, <span class="st">&#39;) survived&#39;</span>)</span>
-<span id="cb76-12"><a href="discrete-probability-distribution.html#cb76-12"></a></span>
-<span id="cb76-13"><a href="discrete-probability-distribution.html#cb76-13"></a>    <span class="kw">return</span>(survive.subset[,<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>])</span>
-<span id="cb76-14"><a href="discrete-probability-distribution.html#cb76-14"></a>}</span>
-<span id="cb76-15"><a href="discrete-probability-distribution.html#cb76-15"></a><span class="kw">lapply</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">21</span>,<span class="dv">41</span>,<span class="dv">61</span>,<span class="dv">81</span>), f_table)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="discrete-probability-distribution.html#cb77-1"></a><span class="co"># print(survive.prob)</span></span>
+<span id="cb77-2"><a href="discrete-probability-distribution.html#cb77-2"></a><span class="co"># start_idx &lt;- 81</span></span>
+<span id="cb77-3"><a href="discrete-probability-distribution.html#cb77-3"></a>f_table &lt;-<span class="st"> </span><span class="cf">function</span>(start_idx) {</span>
+<span id="cb77-4"><a href="discrete-probability-distribution.html#cb77-4"></a></span>
+<span id="cb77-5"><a href="discrete-probability-distribution.html#cb77-5"></a>    survive.subset &lt;-<span class="st"> </span><span class="kw">round</span>(survive.prob[<span class="kw">seq</span>(start_idx, start_idx<span class="op">+</span><span class="dv">20</span>),], <span class="dv">4</span>)</span>
+<span id="cb77-6"><a href="discrete-probability-distribution.html#cb77-6"></a>    survive.subset<span class="op">$</span>prob &lt;-<span class="st"> </span><span class="kw">paste0</span>(survive.subset<span class="op">$</span>prob<span class="op">*</span><span class="dv">100</span>,</span>
+<span id="cb77-7"><a href="discrete-probability-distribution.html#cb77-7"></a>                                  <span class="st">&#39;% chance EXACTLY (n=&#39;</span>, survive.subset<span class="op">$</span>survives, <span class="st">&#39;) survived&#39;</span>)</span>
+<span id="cb77-8"><a href="discrete-probability-distribution.html#cb77-8"></a>    survive.subset<span class="op">$</span>one.minus.cum.prob &lt;-<span class="st"> </span><span class="kw">paste0</span>((<span class="dv">1</span><span class="op">-</span>survive.subset<span class="op">$</span>cum.prob)<span class="op">*</span><span class="dv">100</span>,</span>
+<span id="cb77-9"><a href="discrete-probability-distribution.html#cb77-9"></a>                                                <span class="st">&#39;% chance AT LEAST (n=&#39;</span>, survive.subset<span class="op">$</span>survives, <span class="st">&#39;) survived&#39;</span>)</span>
+<span id="cb77-10"><a href="discrete-probability-distribution.html#cb77-10"></a>    survive.subset<span class="op">$</span>cum.prob &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">round</span>((survive.subset<span class="op">$</span>cum.prob)<span class="op">*</span><span class="dv">100</span>, <span class="dv">4</span>),</span>
+<span id="cb77-11"><a href="discrete-probability-distribution.html#cb77-11"></a>                                      <span class="st">&#39;% chance AT MOST (n=&#39;</span>, survive.subset<span class="op">$</span>survives, <span class="st">&#39;) survived&#39;</span>)</span>
+<span id="cb77-12"><a href="discrete-probability-distribution.html#cb77-12"></a></span>
+<span id="cb77-13"><a href="discrete-probability-distribution.html#cb77-13"></a>    <span class="kw">return</span>(survive.subset[,<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>])</span>
+<span id="cb77-14"><a href="discrete-probability-distribution.html#cb77-14"></a>}</span>
+<span id="cb77-15"><a href="discrete-probability-distribution.html#cb77-15"></a><span class="kw">lapply</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">21</span>,<span class="dv">41</span>,<span class="dv">61</span>,<span class="dv">81</span>), f_table)</span></code></pre></div>
 <pre><code>## [[1]]
 ## 
 ## [[2]]
@@ -605,81 +606,81 @@ f(x;\mu) &amp;=&amp; \frac{\mu^{x} \cdot e^{-\mu}}{x!}\\
 <p>We can see from the results below that given our parameter <span class="math inline">\(\mu=0.7\)</span>, there is almost a 50 percent chance that a corp has no death from horse kick in a year. And the chances that 1, 2, 3 and 4 Prussian soldiers die from horse-kick are 35, 12, 3, and 0.5 percent.</p>
 <p>The chance that at least 2 soldiers die from each corp each year is 16 percent.</p>
 <p>If you are running the Prussian Army, you would want to know these statistics. You would want to track these statistics overtime and try to improve training etc.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="discrete-probability-distribution.html#cb78-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb78-2"><a href="discrete-probability-distribution.html#cb78-2"></a></span>
-<span id="cb78-3"><a href="discrete-probability-distribution.html#cb78-3"></a><span class="co"># Parameters</span></span>
-<span id="cb78-4"><a href="discrete-probability-distribution.html#cb78-4"></a>n &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb78-5"><a href="discrete-probability-distribution.html#cb78-5"></a>mu &lt;-<span class="st"> </span><span class="fl">0.70</span></span>
-<span id="cb78-6"><a href="discrete-probability-distribution.html#cb78-6"></a></span>
-<span id="cb78-7"><a href="discrete-probability-distribution.html#cb78-7"></a><span class="co"># Generate Data</span></span>
-<span id="cb78-8"><a href="discrete-probability-distribution.html#cb78-8"></a><span class="co"># A vector of different survival counts</span></span>
-<span id="cb78-9"><a href="discrete-probability-distribution.html#cb78-9"></a>zero2large &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span>n</span>
-<span id="cb78-10"><a href="discrete-probability-distribution.html#cb78-10"></a><span class="co"># Probability for different survival counts</span></span>
-<span id="cb78-11"><a href="discrete-probability-distribution.html#cb78-11"></a>prob_of_diekicks &lt;-<span class="st"> </span><span class="kw">dpois</span>(zero2large, mu)</span>
-<span id="cb78-12"><a href="discrete-probability-distribution.html#cb78-12"></a><span class="co"># Cumulative Probability for different survival counts, before dbinom, now pbinom</span></span>
-<span id="cb78-13"><a href="discrete-probability-distribution.html#cb78-13"></a>cumulative_prob_of_diekicks &lt;-<span class="st"> </span><span class="kw">ppois</span>(zero2large, mu)</span>
-<span id="cb78-14"><a href="discrete-probability-distribution.html#cb78-14"></a><span class="co"># Data File that Includes Cumulative Probability and Mass</span></span>
-<span id="cb78-15"><a href="discrete-probability-distribution.html#cb78-15"></a>diekick.prob &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">diekicks=</span>(zero2large), <span class="dt">prob=</span>prob_of_diekicks, <span class="dt">cum.prob=</span>cumulative_prob_of_diekicks)</span>
-<span id="cb78-16"><a href="discrete-probability-distribution.html#cb78-16"></a></span>
-<span id="cb78-17"><a href="discrete-probability-distribution.html#cb78-17"></a><span class="co"># Control Graph Size</span></span>
-<span id="cb78-18"><a href="discrete-probability-distribution.html#cb78-18"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">5</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
-<span id="cb78-19"><a href="discrete-probability-distribution.html#cb78-19"></a><span class="co"># Two axis colors</span></span>
-<span id="cb78-20"><a href="discrete-probability-distribution.html#cb78-20"></a>axis.sec.ratio &lt;-<span class="st"> </span><span class="kw">max</span>(cumulative_prob_of_diekicks)<span class="op">/</span><span class="kw">max</span>(prob_of_diekicks)</span>
-<span id="cb78-21"><a href="discrete-probability-distribution.html#cb78-21"></a>right.axis.color &lt;-<span class="st"> &#39;blue&#39;</span></span>
-<span id="cb78-22"><a href="discrete-probability-distribution.html#cb78-22"></a>left.axis.color &lt;-<span class="st"> &#39;red&#39;</span></span>
-<span id="cb78-23"><a href="discrete-probability-distribution.html#cb78-23"></a></span>
-<span id="cb78-24"><a href="discrete-probability-distribution.html#cb78-24"></a><span class="co"># Probabilities</span></span>
-<span id="cb78-25"><a href="discrete-probability-distribution.html#cb78-25"></a>diekick.graph &lt;-<span class="st"> </span>diekick.prob <span class="op">%&gt;%</span></span>
-<span id="cb78-26"><a href="discrete-probability-distribution.html#cb78-26"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>diekicks)) <span class="op">+</span></span>
-<span id="cb78-27"><a href="discrete-probability-distribution.html#cb78-27"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y=</span>prob),</span>
-<span id="cb78-28"><a href="discrete-probability-distribution.html#cb78-28"></a>             <span class="dt">stat=</span><span class="st">&#39;identity&#39;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>, <span class="dt">width=</span><span class="fl">0.5</span>, <span class="dt">fill=</span>left.axis.color) <span class="op">+</span></span>
-<span id="cb78-29"><a href="discrete-probability-distribution.html#cb78-29"></a><span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">y=</span>prob,</span>
-<span id="cb78-30"><a href="discrete-probability-distribution.html#cb78-30"></a>                  <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="kw">sprintf</span>(<span class="st">&#39;%2.1f&#39;</span>, prob<span class="op">*</span><span class="dv">100</span>), <span class="st">&#39;%&#39;</span>)),</span>
-<span id="cb78-31"><a href="discrete-probability-distribution.html#cb78-31"></a>              <span class="dt">vjust =</span> <span class="fl">-0.</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color=</span>left.axis.color, <span class="dt">fontface=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb78-32"><a href="discrete-probability-distribution.html#cb78-32"></a></span>
-<span id="cb78-33"><a href="discrete-probability-distribution.html#cb78-33"></a><span class="co"># Cumulative Probabilities</span></span>
-<span id="cb78-34"><a href="discrete-probability-distribution.html#cb78-34"></a>diekick.graph &lt;-<span class="st"> </span>diekick.graph <span class="op">+</span></span>
-<span id="cb78-35"><a href="discrete-probability-distribution.html#cb78-35"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio),</span>
-<span id="cb78-36"><a href="discrete-probability-distribution.html#cb78-36"></a>              <span class="dt">alpha=</span><span class="fl">0.25</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span>right.axis.color) <span class="op">+</span></span>
-<span id="cb78-37"><a href="discrete-probability-distribution.html#cb78-37"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio),</span>
-<span id="cb78-38"><a href="discrete-probability-distribution.html#cb78-38"></a>               <span class="dt">alpha=</span><span class="fl">0.75</span>, <span class="dt">size=</span><span class="dv">2</span>, <span class="dt">shape=</span><span class="dv">23</span>, <span class="dt">fill=</span>right.axis.color) <span class="op">+</span></span>
-<span id="cb78-39"><a href="discrete-probability-distribution.html#cb78-39"></a><span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio,</span>
-<span id="cb78-40"><a href="discrete-probability-distribution.html#cb78-40"></a>                  <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="kw">sprintf</span>(<span class="st">&#39;%2.0f&#39;</span>, cum.prob<span class="op">*</span><span class="dv">100</span>), <span class="st">&#39;%&#39;</span>)),</span>
-<span id="cb78-41"><a href="discrete-probability-distribution.html#cb78-41"></a>              <span class="dt">vjust =</span> <span class="fl">-0.5</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color=</span>right.axis.color, <span class="dt">fontface=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb78-42"><a href="discrete-probability-distribution.html#cb78-42"></a></span>
-<span id="cb78-43"><a href="discrete-probability-distribution.html#cb78-43"></a></span>
-<span id="cb78-44"><a href="discrete-probability-distribution.html#cb78-44"></a><span class="co"># Graph Strings</span></span>
-<span id="cb78-45"><a href="discrete-probability-distribution.html#cb78-45"></a>graph.title &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
-<span id="cb78-46"><a href="discrete-probability-distribution.html#cb78-46"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Death from Horse Kick Per Corp Per Year</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
-<span id="cb78-47"><a href="discrete-probability-distribution.html#cb78-47"></a>           <span class="st">&#39;Prob Mass (Left) and Cumulative Prob (Right)&#39;</span>))</span>
-<span id="cb78-48"><a href="discrete-probability-distribution.html#cb78-48"></a>graph.caption &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
-<span id="cb78-49"><a href="discrete-probability-distribution.html#cb78-49"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Assuming the Poisson properties apply</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
-<span id="cb78-50"><a href="discrete-probability-distribution.html#cb78-50"></a>           <span class="st">&#39;Ladislaus Bortkiewicz Prussian Data</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
-<span id="cb78-51"><a href="discrete-probability-distribution.html#cb78-51"></a>           <span class="st">&#39;Death By Horse Kick Per Corp Per Year = %s&#39;</span>), mu)</span>
-<span id="cb78-52"><a href="discrete-probability-distribution.html#cb78-52"></a>graph.title.x &lt;-<span class="st"> &#39;Number of Soldiers Die of Horse Kick&#39;</span></span>
-<span id="cb78-53"><a href="discrete-probability-distribution.html#cb78-53"></a>graph.title.y.axisleft &lt;-<span class="st"> &#39;Prob of x Die of Horse Kick&#39;</span></span>
-<span id="cb78-54"><a href="discrete-probability-distribution.html#cb78-54"></a>graph.title.y.axisright &lt;-<span class="st"> &#39;Prob of at Most x Die Of Horse Kick&#39;</span></span>
-<span id="cb78-55"><a href="discrete-probability-distribution.html#cb78-55"></a></span>
-<span id="cb78-56"><a href="discrete-probability-distribution.html#cb78-56"></a><span class="co"># Graphing</span></span>
-<span id="cb78-57"><a href="discrete-probability-distribution.html#cb78-57"></a>diekick.graph &lt;-<span class="st"> </span>diekick.graph <span class="op">+</span></span>
-<span id="cb78-58"><a href="discrete-probability-distribution.html#cb78-58"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> graph.title,</span>
-<span id="cb78-59"><a href="discrete-probability-distribution.html#cb78-59"></a>         <span class="dt">x =</span> graph.title.x,</span>
-<span id="cb78-60"><a href="discrete-probability-distribution.html#cb78-60"></a>         <span class="dt">y =</span> graph.title.y.axisleft,</span>
-<span id="cb78-61"><a href="discrete-probability-distribution.html#cb78-61"></a>         <span class="dt">caption =</span> graph.caption) <span class="op">+</span></span>
-<span id="cb78-62"><a href="discrete-probability-distribution.html#cb78-62"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">sec.axis =</span></span>
-<span id="cb78-63"><a href="discrete-probability-distribution.html#cb78-63"></a>                       <span class="kw">sec_axis</span>(<span class="op">~</span>.<span class="op">*</span>axis.sec.ratio,</span>
-<span id="cb78-64"><a href="discrete-probability-distribution.html#cb78-64"></a>                                <span class="dt">name =</span> graph.title.y.axisright)) <span class="op">+</span></span>
-<span id="cb78-65"><a href="discrete-probability-distribution.html#cb78-65"></a><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> zero2large[<span class="kw">floor</span>(<span class="kw">seq</span>(<span class="dv">1</span>,n,<span class="dt">length.out=</span><span class="dv">10</span>))],</span>
-<span id="cb78-66"><a href="discrete-probability-distribution.html#cb78-66"></a>                       <span class="dt">breaks =</span> zero2large[<span class="kw">floor</span>(<span class="kw">seq</span>(<span class="dv">1</span>,n,<span class="dt">length.out=</span><span class="dv">10</span>))]) <span class="op">+</span></span>
-<span id="cb78-67"><a href="discrete-probability-distribution.html#cb78-67"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&#39;bold&#39;</span>),</span>
-<span id="cb78-68"><a href="discrete-probability-distribution.html#cb78-68"></a>          <span class="dt">axis.text.y.right =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> right.axis.color),</span>
-<span id="cb78-69"><a href="discrete-probability-distribution.html#cb78-69"></a>          <span class="dt">axis.text.y.left =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> left.axis.color))</span>
-<span id="cb78-70"><a href="discrete-probability-distribution.html#cb78-70"></a></span>
-<span id="cb78-71"><a href="discrete-probability-distribution.html#cb78-71"></a><span class="co"># Print</span></span>
-<span id="cb78-72"><a href="discrete-probability-distribution.html#cb78-72"></a><span class="kw">print</span>(diekick.graph)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-78-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="discrete-probability-distribution.html#cb79-1"></a><span class="co"># Tabular</span></span>
-<span id="cb79-2"><a href="discrete-probability-distribution.html#cb79-2"></a><span class="kw">round</span>(<span class="kw">as.tibble</span>(diekick.prob), <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="discrete-probability-distribution.html#cb79-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb79-2"><a href="discrete-probability-distribution.html#cb79-2"></a></span>
+<span id="cb79-3"><a href="discrete-probability-distribution.html#cb79-3"></a><span class="co"># Parameters</span></span>
+<span id="cb79-4"><a href="discrete-probability-distribution.html#cb79-4"></a>n &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb79-5"><a href="discrete-probability-distribution.html#cb79-5"></a>mu &lt;-<span class="st"> </span><span class="fl">0.70</span></span>
+<span id="cb79-6"><a href="discrete-probability-distribution.html#cb79-6"></a></span>
+<span id="cb79-7"><a href="discrete-probability-distribution.html#cb79-7"></a><span class="co"># Generate Data</span></span>
+<span id="cb79-8"><a href="discrete-probability-distribution.html#cb79-8"></a><span class="co"># A vector of different survival counts</span></span>
+<span id="cb79-9"><a href="discrete-probability-distribution.html#cb79-9"></a>zero2large &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span>n</span>
+<span id="cb79-10"><a href="discrete-probability-distribution.html#cb79-10"></a><span class="co"># Probability for different survival counts</span></span>
+<span id="cb79-11"><a href="discrete-probability-distribution.html#cb79-11"></a>prob_of_diekicks &lt;-<span class="st"> </span><span class="kw">dpois</span>(zero2large, mu)</span>
+<span id="cb79-12"><a href="discrete-probability-distribution.html#cb79-12"></a><span class="co"># Cumulative Probability for different survival counts, before dbinom, now pbinom</span></span>
+<span id="cb79-13"><a href="discrete-probability-distribution.html#cb79-13"></a>cumulative_prob_of_diekicks &lt;-<span class="st"> </span><span class="kw">ppois</span>(zero2large, mu)</span>
+<span id="cb79-14"><a href="discrete-probability-distribution.html#cb79-14"></a><span class="co"># Data File that Includes Cumulative Probability and Mass</span></span>
+<span id="cb79-15"><a href="discrete-probability-distribution.html#cb79-15"></a>diekick.prob &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">diekicks=</span>(zero2large), <span class="dt">prob=</span>prob_of_diekicks, <span class="dt">cum.prob=</span>cumulative_prob_of_diekicks)</span>
+<span id="cb79-16"><a href="discrete-probability-distribution.html#cb79-16"></a></span>
+<span id="cb79-17"><a href="discrete-probability-distribution.html#cb79-17"></a><span class="co"># Control Graph Size</span></span>
+<span id="cb79-18"><a href="discrete-probability-distribution.html#cb79-18"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">5</span>, <span class="dt">repr.plot.height =</span> <span class="dv">4</span>)</span>
+<span id="cb79-19"><a href="discrete-probability-distribution.html#cb79-19"></a><span class="co"># Two axis colors</span></span>
+<span id="cb79-20"><a href="discrete-probability-distribution.html#cb79-20"></a>axis.sec.ratio &lt;-<span class="st"> </span><span class="kw">max</span>(cumulative_prob_of_diekicks)<span class="op">/</span><span class="kw">max</span>(prob_of_diekicks)</span>
+<span id="cb79-21"><a href="discrete-probability-distribution.html#cb79-21"></a>right.axis.color &lt;-<span class="st"> &#39;blue&#39;</span></span>
+<span id="cb79-22"><a href="discrete-probability-distribution.html#cb79-22"></a>left.axis.color &lt;-<span class="st"> &#39;red&#39;</span></span>
+<span id="cb79-23"><a href="discrete-probability-distribution.html#cb79-23"></a></span>
+<span id="cb79-24"><a href="discrete-probability-distribution.html#cb79-24"></a><span class="co"># Probabilities</span></span>
+<span id="cb79-25"><a href="discrete-probability-distribution.html#cb79-25"></a>diekick.graph &lt;-<span class="st"> </span>diekick.prob <span class="op">%&gt;%</span></span>
+<span id="cb79-26"><a href="discrete-probability-distribution.html#cb79-26"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>diekicks)) <span class="op">+</span></span>
+<span id="cb79-27"><a href="discrete-probability-distribution.html#cb79-27"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y=</span>prob),</span>
+<span id="cb79-28"><a href="discrete-probability-distribution.html#cb79-28"></a>             <span class="dt">stat=</span><span class="st">&#39;identity&#39;</span>, <span class="dt">alpha=</span><span class="fl">0.5</span>, <span class="dt">width=</span><span class="fl">0.5</span>, <span class="dt">fill=</span>left.axis.color) <span class="op">+</span></span>
+<span id="cb79-29"><a href="discrete-probability-distribution.html#cb79-29"></a><span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">y=</span>prob,</span>
+<span id="cb79-30"><a href="discrete-probability-distribution.html#cb79-30"></a>                  <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="kw">sprintf</span>(<span class="st">&#39;%2.1f&#39;</span>, prob<span class="op">*</span><span class="dv">100</span>), <span class="st">&#39;%&#39;</span>)),</span>
+<span id="cb79-31"><a href="discrete-probability-distribution.html#cb79-31"></a>              <span class="dt">vjust =</span> <span class="fl">-0.</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color=</span>left.axis.color, <span class="dt">fontface=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb79-32"><a href="discrete-probability-distribution.html#cb79-32"></a></span>
+<span id="cb79-33"><a href="discrete-probability-distribution.html#cb79-33"></a><span class="co"># Cumulative Probabilities</span></span>
+<span id="cb79-34"><a href="discrete-probability-distribution.html#cb79-34"></a>diekick.graph &lt;-<span class="st"> </span>diekick.graph <span class="op">+</span></span>
+<span id="cb79-35"><a href="discrete-probability-distribution.html#cb79-35"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio),</span>
+<span id="cb79-36"><a href="discrete-probability-distribution.html#cb79-36"></a>              <span class="dt">alpha=</span><span class="fl">0.25</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span>right.axis.color) <span class="op">+</span></span>
+<span id="cb79-37"><a href="discrete-probability-distribution.html#cb79-37"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio),</span>
+<span id="cb79-38"><a href="discrete-probability-distribution.html#cb79-38"></a>               <span class="dt">alpha=</span><span class="fl">0.75</span>, <span class="dt">size=</span><span class="dv">2</span>, <span class="dt">shape=</span><span class="dv">23</span>, <span class="dt">fill=</span>right.axis.color) <span class="op">+</span></span>
+<span id="cb79-39"><a href="discrete-probability-distribution.html#cb79-39"></a><span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">y=</span>cum.prob<span class="op">/</span>axis.sec.ratio,</span>
+<span id="cb79-40"><a href="discrete-probability-distribution.html#cb79-40"></a>                  <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="kw">sprintf</span>(<span class="st">&#39;%2.0f&#39;</span>, cum.prob<span class="op">*</span><span class="dv">100</span>), <span class="st">&#39;%&#39;</span>)),</span>
+<span id="cb79-41"><a href="discrete-probability-distribution.html#cb79-41"></a>              <span class="dt">vjust =</span> <span class="fl">-0.5</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color=</span>right.axis.color, <span class="dt">fontface=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb79-42"><a href="discrete-probability-distribution.html#cb79-42"></a></span>
+<span id="cb79-43"><a href="discrete-probability-distribution.html#cb79-43"></a></span>
+<span id="cb79-44"><a href="discrete-probability-distribution.html#cb79-44"></a><span class="co"># Graph Strings</span></span>
+<span id="cb79-45"><a href="discrete-probability-distribution.html#cb79-45"></a>graph.title &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
+<span id="cb79-46"><a href="discrete-probability-distribution.html#cb79-46"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Death from Horse Kick Per Corp Per Year</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
+<span id="cb79-47"><a href="discrete-probability-distribution.html#cb79-47"></a>           <span class="st">&#39;Prob Mass (Left) and Cumulative Prob (Right)&#39;</span>))</span>
+<span id="cb79-48"><a href="discrete-probability-distribution.html#cb79-48"></a>graph.caption &lt;-<span class="st"> </span><span class="kw">sprintf</span>(</span>
+<span id="cb79-49"><a href="discrete-probability-distribution.html#cb79-49"></a>    <span class="kw">paste0</span>(<span class="st">&#39;Assuming the Poisson properties apply</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
+<span id="cb79-50"><a href="discrete-probability-distribution.html#cb79-50"></a>           <span class="st">&#39;Ladislaus Bortkiewicz Prussian Data</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
+<span id="cb79-51"><a href="discrete-probability-distribution.html#cb79-51"></a>           <span class="st">&#39;Death By Horse Kick Per Corp Per Year = %s&#39;</span>), mu)</span>
+<span id="cb79-52"><a href="discrete-probability-distribution.html#cb79-52"></a>graph.title.x &lt;-<span class="st"> &#39;Number of Soldiers Die of Horse Kick&#39;</span></span>
+<span id="cb79-53"><a href="discrete-probability-distribution.html#cb79-53"></a>graph.title.y.axisleft &lt;-<span class="st"> &#39;Prob of x Die of Horse Kick&#39;</span></span>
+<span id="cb79-54"><a href="discrete-probability-distribution.html#cb79-54"></a>graph.title.y.axisright &lt;-<span class="st"> &#39;Prob of at Most x Die Of Horse Kick&#39;</span></span>
+<span id="cb79-55"><a href="discrete-probability-distribution.html#cb79-55"></a></span>
+<span id="cb79-56"><a href="discrete-probability-distribution.html#cb79-56"></a><span class="co"># Graphing</span></span>
+<span id="cb79-57"><a href="discrete-probability-distribution.html#cb79-57"></a>diekick.graph &lt;-<span class="st"> </span>diekick.graph <span class="op">+</span></span>
+<span id="cb79-58"><a href="discrete-probability-distribution.html#cb79-58"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> graph.title,</span>
+<span id="cb79-59"><a href="discrete-probability-distribution.html#cb79-59"></a>         <span class="dt">x =</span> graph.title.x,</span>
+<span id="cb79-60"><a href="discrete-probability-distribution.html#cb79-60"></a>         <span class="dt">y =</span> graph.title.y.axisleft,</span>
+<span id="cb79-61"><a href="discrete-probability-distribution.html#cb79-61"></a>         <span class="dt">caption =</span> graph.caption) <span class="op">+</span></span>
+<span id="cb79-62"><a href="discrete-probability-distribution.html#cb79-62"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">sec.axis =</span></span>
+<span id="cb79-63"><a href="discrete-probability-distribution.html#cb79-63"></a>                       <span class="kw">sec_axis</span>(<span class="op">~</span>.<span class="op">*</span>axis.sec.ratio,</span>
+<span id="cb79-64"><a href="discrete-probability-distribution.html#cb79-64"></a>                                <span class="dt">name =</span> graph.title.y.axisright)) <span class="op">+</span></span>
+<span id="cb79-65"><a href="discrete-probability-distribution.html#cb79-65"></a><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> zero2large[<span class="kw">floor</span>(<span class="kw">seq</span>(<span class="dv">1</span>,n,<span class="dt">length.out=</span><span class="dv">10</span>))],</span>
+<span id="cb79-66"><a href="discrete-probability-distribution.html#cb79-66"></a>                       <span class="dt">breaks =</span> zero2large[<span class="kw">floor</span>(<span class="kw">seq</span>(<span class="dv">1</span>,n,<span class="dt">length.out=</span><span class="dv">10</span>))]) <span class="op">+</span></span>
+<span id="cb79-67"><a href="discrete-probability-distribution.html#cb79-67"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&#39;bold&#39;</span>),</span>
+<span id="cb79-68"><a href="discrete-probability-distribution.html#cb79-68"></a>          <span class="dt">axis.text.y.right =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> right.axis.color),</span>
+<span id="cb79-69"><a href="discrete-probability-distribution.html#cb79-69"></a>          <span class="dt">axis.text.y.left =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> left.axis.color))</span>
+<span id="cb79-70"><a href="discrete-probability-distribution.html#cb79-70"></a></span>
+<span id="cb79-71"><a href="discrete-probability-distribution.html#cb79-71"></a><span class="co"># Print</span></span>
+<span id="cb79-72"><a href="discrete-probability-distribution.html#cb79-72"></a><span class="kw">print</span>(diekick.graph)</span></code></pre></div>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-85-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="discrete-probability-distribution.html#cb80-1"></a><span class="co"># Tabular</span></span>
+<span id="cb80-2"><a href="discrete-probability-distribution.html#cb80-2"></a><span class="kw">round</span>(<span class="kw">as.tibble</span>(diekick.prob), <span class="dv">3</span>)</span></code></pre></div>
 
 </div>
 </div>

@@ -7,7 +7,7 @@ core:
   - package: r
     code: |
       sample(size, replace, prob)
-date: 2020-05-02
+date: 2020-06-19
 date_start: 2018-12-01
 output:
   pdf_document:
@@ -99,7 +99,7 @@ experimental.outcome.prob <- c((1-fracbase)^0*fracbase,
 # Show these in a Tibble
 dice.true.prob <- tibble(dice.outcomes.list = experimental.outcomes.list,
                          dice.true.prob = experimental.outcome.prob)
-dice.true.prob
+kable(dice.true.prob) %>% kable_styling_fc()
 ```
 
 #### Throw the Dice 10 Times
@@ -118,8 +118,8 @@ future.dice.draws <- sample(experimental.outcomes.list,
                             prob = experimental.outcome.prob)
 
 # A little tibble to show results
-tibble(which.future.dice = paste0('dice draws:', 1:number.of.futures.to.draw),
-       dice.draws = future.dice.draws)
+kable(tibble(which.future.dice = paste0('dice draws:', 1:number.of.futures.to.draw),
+       dice.draws = future.dice.draws)) %>% kable_styling_fc()
 ```
 
 #### Redefining Sample Space for Throwing a Dice

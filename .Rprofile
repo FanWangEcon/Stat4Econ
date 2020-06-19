@@ -1,7 +1,13 @@
 # rm(list = ls(all.names = TRUE))
 # Load Libraries
+library(tidyverse)
+library(tidyr)
+library(forcats)
 library(knitr)
 library(kableExtra)
+library(REconTools)
+
+# formatR needed for tidy.opts below
 library(formatR)
 
 # jointly use R and Python Together

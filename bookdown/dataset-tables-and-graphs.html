@@ -24,7 +24,7 @@
 <meta name="author" content="Fan Wang" />
 
 
-<meta name="date" content="2020-05-16" />
+<meta name="date" content="2020-06-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="survey.html"/>
 <link rel="next" href="summarizing-data.html"/>
-<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92953468-4"></script>
 <script>
@@ -193,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.2" data-path="basics-of-probability.html"><a href="basics-of-probability.html#throwing-a-dice"><i class="fa fa-check"></i><b>4.2.2</b> Throwing a Dice</a></li>
 <li class="chapter" data-level="4.2.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#two-basketball-games"><i class="fa fa-check"></i><b>4.2.3</b> Two Basketball Games</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#sample-average"><i class="fa fa-check"></i><b>4.3</b> Sample Average</a>
+<li class="chapter" data-level="4.3" data-path="basics-of-probability.html"><a href="basics-of-probability.html#law-of-large-number"><i class="fa fa-check"></i><b>4.3</b> Law of Large Number</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="basics-of-probability.html"><a href="basics-of-probability.html#an-unfair-dice"><i class="fa fa-check"></i><b>4.3.1</b> An Unfair Dice</a></li>
 </ul></li>
@@ -298,27 +299,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-2"><a href="dataset-tables-and-graphs.html#cb13-2"></a>basetball_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/Basketball.csv&#39;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="dataset-tables-and-graphs.html#cb14-1"></a><span class="co"># Summarize all variables in data frame</span></span>
 <span id="cb14-2"><a href="dataset-tables-and-graphs.html#cb14-2"></a><span class="kw">summary</span>(basetball_data)</span></code></pre></div>
-<pre><code>##     ilkid                year       firstname           lastname             team               leag                 gp           minutes      
-##  Length:21959       Min.   :1946   Length:21959       Length:21959       Length:21959       Length:21959       Min.   : 1.00   Min.   :   0.0  
-##  Class :character   1st Qu.:1974   Class :character   Class :character   Class :character   Class :character   1st Qu.:29.00   1st Qu.: 275.5  
-##  Mode  :character   Median :1988   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Median :60.00   Median :1038.0  
-##                     Mean   :1986                                                                               Mean   :51.91   Mean   :1204.1  
-##                     3rd Qu.:1999                                                                               3rd Qu.:76.00   3rd Qu.:2009.0  
-##                     Max.   :2009                                                                               Max.   :90.00   Max.   :3882.0  
-##       pts              oreb             dreb             reb              asts            stl                blk              turnover        
-##  Min.   :   0.0   Min.   :  0.00   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Length:21959       Length:21959       Length:21959      
-##  1st Qu.: 113.0   1st Qu.:  0.00   1st Qu.:   1.0   1st Qu.:  44.0   1st Qu.:  20.0   Class :character   Class :character   Class :character  
-##  Median : 386.0   Median : 22.00   Median :  60.0   Median : 160.0   Median :  71.0   Mode  :character   Mode  :character   Mode  :character  
-##  Mean   : 531.1   Mean   : 49.79   Mean   : 117.8   Mean   : 229.7   Mean   : 118.1                                                           
-##  3rd Qu.: 811.0   3rd Qu.: 75.00   3rd Qu.: 180.0   3rd Qu.: 333.0   3rd Qu.: 167.0                                                           
-##  Max.   :4029.0   Max.   :587.00   Max.   :1538.0   Max.   :2149.0   Max.   :1164.0                                                           
-##        pf             fga              fgm              fta              ftm             tpa              tpm       
-##  Min.   :  0.0   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Min.   :  0.0   Min.   :  0.00   Min.   :  0.0  
-##  1st Qu.: 43.0   1st Qu.: 106.0   1st Qu.:  43.0   1st Qu.:  30.0   1st Qu.: 20.0   1st Qu.:  0.00   1st Qu.:  0.0  
-##  Median :118.0   Median : 345.0   Median : 148.0   Median :  99.0   Median : 70.0   Median :  2.00   Median :  0.0  
-##  Mean   :123.6   Mean   : 452.5   Mean   : 204.2   Mean   : 146.9   Mean   :109.6   Mean   : 38.07   Mean   : 13.1  
-##  3rd Qu.:193.0   3rd Qu.: 696.0   3rd Qu.: 313.0   3rd Qu.: 218.0   3rd Qu.:161.0   3rd Qu.: 27.00   3rd Qu.:  7.0  
-##  Max.   :386.0   Max.   :3159.0   Max.   :1597.0   Max.   :1363.0   Max.   :840.0   Max.   :678.00   Max.   :269.0</code></pre>
+<pre><code>##     ilkid                year       firstname           lastname             team               leag                 gp       
+##  Length:21959       Min.   :1946   Length:21959       Length:21959       Length:21959       Length:21959       Min.   : 1.00  
+##  Class :character   1st Qu.:1974   Class :character   Class :character   Class :character   Class :character   1st Qu.:29.00  
+##  Mode  :character   Median :1988   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Median :60.00  
+##                     Mean   :1986                                                                               Mean   :51.91  
+##                     3rd Qu.:1999                                                                               3rd Qu.:76.00  
+##                     Max.   :2009                                                                               Max.   :90.00  
+##     minutes            pts              oreb             dreb             reb              asts            stl           
+##  Min.   :   0.0   Min.   :   0.0   Min.   :  0.00   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Length:21959      
+##  1st Qu.: 275.5   1st Qu.: 113.0   1st Qu.:  0.00   1st Qu.:   1.0   1st Qu.:  44.0   1st Qu.:  20.0   Class :character  
+##  Median :1038.0   Median : 386.0   Median : 22.00   Median :  60.0   Median : 160.0   Median :  71.0   Mode  :character  
+##  Mean   :1204.1   Mean   : 531.1   Mean   : 49.79   Mean   : 117.8   Mean   : 229.7   Mean   : 118.1                     
+##  3rd Qu.:2009.0   3rd Qu.: 811.0   3rd Qu.: 75.00   3rd Qu.: 180.0   3rd Qu.: 333.0   3rd Qu.: 167.0                     
+##  Max.   :3882.0   Max.   :4029.0   Max.   :587.00   Max.   :1538.0   Max.   :2149.0   Max.   :1164.0                     
+##      blk              turnover               pf             fga              fgm              fta              ftm       
+##  Length:21959       Length:21959       Min.   :  0.0   Min.   :   0.0   Min.   :   0.0   Min.   :   0.0   Min.   :  0.0  
+##  Class :character   Class :character   1st Qu.: 43.0   1st Qu.: 106.0   1st Qu.:  43.0   1st Qu.:  30.0   1st Qu.: 20.0  
+##  Mode  :character   Mode  :character   Median :118.0   Median : 345.0   Median : 148.0   Median :  99.0   Median : 70.0  
+##                                        Mean   :123.6   Mean   : 452.5   Mean   : 204.2   Mean   : 146.9   Mean   :109.6  
+##                                        3rd Qu.:193.0   3rd Qu.: 696.0   3rd Qu.: 313.0   3rd Qu.: 218.0   3rd Qu.:161.0  
+##                                        Max.   :386.0   Max.   :3159.0   Max.   :1597.0   Max.   :1363.0   Max.   :840.0  
+##       tpa              tpm       
+##  Min.   :  0.00   Min.   :  0.0  
+##  1st Qu.:  0.00   1st Qu.:  0.0  
+##  Median :  2.00   Median :  0.0  
+##  Mean   : 38.07   Mean   : 13.1  
+##  3rd Qu.: 27.00   3rd Qu.:  7.0  
+##  Max.   :678.00   Max.   :269.0</code></pre>
 
 </div>
 </div>
@@ -397,7 +405,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb21-6"><a href="dataset-tables-and-graphs.html#cb21-6"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x=</span>gender)) <span class="op">+</span></span>
 <span id="cb21-7"><a href="dataset-tables-and-graphs.html#cb21-7"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span>
 <span id="cb21-8"><a href="dataset-tables-and-graphs.html#cb21-8"></a><span class="kw">print</span>(bar.plot)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="using-r-functions-to-generate-multiple-frequency-tables" class="section level4" number="2.2.1.2">
 <h4><span class="header-section-number">2.2.1.2</span> Using R Functions to Generate Multiple Frequency Tables</h4>
@@ -512,7 +520,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb31-12"><a href="dataset-tables-and-graphs.html#cb31-12"></a>}</span></code></pre></div>
 <pre><code>## [[1]]
 ## [[1]]$gghist</code></pre>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>## 
 ## [[1]]$hist.df
 ##   y count  x xmin xmax    density ncount ndensity flipped_aes PANEL group ymin ymax colour   fill size linetype alpha
@@ -523,7 +531,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## [[1]]
 ## [[1]]$gghist</code></pre>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-28-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-35-2.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>## 
 ## [[1]]$hist.df
 ##   y count    x  xmin  xmax density ncount ndensity flipped_aes PANEL group ymin ymax colour   fill size linetype alpha
@@ -599,7 +607,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb39-16"><a href="dataset-tables-and-graphs.html#cb39-16"></a>           <span class="dt">caption =</span> <span class="st">&#39;In Class Survey&#39;</span>) <span class="op">+</span></span>
 <span id="cb39-17"><a href="dataset-tables-and-graphs.html#cb39-17"></a><span class="st">      </span><span class="kw">theme_bw</span>()</span>
 <span id="cb39-18"><a href="dataset-tables-and-graphs.html#cb39-18"></a><span class="kw">print</span>(scatter)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="two-categorical-variables" class="section level3" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Two Categorical Variables</h3>
@@ -622,7 +630,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb42-6"><a href="dataset-tables-and-graphs.html#cb42-6"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x=</span>gender, <span class="dt">fill=</span>econ)) <span class="op">+</span></span>
 <span id="cb42-7"><a href="dataset-tables-and-graphs.html#cb42-7"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span>
 <span id="cb42-8"><a href="dataset-tables-and-graphs.html#cb42-8"></a><span class="kw">print</span>(stacked.bar.plot)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="continuous-and-categorical-variable" class="section level3" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> Continuous and Categorical Variable</h3>
@@ -642,7 +650,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb44-6"><a href="dataset-tables-and-graphs.html#cb44-6"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x=</span>gender, <span class="dt">y=</span>avg.games.attended), <span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>) <span class="op">+</span></span>
 <span id="cb44-7"><a href="dataset-tables-and-graphs.html#cb44-7"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span>
 <span id="cb44-8"><a href="dataset-tables-and-graphs.html#cb44-8"></a><span class="kw">print</span>(group.means)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-45-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="dataset-tables-and-graphs.html#cb45-1"></a><span class="co"># But it is a little cumbersome to do this in two steps, we can do it in one step</span></span>
 <span id="cb45-2"><a href="dataset-tables-and-graphs.html#cb45-2"></a><span class="co"># Sizing the Figure Here</span></span>
 <span id="cb45-3"><a href="dataset-tables-and-graphs.html#cb45-3"></a><span class="kw">options</span>(<span class="dt">repr.plot.width =</span> <span class="dv">2</span>, <span class="dt">repr.plot.height =</span> <span class="dv">2</span>)</span>
@@ -652,7 +660,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb45-7"><a href="dataset-tables-and-graphs.html#cb45-7"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x=</span>gender, <span class="dt">y=</span>games.attended), <span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>) <span class="op">+</span></span>
 <span id="cb45-8"><a href="dataset-tables-and-graphs.html#cb45-8"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span>
 <span id="cb45-9"><a href="dataset-tables-and-graphs.html#cb45-9"></a><span class="kw">print</span>(group.means.joint)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="average-across-two-groups-gender-and-majors" class="section level4" number="2.3.3.2">
 <h4><span class="header-section-number">2.3.3.2</span> Average Across Two Groups: Gender and Majors</h4>
@@ -673,7 +681,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb47-10"><a href="dataset-tables-and-graphs.html#cb47-10"></a>             <span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></span>
 <span id="cb47-11"><a href="dataset-tables-and-graphs.html#cb47-11"></a><span class="st">    </span><span class="kw">theme_bw</span>()</span>
 <span id="cb47-12"><a href="dataset-tables-and-graphs.html#cb47-12"></a><span class="kw">print</span>(two.group.means)</span></code></pre></div>
-<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-41-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="Introductory-Statistics-with-R-tidyverse_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
